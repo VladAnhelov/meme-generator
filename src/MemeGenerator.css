@@ -77,8 +77,15 @@ main {
   max-width: 100%;
   border-radius: 3px;
   block-size: auto;
-  width: 550px;
+  width: auto;
   height: 550px;
+}
+
+@media only screen and (max-width: 600px) {
+  .meme--image {
+    width: auto;
+    height: auto;
+  }
 }
 
 .meme--text {
