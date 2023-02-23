@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as ReactLogo } from "/Users/vladanhelov/Desktop/meme-generator/src/images/meme-logo.svg";
+import { ReactComponent as ReactLogo } from "/Users/vladanhelov/Desktop/meme-generator/src/meme-logo.svg";
 
 export default function MemeHeader() {
   return (
