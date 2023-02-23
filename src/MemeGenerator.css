@@ -63,6 +63,22 @@ main {
   cursor: pointer;
 }
 
+.download--button {
+  grid-column: 1 / -1;
+  font-family: "Karla", sans-serif;
+  border-radius: 5px;
+  background: linear-gradient(90.41deg, #1c7a2a 1.14%, #12a31e 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+
+.download--button:hover {
+  background: linear-gradient(90.41deg, #26ac43 1.14%, #1a9e49 100%);
+}
+
 .form--button:hover {
   background: linear-gradient(90.41deg, #8825a9 1.14%, #c11df8 100%);
 }

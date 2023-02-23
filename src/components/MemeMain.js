@@ -33,6 +33,35 @@ export default function MemeMain() {
     }));
   }
 
+  function downloadMeme() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 500;
+    canvas.height = 500;
+    const context = canvas.getContext("2d");
+
+    const image = new Image();
+    image.onload = () => {
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      context.font = "40px Impact";
+      context.fillStyle = "#ffffff";
+      context.textAlign = "center";
+      context.fillText(meme.topText, canvas.width / 2, 50);
+      context.fillText(meme.bottomText, canvas.width / 2, canvas.height - 20);
+
+      const dataURL = canvas.toDataURL("image/png");
+
+      const link = document.createElement("a");
+      link.download = "meme.png";
+      link.href = dataURL;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+    image.src = meme.randomImage;
+    image.setAttribute("crossorigin", "anonymous");
+  }
+
   return (
     <main>
       <div className="form">
@@ -57,9 +86,18 @@ export default function MemeMain() {
         </button>
       </div>
       <div className="meme">
-        <img src={meme.randomImage} className="meme--image" />
+        <img
+          src={meme.randomImage}
+          className="meme--image"
+          crossOrigin="anonymous"
+        />
         <h2 className="meme--text top">{meme.topText}</h2>
         <h2 className="meme--text bottom">{meme.bottomText}</h2>
+      </div>
+      <div className="form">
+        <button className="download--button" onClick={downloadMeme}>
+          Download Meme
+        </button>
       </div>
     </main>
   );
