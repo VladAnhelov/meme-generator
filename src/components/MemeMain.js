@@ -24,12 +24,46 @@ export default function MemeMain() {
       document.addEventListener("mouseup", handleMouseUp);
     };
 
-    const handleMouseMove = (event) => {
+    function handleMouseMove(event) {
+      const image = document.querySelector(".meme--image");
+      const imageRect = image.getBoundingClientRect();
+      const imageWidth = imageRect.width;
+      const imageHeight = imageRect.height;
+
+      const text = document.querySelector(".meme--text.top");
+      const textRect = text.getBoundingClientRect();
+      const textWidth = textRect.width;
+      const textHeight = textRect.height;
+
+      const container = document.querySelector(".meme");
+      const containerRect = container.getBoundingClientRect();
+      const containerWidth = containerRect.width;
+      const containerHeight = containerRect.height;
+
+      const x = event.clientX - containerRect.left;
+      const y = event.clientY - containerRect.top;
+
+      let topX = x - textWidth / 2;
+      let topY = y - textHeight / 2;
+
+      if (topX < 0) {
+        topX = 0;
+      } else if (topX + textWidth > containerWidth) {
+        topX = containerWidth - textWidth;
+      }
+
+      if (topY < 0) {
+        topY = 0;
+      } else if (topY + textHeight > containerHeight) {
+        topY = containerHeight - textHeight;
+      }
+
       setPosition({
-        topX: event.clientX,
-        topY: event.clientY,
+        ...position,
+        topX: `${topX}px`,
+        topY: `${topY}px`,
       });
-    };
+    }
 
     const handleMouseUp = () => {
       document.removeEventListener("mousemove", handleMouseMove);

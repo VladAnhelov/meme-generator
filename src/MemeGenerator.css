@@ -95,6 +95,7 @@ main {
   block-size: auto;
   width: auto;
   height: 550px;
+  border: 2px solid green;
 }
 
 @media only screen and (max-width: 600px) {
@@ -125,8 +126,4 @@ main {
 
 .bottom {
   bottom: 0;
-}
-
-.top {
-  top: 0;
 }
