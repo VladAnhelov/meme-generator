@@ -106,13 +106,13 @@ main {
 
 .meme--text {
   position: absolute;
-  width: 80%;
+  background-color: red;
+  user-select: none;
+  width: 30px;
+  height: 30px;
   text-align: center;
-  cursor: default;
-  left: 50%;
+  cursor: move;
   transform: translateX(-50%);
-  margin: 15px 0;
-  padding: 0 5px;
   font-family: impact, sans-serif;
   font-size: 2em;
   text-transform: uppercase;

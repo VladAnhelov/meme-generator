@@ -9,6 +9,39 @@ export default function MemeMain() {
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
+  const [position, setPosition] = React.useState({
+    topX: "50%",
+    topY: "5%",
+    bottomX: "50%",
+    bottomY: "90%",
+    isTopDragging: false,
+    isBottomDragging: false,
+  });
+
+  React.useEffect(() => {
+    const handleMouseDown = (event) => {
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+    };
+
+    const handleMouseMove = (event) => {
+      setPosition({
+        topX: event.clientX,
+        topY: event.clientY,
+      });
+    };
+
+    const handleMouseUp = () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    document.addEventListener("mousedown", handleMouseDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleMouseDown);
+    };
+  }, []);
 
   React.useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
@@ -91,7 +124,15 @@ export default function MemeMain() {
           className="meme--image"
           crossOrigin="anonymous"
         />
-        <h2 className="meme--text top">{meme.topText}</h2>
+        <div
+          className="meme--text top"
+          style={{
+            top: position.topY,
+            left: position.topX,
+          }}
+        >
+          {meme.topText}
+        </div>
         <h2 className="meme--text bottom">{meme.bottomText}</h2>
       </div>
       <div className="form">
