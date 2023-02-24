@@ -46,10 +46,10 @@ export default function MemeMain() {
       let topX = x - textWidth / 2;
       let topY = y - textHeight / 2;
 
-      if (topX < 0) {
-        topX = 0;
-      } else if (topX + textWidth > containerWidth) {
-        topX = containerWidth - textWidth;
+      if (topX < imageRect.left) {
+        topX = imageRect.left;
+      } else if (topX + textWidth > imageRect.right) {
+        topX = imageRect.right - textWidth;
       }
 
       if (topY < 0) {
@@ -167,7 +167,15 @@ export default function MemeMain() {
         >
           {meme.topText}
         </div>
-        <h2 className="meme--text bottom">{meme.bottomText}</h2>
+        <div
+          className="meme--text bottom"
+          style={{
+            top: position.bottomY,
+            left: position.bottomX,
+          }}
+        >
+          {meme.bottomText}
+        </div>
       </div>
       <div className="form">
         <button className="download--button" onClick={downloadMeme}>
