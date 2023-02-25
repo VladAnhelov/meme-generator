@@ -102,17 +102,20 @@ main {
     width: auto;
     height: auto;
   }
+
+  .bottom {
+    bottom: 90%;
+  }
 }
 
 .meme--text {
   position: absolute;
-  width: 80%;
+  user-select: none;
+  width: 30px;
+  height: 30px;
   text-align: center;
-  cursor: default;
-  left: 50%;
+  cursor: move;
   transform: translateX(-50%);
-  margin: 15px 0;
-  padding: 0 5px;
   font-family: impact, sans-serif;
   font-size: 2em;
   text-transform: uppercase;
@@ -125,8 +128,4 @@ main {
 
 .bottom {
   bottom: 0;
-}
-
-.top {
-  top: 0;
 }
