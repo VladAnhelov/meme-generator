@@ -15,7 +15,7 @@ export default function MemeMain() {
   });
   const [bottomTextPosition, setBottomTextPosition] = React.useState({
     x: "50%",
-    y: "90%",
+    y: "80%",
   });
 
   React.useEffect(() => {
@@ -174,6 +174,7 @@ export default function MemeMain() {
             top: topTextPosition.y,
             left: topTextPosition.x,
           }}
+          draggable
         >
           {meme.topText}
         </div>

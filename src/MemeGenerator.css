@@ -95,7 +95,6 @@ main {
   block-size: auto;
   width: auto;
   height: 550px;
-  border: 2px solid green;
 }
 
 @media only screen and (max-width: 600px) {
@@ -103,11 +102,14 @@ main {
     width: auto;
     height: auto;
   }
+
+  .bottom {
+    bottom: 90%;
+  }
 }
 
 .meme--text {
   position: absolute;
-  background-color: red;
   user-select: none;
   width: 30px;
   height: 30px;
