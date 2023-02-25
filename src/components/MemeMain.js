@@ -9,73 +9,83 @@ export default function MemeMain() {
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
-  const [position, setPosition] = React.useState({
-    topX: "50%",
-    topY: "5%",
-    bottomX: "50%",
-    bottomY: "90%",
-    isTopDragging: false,
-    isBottomDragging: false,
+  const [topTextPosition, setTopTextPosition] = React.useState({
+    x: "50%",
+    y: "5%",
+  });
+  const [bottomTextPosition, setBottomTextPosition] = React.useState({
+    x: "50%",
+    y: "90%",
   });
 
   React.useEffect(() => {
     const handleMouseDown = (event) => {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-    };
+      const target = event.target;
 
-    function handleMouseMove(event) {
-      const image = document.querySelector(".meme--image");
-      const imageRect = image.getBoundingClientRect();
-      const imageWidth = imageRect.width;
-      const imageHeight = imageRect.height;
+      if (target.classList.contains("meme--text")) {
+        const textClass = target.classList.contains("top") ? "top" : "bottom";
 
-      const text = document.querySelector(".meme--text.top");
-      const textRect = text.getBoundingClientRect();
-      const textWidth = textRect.width;
-      const textHeight = textRect.height;
+        function handleMouseMove(event) {
+          const image = document.querySelector(".meme--image");
+          const imageRect = image.getBoundingClientRect();
 
-      const container = document.querySelector(".meme");
-      const containerRect = container.getBoundingClientRect();
-      const containerWidth = containerRect.width;
-      const containerHeight = containerRect.height;
+          const text = document.querySelector(".meme--text.top");
+          const textRect = text.getBoundingClientRect();
+          const textWidth = textRect.width;
+          const textHeight = textRect.height;
 
-      const x = event.clientX - containerRect.left;
-      const y = event.clientY - containerRect.top;
+          const container = document.querySelector(".meme");
+          const containerRect = container.getBoundingClientRect();
+          const containerHeight = containerRect.height;
 
-      let topX = x - textWidth / 2;
-      let topY = y - textHeight / 2;
+          let x = event.clientX - containerRect.left;
+          let y = event.clientY - containerRect.top;
 
-      if (topX < imageRect.left) {
-        topX = imageRect.left;
-      } else if (topX + textWidth > imageRect.right) {
-        topX = imageRect.right - textWidth;
+          let textX = x - textWidth / 2;
+          let textY = y - textHeight / 2;
+
+          if (textX < imageRect.left) {
+            textX = imageRect.left;
+          } else if (textX + textWidth > imageRect.right) {
+            textX = imageRect.right - textWidth;
+          }
+
+          if (textY < 0) {
+            textY = 0;
+          } else if (textY + textHeight > containerHeight) {
+            textY = containerHeight - textHeight;
+          }
+
+          if (textClass === "top") {
+            setTopTextPosition({
+              ...topTextPosition,
+              x: `${textX}px`,
+              y: `${textY}px`,
+            });
+          } else {
+            setBottomTextPosition({
+              ...bottomTextPosition,
+              x: `${textX}px`,
+              y: `${textY}px`,
+            });
+          }
+        }
+
+        const handleMouseUp = () => {
+          document.removeEventListener("mousemove", handleMouseMove);
+          document.removeEventListener("mouseup", handleMouseUp);
+        };
+
+        document.addEventListener("mousemove", handleMouseMove);
+        document.addEventListener("mouseup", handleMouseUp);
       }
-
-      if (topY < 0) {
-        topY = 0;
-      } else if (topY + textHeight > containerHeight) {
-        topY = containerHeight - textHeight;
-      }
-
-      setPosition({
-        ...position,
-        topX: `${topX}px`,
-        topY: `${topY}px`,
-      });
-    }
-
-    const handleMouseUp = () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
     };
-
     document.addEventListener("mousedown", handleMouseDown);
 
     return () => {
       document.removeEventListener("mousedown", handleMouseDown);
     };
-  }, []);
+  }, [topTextPosition, bottomTextPosition]);
 
   React.useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
@@ -161,8 +171,8 @@ export default function MemeMain() {
         <div
           className="meme--text top"
           style={{
-            top: position.topY,
-            left: position.topX,
+            top: topTextPosition.y,
+            left: topTextPosition.x,
           }}
         >
           {meme.topText}
@@ -170,8 +180,8 @@ export default function MemeMain() {
         <div
           className="meme--text bottom"
           style={{
-            top: position.bottomY,
-            left: position.bottomX,
+            top: bottomTextPosition.y,
+            left: bottomTextPosition.x,
           }}
         >
           {meme.bottomText}
