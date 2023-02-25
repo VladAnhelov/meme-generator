@@ -18,6 +18,8 @@ export default function MemeMain() {
     y: "80%",
   });
 
+  const IMAGE = document.querySelector(".meme--image");
+
   React.useEffect(() => {
     const handleMouseDown = (event) => {
       const target = event.target;
@@ -26,9 +28,7 @@ export default function MemeMain() {
         const textClass = target.classList.contains("top") ? "top" : "bottom";
 
         function handleMouseMove(event) {
-          const image = document.querySelector(".meme--image");
-          const imageRect = image.getBoundingClientRect();
-
+          const imageRect = IMAGE.getBoundingClientRect();
           const text = document.querySelector(".meme--text.top");
           const textRect = text.getBoundingClientRect();
           const textWidth = textRect.width;
@@ -111,9 +111,10 @@ export default function MemeMain() {
   }
 
   function downloadMeme() {
+    const imageRect = IMAGE.getBoundingClientRect();
     const canvas = document.createElement("canvas");
-    canvas.width = 500;
-    canvas.height = 500;
+    canvas.width = imageRect.width;
+    canvas.height = 550;
     const context = canvas.getContext("2d");
 
     const image = new Image();
