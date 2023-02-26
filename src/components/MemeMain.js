@@ -123,10 +123,16 @@ export default function MemeMain() {
 
       context.font = "40px Impact";
       context.fillStyle = "#ffffff";
-      context.textAlign = "center";
-      context.textTransform = "uppercase";
-      context.fillText(meme.topText, canvas.width / 2, 50);
-      context.fillText(meme.bottomText, canvas.width / 2, canvas.height - 20);
+      context.shadowBlur = 5;
+      context.shadowColor = "#000";
+      context.shadowOffsetX = 2;
+      context.shadowOffsetY = 2;
+      context.fillText(meme.topText.toUpperCase(), canvas.width / 2, 50);
+      context.fillText(
+        meme.bottomText.toUpperCase(),
+        canvas.width / 2,
+        canvas.height - 20,
+      );
 
       const dataURL = canvas.toDataURL("image/png");
 
