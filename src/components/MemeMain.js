@@ -10,13 +10,36 @@ export default function MemeMain() {
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
   const [topTextPosition, setTopTextPosition] = React.useState({
-    x: "50%",
-    y: "5%",
+    x: "350",
+    y: "70",
   });
   const [bottomTextPosition, setBottomTextPosition] = React.useState({
     x: "50%",
     y: "80%",
   });
+
+  React.useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((data) => setAllMemeImages(data.data.memes));
+  }, []);
+
+  function getMemeImage() {
+    const randomNumber = Math.floor(Math.random() * allMemeImages.length);
+    const url = allMemeImages[randomNumber].url;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      randomImage: url,
+    }));
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      [name]: value,
+    }));
+  }
 
   React.useEffect(() => {
     const handleMouseDown = (event) => {
@@ -86,29 +109,6 @@ export default function MemeMain() {
     };
   }, [topTextPosition, bottomTextPosition]);
 
-  React.useEffect(() => {
-    fetch("https://api.imgflip.com/get_memes")
-      .then((res) => res.json())
-      .then((data) => setAllMemeImages(data.data.memes));
-  }, []);
-
-  function getMemeImage() {
-    const randomNumber = Math.floor(Math.random() * allMemeImages.length);
-    const url = allMemeImages[randomNumber].url;
-    setMeme((prevMeme) => ({
-      ...prevMeme,
-      randomImage: url,
-    }));
-  }
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setMeme((prevMeme) => ({
-      ...prevMeme,
-      [name]: value,
-    }));
-  }
-
   function downloadMeme() {
     const IMAGE = document.querySelector(".meme--image");
     const imageRect = IMAGE.getBoundingClientRect();
@@ -127,7 +127,11 @@ export default function MemeMain() {
       context.shadowColor = "#000";
       context.shadowOffsetX = 2;
       context.shadowOffsetY = 2;
-      context.fillText(meme.topText.toUpperCase(), canvas.width / 2, 50);
+      context.fillText(
+        meme.topText.toUpperCase(),
+        topTextPosition.x,
+        topTextPosition.y,
+      );
       context.fillText(
         meme.bottomText.toUpperCase(),
         canvas.width / 2,
@@ -146,6 +150,7 @@ export default function MemeMain() {
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
   }
+  console.log(topTextPosition.x);
 
   return (
     <main>
