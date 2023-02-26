@@ -110,20 +110,15 @@ main {
 
 .meme--text {
   position: absolute;
-  user-select: none;
-  width: 30px;
-  height: 30px;
+  font-size: 40px;
+  font-family: Impact;
+  color: #ffffff;
   text-align: center;
-  cursor: move;
-  transform: translateX(-50%);
-  font-family: impact, sans-serif;
-  font-size: 2em;
-  text-transform: uppercase;
-  color: white;
-  letter-spacing: 1px;
   text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000,
     -2px 2px 0 #000, 0 2px 0 #000, 2px 0 0 #000, 0 -2px 0 #000, -2px 0 0 #000,
     2px 2px 5px #000;
+  text-transform: uppercase;
+  cursor: move;
 }
 
 .bottom {
