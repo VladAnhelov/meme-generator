@@ -14,8 +14,8 @@ export default function MemeMain() {
     y: "70",
   });
   const [bottomTextPosition, setBottomTextPosition] = React.useState({
-    x: "50%",
-    y: "80%",
+    x: "430",
+    y: "700",
   });
 
   React.useEffect(() => {
@@ -129,13 +129,13 @@ export default function MemeMain() {
       context.shadowOffsetY = 2;
       context.fillText(
         meme.topText.toUpperCase(),
-        topTextPosition.x,
-        topTextPosition.y,
+        parseInt(topTextPosition.x),
+        parseInt(topTextPosition.y),
       );
       context.fillText(
         meme.bottomText.toUpperCase(),
-        canvas.width / 2,
-        canvas.height - 20,
+        parseInt(bottomTextPosition.x) / 2,
+        parseInt(bottomTextPosition.y) / 2,
       );
 
       const dataURL = canvas.toDataURL("image/png");
@@ -150,7 +150,8 @@ export default function MemeMain() {
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
   }
-  console.log(topTextPosition.x);
+  console.log(parseInt(topTextPosition.x), parseInt(topTextPosition.y));
+  console.log(parseInt(bottomTextPosition.x), parseInt(bottomTextPosition.y));
 
   return (
     <main>
@@ -187,7 +188,6 @@ export default function MemeMain() {
             top: topTextPosition.y,
             left: topTextPosition.x,
           }}
-          draggable
         >
           {meme.topText}
         </div>
