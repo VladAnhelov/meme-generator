@@ -10,12 +10,12 @@ export default function MemeMain() {
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
   const [topTextPosition, setTopTextPosition] = React.useState({
-    x: "350",
-    y: "70",
+    x: 400,
+    y: 50,
   });
   const [bottomTextPosition, setBottomTextPosition] = React.useState({
-    x: "430",
-    y: "700",
+    x: 400,
+    y: 480,
   });
 
   React.useEffect(() => {
@@ -134,8 +134,8 @@ export default function MemeMain() {
       );
       context.fillText(
         meme.bottomText.toUpperCase(),
-        parseInt(bottomTextPosition.x) / 2,
-        parseInt(bottomTextPosition.y) / 2,
+        parseInt(bottomTextPosition.x),
+        parseInt(bottomTextPosition.y),
       );
 
       const dataURL = canvas.toDataURL("image/png");
