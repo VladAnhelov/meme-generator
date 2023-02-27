@@ -109,6 +109,14 @@ export default function MemeMain() {
     };
   }, [topTextPosition, bottomTextPosition]);
 
+  function getFontSize(fontSize, image) {
+    const containerWidth = document.querySelector(".meme");
+    const imageWidth = image.naturalWidth;
+    const scale = containerWidth / imageWidth;
+
+    return `${fontSize * scale}px`;
+  }
+
   function downloadMeme() {
     const IMAGE = document.querySelector(".meme--image");
     const imageRect = IMAGE.getBoundingClientRect();
@@ -186,6 +194,7 @@ export default function MemeMain() {
           style={{
             top: topTextPosition.y,
             left: topTextPosition.x,
+            fontSize: getFontSize(topTextPosition.fontSize, meme.randomImage),
           }}
         >
           {meme.topText}
@@ -195,6 +204,10 @@ export default function MemeMain() {
           style={{
             top: bottomTextPosition.y,
             left: bottomTextPosition.x,
+            fontSize: getFontSize(
+              bottomTextPosition.fontSize,
+              meme.randomImage,
+            ),
           }}
         >
           {meme.bottomText}
