@@ -93,6 +93,7 @@ main {
   border-radius: 3px;
   block-size: auto;
   height: 550px;
+  max-width: 100%;
 }
 
 @media only screen and (max-width: 600px) {
