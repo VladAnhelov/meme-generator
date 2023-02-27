@@ -85,15 +85,13 @@ main {
 
 .meme {
   position: relative;
-  display: grid;
   justify-items: center;
+  padding-top: 25px;
 }
 
 .meme--image {
-  max-width: 100%;
   border-radius: 3px;
   block-size: auto;
-  width: auto;
   height: 550px;
 }
 

@@ -10,11 +10,11 @@ export default function MemeMain() {
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
   const [topTextPosition, setTopTextPosition] = React.useState({
-    x: 400,
+    x: 100,
     y: 50,
   });
   const [bottomTextPosition, setBottomTextPosition] = React.useState({
-    x: 400,
+    x: 100,
     y: 480,
   });
 
@@ -114,6 +114,7 @@ export default function MemeMain() {
     const imageRect = IMAGE.getBoundingClientRect();
     const canvas = document.createElement("canvas");
     canvas.width = imageRect.width;
+    console.log("image size in download", imageRect.width, imageRect.height);
     canvas.height = 550;
     const context = canvas.getContext("2d");
 
@@ -150,8 +151,6 @@ export default function MemeMain() {
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
   }
-  console.log(parseInt(topTextPosition.x), parseInt(topTextPosition.y));
-  console.log(parseInt(bottomTextPosition.x), parseInt(bottomTextPosition.y));
 
   return (
     <main>
