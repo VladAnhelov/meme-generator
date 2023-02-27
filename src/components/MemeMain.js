@@ -10,13 +10,36 @@ export default function MemeMain() {
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
   const [topTextPosition, setTopTextPosition] = React.useState({
-    x: "50%",
-    y: "5%",
+    x: 100,
+    y: 50,
   });
   const [bottomTextPosition, setBottomTextPosition] = React.useState({
-    x: "50%",
-    y: "80%",
+    x: 100,
+    y: 480,
   });
+
+  React.useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((data) => setAllMemeImages(data.data.memes));
+  }, []);
+
+  function getMemeImage() {
+    const randomNumber = Math.floor(Math.random() * allMemeImages.length);
+    const url = allMemeImages[randomNumber].url;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      randomImage: url,
+    }));
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      [name]: value,
+    }));
+  }
 
   React.useEffect(() => {
     const handleMouseDown = (event) => {
@@ -26,9 +49,8 @@ export default function MemeMain() {
         const textClass = target.classList.contains("top") ? "top" : "bottom";
 
         function handleMouseMove(event) {
-          const image = document.querySelector(".meme--image");
-          const imageRect = image.getBoundingClientRect();
-
+          const IMAGE = document.querySelector(".meme--image");
+          const imageRect = IMAGE.getBoundingClientRect();
           const text = document.querySelector(".meme--text.top");
           const textRect = text.getBoundingClientRect();
           const textWidth = textRect.width;
@@ -87,33 +109,13 @@ export default function MemeMain() {
     };
   }, [topTextPosition, bottomTextPosition]);
 
-  React.useEffect(() => {
-    fetch("https://api.imgflip.com/get_memes")
-      .then((res) => res.json())
-      .then((data) => setAllMemeImages(data.data.memes));
-  }, []);
-
-  function getMemeImage() {
-    const randomNumber = Math.floor(Math.random() * allMemeImages.length);
-    const url = allMemeImages[randomNumber].url;
-    setMeme((prevMeme) => ({
-      ...prevMeme,
-      randomImage: url,
-    }));
-  }
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setMeme((prevMeme) => ({
-      ...prevMeme,
-      [name]: value,
-    }));
-  }
-
   function downloadMeme() {
+    const IMAGE = document.querySelector(".meme--image");
+    const imageRect = IMAGE.getBoundingClientRect();
     const canvas = document.createElement("canvas");
-    canvas.width = 500;
-    canvas.height = 500;
+    canvas.width = imageRect.width;
+    console.log("image size in download", imageRect.width, imageRect.height);
+    canvas.height = 550;
     const context = canvas.getContext("2d");
 
     const image = new Image();
@@ -122,9 +124,20 @@ export default function MemeMain() {
 
       context.font = "40px Impact";
       context.fillStyle = "#ffffff";
-      context.textAlign = "center";
-      context.fillText(meme.topText, canvas.width / 2, 50);
-      context.fillText(meme.bottomText, canvas.width / 2, canvas.height - 20);
+      context.shadowBlur = 5;
+      context.shadowColor = "#000";
+      context.shadowOffsetX = 2;
+      context.shadowOffsetY = 2;
+      context.fillText(
+        meme.topText.toUpperCase(),
+        parseInt(topTextPosition.x),
+        parseInt(topTextPosition.y),
+      );
+      context.fillText(
+        meme.bottomText.toUpperCase(),
+        parseInt(bottomTextPosition.x),
+        parseInt(bottomTextPosition.y),
+      );
 
       const dataURL = canvas.toDataURL("image/png");
 
@@ -174,7 +187,6 @@ export default function MemeMain() {
             top: topTextPosition.y,
             left: topTextPosition.x,
           }}
-          draggable
         >
           {meme.topText}
         </div>

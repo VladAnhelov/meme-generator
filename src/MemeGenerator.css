@@ -85,16 +85,15 @@ main {
 
 .meme {
   position: relative;
-  display: grid;
   justify-items: center;
+  padding-top: 25px;
 }
 
 .meme--image {
-  max-width: 100%;
   border-radius: 3px;
   block-size: auto;
-  width: auto;
   height: 550px;
+  max-width: 100%;
 }
 
 @media only screen and (max-width: 600px) {
@@ -110,20 +109,15 @@ main {
 
 .meme--text {
   position: absolute;
-  user-select: none;
-  width: 30px;
-  height: 30px;
+  font-size: 40px;
+  font-family: Impact;
+  color: #ffffff;
   text-align: center;
-  cursor: move;
-  transform: translateX(-50%);
-  font-family: impact, sans-serif;
-  font-size: 2em;
-  text-transform: uppercase;
-  color: white;
-  letter-spacing: 1px;
   text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000,
     -2px 2px 0 #000, 0 2px 0 #000, 2px 0 0 #000, 0 -2px 0 #000, -2px 0 0 #000,
     2px 2px 5px #000;
+  text-transform: uppercase;
+  cursor: move;
 }
 
 .bottom {
