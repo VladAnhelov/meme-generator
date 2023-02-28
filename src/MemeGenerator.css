@@ -97,13 +97,27 @@ main {
 }
 
 @media only screen and (max-width: 600px) {
+  body {
+    overflow: hidden;
+  }
   .meme--image {
-    width: auto;
+    width: 100%;
     height: auto;
   }
 
-  .bottom {
-    bottom: 90%;
+  .meme {
+    padding-top: 0px;
+  }
+
+  .meme--text.bottom {
+    bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .meme--text.top,
+  .meme--text.bottom {
+    font-size: 20px;
   }
 }
 

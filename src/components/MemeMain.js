@@ -10,12 +10,12 @@ export default function MemeMain() {
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
   const [topTextPosition, setTopTextPosition] = React.useState({
-    x: 100,
-    y: 50,
+    x: 30,
+    y: 40,
   });
   const [bottomTextPosition, setBottomTextPosition] = React.useState({
-    x: 100,
-    y: 480,
+    x: 30,
+    y: 135,
   });
 
   React.useEffect(() => {
@@ -109,20 +109,124 @@ export default function MemeMain() {
     };
   }, [topTextPosition, bottomTextPosition]);
 
+  console.log(
+    "start text position Top",
+    parseInt(topTextPosition.x),
+    parseInt(topTextPosition.y),
+  );
+  console.log(
+    "start text position Bottom",
+    parseInt(bottomTextPosition.x),
+    parseInt(bottomTextPosition.y),
+  );
+
+  function useTouchListeners() {
+    React.useEffect(() => {
+      const handleTouchStart = (event) => {
+        const target = event.target;
+
+        if (target.classList.contains("meme--text")) {
+          const textClass = target.classList.contains("top") ? "top" : "bottom";
+
+          function handleTouchMove(event) {
+            const IMAGE = document.querySelector(".meme--image");
+            const imageRect = IMAGE.getBoundingClientRect();
+            const text = document.querySelector(".meme--text.top");
+            const textRect = text.getBoundingClientRect();
+            const textWidth = textRect.width;
+            const textHeight = textRect.height;
+
+            const container = document.querySelector(".meme");
+            const containerRect = container.getBoundingClientRect();
+            const containerHeight = containerRect.height;
+
+            let x = event.touches[0].clientX - containerRect.left;
+            let y = event.touches[0].clientY - containerRect.top;
+
+            let textX = x - textWidth / 2;
+            let textY = y - textHeight / 2;
+
+            if (textX < imageRect.left) {
+              textX = imageRect.left;
+            } else if (textX + textWidth > imageRect.right) {
+              textX = imageRect.right - textWidth;
+            }
+
+            if (textY < 0) {
+              textY = 0;
+            } else if (textY + textHeight > containerHeight) {
+              textY = containerHeight - textHeight;
+            }
+
+            if (textClass === "top") {
+              setTopTextPosition({
+                ...topTextPosition,
+                x: `${textX}px`,
+                y: `${textY}px`,
+              });
+            } else {
+              setBottomTextPosition({
+                ...bottomTextPosition,
+                x: `${textX}px`,
+                y: `${textY}px`,
+              });
+            }
+          }
+
+          const handleTouchEnd = () => {
+            document.removeEventListener("touchmove", handleTouchMove);
+            document.removeEventListener("touchend", handleTouchEnd);
+          };
+
+          document.addEventListener("touchmove", handleTouchMove);
+          document.addEventListener("touchend", handleTouchEnd);
+        }
+      };
+
+      document.addEventListener("touchstart", handleTouchStart);
+
+      return () => {
+        document.removeEventListener("touchstart", handleTouchStart);
+      };
+    }, [topTextPosition, bottomTextPosition]);
+
+    return null;
+  }
+
+  useTouchListeners();
+
+  function getFontSize(fontSize, image) {
+    const containerWidth = document.querySelector(".meme");
+    const imageWidth = image.naturalWidth;
+    const scale = containerWidth / imageWidth;
+
+    return `${fontSize * scale}px`;
+  }
+
   function downloadMeme() {
-    const IMAGE = document.querySelector(".meme--image");
-    const imageRect = IMAGE.getBoundingClientRect();
     const canvas = document.createElement("canvas");
-    canvas.width = imageRect.width;
-    console.log("image size in download", imageRect.width, imageRect.height);
-    canvas.height = 550;
+    const heightRatio = 1.2;
+    const container = document.querySelector(".meme--image");
+
+    function updateCanvasSize() {
+      canvas.width = container.offsetWidth;
+      canvas.height = canvas.width * heightRatio;
+    }
+
+    updateCanvasSize();
+    window.addEventListener("resize", updateCanvasSize);
+
     const context = canvas.getContext("2d");
 
     const image = new Image();
     image.onload = () => {
       context.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-      context.font = "40px Impact";
+      if (updateCanvasSize) {
+        context.font = "20px Impact";
+      } else {
+        context.font = "40px Impact";
+      }
       context.fillStyle = "#ffffff";
       context.shadowBlur = 5;
       context.shadowColor = "#000";
@@ -186,6 +290,7 @@ export default function MemeMain() {
           style={{
             top: topTextPosition.y,
             left: topTextPosition.x,
+            fontSize: getFontSize(topTextPosition.fontSize, meme.randomImage),
           }}
         >
           {meme.topText}
@@ -195,6 +300,10 @@ export default function MemeMain() {
           style={{
             top: bottomTextPosition.y,
             left: bottomTextPosition.x,
+            fontSize: getFontSize(
+              bottomTextPosition.fontSize,
+              meme.randomImage,
+            ),
           }}
         >
           {meme.bottomText}
