@@ -109,58 +109,91 @@ export default function MemeMain() {
     };
   }, [topTextPosition, bottomTextPosition]);
 
+  console.log(
+    "start text position",
+    parseInt(topTextPosition.x),
+    parseInt(topTextPosition.y),
+  );
+
   function addTouchListeners() {
     const memeContainerElement = document.querySelector(".meme--image");
     const memeTextElements = document.querySelectorAll(".meme--text");
 
-    memeTextElements.forEach((memeTextElement) => {
-      let initialX = null;
-      let initialY = null;
-      let currentX = null;
-      let currentY = null;
-      let timeoutId = null;
+    if (memeContainerElement && memeTextElements.length > 0) {
+      const textClass = memeTextElements[0].classList.contains("top")
+        ? "top"
+        : "bottom";
 
-      memeTextElement.addEventListener("touchstart", (e) => {
-        initialX = e.touches[0].clientX;
-        initialY = e.touches[0].clientY;
+      memeTextElements.forEach((memeTextElement) => {
+        let initialX = null;
+        let initialY = null;
+        let currentX = null;
+        let currentY = null;
+
+        memeTextElement.addEventListener("touchstart", (e) => {
+          initialX = e.touches[0].clientX;
+          initialY = e.touches[0].clientY;
+        });
+
+        memeTextElement.addEventListener("touchmove", (e) => {
+          e.preventDefault();
+          currentX = e.touches[0].clientX - initialX;
+          currentY = e.touches[0].clientY - initialY;
+
+          initialX = e.touches[0].clientX;
+          initialY = e.touches[0].clientY;
+
+          const memeTextRect = memeTextElement.getBoundingClientRect();
+          const memeContainerRect = memeContainerElement.getBoundingClientRect();
+
+          const isInsideLeftBoundary =
+            memeTextRect.left + currentX >= memeContainerRect.left;
+          const isInsideRightBoundary =
+            memeTextRect.right + currentX <= memeContainerRect.right;
+          const isInsideTopBoundary =
+            memeTextRect.top + currentY >= memeContainerRect.top;
+          const isInsideBottomBoundary =
+            memeTextRect.bottom + currentY <= memeContainerRect.bottom;
+
+          if (
+            isInsideLeftBoundary &&
+            isInsideRightBoundary &&
+            isInsideTopBoundary &&
+            isInsideBottomBoundary
+          ) {
+            requestAnimationFrame(() => {
+              memeTextElement.style.left =
+                memeTextElement.offsetLeft + currentX + "px";
+              memeTextElement.style.top =
+                memeTextElement.offsetTop + currentY + "px";
+              if (
+                parseInt(memeTextElement.style.left) < memeContainerRect.left
+              ) {
+                memeTextElement.style.left = memeContainerRect.left + "px";
+              }
+              if (parseInt(memeTextElement.style.top) < memeContainerRect.top) {
+                memeTextElement.style.top = memeContainerRect.top + "px";
+              }
+            });
+            console.log("left", parseInt(memeTextElement.style.left));
+            console.log("top", parseInt(memeTextElement.style.top));
+          }
+          if (textClass === "top") {
+            setTopTextPosition({
+              ...topTextPosition,
+              x: `${memeTextElement.style.left}`,
+              y: `${memeTextElement.style.top}`,
+            });
+          } else {
+            setBottomTextPosition({
+              ...bottomTextPosition,
+              x: `${memeTextElement.style.left}`,
+              y: `${memeTextElement.style.top}`,
+            });
+          }
+        });
       });
-
-      memeTextElement.addEventListener("touchmove", (e) => {
-        e.preventDefault();
-        currentX = e.touches[0].clientX - initialX;
-        currentY = e.touches[0].clientY - initialY;
-
-        initialX = e.touches[0].clientX;
-        initialY = e.touches[0].clientY;
-
-        const memeTextRect = memeTextElement.getBoundingClientRect();
-        const memeContainerRect = memeContainerElement.getBoundingClientRect();
-
-        const isInsideLeftBoundary =
-          memeTextRect.left + currentX >= memeContainerRect.left;
-        const isInsideRightBoundary =
-          memeTextRect.right + currentX <= memeContainerRect.right;
-        const isInsideTopBoundary =
-          memeTextRect.top + currentY >= memeContainerRect.top;
-        const isInsideBottomBoundary =
-          memeTextRect.bottom + currentY <= memeContainerRect.bottom;
-
-        if (
-          isInsideLeftBoundary &&
-          isInsideRightBoundary &&
-          isInsideTopBoundary &&
-          isInsideBottomBoundary
-        ) {
-          clearTimeout(timeoutId);
-          timeoutId = setTimeout(() => {
-            memeTextElement.style.left =
-              memeTextElement.offsetLeft + currentX + "px";
-            memeTextElement.style.top =
-              memeTextElement.offsetTop + currentY + "px";
-          }, 7);
-        }
-      });
-    });
+    }
   }
 
   addTouchListeners();
