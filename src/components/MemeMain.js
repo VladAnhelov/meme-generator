@@ -122,106 +122,73 @@ export default function MemeMain() {
 
   function useTouchListeners() {
     React.useEffect(() => {
-      const memeContainerElement = document.querySelector(".meme--image");
-      const memeTextElements = document.querySelectorAll(".meme--text");
+      const handleTouchStart = (event) => {
+        const target = event.target;
 
-      if (memeContainerElement && memeTextElements.length > 0) {
-        const textClass = memeTextElements[0].classList.contains("top")
-          ? "top"
-          : "bottom";
+        if (target.classList.contains("meme--text")) {
+          const textClass = target.classList.contains("top") ? "top" : "bottom";
 
-        memeTextElements.forEach((memeTextElement) => {
-          let initialX = null;
-          let initialY = null;
-          let currentX = null;
-          let currentY = null;
-          let isDragging = false;
+          function handleTouchMove(event) {
+            const IMAGE = document.querySelector(".meme--image");
+            const imageRect = IMAGE.getBoundingClientRect();
+            const text = document.querySelector(".meme--text.top");
+            const textRect = text.getBoundingClientRect();
+            const textWidth = textRect.width;
+            const textHeight = textRect.height;
 
-          const handleTouchStart = (e) => {
-            initialX = e.touches[0].clientX;
-            initialY = e.touches[0].clientY;
-            isDragging = true;
-          };
+            const container = document.querySelector(".meme");
+            const containerRect = container.getBoundingClientRect();
+            const containerHeight = containerRect.height;
 
-          const handleTouchMove = (e) => {
-            if (!isDragging) {
-              return;
+            let x = event.touches[0].clientX - containerRect.left;
+            let y = event.touches[0].clientY - containerRect.top;
+
+            let textX = x - textWidth / 2;
+            let textY = y - textHeight / 2;
+
+            if (textX < imageRect.left) {
+              textX = imageRect.left;
+            } else if (textX + textWidth > imageRect.right) {
+              textX = imageRect.right - textWidth;
             }
-            e.preventDefault();
-            currentX = e.touches[0].clientX - initialX;
-            currentY = e.touches[0].clientY - initialY;
 
-            initialX = e.touches[0].clientX;
-            initialY = e.touches[0].clientY;
+            if (textY < 0) {
+              textY = 0;
+            } else if (textY + textHeight > containerHeight) {
+              textY = containerHeight - textHeight;
+            }
 
-            const memeTextRect = memeTextElement.getBoundingClientRect();
-            const memeContainerRect = memeContainerElement.getBoundingClientRect();
-
-            const isInsideLeftBoundary =
-              memeTextRect.left + currentX >= memeContainerRect.left;
-            const isInsideRightBoundary =
-              memeTextRect.right + currentX <= memeContainerRect.right;
-            const isInsideTopBoundary =
-              memeTextRect.top + currentY >= memeContainerRect.top;
-            const isInsideBottomBoundary =
-              memeTextRect.bottom + currentY <= memeContainerRect.bottom;
-
-            if (
-              isInsideLeftBoundary &&
-              isInsideRightBoundary &&
-              isInsideTopBoundary &&
-              isInsideBottomBoundary
-            ) {
-              requestAnimationFrame(() => {
-                memeTextElement.style.left =
-                  memeTextElement.offsetLeft + currentX + "px";
-                memeTextElement.style.top =
-                  memeTextElement.offsetTop + currentY + "px";
-                if (
-                  parseInt(memeTextElement.style.left) < memeContainerRect.left
-                ) {
-                  memeTextElement.style.left = memeContainerRect.left + "px";
-                }
-                if (
-                  parseInt(memeTextElement.style.top) < memeContainerRect.top
-                ) {
-                  memeTextElement.style.top = memeContainerRect.top + "px";
-                }
+            if (textClass === "top") {
+              setTopTextPosition({
+                ...topTextPosition,
+                x: `${textX}px`,
+                y: `${textY}px`,
               });
-              setTimeout(() => {
-                if (textClass === "top") {
-                  setTopTextPosition({
-                    ...topTextPosition,
-                    x: `${memeTextElement.style.left}`,
-                    y: `${memeTextElement.style.top}`,
-                  });
-                } else {
-                  setBottomTextPosition({
-                    ...bottomTextPosition,
-                    x: `${memeTextElement.style.left}`,
-                    y: `${memeTextElement.style.top}`,
-                  });
-                }
-              }, 50);
+            } else {
+              setBottomTextPosition({
+                ...bottomTextPosition,
+                x: `${textX}px`,
+                y: `${textY}px`,
+              });
             }
-          };
+          }
 
           const handleTouchEnd = () => {
-            isDragging = false;
+            document.removeEventListener("touchmove", handleTouchMove);
+            document.removeEventListener("touchend", handleTouchEnd);
           };
 
-          memeTextElement.addEventListener("touchstart", handleTouchStart);
-          memeTextElement.addEventListener("touchmove", handleTouchMove);
-          memeTextElement.addEventListener("touchend", handleTouchEnd);
+          document.addEventListener("touchmove", handleTouchMove);
+          document.addEventListener("touchend", handleTouchEnd);
+        }
+      };
 
-          return () => {
-            memeTextElement.removeEventListener("touchstart", handleTouchStart);
-            memeTextElement.removeEventListener("touchmove", handleTouchMove);
-            memeTextElement.removeEventListener("touchend", handleTouchEnd);
-          };
-        });
-      }
-    }, [setTopTextPosition, setBottomTextPosition]);
+      document.addEventListener("touchstart", handleTouchStart);
+
+      return () => {
+        document.removeEventListener("touchstart", handleTouchStart);
+      };
+    }, [topTextPosition, bottomTextPosition]);
 
     return null;
   }
