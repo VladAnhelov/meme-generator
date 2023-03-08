@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 // eslint-disable-next-line
 import React from "react";
+import DownloadMeme from "./DownloadMeme.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -203,59 +204,6 @@ export default function MemeMain() {
     return `${fontSize * scale}px`;
   }
 
-  function downloadMeme() {
-    const canvas = document.createElement("canvas");
-    const heightRatio = 1.2;
-    const container = document.querySelector(".meme--image");
-
-    function updateCanvasSize() {
-      canvas.width = container.offsetWidth;
-      canvas.height = canvas.width * heightRatio;
-    }
-
-    updateCanvasSize();
-    window.addEventListener("resize", updateCanvasSize);
-
-    const context = canvas.getContext("2d");
-
-    const image = new Image();
-    image.onload = () => {
-      context.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-      if (updateCanvasSize) {
-        context.font = "20px Impact";
-      } else {
-        context.font = "40px Impact";
-      }
-      context.fillStyle = "#ffffff";
-      context.shadowBlur = 5;
-      context.shadowColor = "#000";
-      context.shadowOffsetX = 2;
-      context.shadowOffsetY = 2;
-      context.fillText(
-        meme.topText.toUpperCase(),
-        parseInt(topTextPosition.x),
-        parseInt(topTextPosition.y),
-      );
-      context.fillText(
-        meme.bottomText.toUpperCase(),
-        parseInt(bottomTextPosition.x),
-        parseInt(bottomTextPosition.y),
-      );
-
-      const dataURL = canvas.toDataURL("image/png");
-
-      const link = document.createElement("a");
-      link.download = "meme.png";
-      link.href = dataURL;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    };
-    image.src = meme.randomImage;
-    image.setAttribute("crossorigin", "anonymous");
-  }
-
   return (
     <main>
       <div className="form">
@@ -309,11 +257,11 @@ export default function MemeMain() {
           {meme.bottomText}
         </div>
       </div>
-      <div className="form">
-        <button className="download--button" onClick={downloadMeme}>
-          Download Meme
-        </button>
-      </div>
+      <DownloadMeme
+        meme={meme}
+        topTextPosition={topTextPosition}
+        bottomTextPosition={bottomTextPosition}
+      />
     </main>
   );
 }
