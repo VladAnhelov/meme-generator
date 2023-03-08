@@ -43,17 +43,6 @@ export default function MemeMain() {
     }));
   }
 
-  console.log(
-    "start text position Top",
-    parseInt(topTextPosition.x),
-    parseInt(topTextPosition.y),
-  );
-  console.log(
-    "start text position Bottom",
-    parseInt(bottomTextPosition.x),
-    parseInt(bottomTextPosition.y),
-  );
-
   function getFontSize(fontSize, image) {
     const containerWidth = document.querySelector(".meme");
     const imageWidth = image.naturalWidth;
