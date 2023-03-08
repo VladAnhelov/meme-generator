@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function DownloadMeme(props) {
+export default function DownloadMemeComponent(props) {
   const meme = props.meme || {};
   const canvas = document.createElement("canvas");
   const heightRatio = 1.2;

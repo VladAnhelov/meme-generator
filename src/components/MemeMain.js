@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 // eslint-disable-next-line
 import React from "react";
-import DownloadMeme from "./DownloadMeme.js";
+import DownloadMemeComponent from "./DownloadMemeComponent.js";
+import TouchEventComponent from "./TouchEventComponent.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -121,81 +122,6 @@ export default function MemeMain() {
     parseInt(bottomTextPosition.y),
   );
 
-  function useTouchListeners() {
-    React.useEffect(() => {
-      const handleTouchStart = (event) => {
-        const target = event.target;
-
-        if (target.classList.contains("meme--text")) {
-          const textClass = target.classList.contains("top") ? "top" : "bottom";
-
-          function handleTouchMove(event) {
-            const IMAGE = document.querySelector(".meme--image");
-            const imageRect = IMAGE.getBoundingClientRect();
-            const text = document.querySelector(".meme--text.top");
-            const textRect = text.getBoundingClientRect();
-            const textWidth = textRect.width;
-            const textHeight = textRect.height;
-
-            const container = document.querySelector(".meme");
-            const containerRect = container.getBoundingClientRect();
-            const containerHeight = containerRect.height;
-
-            let x = event.touches[0].clientX - containerRect.left;
-            let y = event.touches[0].clientY - containerRect.top;
-
-            let textX = x - textWidth / 2;
-            let textY = y - textHeight / 2;
-
-            if (textX < imageRect.left) {
-              textX = imageRect.left;
-            } else if (textX + textWidth > imageRect.right) {
-              textX = imageRect.right - textWidth;
-            }
-
-            if (textY < 0) {
-              textY = 0;
-            } else if (textY + textHeight > containerHeight) {
-              textY = containerHeight - textHeight;
-            }
-
-            if (textClass === "top") {
-              setTopTextPosition({
-                ...topTextPosition,
-                x: `${textX}px`,
-                y: `${textY}px`,
-              });
-            } else {
-              setBottomTextPosition({
-                ...bottomTextPosition,
-                x: `${textX}px`,
-                y: `${textY}px`,
-              });
-            }
-          }
-
-          const handleTouchEnd = () => {
-            document.removeEventListener("touchmove", handleTouchMove);
-            document.removeEventListener("touchend", handleTouchEnd);
-          };
-
-          document.addEventListener("touchmove", handleTouchMove);
-          document.addEventListener("touchend", handleTouchEnd);
-        }
-      };
-
-      document.addEventListener("touchstart", handleTouchStart);
-
-      return () => {
-        document.removeEventListener("touchstart", handleTouchStart);
-      };
-    }, [topTextPosition, bottomTextPosition]);
-
-    return null;
-  }
-
-  useTouchListeners();
-
   function getFontSize(fontSize, image) {
     const containerWidth = document.querySelector(".meme");
     const imageWidth = image.naturalWidth;
@@ -206,6 +132,10 @@ export default function MemeMain() {
 
   return (
     <main>
+      <TouchEventComponent
+        setTopTextPosition={setTopTextPosition}
+        setBottomTextPosition={setBottomTextPosition}
+      />
       <div className="form">
         <input
           type="text"
@@ -257,7 +187,7 @@ export default function MemeMain() {
           {meme.bottomText}
         </div>
       </div>
-      <DownloadMeme
+      <DownloadMemeComponent
         meme={meme}
         topTextPosition={topTextPosition}
         bottomTextPosition={bottomTextPosition}
