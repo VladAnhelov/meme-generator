@@ -137,3 +137,7 @@ main {
 .bottom {
   bottom: 0;
 }
+
+.canvas--meme {
+  display: none;
+}

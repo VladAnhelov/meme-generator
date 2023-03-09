@@ -1,53 +1,63 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function DownloadMemeComponent(props) {
-  const meme = props.meme || {};
-  const canvas = document.createElement("canvas");
+  const { meme, topTextPosition, bottomTextPosition } = props;
+  const canvasRef = useRef(null);
+  const [canvasWidth, setCanvasWidth] = useState(0);
   const heightRatio = 1.2;
-  const container = document.querySelector(".meme--image");
-  if (!container) {
-    return;
-  }
 
-  function updateCanvasSize() {
-    canvas.width = container.offsetWidth;
-    canvas.height = canvas.width * heightRatio;
-  }
-
-  updateCanvasSize();
-  window.addEventListener("resize", updateCanvasSize);
-
-  const context = canvas.getContext("2d");
-
-  const image = new Image();
-  image.onload = () => {
-    context.drawImage(image, 0, 0, canvas.width, canvas.height);
-    if (updateCanvasSize) {
-      context.font = "20px Impact";
-    } else {
-      context.font = "40px Impact";
+  useEffect(() => {
+    const container = document.querySelector(".meme--image");
+    if (!container) {
+      console.error(".meme--image selector did not match any elements");
+      return;
     }
-    context.fillStyle = "#ffffff";
-    context.shadowBlur = 5;
-    context.shadowColor = "#000";
-    context.shadowOffsetX = 2;
-    context.shadowOffsetY = 2;
-    context.fillText(
-      props.meme.topText.toUpperCase(),
-      parseInt(props.topTextPosition.x),
-      parseInt(props.topTextPosition.y),
-    );
-    context.fillText(
-      props.meme.bottomText.toUpperCase(),
-      parseInt(props.bottomTextPosition.x),
-      parseInt(props.bottomTextPosition.y),
-    );
-  };
+    setCanvasWidth(container.offsetWidth);
+    const handleResize = () => setCanvasWidth(container.offsetWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  image.src = meme.randomImage;
-  image.setAttribute("crossorigin", "anonymous");
+  useEffect(() => {
+    if (!canvasRef.current) {
+      return;
+    }
+    const canvas = canvasRef.current;
+    canvas.width = canvasWidth;
+    canvas.height = canvasWidth * heightRatio;
+    const context = canvas.getContext("2d");
+
+    const image = new Image();
+    image.onload = () => {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      context.fillStyle = "#ffffff";
+      context.shadowBlur = 5;
+      context.shadowColor = "#000";
+      context.shadowOffsetX = 2;
+      context.shadowOffsetY = 2;
+      if (canvasWidth < 500) {
+        context.font = "20px Impact";
+      } else {
+        context.font = "40px Impact";
+      }
+      context.fillText(
+        meme.topText.toUpperCase(),
+        parseInt(topTextPosition.x),
+        parseInt(topTextPosition.y),
+      );
+      context.fillText(
+        meme.bottomText.toUpperCase(),
+        parseInt(bottomTextPosition.x),
+        parseInt(bottomTextPosition.y),
+      );
+    };
+    image.src = meme.randomImage;
+    image.setAttribute("crossorigin", "anonymous");
+  }, [canvasWidth, meme, topTextPosition, bottomTextPosition]);
 
   const handleDownloadClick = () => {
+    const canvas = canvasRef.current;
     const dataURL = canvas.toDataURL("image/png");
     const link = document.createElement("a");
     link.download = "meme.png";
@@ -59,6 +69,7 @@ export default function DownloadMemeComponent(props) {
 
   return (
     <div className="form">
+      <canvas ref={canvasRef} className="canvas--meme" />
       <button className="download--button" onClick={handleDownloadClick}>
         Download Meme
       </button>
