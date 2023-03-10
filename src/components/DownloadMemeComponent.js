@@ -26,8 +26,10 @@ export default function DownloadMemeComponent(props) {
 
     const image = new Image();
     image.onload = () => {
-      canvas.width = image.naturalWidth;
-      canvas.height = image.naturalHeight;
+      //треба переробити цей код, і зробити щоб текст на картинці співподав з текстом на канвасі
+      const container = document.querySelector(".meme--image");
+      canvas.width = container.offsetWidth;
+      canvas.height = container.offsetHeight;
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.drawImage(image, 0, 0, canvas.width, canvas.height);
       context.fillStyle = "#ffffff";
@@ -50,8 +52,6 @@ export default function DownloadMemeComponent(props) {
       const bottomTextX = (bottomX * canvas.width) / image.naturalWidth;
       const bottomTextY = (bottomY * canvas.height) / image.naturalHeight;
       context.fillText(meme.bottomText.toUpperCase(), bottomTextX, bottomTextY);
-
-      console.log("canvas: ", parseInt(topTextX), parseInt(topTextY));
     };
 
     image.src = meme.randomImage;
