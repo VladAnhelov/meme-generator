@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 // eslint-disable-next-line
-import React from "react";
+import React, { useRef } from "react";
 import DownloadMemeComponent from "./DownloadMemeComponent.js";
 import TouchEventComponent from "./TouchEventComponent.js";
+import CanvasMemeComponent from "./CanvasMemeComponent.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -10,6 +11,7 @@ export default function MemeMain() {
     bottomText: "",
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
+  const canvasRef = useRef(null);
   const [allMemeImages, setAllMemeImages] = React.useState([]);
   const [topTextPosition, setTopTextPosition] = React.useState({
     x: 30,
@@ -45,10 +47,6 @@ export default function MemeMain() {
 
   return (
     <main>
-      <TouchEventComponent
-        setTopTextPosition={setTopTextPosition}
-        setBottomTextPosition={setBottomTextPosition}
-      />
       <div className="form">
         <input
           type="text"
@@ -71,10 +69,11 @@ export default function MemeMain() {
         </button>
       </div>
       <div className="meme">
-        <img
-          src={meme.randomImage}
-          className="meme--image"
-          crossOrigin="anonymous"
+        <CanvasMemeComponent
+          meme={meme}
+          topTextPosition={topTextPosition}
+          bottomTextPosition={bottomTextPosition}
+          canvasRef={canvasRef}
         />
         <div
           className="meme--text top"

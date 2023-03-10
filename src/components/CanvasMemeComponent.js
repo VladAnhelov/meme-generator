@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
+import TouchEventComponent from "./TouchEventComponent.js";
 
 export default function CanvasMemeComponent(props) {
-  const { canvasRef, meme, topTextPosition, bottomTextPosition } = props;
+  const {
+    canvasRef,
+    meme,
+    topTextPosition,
+    bottomTextPosition,
+    setTopTextPosition,
+    setBottomTextPosition,
+  } = props;
   const [canvasWidth, setCanvasWidth] = useState(0);
 
   useEffect(() => {
@@ -26,9 +34,8 @@ export default function CanvasMemeComponent(props) {
     const image = new Image();
     image.onload = () => {
       //треба переробити цей код, і зробити щоб текст на картинці співподав з текстом на канвасі
-      const container = document.querySelector(".meme--image");
-      canvas.width = container.offsetWidth;
-      canvas.height = container.offsetHeight;
+      canvas.width = image.width;
+      canvas.height = image.height;
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.drawImage(image, 0, 0, canvas.width, canvas.height);
       context.fillStyle = "#ffffff";
@@ -56,5 +63,15 @@ export default function CanvasMemeComponent(props) {
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
   }, [canvasWidth, meme, topTextPosition, bottomTextPosition]);
-  return <canvas ref={canvasRef} className="canvas--meme" />;
+  return (
+    <div>
+      <TouchEventComponent
+        setTopTextPosition={setTopTextPosition}
+        setBottomTextPosition={setBottomTextPosition}
+        topTextPosition={topTextPosition}
+        bottomTextPosition={bottomTextPosition}
+      />
+      <canvas ref={canvasRef} className="canvas--meme" />;
+    </div>
+  );
 }
