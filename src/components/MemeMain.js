@@ -43,18 +43,6 @@ export default function MemeMain() {
     }));
   }
 
-  function getFontSize(fontSize, image) {
-    const containerWidth = document.querySelector(".meme");
-    const imageWidth = image.naturalWidth;
-    const scale = containerWidth / imageWidth;
-
-    return `${fontSize * scale}px`;
-  }
-  console.log(
-    "image: ",
-    parseInt(topTextPosition.x),
-    parseInt(topTextPosition.y),
-  );
   return (
     <main>
       <TouchEventComponent
@@ -93,7 +81,6 @@ export default function MemeMain() {
           style={{
             top: topTextPosition.y,
             left: topTextPosition.x,
-            fontSize: getFontSize(topTextPosition.fontSize, meme.randomImage),
           }}
         >
           {meme.topText}
@@ -103,10 +90,6 @@ export default function MemeMain() {
           style={{
             top: bottomTextPosition.y,
             left: bottomTextPosition.x,
-            fontSize: getFontSize(
-              bottomTextPosition.fontSize,
-              meme.randomImage,
-            ),
           }}
         >
           {meme.bottomText}
