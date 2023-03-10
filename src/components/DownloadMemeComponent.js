@@ -40,16 +40,18 @@ export default function DownloadMemeComponent(props) {
       } else {
         context.font = "40px Impact";
       }
-      context.fillText(
-        meme.topText.toUpperCase(),
-        parseInt(topTextPosition.x),
-        parseInt(topTextPosition.y),
-      );
-      context.fillText(
-        meme.bottomText.toUpperCase(),
-        parseInt(bottomTextPosition.x),
-        parseInt(bottomTextPosition.y),
-      );
+      const topX = Math.round(parseInt(topTextPosition.x));
+      const topY = Math.round(parseInt(topTextPosition.y));
+      const bottomX = Math.round(parseInt(bottomTextPosition.x));
+      const bottomY = Math.round(parseInt(bottomTextPosition.y));
+      const topTextX = (topX * canvas.width) / image.naturalWidth;
+      const topTextY = (topY * canvas.height) / image.naturalHeight;
+      context.fillText(meme.topText.toUpperCase(), topTextX, topTextY);
+      const bottomTextX = (bottomX * canvas.width) / image.naturalWidth;
+      const bottomTextY = (bottomY * canvas.height) / image.naturalHeight;
+      context.fillText(meme.bottomText.toUpperCase(), bottomTextX, bottomTextY);
+
+      console.log("canvas: ", parseInt(topTextX), parseInt(topTextY));
     };
 
     image.src = meme.randomImage;

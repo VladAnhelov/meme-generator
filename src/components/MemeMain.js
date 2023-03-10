@@ -50,7 +50,11 @@ export default function MemeMain() {
 
     return `${fontSize * scale}px`;
   }
-
+  console.log(
+    "image: ",
+    parseInt(topTextPosition.x),
+    parseInt(topTextPosition.y),
+  );
   return (
     <main>
       <TouchEventComponent
