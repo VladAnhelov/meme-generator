@@ -4,7 +4,6 @@ export default function DownloadMemeComponent(props) {
   const { meme, topTextPosition, bottomTextPosition } = props;
   const canvasRef = useRef(null);
   const [canvasWidth, setCanvasWidth] = useState(0);
-  const heightRatio = 1.2;
 
   useEffect(() => {
     const container = document.querySelector(".meme--image");
@@ -23,12 +22,12 @@ export default function DownloadMemeComponent(props) {
       return;
     }
     const canvas = canvasRef.current;
-    canvas.width = canvasWidth;
-    canvas.height = canvasWidth * heightRatio;
     const context = canvas.getContext("2d");
 
     const image = new Image();
     image.onload = () => {
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.drawImage(image, 0, 0, canvas.width, canvas.height);
       context.fillStyle = "#ffffff";
@@ -36,7 +35,7 @@ export default function DownloadMemeComponent(props) {
       context.shadowColor = "#000";
       context.shadowOffsetX = 2;
       context.shadowOffsetY = 2;
-      if (canvasWidth < 500) {
+      if (canvas.width < 500) {
         context.font = "20px Impact";
       } else {
         context.font = "40px Impact";
@@ -52,6 +51,7 @@ export default function DownloadMemeComponent(props) {
         parseInt(bottomTextPosition.y),
       );
     };
+
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
   }, [canvasWidth, meme, topTextPosition, bottomTextPosition]);
