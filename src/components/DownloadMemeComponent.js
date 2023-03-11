@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 
-export default function DownloadMemeComponent() {
-  const canvasRef = useRef(null);
+export default function DownloadMemeComponent({ canvasRef }) {
   const handleDownloadClick = () => {
     const canvas = canvasRef.current;
     if (!canvas) {
