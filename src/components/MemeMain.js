@@ -93,24 +93,6 @@ export default function MemeMain() {
           className="meme--image"
           crossOrigin="anonymous"
         />
-        <div
-          className="meme--text top"
-          style={{
-            top: topTextPosition.y,
-            left: topTextPosition.x,
-          }}
-        >
-          {meme.topText}
-        </div>
-        <div
-          className="meme--text bottom"
-          style={{
-            top: bottomTextPosition.y,
-            left: bottomTextPosition.x,
-          }}
-        >
-          {meme.bottomText}
-        </div>
       </div>
       <DownloadMemeComponent
         meme={meme}

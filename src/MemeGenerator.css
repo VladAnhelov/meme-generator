@@ -86,40 +86,9 @@ main {
 .meme {
   position: relative;
   justify-items: center;
+  display: flex;
 }
 
 .meme--image {
-  border-radius: 3px;
-  block-size: auto;
-  width: 500px;
-  border: 2px solid black;
-}
-
-@media only screen and (max-width: 600px) {
-  body {
-    overflow: hidden;
-  }
-  .meme--image {
-    width: 100%;
-    height: auto;
-  }
-
-  .meme {
-    padding-top: 0px;
-  }
-
-  .meme--text.bottom {
-    bottom: 0;
-  }
-}
-
-@media only screen and (max-width: 550px) {
-  .meme--text.top,
-  .meme--text.bottom {
-    font-size: 20px;
-  }
-}
-
-.bottom {
-  bottom: 0;
+  display: none;
 }
