@@ -120,19 +120,6 @@ main {
   }
 }
 
-.meme--text {
-  position: absolute;
-  font-size: 40px;
-  font-family: Impact;
-  color: #ffffff;
-  text-align: center;
-  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000,
-    -2px 2px 0 #000, 0 2px 0 #000, 2px 0 0 #000, 0 -2px 0 #000, -2px 0 0 #000,
-    2px 2px 5px #000;
-  text-transform: uppercase;
-  cursor: move;
-}
-
 .bottom {
   bottom: 0;
 }

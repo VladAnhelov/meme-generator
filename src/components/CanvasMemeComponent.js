@@ -16,7 +16,10 @@ export default function CanvasMemeComponent(props) {
     topTextRotation,
     bottomTextRotation,
   } = props;
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+  const [containerSize, setContainerSize] = useState({
+    width: 0,
+    height: 0,
+  });
   const [imageElement, setImageElement] = useState(null);
   const [selectedText, setSelectedText] = useState(null);
 

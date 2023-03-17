@@ -3,6 +3,7 @@
 import React from "react";
 import DownloadMemeComponent from "./DownloadMemeComponent.js";
 import TouchEventComponent from "./TouchEventComponent.js";
+import CanvasMemeComponent from "./CanvasMemeComponent.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -24,6 +25,7 @@ export default function MemeMain() {
     height: 0,
   });
   const [imageElement, setImageElement] = React.useState(null);
+  const stageRef = React.useRef(null);
 
   React.useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
@@ -80,6 +82,12 @@ export default function MemeMain() {
         </button>
       </div>
       <div className="meme">
+        <CanvasMemeComponent
+          meme={meme}
+          topTextPosition={topTextPosition}
+          bottomTextPosition={bottomTextPosition}
+          stageRef={stageRef}
+        />
         <img
           src={meme.randomImage}
           className="meme--image"
@@ -108,6 +116,7 @@ export default function MemeMain() {
         meme={meme}
         topTextPosition={topTextPosition}
         bottomTextPosition={bottomTextPosition}
+        stageRef={stageRef}
       />
     </main>
   );
