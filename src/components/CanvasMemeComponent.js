@@ -1,8 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  Stage,
+  Layer,
+  Image as KonvaImage,
+  Text,
+  Transformer,
+} from "react-konva";
 
 export default function CanvasMemeComponent(props) {
-  const { canvasRef, meme, topTextPosition, bottomTextPosition } = props;
-  const [canvasWidth, setCanvasWidth] = useState(0);
+  const {
+    stageRef,
+    meme,
+    topTextPosition,
+    bottomTextPosition,
+    topTextRotation,
+    bottomTextRotation,
+  } = props;
+  const [containerSize, setContainerSize] = useState({
+    width: 0,
+    height: 0,
+  });
+  const [imageElement, setImageElement] = useState(null);
+  const [selectedText, setSelectedText] = useState(null);
 
   useEffect(() => {
     const container = document.querySelector(".meme--image");
@@ -10,51 +29,138 @@ export default function CanvasMemeComponent(props) {
       console.error(".meme--image selector did not match any elements");
       return;
     }
-    setCanvasWidth(container.offsetWidth);
-    const handleResize = () => setCanvasWidth(container.offsetWidth);
+
+    const handleResize = () => {
+      const sceneWidth = 570;
+      const sceneHeight = 550;
+      setContainerSize({
+        width: sceneWidth,
+        height: sceneHeight,
+      });
+      const containerImage = document.querySelector(".canvas--block");
+      const containerImageWidth = containerImage.offsetWidth;
+      const scale = containerImageWidth / sceneWidth;
+
+      setImageElement((prevImageElement) => {
+        if (!prevImageElement) {
+          return null;
+        }
+        prevImageElement.width = sceneWidth * scale;
+        prevImageElement.height = sceneHeight * scale;
+        return prevImageElement;
+      });
+    };
+
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
-    if (!canvasRef.current) {
-      return;
-    }
-    const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-
     const image = new Image();
     image.onload = () => {
-      //треба переробити цей код, і зробити щоб текст на картинці співподав з текстом на канвасі
-      const container = document.querySelector(".meme--image");
-      canvas.width = container.offsetWidth;
-      canvas.height = container.offsetHeight;
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      context.fillStyle = "#ffffff";
-      context.shadowBlur = 5;
-      context.shadowColor = "#000";
-      context.shadowOffsetX = 2;
-      context.shadowOffsetY = 2;
-      if (canvas.width < 500) {
-        context.font = "20px Impact";
-      } else {
-        context.font = "40px Impact";
-      }
-      const topX = Math.round(parseInt(topTextPosition.x));
-      const topY = Math.round(parseInt(topTextPosition.y));
-      const bottomX = Math.round(parseInt(bottomTextPosition.x));
-      const bottomY = Math.round(parseInt(bottomTextPosition.y));
-      const topTextX = (topX * canvas.width) / image.naturalWidth;
-      const topTextY = (topY * canvas.height) / image.naturalHeight;
-      context.fillText(meme.topText.toUpperCase(), topTextX, topTextY);
-      const bottomTextX = (bottomX * canvas.width) / image.naturalWidth;
-      const bottomTextY = (bottomY * canvas.height) / image.naturalHeight;
-      context.fillText(meme.bottomText.toUpperCase(), bottomTextX, bottomTextY);
+      setImageElement(image);
+      console.log("image.naturalWidth", image.naturalWidth);
     };
-
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
-  }, [canvasWidth, meme, topTextPosition, bottomTextPosition]);
-  return <canvas ref={canvasRef} className="canvas--meme" />;
+    console.log("image.complete", image.complete);
+  }, [meme.randomImage]);
+
+  const handleTextClick = (e) => {
+    setSelectedText(e.target);
+  };
+
+  return (
+    <Stage
+      className="canvas--block"
+      width={containerSize.width}
+      height={containerSize.height}
+      ref={stageRef}
+      onClick={() => setSelectedText(null)}
+      onContentClick={(e) => {
+        e.evt.preventDefault();
+        setSelectedText(e.target);
+      }}
+    >
+      <Layer>
+        <KonvaImage
+          image={imageElement}
+          width={containerSize.width}
+          height={containerSize.height}
+        />
+
+        <Text
+          x={
+            imageElement &&
+            (parseInt(topTextPosition.x) * containerSize.width) /
+              imageElement.naturalWidth
+          }
+          y={
+            imageElement &&
+            (parseInt(topTextPosition.y) * containerSize.height) /
+              imageElement.naturalHeight
+          }
+          rotation={topTextRotation}
+          text={meme.topText.toUpperCase()}
+          fontFamily="Impact"
+          fontSize={containerSize.width < 500 ? 20 : 40}
+          fill="#fff"
+          shadowBlur={5}
+          shadowColor="#000"
+          shadowOffsetX={2}
+          shadowOffsetY={2}
+          draggable
+          onClick={handleTextClick}
+        />
+        {selectedText === null ? null : (
+          <Transformer
+            selectedNode={selectedText}
+            keepRatio={false}
+            resizeEnabled
+            rotateEnabled
+            anchorSize={10}
+            anchorCornerRadius={5}
+            borderStrokeWidth={1}
+            borderDash={[3, 3]}
+          />
+        )}
+        <Text
+          x={
+            imageElement &&
+            (parseInt(bottomTextPosition.x) * containerSize.width) /
+              imageElement.naturalWidth
+          }
+          y={
+            imageElement &&
+            (parseInt(bottomTextPosition.y) * containerSize.height) /
+              imageElement.naturalHeight
+          }
+          rotation={bottomTextRotation}
+          text={meme.bottomText.toUpperCase()}
+          fontFamily="Impact"
+          fontSize={containerSize.width < 500 ? 20 : 40}
+          fill="#fff"
+          shadowBlur={5}
+          shadowColor="#000"
+          shadowOffsetX={2}
+          shadowOffsetY={2}
+          draggable
+          onClick={handleTextClick}
+        />
+        {selectedText === null ? null : (
+          <Transformer
+            selectedNode={selectedText}
+            keepRatio={false}
+            resizeEnabled
+            rotateEnabled
+            anchorSize={10}
+            anchorCornerRadius={5}
+            borderStrokeWidth={1}
+            borderDash={[3, 3]}
+          />
+        )}
+      </Layer>
+    </Stage>
+  );
 }

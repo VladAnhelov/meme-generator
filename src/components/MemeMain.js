@@ -2,7 +2,7 @@
 // eslint-disable-next-line
 import React from "react";
 import DownloadMemeComponent from "./DownloadMemeComponent.js";
-import TouchEventComponent from "./TouchEventComponent.js";
+import CanvasMemeComponent from "./CanvasMemeComponent.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -19,6 +19,7 @@ export default function MemeMain() {
     x: 30,
     y: 135,
   });
+  const stageRef = React.useRef(null);
 
   React.useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
@@ -45,10 +46,6 @@ export default function MemeMain() {
 
   return (
     <main>
-      <TouchEventComponent
-        setTopTextPosition={setTopTextPosition}
-        setBottomTextPosition={setBottomTextPosition}
-      />
       <div className="form">
         <input
           type="text"
@@ -71,34 +68,24 @@ export default function MemeMain() {
         </button>
       </div>
       <div className="meme">
+        <CanvasMemeComponent
+          meme={meme}
+          topTextPosition={topTextPosition}
+          bottomTextPosition={bottomTextPosition}
+          stageRef={stageRef}
+        />
         <img
           src={meme.randomImage}
           className="meme--image"
           crossOrigin="anonymous"
         />
-        <div
-          className="meme--text top"
-          style={{
-            top: topTextPosition.y,
-            left: topTextPosition.x,
-          }}
-        >
-          {meme.topText}
-        </div>
-        <div
-          className="meme--text bottom"
-          style={{
-            top: bottomTextPosition.y,
-            left: bottomTextPosition.x,
-          }}
-        >
-          {meme.bottomText}
-        </div>
+        <div className="meme--config"></div>
       </div>
       <DownloadMemeComponent
         meme={meme}
         topTextPosition={topTextPosition}
         bottomTextPosition={bottomTextPosition}
+        stageRef={stageRef}
       />
     </main>
   );

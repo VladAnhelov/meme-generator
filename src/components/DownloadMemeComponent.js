@@ -1,15 +1,11 @@
-import React, { useRef } from "react";
-import CanvasMemeComponent from "./CanvasMemeComponent.js";
+import React from "react";
 
-export default function DownloadMemeComponent({
-  meme,
-  topTextPosition,
-  bottomTextPosition,
-}) {
-  const canvasRef = useRef(null);
+export default function DownloadMemeComponent(props) {
   const handleDownloadClick = () => {
-    const canvas = canvasRef.current;
-    const dataURL = canvas.toDataURL("image/png");
+    const dataURL = props.stageRef.current.toDataURL({
+      mimeType: "image/png",
+      quality: 1,
+    });
     const link = document.createElement("a");
     link.download = "meme.png";
     link.href = dataURL;
@@ -20,12 +16,6 @@ export default function DownloadMemeComponent({
 
   return (
     <div className="form">
-      <CanvasMemeComponent
-        meme={meme}
-        topTextPosition={topTextPosition}
-        bottomTextPosition={bottomTextPosition}
-        canvasRef={canvasRef}
-      />
       <button className="download--button" onClick={handleDownloadClick}>
         Download Meme
       </button>

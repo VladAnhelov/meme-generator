@@ -73,6 +73,7 @@ main {
   cursor: pointer;
   margin-top: 5px;
   text-transform: uppercase;
+  position: inherit;
 }
 
 .download--button:hover {
@@ -86,57 +87,24 @@ main {
 .meme {
   position: relative;
   justify-items: center;
-  padding-top: 25px;
+  display: flex;
 }
 
 .meme--image {
-  border-radius: 3px;
-  block-size: auto;
-  height: 550px;
+  display: none;
 }
 
-@media only screen and (max-width: 600px) {
-  body {
-    overflow: hidden;
-  }
-  .meme--image {
-    width: 100%;
-    height: auto;
-  }
-
-  .meme {
-    padding-top: 0px;
-  }
-
-  .meme--text.bottom {
-    bottom: 0;
-  }
+.canvas--block {
+  position: relative;
+  display: inline-block;
+  border: 2px solid #000000;
+  width: 100%;
 }
 
-@media only screen and (max-width: 550px) {
-  .meme--text.top,
-  .meme--text.bottom {
-    font-size: 20px;
-  }
+canvas {
+  width: 100%;
 }
 
-.meme--text {
-  position: absolute;
-  font-size: 40px;
-  font-family: Impact;
-  color: #ffffff;
-  text-align: center;
-  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000,
-    -2px 2px 0 #000, 0 2px 0 #000, 2px 0 0 #000, 0 -2px 0 #000, -2px 0 0 #000,
-    2px 2px 5px #000;
-  text-transform: uppercase;
-  cursor: move;
-}
-
-.bottom {
-  bottom: 0;
-}
-
-.canvas--meme {
-  height: 550px;
+.meme--config {
+  width: 143%;
 }
