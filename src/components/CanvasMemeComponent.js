@@ -32,8 +32,8 @@ export default function CanvasMemeComponent(props) {
 
     const handleResize = () => {
       setContainerSize({
-        width: container.naturalWidth,
-        height: container.naturalHeight,
+        width: 568,
+        height: 550,
       });
     };
 

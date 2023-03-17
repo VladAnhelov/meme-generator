@@ -73,6 +73,7 @@ main {
   cursor: pointer;
   margin-top: 5px;
   text-transform: uppercase;
+  position: inherit;
 }
 
 .download--button:hover {
