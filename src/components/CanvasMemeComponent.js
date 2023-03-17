@@ -31,9 +31,23 @@ export default function CanvasMemeComponent(props) {
     }
 
     const handleResize = () => {
+      const sceneWidth = 570;
+      const sceneHeight = 550;
       setContainerSize({
-        width: 568,
-        height: 550,
+        width: sceneWidth,
+        height: sceneHeight,
+      });
+      const containerImage = document.querySelector(".canvas--block");
+      const containerImageWidth = containerImage.offsetWidth;
+      const scale = containerImageWidth / sceneWidth;
+
+      setImageElement((prevImageElement) => {
+        if (!prevImageElement) {
+          return null;
+        }
+        prevImageElement.width = sceneWidth * scale;
+        prevImageElement.height = sceneHeight * scale;
+        return prevImageElement;
       });
     };
 
@@ -46,9 +60,11 @@ export default function CanvasMemeComponent(props) {
     const image = new Image();
     image.onload = () => {
       setImageElement(image);
+      console.log("image.naturalWidth", image.naturalWidth);
     };
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
+    console.log("image.complete", image.complete);
   }, [meme.randomImage]);
 
   const handleTextClick = (e) => {
@@ -57,6 +73,7 @@ export default function CanvasMemeComponent(props) {
 
   return (
     <Stage
+      className="canvas--block"
       width={containerSize.width}
       height={containerSize.height}
       ref={stageRef}

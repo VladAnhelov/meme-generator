@@ -2,7 +2,6 @@
 // eslint-disable-next-line
 import React from "react";
 import DownloadMemeComponent from "./DownloadMemeComponent.js";
-import TouchEventComponent from "./TouchEventComponent.js";
 import CanvasMemeComponent from "./CanvasMemeComponent.js";
 
 export default function MemeMain() {
@@ -52,14 +51,6 @@ export default function MemeMain() {
 
   return (
     <main>
-      <TouchEventComponent
-        setTopTextPosition={setTopTextPosition}
-        setBottomTextPosition={setBottomTextPosition}
-        topTextPosition={topTextPosition}
-        bottomTextPosition={bottomTextPosition}
-        containerSize={containerSize}
-        imageElement={imageElement}
-      />
       <div className="form">
         <input
           type="text"
@@ -93,6 +84,7 @@ export default function MemeMain() {
           className="meme--image"
           crossOrigin="anonymous"
         />
+        <div className="meme--config"></div>
       </div>
       <DownloadMemeComponent
         meme={meme}

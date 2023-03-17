@@ -93,3 +93,18 @@ main {
 .meme--image {
   display: none;
 }
+
+.canvas--block {
+  position: relative;
+  display: inline-block;
+  border: 2px solid #000000;
+  width: 100%;
+}
+
+canvas {
+  width: 100%;
+}
+
+.meme--config {
+  width: 143%;
+}
