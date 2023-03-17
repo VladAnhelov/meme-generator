@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Stage,
   Layer,
-  Image as KonvaImage,
   Text,
   Transformer,
+  Image as KonvaImage,
 } from "react-konva";
 
 export default function CanvasMemeComponent(props) {
@@ -22,6 +22,8 @@ export default function CanvasMemeComponent(props) {
   });
   const [imageElement, setImageElement] = useState(null);
   const [selectedText, setSelectedText] = useState(null);
+  const shapeRef = useRef();
+  const trRef = useRef();
 
   useEffect(() => {
     const container = document.querySelector(".meme--image");
@@ -69,6 +71,27 @@ export default function CanvasMemeComponent(props) {
 
   const handleTextClick = (e) => {
     setSelectedText(e.target);
+    if (selectedText) {
+      trRef.current.nodes([shapeRef.current]);
+      trRef.current.getLayer().batchDraw();
+    }
+  };
+
+  const handleTransform = (e) => {
+    const node = shapeRef.current;
+    const scaleX = node.scaleX();
+    const scaleY = node.scaleY();
+
+    node.scaleX(1);
+    node.scaleY(1);
+
+    setSelectedText({
+      ...selectedText,
+      x: node.x(),
+      y: node.y(),
+      width: Math.max(5, node.width() * scaleX),
+      height: Math.max(5, node.height() * scaleY),
+    });
   };
 
   return (
@@ -77,7 +100,6 @@ export default function CanvasMemeComponent(props) {
       width={containerSize.width}
       height={containerSize.height}
       ref={stageRef}
-      onClick={() => setSelectedText(null)}
       onContentClick={(e) => {
         e.evt.preventDefault();
         setSelectedText(e.target);
@@ -106,16 +128,19 @@ export default function CanvasMemeComponent(props) {
           fontFamily="Impact"
           fontSize={containerSize.width < 500 ? 20 : 40}
           fill="#fff"
-          shadowBlur={5}
+          shadowBlur={2}
           shadowColor="#000"
           shadowOffsetX={2}
           shadowOffsetY={2}
           draggable
+          ref={shapeRef}
           onClick={handleTextClick}
+          onTransformEnd={handleTransform}
         />
         {selectedText === null ? null : (
           <Transformer
             selectedNode={selectedText}
+            ref={trRef}
             keepRatio={false}
             resizeEnabled
             rotateEnabled
@@ -123,8 +148,10 @@ export default function CanvasMemeComponent(props) {
             anchorCornerRadius={5}
             borderStrokeWidth={1}
             borderDash={[3, 3]}
+            onTransform={handleTransform}
           />
         )}
+
         <Text
           x={
             imageElement &&
