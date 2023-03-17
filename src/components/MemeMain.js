@@ -11,11 +11,11 @@ export default function MemeMain() {
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
-  const [topTextPosition, setTopTextPosition] = React.useState({
+  const [topTextPosition] = React.useState({
     x: 30,
     y: 40,
   });
-  const [bottomTextPosition, setBottomTextPosition] = React.useState({
+  const [bottomTextPosition] = React.useState({
     x: 30,
     y: 135,
   });
