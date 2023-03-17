@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Stage, Layer, Image as KonvaImage, Text } from "react-konva";
+
+import Konva from "konva";
 
 export default function CanvasMemeComponent(props) {
-  const { canvasRef, meme, topTextPosition, bottomTextPosition } = props;
-  const [canvasWidth, setCanvasWidth] = useState(0);
+  const { stageRef, meme, topTextPosition, bottomTextPosition } = props;
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+  const [imageElement, setImageElement] = useState(null);
 
   useEffect(() => {
     const container = document.querySelector(".meme--image");
@@ -10,51 +14,88 @@ export default function CanvasMemeComponent(props) {
       console.error(".meme--image selector did not match any elements");
       return;
     }
-    setCanvasWidth(container.offsetWidth);
-    const handleResize = () => setCanvasWidth(container.offsetWidth);
+
+    const handleResize = () => {
+      setContainerSize({
+        width: container.offsetWidth,
+        height: container.offsetHeight,
+      });
+    };
+
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
-    if (!canvasRef.current) {
-      return;
-    }
-    const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-
-    const image = new Image();
+    const image = document.querySelector(".meme--image");
     image.onload = () => {
-      //треба переробити цей код, і зробити щоб текст на картинці співподав з текстом на канвасі
-      const container = document.querySelector(".meme--image");
-      canvas.width = container.offsetWidth;
-      canvas.height = container.offsetHeight;
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      context.fillStyle = "#ffffff";
-      context.shadowBlur = 5;
-      context.shadowColor = "#000";
-      context.shadowOffsetX = 2;
-      context.shadowOffsetY = 2;
-      if (canvas.width < 500) {
-        context.font = "20px Impact";
-      } else {
-        context.font = "40px Impact";
-      }
-      const topX = Math.round(parseInt(topTextPosition.x));
-      const topY = Math.round(parseInt(topTextPosition.y));
-      const bottomX = Math.round(parseInt(bottomTextPosition.x));
-      const bottomY = Math.round(parseInt(bottomTextPosition.y));
-      const topTextX = (topX * canvas.width) / image.naturalWidth;
-      const topTextY = (topY * canvas.height) / image.naturalHeight;
-      context.fillText(meme.topText.toUpperCase(), topTextX, topTextY);
-      const bottomTextX = (bottomX * canvas.width) / image.naturalWidth;
-      const bottomTextY = (bottomY * canvas.height) / image.naturalHeight;
-      context.fillText(meme.bottomText.toUpperCase(), bottomTextX, bottomTextY);
+      setImageElement(image);
     };
-
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
-  }, [canvasWidth, meme, topTextPosition, bottomTextPosition]);
-  return <canvas ref={canvasRef} className="canvas--meme" />;
+  }, [meme.randomImage]);
+
+  const getTextFontSize = () => (containerSize.width < 500 ? 20 : 40);
+
+  return (
+    <Stage
+      width={containerSize.width}
+      height={containerSize.height}
+      ref={stageRef}
+    >
+      <Layer>
+        <KonvaImage
+          image={imageElement}
+          width={containerSize.width}
+          height={containerSize.height}
+        />
+
+        <Text
+          x={
+            imageElement
+              ? (parseInt(topTextPosition.x) * containerSize.width) /
+                imageElement.naturalWidth
+              : 0
+          }
+          y={
+            imageElement
+              ? (parseInt(topTextPosition.y) * containerSize.height) /
+                imageElement.naturalHeight
+              : 0
+          }
+          text={meme.topText.toUpperCase()}
+          fontFamily="Impact"
+          fontSize={getTextFontSize()}
+          fill="#fff"
+          shadowBlur={5}
+          shadowColor="#000"
+          shadowOffsetX={2}
+          shadowOffsetY={2}
+        />
+        <Text
+          x={
+            imageElement
+              ? (parseInt(bottomTextPosition.x) * containerSize.width) /
+                imageElement.naturalWidth
+              : 0
+          }
+          y={
+            imageElement
+              ? (parseInt(bottomTextPosition.y) * containerSize.height) /
+                imageElement.naturalHeight
+              : 0
+          }
+          text={meme.bottomText.toUpperCase()}
+          fontFamily="Impact"
+          fontSize={getTextFontSize()}
+          fill="#fff"
+          shadowBlur={5}
+          shadowColor="#000"
+          shadowOffsetX={2}
+          shadowOffsetY={2}
+        />
+      </Layer>
+    </Stage>
+  );
 }

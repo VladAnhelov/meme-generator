@@ -6,10 +6,12 @@ export default function DownloadMemeComponent({
   topTextPosition,
   bottomTextPosition,
 }) {
-  const canvasRef = useRef(null);
+  const stageRef = useRef(null);
   const handleDownloadClick = () => {
-    const canvas = canvasRef.current;
-    const dataURL = canvas.toDataURL("image/png");
+    const dataURL = stageRef.current.toDataURL({
+      mimeType: "image/png",
+      quality: 1,
+    });
     const link = document.createElement("a");
     link.download = "meme.png";
     link.href = dataURL;
@@ -24,7 +26,7 @@ export default function DownloadMemeComponent({
         meme={meme}
         topTextPosition={topTextPosition}
         bottomTextPosition={bottomTextPosition}
-        canvasRef={canvasRef}
+        stageRef={stageRef}
       />
       <button className="download--button" onClick={handleDownloadClick}>
         Download Meme

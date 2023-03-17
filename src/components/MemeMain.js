@@ -19,6 +19,11 @@ export default function MemeMain() {
     x: 30,
     y: 135,
   });
+  const [containerSize, setContainerSize] = React.useState({
+    width: 0,
+    height: 0,
+  });
+  const [imageElement, setImageElement] = React.useState(null);
 
   React.useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
@@ -48,6 +53,10 @@ export default function MemeMain() {
       <TouchEventComponent
         setTopTextPosition={setTopTextPosition}
         setBottomTextPosition={setBottomTextPosition}
+        topTextPosition={topTextPosition}
+        bottomTextPosition={bottomTextPosition}
+        containerSize={containerSize}
+        imageElement={imageElement}
       />
       <div className="form">
         <input

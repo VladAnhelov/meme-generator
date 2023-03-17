@@ -86,13 +86,13 @@ main {
 .meme {
   position: relative;
   justify-items: center;
-  padding-top: 25px;
 }
 
 .meme--image {
   border-radius: 3px;
   block-size: auto;
-  height: 550px;
+  width: 500px;
+  border: 2px solid black;
 }
 
 @media only screen and (max-width: 600px) {
@@ -135,8 +135,4 @@ main {
 
 .bottom {
   bottom: 0;
-}
-
-.canvas--meme {
-  height: 550px;
 }
