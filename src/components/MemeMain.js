@@ -19,11 +19,6 @@ export default function MemeMain() {
     x: 30,
     y: 135,
   });
-  const [containerSize, setContainerSize] = React.useState({
-    width: 0,
-    height: 0,
-  });
-  const [imageElement, setImageElement] = React.useState(null);
   const stageRef = React.useRef(null);
 
   React.useEffect(() => {
