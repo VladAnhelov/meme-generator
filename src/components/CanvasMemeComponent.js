@@ -22,6 +22,7 @@ export default function CanvasMemeComponent(props) {
   });
   const [imageElement, setImageElement] = useState(null);
   const [selectedText, setSelectedText] = useState(null);
+  const [fontSize] = useState(40);
   const [nodes, setNodes] = useState([]);
   const shapeRef = useRef();
   const trRef = useRef();
@@ -83,10 +84,13 @@ export default function CanvasMemeComponent(props) {
     const node = shapeRef.current;
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
+    const fontSize = node.fontSize();
 
+    // reset the scale
     node.scaleX(1);
     node.scaleY(1);
 
+    // update the selected text
     setSelectedText({
       ...selectedText,
       x: node.x(),
@@ -94,6 +98,10 @@ export default function CanvasMemeComponent(props) {
       width: Math.max(5, node.width() * scaleX),
       height: Math.max(node, node.height() * scaleY),
     });
+
+    // update the font size based on the scale
+    const newFontSize = fontSize * Math.max(scaleX, scaleY);
+    node.fontSize(newFontSize);
   };
 
   const handleDragMove = (e) => {
@@ -143,7 +151,7 @@ export default function CanvasMemeComponent(props) {
           rotation={topTextRotation}
           text={meme.topText.toUpperCase()}
           fontFamily="Impact"
-          fontSize={containerSize.width < 500 ? 20 : 40}
+          fontSize={fontSize}
           fill="#fff"
           shadowBlur={2}
           shadowColor="#000"
@@ -185,7 +193,7 @@ export default function CanvasMemeComponent(props) {
           rotation={bottomTextRotation}
           text={meme.bottomText.toUpperCase()}
           fontFamily="Impact"
-          fontSize={containerSize.width < 500 ? 20 : 40}
+          fontSize={fontSize}
           fill="#fff"
           shadowBlur={5}
           shadowColor="#000"
