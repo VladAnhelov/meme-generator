@@ -22,7 +22,7 @@ export default function CanvasMemeComponent(props) {
   });
   const [imageElement, setImageElement] = useState(null);
   const [selectedText, setSelectedText] = useState(null);
-  const [fontSize] = useState(40);
+  const [fontSize, setFontSize] = useState(40);
   const [nodes, setNodes] = useState([]);
   const shapeRef = useRef();
   const trRef = useRef();
@@ -104,6 +104,33 @@ export default function CanvasMemeComponent(props) {
     node.fontSize(newFontSize);
   };
 
+  const handleTransformEnd = (e) => {
+    const node = shapeRef.current;
+    const scaleX = node.scaleX();
+    const scaleY = node.scaleY();
+
+    // reset the scale
+    node.scaleX(1);
+    node.scaleY(1);
+
+    // update the selected text
+    setSelectedText({
+      ...selectedText,
+      x: node.x(),
+      y: node.y(),
+      width: Math.max(5, node.width() * scaleX),
+      height: Math.max(node, node.height() * scaleY),
+    });
+
+    // update the font size
+    const newFontSize = e.target.fontSize() * e.target.scaleX();
+    setFontSize(newFontSize);
+    e.target.fontSize(newFontSize);
+
+    // deselect the text
+    setSelectedText(null);
+  };
+
   const handleDragMove = (e) => {
     const node = e.target;
     const newNodes = nodes.slice();
@@ -160,7 +187,8 @@ export default function CanvasMemeComponent(props) {
           draggable
           ref={shapeRef}
           onClick={handleTextClick}
-          onTransformEnd={handleTransform}
+          onTransform={handleTransform}
+          onTransformEnd={handleTransformEnd}
           onDragMove={handleDragMove}
           onDragEnd={handleDragEnd}
         />
