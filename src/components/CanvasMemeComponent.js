@@ -22,6 +22,7 @@ export default function CanvasMemeComponent(props) {
   });
   const [imageElement, setImageElement] = useState(null);
   const [selectedText, setSelectedText] = useState(null);
+  const [nodes, setNodes] = useState([]);
   const shapeRef = useRef();
   const trRef = useRef();
 
@@ -70,9 +71,10 @@ export default function CanvasMemeComponent(props) {
   }, [meme.randomImage]);
 
   const handleTextClick = (e) => {
+    const node = shapeRef.current;
     setSelectedText(e.target);
     if (selectedText) {
-      trRef.current.nodes([shapeRef.current]);
+      trRef.current.attachTo(node);
       trRef.current.getLayer().batchDraw();
     }
   };
@@ -90,8 +92,23 @@ export default function CanvasMemeComponent(props) {
       x: node.x(),
       y: node.y(),
       width: Math.max(5, node.width() * scaleX),
-      height: Math.max(5, node.height() * scaleY),
+      height: Math.max(node, node.height() * scaleY),
     });
+  };
+
+  const handleDragMove = (e) => {
+    const node = e.target;
+    const newNodes = nodes.slice();
+    newNodes[0] = {
+      ...newNodes[0],
+      x: node.x(),
+      y: node.y(),
+    };
+    setNodes(newNodes);
+  };
+
+  const handleDragEnd = () => {
+    setNodes([]);
   };
 
   return (
@@ -136,6 +153,8 @@ export default function CanvasMemeComponent(props) {
           ref={shapeRef}
           onClick={handleTextClick}
           onTransformEnd={handleTransform}
+          onDragMove={handleDragMove}
+          onDragEnd={handleDragEnd}
         />
         {selectedText === null ? null : (
           <Transformer
@@ -174,6 +193,8 @@ export default function CanvasMemeComponent(props) {
           shadowOffsetY={2}
           draggable
           onClick={handleTextClick}
+          onDragMove={handleDragMove}
+          onDragEnd={handleDragEnd}
         />
         {selectedText === null ? null : (
           <Transformer
