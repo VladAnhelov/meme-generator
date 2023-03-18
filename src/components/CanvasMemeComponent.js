@@ -28,12 +28,6 @@ export default function CanvasMemeComponent(props) {
   const trRef = useRef();
 
   useEffect(() => {
-    const container = document.querySelector(".meme--image");
-    if (!container) {
-      console.error(".meme--image selector did not match any elements");
-      return;
-    }
-
     const handleResize = () => {
       const sceneWidth = 570;
       const sceneHeight = 550;
@@ -64,11 +58,9 @@ export default function CanvasMemeComponent(props) {
     const image = new Image();
     image.onload = () => {
       setImageElement(image);
-      console.log("image.naturalWidth", image.naturalWidth);
     };
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
-    console.log("image.complete", image.complete);
   }, [meme.randomImage]);
 
   const handleTextClick = (e) => {
