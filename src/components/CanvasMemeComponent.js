@@ -228,7 +228,10 @@ export default function CanvasMemeComponent(props) {
           shadowOffsetX={2}
           shadowOffsetY={2}
           draggable
+          ref={shapeRef}
           onClick={handleTextClick}
+          onTransform={handleTransform}
+          onTransformEnd={handleTransformEnd}
           onDragMove={handleDragMove}
           onDragEnd={handleDragEnd}
         />
