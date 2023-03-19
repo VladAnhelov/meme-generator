@@ -22,10 +22,12 @@ export default function CanvasMemeComponent(props) {
   });
   const [imageElement, setImageElement] = useState(null);
   const [selectedText, setSelectedText] = useState(null);
-  const [fontSize, setFontSize] = useState(40);
+  const [fontSizeTop, setFontSizeTop] = useState(40);
+  const [fontSizeBottom, setFontSizeBottom] = useState(40);
   const [nodes, setNodes] = useState([]);
-  const shapeRef = useRef();
-  const trRef = useRef();
+  const shapeRefTop = useRef();
+  const shapeRefBottom = useRef();
+  const trRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -64,8 +66,16 @@ export default function CanvasMemeComponent(props) {
   }, [meme.randomImage]);
 
   const handleTextClick = (e) => {
-    const node = shapeRef.current;
-    setSelectedText(e.target);
+    const node = e.target;
+
+    // check which text was clicked and set the appropriate state
+    if (node === shapeRefTop.current) {
+      setSelectedText("top");
+    } else if (node === shapeRefBottom.current) {
+      setSelectedText("bottom");
+    } else {
+      setSelectedText(null);
+    }
     if (selectedText) {
       trRef.current.attachTo(node);
       trRef.current.getLayer().batchDraw();
@@ -73,7 +83,8 @@ export default function CanvasMemeComponent(props) {
   };
 
   const handleTransform = (e) => {
-    const node = shapeRef.current;
+    const node =
+      selectedText === "top" ? shapeRefTop.current : shapeRefBottom.current;
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
     const fontSize = node.fontSize();
@@ -88,7 +99,7 @@ export default function CanvasMemeComponent(props) {
       x: node.x(),
       y: node.y(),
       width: Math.max(5, node.width() * scaleX),
-      height: Math.max(node, node.height() * scaleY),
+      height: Math.max(5, node.height() * scaleY),
     });
 
     // update the font size based on the scale
@@ -97,7 +108,8 @@ export default function CanvasMemeComponent(props) {
   };
 
   const handleTransformEnd = (e) => {
-    const node = shapeRef.current;
+    const node =
+      selectedText === "top" ? shapeRefTop.current : shapeRefBottom.current;
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
 
@@ -111,12 +123,16 @@ export default function CanvasMemeComponent(props) {
       x: node.x(),
       y: node.y(),
       width: Math.max(5, node.width() * scaleX),
-      height: Math.max(node, node.height() * scaleY),
+      height: Math.max(5, node.height() * scaleY),
     });
 
     // update the font size
     const newFontSize = e.target.fontSize() * e.target.scaleX();
-    setFontSize(newFontSize);
+    if (selectedText === "top") {
+      setFontSizeTop(newFontSize);
+    } else if (selectedText === "bottom") {
+      setFontSizeBottom(newFontSize);
+    }
     e.target.fontSize(newFontSize);
 
     // deselect the text
@@ -170,14 +186,14 @@ export default function CanvasMemeComponent(props) {
           rotation={topTextRotation}
           text={meme.topText.toUpperCase()}
           fontFamily="Impact"
-          fontSize={fontSize}
+          fontSize={fontSizeTop}
           fill="#fff"
           shadowBlur={2}
           shadowColor="#000"
           shadowOffsetX={2}
           shadowOffsetY={2}
           draggable
-          ref={shapeRef}
+          ref={shapeRefTop}
           onClick={handleTextClick}
           onTransform={handleTransform}
           onTransformEnd={handleTransformEnd}
@@ -213,14 +229,14 @@ export default function CanvasMemeComponent(props) {
           rotation={bottomTextRotation}
           text={meme.bottomText.toUpperCase()}
           fontFamily="Impact"
-          fontSize={fontSize}
+          fontSize={fontSizeBottom}
           fill="#fff"
           shadowBlur={5}
           shadowColor="#000"
           shadowOffsetX={2}
           shadowOffsetY={2}
           draggable
-          ref={shapeRef}
+          ref={shapeRefBottom}
           onClick={handleTextClick}
           onTransform={handleTransform}
           onTransformEnd={handleTransformEnd}
