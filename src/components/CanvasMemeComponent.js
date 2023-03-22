@@ -32,7 +32,7 @@ export default function CanvasMemeComponent(props) {
   useEffect(() => {
     const handleResize = () => {
       const sceneWidth = 570;
-      const sceneHeight = 550;
+      const sceneHeight = 600;
       setContainerSize({
         width: sceneWidth,
         height: sceneHeight,

@@ -67,7 +67,7 @@ export default function MemeMain() {
       </div>
       <div className="user--buttons">
         <button className="form--button" onClick={getMemeImage}>
-          <p className="text--button">Choose meme</p>
+          <p className="text--button">Choose random meme</p>
         </button>
         <AddNewMemeComponent setMeme={setMeme} />
       </div>

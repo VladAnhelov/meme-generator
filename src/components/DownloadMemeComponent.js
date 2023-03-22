@@ -11,7 +11,7 @@ export default function DownloadMemeComponent(props) {
 
       setTimeout(() => {
         btn.classList.remove("clicked");
-        btn.textContent = "Download";
+        btn.textContent = "Download Meme";
       }, 1000);
     });
   }
@@ -38,7 +38,7 @@ export default function DownloadMemeComponent(props) {
         id="downloadBtn"
         onClick={handleDownloadClick}
       >
-        <p className="text--button">Download Meme</p>
+        Download Meme
       </button>
     </div>
   );
