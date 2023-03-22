@@ -55,7 +55,6 @@ main {
 }
 
 .form--button {
-  grid-column: 1 / -1;
   border-radius: 5px;
   background: linear-gradient(90.41deg, #711f8d 1.14%, #a818da 100%);
   color: white;
@@ -64,10 +63,16 @@ main {
   width: 100%;
   padding: 2px;
   margin: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cat-icon {
+  width: 30px;
 }
 
 .upload {
-  grid-column: 1 / -1;
   border-radius: 5px;
   background: linear-gradient(90.41deg, #1d77dd 1.14%, #106fdb 100%);
   color: white;
@@ -76,6 +81,10 @@ main {
   width: 100%;
   padding: 2px;
   margin: 7px;
+}
+
+.dog-icon {
+  width: 20px;
 }
 
 .form--button:hover {
@@ -175,11 +184,23 @@ main {
   .text--button {
     font-size: 12px;
   }
+  .cat-icon {
+    width: 20px;
+  }
+  .dog-icon {
+    width: 15px;
+  }
 }
 
 @media (max-width: 390px) {
   .text--button {
     font-size: 10px;
+  }
+  .cat-icon {
+    width: 15px;
+  }
+  .dog-icon {
+    width: 10px;
   }
 }
 
