@@ -3,6 +3,7 @@
 import React from "react";
 import DownloadMemeComponent from "./DownloadMemeComponent.js";
 import CanvasMemeComponent from "./CanvasMemeComponent.js";
+import AddNewMemeComponent from "./AddNewMemeComponent.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -63,9 +64,17 @@ export default function MemeMain() {
           value={meme.bottomText}
           onChange={handleChange}
         />
+      </div>
+      <div className="user--buttons">
         <button className="form--button" onClick={getMemeImage}>
-          Get a new meme image 🖼
+          <p className="text--button">Choose meme</p>
+          <img
+            src={`${process.env.PUBLIC_URL}/cat-icon.png`}
+            alt="Download"
+            className="cat-icon"
+          />
         </button>
+        <AddNewMemeComponent setMeme={setMeme} />
       </div>
       <div className="meme">
         <CanvasMemeComponent

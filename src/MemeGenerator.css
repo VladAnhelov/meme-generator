@@ -9,6 +9,11 @@ body {
 
 main {
   padding: 25px;
+  background-image: url("/background.png");
+  background-size: 400px;
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: 278px;
 }
 
 .container {
@@ -40,10 +45,8 @@ main {
 }
 
 .form {
-  display: grid;
-  grid-template: 40px 40px / 1fr 1fr;
-  gap: 17px;
-  margin-bottom: 17px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .form--input {
@@ -51,37 +54,197 @@ main {
   border-radius: 5px;
   border: 1px solid #d5d4d8;
   text-indent: 5px;
+  width: 100%;
+  padding: 10px;
+  margin: 7px;
 }
 
 .form--button {
-  grid-column: 1 / -1;
-  font-family: "Karla", sans-serif;
   border-radius: 5px;
   background: linear-gradient(90.41deg, #711f8d 1.14%, #a818da 100%);
   color: white;
   border: none;
   cursor: pointer;
+  width: 100%;
+  padding: 2px;
+  margin: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.download--button {
-  grid-column: 1 / -1;
+.cat-icon {
+  width: 30px;
+}
+
+.upload {
+  border-radius: 5px;
+  background: linear-gradient(90.41deg, #1d77dd 1.14%, #106fdb 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  padding: 2px;
+  margin: 7px;
+}
+
+.dog-icon {
+  width: 23px;
+}
+
+.form--button:hover {
+  background: #bc00fa;
+}
+
+.upload:hover {
+  background: #2187fc;
+}
+
+.text--button {
+  display: flex;
+  font-family: "Karla", sans-serif;
+  justify-content: center;
+  font-size: 16px;
+  margin: 8px;
+  text-transform: uppercase;
+}
+
+.user--buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.file-upload-button {
+  display: none;
+}
+
+.download-btn {
   font-family: "Karla", sans-serif;
   border-radius: 5px;
   background: linear-gradient(90.41deg, #1c7a2a 1.14%, #12a31e 100%);
   color: white;
   border: none;
   cursor: pointer;
-  margin-top: 5px;
+  width: 100%;
+  height: 35px;
+  margin: 7px;
   text-transform: uppercase;
   position: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.download--button:hover {
-  background: linear-gradient(90.41deg, #26ac43 1.14%, #1a9e49 100%);
+.download-btn::before {
+  content: "Done";
+  position: absolute;
+  color: rgb(29, 165, 29);
+  left: 50%;
+  top: -2em;
+  transform: translateX(-50%);
+  opacity: 0;
 }
 
-.form--button:hover {
-  background: linear-gradient(90.41deg, #8825a9 1.14%, #c11df8 100%);
+.download-btn:hover {
+  background: #25a137;
+}
+
+.download-btn.clicked {
+  width: 100%;
+  height: 0.5em;
+  background-color: #cee0ed;
+  animation: fill 1s ease-out 1 forwards;
+  animation-delay: 45ms;
+}
+
+.download-btn.clicked::before {
+  animation: show 25ms ease-in 1 forwards;
+  animation-delay: 1s;
+}
+
+.download-icon {
+  width: 25px;
+}
+
+@keyframes fill {
+  0% {
+    box-shadow: 0 0 0 rgb(29, 155, 240) inset;
+  }
+
+  95% {
+    box-shadow: 100em 0 0 rgb(29, 155, 240) inset;
+  }
+
+  100% {
+    box-shadow: 115em 0 0 rgb(29, 165, 29) inset;
+  }
+}
+
+@keyframes show {
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 576px) {
+  .download-btn {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 952px) {
+  main {
+    background-image: url("/background.png");
+    background-size: 350px;
+    background-position-y: 330px;
+  }
+}
+
+@media (max-width: 930px) {
+  main {
+    background-image: url("/background.png");
+    background-size: 300px;
+    background-position-y: 390px;
+  }
+}
+
+@media (max-width: 880px) {
+  main {
+    background-image: none;
+  }
+}
+
+@media (max-width: 570px) {
+  .text--button {
+    font-size: 12px;
+  }
+  .cat-icon {
+    width: 20px;
+  }
+  .dog-icon {
+    width: 15px;
+  }
+  .download-icon {
+    width: 20px;
+  }
+  main {
+    background-image: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .text--button {
+    font-size: 10px;
+  }
+  .cat-icon {
+    width: 15px;
+  }
+  .dog-icon {
+    width: 10px;
+  }
+  .download-icon {
+    width: 15px;
+  }
 }
 
 .meme {
@@ -96,7 +259,6 @@ main {
 
 .canvas--block {
   position: relative;
-  display: inline-block;
   width: 100%;
   height: 100%;
 }

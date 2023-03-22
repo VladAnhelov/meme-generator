@@ -32,7 +32,7 @@ export default function CanvasMemeComponent(props) {
   useEffect(() => {
     const handleResize = () => {
       const sceneWidth = 570;
-      const sceneHeight = 550;
+      const sceneHeight = 600;
       setContainerSize({
         width: sceneWidth,
         height: sceneHeight,
@@ -45,6 +45,14 @@ export default function CanvasMemeComponent(props) {
         setContainerSize({
           width: containerImageWidth,
           height: 400,
+        });
+        setFontSizeTop(30);
+        setFontSizeBottom(30);
+      }
+      if (containerImageWidth < 390) {
+        setContainerSize({
+          width: containerImageWidth,
+          height: 300,
         });
         setFontSizeTop(30);
         setFontSizeBottom(30);
@@ -217,12 +225,6 @@ export default function CanvasMemeComponent(props) {
             selectedNode={selectedText}
             ref={trRef}
             keepRatio={true}
-            enabledAnchors={[
-              "top-left",
-              "top-right",
-              "bottom-left",
-              "bottom-right",
-            ]}
             resizeEnabled
             rotateEnabled
             anchorSize={10}
@@ -265,12 +267,6 @@ export default function CanvasMemeComponent(props) {
           <Transformer
             selectedNode={selectedText}
             keepRatio={false}
-            enabledAnchors={[
-              "top-left",
-              "top-right",
-              "bottom-left",
-              "bottom-right",
-            ]}
             resizeEnabled
             rotateEnabled
             anchorSize={10}
