@@ -41,9 +41,8 @@ main {
 
 .form {
   display: grid;
-  grid-template: 40px 40px / 1fr 1fr;
+  grid-template: 40px 4px / 1fr 1fr;
   gap: 17px;
-  margin-bottom: 17px;
 }
 
 .form--input {
@@ -60,10 +59,25 @@ main {
   background: linear-gradient(90.41deg, #711f8d 1.14%, #a818da 100%);
   color: white;
   border: none;
+  text-transform: uppercase;
   cursor: pointer;
+  width: 100%;
+  height: 35px;
+  margin: 5px;
 }
 
-.download--button {
+.meme--icon {
+  display: inline;
+  width: 20px;
+  height: 20px;
+}
+
+.user--buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.download-btn {
   grid-column: 1 / -1;
   font-family: "Karla", sans-serif;
   border-radius: 5px;
@@ -76,12 +90,53 @@ main {
   position: inherit;
 }
 
-.download--button:hover {
-  background: linear-gradient(90.41deg, #26ac43 1.14%, #1a9e49 100%);
+.download-btn::before {
+  content: "Done";
+  position: absolute;
+  color: rgb(29, 165, 29);
+  left: 50%;
+  top: -2em;
+  transform: translateX(-50%);
+  opacity: 0;
 }
 
-.form--button:hover {
-  background: linear-gradient(90.41deg, #8825a9 1.14%, #c11df8 100%);
+.download-btn.clicked {
+  width: 100%;
+  height: 0.5em;
+  background-color: rgb(206, 224, 237);
+  animation: fill 1s ease-out 1 forwards;
+  animation-delay: 45ms;
+}
+
+.download-btn.clicked::before {
+  animation: show 25ms ease-in 1 forwards;
+  animation-delay: 1s;
+}
+
+@keyframes fill {
+  0% {
+    box-shadow: 0 0 0 rgb(29, 155, 240) inset;
+  }
+
+  95% {
+    box-shadow: 100em 0 0 rgb(29, 155, 240) inset;
+  }
+
+  100% {
+    box-shadow: 115em 0 0 rgb(29, 165, 29) inset;
+  }
+}
+
+@keyframes show {
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 576px) {
+  .download-btn {
+    font-size: 0.85rem;
+  }
 }
 
 .meme {

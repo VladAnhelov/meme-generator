@@ -63,9 +63,21 @@ export default function MemeMain() {
           value={meme.bottomText}
           onChange={handleChange}
         />
+      </div>
+      <div className="user--buttons">
         <button className="form--button" onClick={getMemeImage}>
-          Get a new meme image 🖼
+          Choose meme{" "}
+          <img
+            className="meme--icon"
+            src="https://static.thenounproject.com/png/105264-200.png"
+          ></img>
         </button>
+        <input
+          type="button"
+          accept="image/jpeg, image/png, image/jpg"
+          className="form--button"
+          value="Add your own meme"
+        />
       </div>
       <div className="meme">
         <CanvasMemeComponent
