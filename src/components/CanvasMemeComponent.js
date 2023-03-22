@@ -31,15 +31,15 @@ export default function CanvasMemeComponent(props) {
 
   useEffect(() => {
     const handleResize = () => {
-      const containerImage = document.querySelector(".canvas--block");
-      const containerImageWidth = containerImage.offsetWidth;
-      const scale = containerImageWidth / sceneWidth;
       const sceneWidth = 570;
       const sceneHeight = 550;
       setContainerSize({
         width: sceneWidth,
         height: sceneHeight,
       });
+      const containerImage = document.querySelector(".canvas--block");
+      const containerImageWidth = containerImage.offsetWidth;
+      const scale = containerImageWidth / sceneWidth;
 
       if (containerImageWidth < 574) {
         setContainerSize({
