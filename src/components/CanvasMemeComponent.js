@@ -216,7 +216,13 @@ export default function CanvasMemeComponent(props) {
           <Transformer
             selectedNode={selectedText}
             ref={trRef}
-            keepRatio={false}
+            keepRatio={true}
+            enabledAnchors={[
+              "top-left",
+              "top-right",
+              "bottom-left",
+              "bottom-right",
+            ]}
             resizeEnabled
             rotateEnabled
             anchorSize={10}
@@ -259,6 +265,12 @@ export default function CanvasMemeComponent(props) {
           <Transformer
             selectedNode={selectedText}
             keepRatio={false}
+            enabledAnchors={[
+              "top-left",
+              "top-right",
+              "bottom-left",
+              "bottom-right",
+            ]}
             resizeEnabled
             rotateEnabled
             anchorSize={10}
