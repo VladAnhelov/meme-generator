@@ -38,7 +38,7 @@ export default function DownloadMemeComponent(props) {
         id="downloadBtn"
         onClick={handleDownloadClick}
       >
-        Download Meme
+        <p className="text--button">Download Meme</p>
       </button>
     </div>
   );
