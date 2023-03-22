@@ -187,11 +187,6 @@ main {
   position: relative;
   justify-items: center;
   display: flex;
-  overflow: auto;
-}
-
-.konvajs-content {
-  margin: 7px;
 }
 
 .meme--image {
