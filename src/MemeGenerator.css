@@ -125,6 +125,9 @@ main {
   margin: 7px;
   text-transform: uppercase;
   position: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .download-btn::before {
@@ -152,6 +155,10 @@ main {
 .download-btn.clicked::before {
   animation: show 25ms ease-in 1 forwards;
   animation-delay: 1s;
+}
+
+.download-icon {
+  width: 25px;
 }
 
 @keyframes fill {
@@ -190,6 +197,9 @@ main {
   .dog-icon {
     width: 15px;
   }
+  .download-icon {
+    width: 20px;
+  }
 }
 
 @media (max-width: 390px) {
@@ -201,6 +211,9 @@ main {
   }
   .dog-icon {
     width: 10px;
+  }
+  .download-icon {
+    width: 15px;
   }
 }
 

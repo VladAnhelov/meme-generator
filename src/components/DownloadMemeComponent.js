@@ -1,22 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function DownloadMemeComponent(props) {
-  let downloadBtn = document.getElementById("downloadBtn");
-
-  if (downloadBtn) {
-    downloadBtn.addEventListener("click", (event) => {
-      let btn = event.target;
-      btn.classList.add("clicked");
-      btn.textContent = "";
-
-      setTimeout(() => {
-        btn.classList.remove("clicked");
-        btn.textContent = "Download Meme";
-      }, 1000);
-    });
-  }
+  const [clicked, setClicked] = useState(false);
 
   const handleDownloadClick = () => {
+    setClicked(true);
+
     const dataURL = props.stageRef.current.toDataURL({
       mimeType: "image/png",
       quality: 1,
@@ -29,16 +18,30 @@ export default function DownloadMemeComponent(props) {
       link.click();
       document.body.removeChild(link);
     }, 1000);
+
+    setTimeout(() => {
+      setClicked(false);
+    }, 1000);
   };
 
   return (
     <div className="form">
       <button
-        className="download-btn"
-        id="downloadBtn"
+        className={`download-btn ${clicked ? "clicked" : ""}`}
         onClick={handleDownloadClick}
       >
-        Download Meme
+        {clicked ? (
+          ""
+        ) : (
+          <>
+            <p className="text--button">Download Meme</p>
+            <img
+              src={`${process.env.PUBLIC_URL}/download-icon.png`}
+              alt="Download"
+              className="download-icon"
+            />
+          </>
+        )}
       </button>
     </div>
   );
