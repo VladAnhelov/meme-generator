@@ -48,6 +48,14 @@ export default function CanvasMemeComponent(props) {
         });
         setFontSizeTop(30);
         setFontSizeBottom(30);
+      }
+      if (containerImageWidth < 390) {
+        setContainerSize({
+          width: containerImageWidth,
+          height: 300,
+        });
+        setFontSizeTop(30);
+        setFontSizeBottom(30);
       } else if (containerImageWidth > 574) {
         setFontSizeTop(40);
         setFontSizeBottom(40);
