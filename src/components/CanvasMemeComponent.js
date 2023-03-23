@@ -81,7 +81,6 @@ export default function CanvasMemeComponent(props) {
   const handleTextClick = (e) => {
     const node = e.target;
 
-    // check which text was clicked and set the appropriate state
     if (node === shapeRefTop.current) {
       setSelectedText("top");
     } else if (node === shapeRefBottom.current) {
@@ -102,11 +101,9 @@ export default function CanvasMemeComponent(props) {
     const scaleY = node.scaleY();
     const fontSize = node.fontSize();
 
-    // reset the scale
     node.scaleX(1);
     node.scaleY(1);
 
-    // update the selected text
     setSelectedText({
       ...selectedText,
       x: node.x(),
@@ -115,7 +112,6 @@ export default function CanvasMemeComponent(props) {
       height: Math.max(5, node.height() * scaleY),
     });
 
-    // update the font size based on the scale
     const newFontSize = fontSize * Math.max(scaleX, scaleY);
     node.fontSize(newFontSize);
   };
@@ -125,12 +121,11 @@ export default function CanvasMemeComponent(props) {
       selectedText === "top" ? shapeRefTop.current : shapeRefBottom.current;
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
+    const fontSize = node.fontSize();
 
-    // reset the scale
     node.scaleX(1);
     node.scaleY(1);
 
-    // update the selected text
     setSelectedText({
       ...selectedText,
       x: node.x(),
@@ -139,17 +134,16 @@ export default function CanvasMemeComponent(props) {
       height: Math.max(5, node.height() * scaleY),
     });
 
-    // update the font size
-    const newFontSize = e.target.fontSize() * e.target.scaleX();
-    if (selectedText === "top") {
-      setFontSizeTop(newFontSize);
-    } else if (selectedText === "bottom") {
-      setFontSizeBottom(newFontSize);
+    switch (selectedText) {
+      case "top":
+        setFontSizeTop(fontSize * Math.max(scaleX, scaleY));
+        break;
+      case "bottom":
+        setFontSizeBottom(fontSize * Math.max(scaleX, scaleY));
+        break;
     }
-    e.target.fontSize(newFontSize);
-
-    // deselect the text
     setSelectedText(null);
+    node.fontSize(fontSize * Math.max(scaleX, scaleY));
   };
 
   const handleDragMove = (e) => {
