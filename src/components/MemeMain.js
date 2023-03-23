@@ -88,14 +88,15 @@ export default function MemeMain() {
           className="meme--image"
           crossOrigin="anonymous"
         />
-        <div className="meme--config"></div>
+        <div className="meme--config">
+          <DownloadMemeComponent
+            meme={meme}
+            topTextPosition={topTextPosition}
+            bottomTextPosition={bottomTextPosition}
+            stageRef={stageRef}
+          />
+        </div>
       </div>
-      <DownloadMemeComponent
-        meme={meme}
-        topTextPosition={topTextPosition}
-        bottomTextPosition={bottomTextPosition}
-        stageRef={stageRef}
-      />
     </main>
   );
 }

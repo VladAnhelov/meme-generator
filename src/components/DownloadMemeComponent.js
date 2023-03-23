@@ -25,7 +25,7 @@ export default function DownloadMemeComponent(props) {
   };
 
   return (
-    <div className="form">
+    <div className="form config">
       <button
         className={`download-btn ${clicked ? "clicked" : ""}`}
         onClick={handleDownloadClick}
