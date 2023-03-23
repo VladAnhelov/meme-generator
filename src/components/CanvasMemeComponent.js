@@ -33,10 +33,6 @@ export default function CanvasMemeComponent(props) {
     const handleResize = () => {
       const sceneWidth = 570;
       const sceneHeight = 600;
-      setContainerSize({
-        width: sceneWidth,
-        height: sceneHeight,
-      });
       const containerImage = document.querySelector(".canvas--block");
       const containerImageWidth = containerImage.offsetWidth;
       const scale = containerImageWidth / sceneWidth;
@@ -44,19 +40,15 @@ export default function CanvasMemeComponent(props) {
       if (containerImageWidth < 574) {
         setContainerSize({
           width: containerImageWidth,
-          height: 400,
+          height: containerImageWidth < 390 ? 300 : 400,
         });
         setFontSizeTop(30);
         setFontSizeBottom(30);
-      }
-      if (containerImageWidth < 390) {
+      } else {
         setContainerSize({
-          width: containerImageWidth,
-          height: 300,
+          width: sceneWidth,
+          height: sceneHeight,
         });
-        setFontSizeTop(30);
-        setFontSizeBottom(30);
-      } else if (containerImageWidth > 574) {
         setFontSizeTop(40);
         setFontSizeBottom(40);
       }
@@ -73,6 +65,7 @@ export default function CanvasMemeComponent(props) {
 
     handleResize();
     window.addEventListener("resize", handleResize);
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
