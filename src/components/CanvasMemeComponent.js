@@ -22,6 +22,8 @@ export default function CanvasMemeComponent(props) {
   });
   const [imageElement, setImageElement] = useState(null);
   const [selectedText, setSelectedText] = useState(null);
+  const [sceneWidth, setSceneWidth] = useState(570);
+  const [sceneHeight, setSceneHeight] = useState(600);
   const [fontSizeTop, setFontSizeTop] = useState(40);
   const [fontSizeBottom, setFontSizeBottom] = useState(40);
   const [nodes, setNodes] = useState([]);
@@ -29,12 +31,43 @@ export default function CanvasMemeComponent(props) {
   const shapeRefBottom = useRef();
   const trRef = useRef(null);
 
+  const setDimensionsWithMaxWidth = (width, height) => {
+    const maxWidth = 775;
+    if (width > maxWidth) {
+      const aspectRatio = height / width;
+      const newWidth = maxWidth;
+      const newHeight = newWidth * aspectRatio;
+      setSceneWidth(newWidth);
+      setSceneHeight(newHeight);
+    } else {
+      setSceneWidth(width);
+      setSceneHeight(height);
+    }
+  };
+
+  const getImageWidth = (imageUrl) => {
+    const image = new Image();
+    image.src = imageUrl;
+
+    image.onload = () => {
+      console.log("Image width:", image.naturalWidth);
+      console.log("Image height:", image.naturalHeight);
+      setDimensionsWithMaxWidth(image.naturalWidth, image.naturalHeight);
+    };
+
+    image.onerror = () => {
+      console.error("Error loading image");
+    };
+  };
+
+  console.log("meme", meme.randomImage);
+  getImageWidth(meme.randomImage);
+
   useEffect(() => {
     const handleResize = () => {
-      const sceneWidth = 570;
-      const sceneHeight = 600;
       const containerImage = document.querySelector(".canvas--block");
       const containerImageWidth = containerImage.offsetWidth;
+      console.log("containerImageWidth:", containerImageWidth);
       const scale = containerImageWidth / sceneWidth;
 
       if (containerImageWidth < 574) {
@@ -67,7 +100,7 @@ export default function CanvasMemeComponent(props) {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [sceneWidth, sceneHeight]);
 
   useEffect(() => {
     const image = new Image();
@@ -141,7 +174,10 @@ export default function CanvasMemeComponent(props) {
       case "bottom":
         setFontSizeBottom(fontSize * Math.max(scaleX, scaleY));
         break;
+      default:
+        console.warn("Unexpected selectedText value:", selectedText);
     }
+
     setSelectedText(null);
     node.fontSize(fontSize * Math.max(scaleX, scaleY));
   };

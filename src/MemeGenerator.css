@@ -13,7 +13,7 @@ main {
   background-size: 400px;
   background-repeat: no-repeat;
   background-position-x: right;
-  background-position-y: 278px;
+  background-position-y: 90%;
 }
 
 .container {
@@ -46,7 +46,7 @@ main {
 
 .form {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
 }
 
 .form--input {
@@ -125,7 +125,7 @@ main {
   color: white;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 49%;
   height: 38px;
   margin: 7px;
   text-transform: uppercase;
@@ -259,7 +259,7 @@ main {
 
 .canvas--block {
   position: relative;
-  width: 100%;
+  width: 50%;
   height: 100%;
 }
 
