@@ -32,7 +32,7 @@ export default function CanvasMemeComponent(props) {
   const trRef = useRef(null);
 
   const setDimensionsWithMaxWidth = (width, height) => {
-    const maxWidth = 775;
+    const maxWidth = 594;
     if (width > maxWidth) {
       const aspectRatio = height / width;
       const newWidth = maxWidth;
