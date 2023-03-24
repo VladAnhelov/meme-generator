@@ -113,16 +113,37 @@ main {
   display: none;
 }
 
+.meme--config {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-left: 2px;
+  border: 1px solid #000000;
+  justify-items: center;
+  width: 50%;
+  height: 700px;
+  background-image: url("/background.png");
+  background-size: 400px;
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: 100%;
+}
+
+.download {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .download-btn {
   font-family: "Karla", sans-serif;
   border-radius: 5px;
   background: linear-gradient(90.41deg, #1c7a2a 1.14%, #12a31e 100%);
+  margin: 7px;
+  padding: 2px;
   color: white;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 49.1%;
   height: 38px;
-  margin: 7px;
   text-transform: uppercase;
   position: inherit;
   display: flex;
@@ -181,31 +202,38 @@ main {
   }
 }
 
+.meme {
+  position: relative;
+  justify-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.meme--image {
+  display: none;
+}
+
+.canvas--block {
+  position: relative;
+  margin-right: 2px;
+  border: 1px solid #ff0000;
+  width: 50%;
+  height: 100%;
+}
+
+@media (max-width: 837px) {
+  .meme--config {
+    background-image: none;
+    display: none;
+  }
+  .download-btn {
+    width: 100%;
+  }
+}
+
 @media (max-width: 576px) {
   .download-btn {
     font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 952px) {
-  main {
-    background-image: url("/background.png");
-    background-size: 350px;
-    background-position-y: 330px;
-  }
-}
-
-@media (max-width: 930px) {
-  main {
-    background-image: url("/background.png");
-    background-size: 300px;
-    background-position-y: 390px;
-  }
-}
-
-@media (max-width: 880px) {
-  main {
-    background-image: none;
   }
 }
 
@@ -222,9 +250,6 @@ main {
   .download-icon {
     width: 20px;
   }
-  main {
-    background-image: none;
-  }
 }
 
 @media (max-width: 390px) {
@@ -240,42 +265,4 @@ main {
   .download-icon {
     width: 15px;
   }
-}
-
-.meme {
-  position: relative;
-  justify-items: center;
-  display: flex;
-  height: 100%;
-}
-
-.meme--config {
-  display: flex;
-  flex-direction: column-reverse;
-  margin-left: 2px;
-  border: 1px solid #000000;
-  justify-items: center;
-  width: 50%;
-  height: 660px;
-  background-image: url("/background.png");
-  background-size: 400px;
-  background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: 90%;
-}
-
-.meme--image {
-  display: none;
-}
-
-.canvas--block {
-  position: relative;
-  margin-right: 2px;
-  border: 1px solid #ff0000;
-  width: 50%;
-  height: 100%;
-}
-
-canvas {
-  width: 100%;
 }

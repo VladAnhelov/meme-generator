@@ -32,7 +32,8 @@ export default function CanvasMemeComponent(props) {
   const trRef = useRef(null);
 
   const setDimensionsWithMaxWidth = (width, height) => {
-    const maxWidth = 594;
+    const maxWidth = 773;
+    // 594;
     if (width > maxWidth) {
       const aspectRatio = height / width;
       const newWidth = maxWidth;
@@ -50,17 +51,9 @@ export default function CanvasMemeComponent(props) {
     image.src = imageUrl;
 
     image.onload = () => {
-      console.log("Image width:", image.naturalWidth);
-      console.log("Image height:", image.naturalHeight);
       setDimensionsWithMaxWidth(image.naturalWidth, image.naturalHeight);
     };
-
-    image.onerror = () => {
-      console.error("Error loading image");
-    };
   };
-
-  console.log("meme", meme.randomImage);
   getImageWidth(meme.randomImage);
 
   useEffect(() => {
