@@ -22,6 +22,8 @@ export default function CanvasMemeComponent(props) {
   });
   const [imageElement, setImageElement] = useState(null);
   const [selectedText, setSelectedText] = useState(null);
+  const [sceneWidth, setSceneWidth] = useState(570);
+  const [sceneHeight, setSceneHeight] = useState(600);
   const [fontSizeTop, setFontSizeTop] = useState(40);
   const [fontSizeBottom, setFontSizeBottom] = useState(40);
   const [nodes, setNodes] = useState([]);
@@ -29,36 +31,76 @@ export default function CanvasMemeComponent(props) {
   const shapeRefBottom = useRef();
   const trRef = useRef(null);
 
+  const setDimensionsWithMaxWidth = (width, height) => {
+    const maxWidth = 773;
+    const maxHeight = 788;
+
+    let newWidth = width;
+    let newHeight = height;
+
+    if (height > 1000) {
+      const aspectRatio = width / height;
+      newHeight = maxHeight;
+      newWidth = newHeight * aspectRatio;
+    } else if (width > maxWidth) {
+      const aspectRatio = height / width;
+      newWidth = maxWidth;
+      newHeight = newWidth * aspectRatio;
+    }
+
+    setSceneWidth(newWidth);
+    setSceneHeight(newHeight);
+  };
+
+  const getImageWidth = (imageUrl) => {
+    const image = new Image();
+    image.src = imageUrl;
+
+    image.onload = () => {
+      setDimensionsWithMaxWidth(image.naturalWidth, image.naturalHeight);
+    };
+  };
+  getImageWidth(meme.randomImage);
+
   useEffect(() => {
     const handleResize = () => {
-      const sceneWidth = 570;
-      const sceneHeight = 600;
-      setContainerSize({
-        width: sceneWidth,
-        height: sceneHeight,
-      });
       const containerImage = document.querySelector(".canvas--block");
       const containerImageWidth = containerImage.offsetWidth;
+      console.log("containerImageWidth:", containerImageWidth);
       const scale = containerImageWidth / sceneWidth;
 
-      if (containerImageWidth < 574) {
+      if (containerImageWidth < 773) {
         setContainerSize({
           width: containerImageWidth,
-          height: 400,
+          height: containerImageWidth < 390 ? 300 : 400,
         });
         setFontSizeTop(30);
         setFontSizeBottom(30);
-      }
-      if (containerImageWidth < 390) {
+      } else {
         setContainerSize({
-          width: containerImageWidth,
-          height: 300,
+          width: sceneWidth,
+          height: sceneHeight,
         });
-        setFontSizeTop(30);
-        setFontSizeBottom(30);
-      } else if (containerImageWidth > 574) {
         setFontSizeTop(40);
         setFontSizeBottom(40);
+      }
+
+      if (
+        imageElement &&
+        imageElement.naturalHeight > 1000 &&
+        imageElement.naturalWidth < 900
+      ) {
+        const maxHeight = 788;
+        const aspectRatio =
+          imageElement.naturalWidth / imageElement.naturalHeight;
+        const newWidth = maxHeight * aspectRatio;
+        setFontSizeTop(25);
+        setFontSizeBottom(25);
+
+        setContainerSize({
+          width: newWidth,
+          height: maxHeight,
+        });
       }
 
       setImageElement((prevImageElement) => {
@@ -73,8 +115,9 @@ export default function CanvasMemeComponent(props) {
 
     handleResize();
     window.addEventListener("resize", handleResize);
+
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [sceneWidth, sceneHeight]);
 
   useEffect(() => {
     const image = new Image();
@@ -88,7 +131,6 @@ export default function CanvasMemeComponent(props) {
   const handleTextClick = (e) => {
     const node = e.target;
 
-    // check which text was clicked and set the appropriate state
     if (node === shapeRefTop.current) {
       setSelectedText("top");
     } else if (node === shapeRefBottom.current) {
@@ -109,11 +151,9 @@ export default function CanvasMemeComponent(props) {
     const scaleY = node.scaleY();
     const fontSize = node.fontSize();
 
-    // reset the scale
     node.scaleX(1);
     node.scaleY(1);
 
-    // update the selected text
     setSelectedText({
       ...selectedText,
       x: node.x(),
@@ -122,7 +162,6 @@ export default function CanvasMemeComponent(props) {
       height: Math.max(5, node.height() * scaleY),
     });
 
-    // update the font size based on the scale
     const newFontSize = fontSize * Math.max(scaleX, scaleY);
     node.fontSize(newFontSize);
   };
@@ -132,12 +171,11 @@ export default function CanvasMemeComponent(props) {
       selectedText === "top" ? shapeRefTop.current : shapeRefBottom.current;
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
+    const fontSize = node.fontSize();
 
-    // reset the scale
     node.scaleX(1);
     node.scaleY(1);
 
-    // update the selected text
     setSelectedText({
       ...selectedText,
       x: node.x(),
@@ -146,17 +184,19 @@ export default function CanvasMemeComponent(props) {
       height: Math.max(5, node.height() * scaleY),
     });
 
-    // update the font size
-    const newFontSize = e.target.fontSize() * e.target.scaleX();
-    if (selectedText === "top") {
-      setFontSizeTop(newFontSize);
-    } else if (selectedText === "bottom") {
-      setFontSizeBottom(newFontSize);
+    switch (selectedText) {
+      case "top":
+        setFontSizeTop(fontSize * Math.max(scaleX, scaleY));
+        break;
+      case "bottom":
+        setFontSizeBottom(fontSize * Math.max(scaleX, scaleY));
+        break;
+      default:
+        console.warn("Unexpected selectedText value:", selectedText);
     }
-    e.target.fontSize(newFontSize);
 
-    // deselect the text
     setSelectedText(null);
+    node.fontSize(fontSize * Math.max(scaleX, scaleY));
   };
 
   const handleDragMove = (e) => {
@@ -190,6 +230,7 @@ export default function CanvasMemeComponent(props) {
           image={imageElement}
           width={containerSize.width}
           height={containerSize.height}
+          preventDefault={false}
         />
 
         <Text
@@ -231,7 +272,6 @@ export default function CanvasMemeComponent(props) {
             anchorCornerRadius={5}
             borderStrokeWidth={1}
             borderDash={[3, 3]}
-            onTransform={handleTransform}
           />
         )}
 
@@ -266,7 +306,7 @@ export default function CanvasMemeComponent(props) {
         {selectedText === null ? null : (
           <Transformer
             selectedNode={selectedText}
-            keepRatio={false}
+            keepRatio={true}
             resizeEnabled
             rotateEnabled
             anchorSize={10}
