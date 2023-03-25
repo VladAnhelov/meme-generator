@@ -33,17 +33,23 @@ export default function CanvasMemeComponent(props) {
 
   const setDimensionsWithMaxWidth = (width, height) => {
     const maxWidth = 773;
-    // 594;
-    if (width > maxWidth) {
+    const maxHeight = 788;
+
+    let newWidth = width;
+    let newHeight = height;
+
+    if (height > 1000) {
+      const aspectRatio = width / height;
+      newHeight = maxHeight;
+      newWidth = newHeight * aspectRatio;
+    } else if (width > maxWidth) {
       const aspectRatio = height / width;
-      const newWidth = maxWidth;
-      const newHeight = newWidth * aspectRatio;
-      setSceneWidth(newWidth);
-      setSceneHeight(newHeight);
-    } else {
-      setSceneWidth(width);
-      setSceneHeight(height);
+      newWidth = maxWidth;
+      newHeight = newWidth * aspectRatio;
     }
+
+    setSceneWidth(newWidth);
+    setSceneHeight(newHeight);
   };
 
   const getImageWidth = (imageUrl) => {
@@ -63,7 +69,7 @@ export default function CanvasMemeComponent(props) {
       console.log("containerImageWidth:", containerImageWidth);
       const scale = containerImageWidth / sceneWidth;
 
-      if (containerImageWidth < 574) {
+      if (containerImageWidth < 773) {
         setContainerSize({
           width: containerImageWidth,
           height: containerImageWidth < 390 ? 300 : 400,
@@ -77,6 +83,24 @@ export default function CanvasMemeComponent(props) {
         });
         setFontSizeTop(40);
         setFontSizeBottom(40);
+      }
+
+      if (
+        imageElement &&
+        imageElement.naturalHeight > 1000 &&
+        imageElement.naturalWidth < 900
+      ) {
+        const maxHeight = 788;
+        const aspectRatio =
+          imageElement.naturalWidth / imageElement.naturalHeight;
+        const newWidth = maxHeight * aspectRatio;
+        setFontSizeTop(25);
+        setFontSizeBottom(25);
+
+        setContainerSize({
+          width: newWidth,
+          height: maxHeight,
+        });
       }
 
       setImageElement((prevImageElement) => {
@@ -206,6 +230,7 @@ export default function CanvasMemeComponent(props) {
           image={imageElement}
           width={containerSize.width}
           height={containerSize.height}
+          preventDefault={false}
         />
 
         <Text
@@ -247,7 +272,6 @@ export default function CanvasMemeComponent(props) {
             anchorCornerRadius={5}
             borderStrokeWidth={1}
             borderDash={[3, 3]}
-            onTransform={handleTransform}
           />
         )}
 
@@ -282,7 +306,7 @@ export default function CanvasMemeComponent(props) {
         {selectedText === null ? null : (
           <Transformer
             selectedNode={selectedText}
-            keepRatio={false}
+            keepRatio={true}
             resizeEnabled
             rotateEnabled
             anchorSize={10}
