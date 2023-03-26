@@ -165,8 +165,8 @@ main {
 }
 
 .download-btn.clicked {
-  width: 100%;
-  height: 0.5em;
+  width: 49.1%;
+  height: 38px;
   background-color: #cee0ed;
   animation: fill 1s ease-out 1 forwards;
   animation-delay: 45ms;
@@ -226,6 +226,10 @@ main {
   }
   .download-btn {
     width: 100%;
+  }
+  .download-btn.clicked {
+    width: 100%;
+    height: 38px;
   }
   .meme {
     width: 100%;
