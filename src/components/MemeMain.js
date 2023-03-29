@@ -29,15 +29,6 @@ export default function MemeMain() {
       .then((data) => setAllMemeImages(data.data.memes));
   }, []);
 
-  function getMemeImage() {
-    const randomNumber = Math.floor(Math.random() * allMemeImages.length);
-    const url = allMemeImages[randomNumber].url;
-    setMeme((prevMeme) => ({
-      ...prevMeme,
-      randomImage: url,
-    }));
-  }
-
   function handleChange(event) {
     const { name, value } = event.target;
     setMeme((prevMeme) => ({

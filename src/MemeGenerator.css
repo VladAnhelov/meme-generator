@@ -76,42 +76,25 @@ main {
   margin: 7px;
 }
 
-.form--button {
-  border-radius: 5px;
-  background: linear-gradient(90.41deg, #711f8d 1.14%, #a818da 100%);
-  color: white;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  padding: 2px;
-  margin: 7px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .cat-icon {
   width: 30px;
 }
 
 .upload {
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
   background: linear-gradient(90.41deg, #1d77dd 1.14%, #106fdb 100%);
   color: white;
   border: none;
   cursor: pointer;
   display: flex;
-  width: 98%;
   padding: 2px;
   margin: 7px;
 }
 
 .dog-icon {
   width: 23px;
-}
-
-.form--button:hover {
-  background: #bc00fa;
 }
 
 .upload:hover {
@@ -158,7 +141,7 @@ main {
   color: white;
   border: none;
   cursor: pointer;
-  width: 98%;
+  width: 100%;
   height: 38px;
   text-transform: uppercase;
   position: inherit;
@@ -228,7 +211,7 @@ main {
 
 .canvas--block {
   position: relative;
-  margin-right: 2px;
+  margin: 7px 2px 0px 7px;
   width: 50%;
   height: 100%;
 }
@@ -236,7 +219,8 @@ main {
 @media (max-width: 837px) {
   .meme--config {
     background-image: none;
-    display: none;
+    width: 100%;
+    height: 215px;
   }
   .download-btn {
     width: 100%;
@@ -247,6 +231,7 @@ main {
   }
   .meme {
     width: 100%;
+    flex-direction: column-reverse;
   }
   .canvas--block {
     width: 100%;
