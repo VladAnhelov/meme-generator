@@ -39,9 +39,32 @@ main {
   font-weight: 500;
 }
 
+.meme-preview {
+  display: flex;
+  width: 100%;
+  height: 106px;
+  overflow: scroll;
+  border-radius: 2px;
+  background-color: #bed0d7;
+}
+
+.im {
+  display: grid;
+  width: 100px;
+  height: 100px;
+  margin: 3px;
+  cursor: pointer;
+}
+
+.im--preview {
+  width: 100px;
+  height: 100px;
+}
+
 .form {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  width: 100%;
 }
 
 .form--input {
@@ -49,7 +72,6 @@ main {
   border-radius: 5px;
   border: 1px solid #d5d4d8;
   text-indent: 5px;
-  width: 100%;
   padding: 10px;
   margin: 7px;
 }
@@ -78,7 +100,8 @@ main {
   color: white;
   border: none;
   cursor: pointer;
-  width: 100%;
+  display: flex;
+  width: 98%;
   padding: 2px;
   margin: 7px;
 }
@@ -104,22 +127,16 @@ main {
   text-transform: uppercase;
 }
 
-.user--buttons {
-  display: flex;
-  justify-content: space-around;
-}
-
 .file-upload-button {
   display: none;
 }
 
 .meme--config {
   display: flex;
-  flex-direction: column-reverse;
   margin-left: 2px;
   justify-items: center;
   width: 50%;
-  height: 700px;
+  height: 600px;
   background-image: url("/background.png");
   background-size: 400px;
   background-repeat: no-repeat;
@@ -141,7 +158,7 @@ main {
   color: white;
   border: none;
   cursor: pointer;
-  width: 49.1%;
+  width: 98%;
   height: 38px;
   text-transform: uppercase;
   position: inherit;
@@ -165,7 +182,7 @@ main {
 }
 
 .download-btn.clicked {
-  width: 49.1%;
+  width: 98%;
   height: 38px;
   background-color: #cee0ed;
   animation: fill 1s ease-out 1 forwards;
@@ -202,6 +219,7 @@ main {
   justify-items: center;
   display: flex;
   height: 100%;
+  margin-top: 5px;
 }
 
 .meme--image {
