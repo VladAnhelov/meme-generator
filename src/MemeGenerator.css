@@ -186,10 +186,6 @@ main {
     box-shadow: 0 0 0 rgb(29, 155, 240) inset;
   }
 
-  95% {
-    box-shadow: 100em 0 0 rgb(29, 155, 240) inset;
-  }
-
   100% {
     box-shadow: 115em 0 0 rgb(29, 165, 29) inset;
   }
