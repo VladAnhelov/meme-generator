@@ -72,8 +72,9 @@ main {
   border-radius: 5px;
   border: 1px solid #d5d4d8;
   text-indent: 5px;
-  padding: 10px;
+  padding: 2px;
   margin: 7px;
+  resize: none;
 }
 
 .cat-icon {

@@ -54,7 +54,7 @@ export default function MemeMain() {
         />
         <div className="meme--config">
           <div className="form">
-            <input
+            <textarea
               type="text"
               placeholder="Top text"
               className="form--input"
@@ -62,7 +62,7 @@ export default function MemeMain() {
               value={meme.topText}
               onChange={handleChange}
             />
-            <input
+            <textarea
               type="text"
               placeholder="Bottom text"
               className="form--input"
