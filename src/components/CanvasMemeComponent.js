@@ -72,7 +72,7 @@ export default function CanvasMemeComponent(props) {
       if (containerImageWidth < 773) {
         setContainerSize({
           width: containerImageWidth,
-          height: containerImageWidth < 390 ? 300 : 400,
+          height: containerImageWidth < 390 ? 300 : 550,
         });
         setFontSizeTop(30);
         setFontSizeBottom(30);

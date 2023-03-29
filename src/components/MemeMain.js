@@ -4,6 +4,7 @@ import React from "react";
 import DownloadMemeComponent from "./DownloadMemeComponent.js";
 import CanvasMemeComponent from "./CanvasMemeComponent.js";
 import AddNewMemeComponent from "./AddNewMemeComponent.js";
+import MemePreviewBlock from "./MemePreviewBlock.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -28,15 +29,6 @@ export default function MemeMain() {
       .then((data) => setAllMemeImages(data.data.memes));
   }, []);
 
-  function getMemeImage() {
-    const randomNumber = Math.floor(Math.random() * allMemeImages.length);
-    const url = allMemeImages[randomNumber].url;
-    setMeme((prevMeme) => ({
-      ...prevMeme,
-      randomImage: url,
-    }));
-  }
-
   function handleChange(event) {
     const { name, value } = event.target;
     setMeme((prevMeme) => ({
@@ -47,35 +39,7 @@ export default function MemeMain() {
 
   return (
     <main>
-      <div className="form">
-        <input
-          type="text"
-          placeholder="Top text"
-          className="form--input"
-          name="topText"
-          value={meme.topText}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          placeholder="Bottom text"
-          className="form--input"
-          name="bottomText"
-          value={meme.bottomText}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="user--buttons">
-        <button className="form--button" onClick={getMemeImage}>
-          <p className="text--button">Choose meme</p>
-          <img
-            src={`${process.env.PUBLIC_URL}/cat-icon.png`}
-            alt="Download"
-            className="cat-icon"
-          />
-        </button>
-        <AddNewMemeComponent setMeme={setMeme} />
-      </div>
+      <MemePreviewBlock setMeme={setMeme} allMemeImages={allMemeImages} />
       <div className="meme">
         <CanvasMemeComponent
           meme={meme}
@@ -88,14 +52,34 @@ export default function MemeMain() {
           className="meme--image"
           crossOrigin="anonymous"
         />
-        <div className="meme--config"></div>
+        <div className="meme--config">
+          <div className="form">
+            <input
+              type="text"
+              placeholder="Top text"
+              className="form--input"
+              name="topText"
+              value={meme.topText}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              placeholder="Bottom text"
+              className="form--input"
+              name="bottomText"
+              value={meme.bottomText}
+              onChange={handleChange}
+            />
+            <AddNewMemeComponent setMeme={setMeme} />
+            <DownloadMemeComponent
+              meme={meme}
+              topTextPosition={topTextPosition}
+              bottomTextPosition={bottomTextPosition}
+              stageRef={stageRef}
+            />
+          </div>
+        </div>
       </div>
-      <DownloadMemeComponent
-        meme={meme}
-        topTextPosition={topTextPosition}
-        bottomTextPosition={bottomTextPosition}
-        stageRef={stageRef}
-      />
     </main>
   );
 }
