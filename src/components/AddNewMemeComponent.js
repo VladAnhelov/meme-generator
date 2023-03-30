@@ -19,7 +19,7 @@ export default function AddNewMemeComponent(props) {
   }
   return (
     <label className="form--button upload">
-      <p className="text--button">Add your meme</p>
+      <p className="text--button">Create your meme</p>
       <img
         src={`${process.env.PUBLIC_URL}/dog-icon.png`}
         alt="Download"

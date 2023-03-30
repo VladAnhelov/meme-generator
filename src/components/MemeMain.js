@@ -39,7 +39,6 @@ export default function MemeMain() {
 
   return (
     <main>
-      <MemePreviewBlock setMeme={setMeme} allMemeImages={allMemeImages} />
       <div className="meme">
         <CanvasMemeComponent
           meme={meme}
@@ -53,6 +52,7 @@ export default function MemeMain() {
           crossOrigin="anonymous"
         />
         <div className="meme--config">
+          <MemePreviewBlock setMeme={setMeme} allMemeImages={allMemeImages} />
           <div className="form">
             <textarea
               type="text"
