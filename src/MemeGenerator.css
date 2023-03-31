@@ -100,7 +100,7 @@ main {
 .meme-preview {
   display: flex;
   align-items: center;
-  width: 650px;
+  width: 98%;
   height: 108px;
   padding: 5px;
   margin: 0px 7px 0px 7px;
@@ -285,7 +285,18 @@ main {
   .meme--config {
     background-image: none;
     width: 100%;
-    height: 320px;
+    height: 400px;
+  }
+
+  main {
+    overflow-x: hidden;
+  }
+  .tabs {
+    align-items: baseline;
+  }
+
+  .tab-content {
+    width: 99.3%;
   }
   .download-btn {
     width: 100%;
