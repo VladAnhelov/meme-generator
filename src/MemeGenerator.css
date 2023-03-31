@@ -72,6 +72,7 @@ main {
   font-weight: bold;
   text-align: center;
   cursor: pointer;
+  text-transform: uppercase;
   transition: all 0.2s ease-in-out;
 }
 

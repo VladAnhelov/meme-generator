@@ -79,10 +79,10 @@ export default function MemeMain() {
                 className="tab-switch"
               />
               <label htmlFor="tab-2" className="tab-label">
-                Ukraine memes
+                Ukrainian memes
               </label>
               <div className="tab-content">
-                <p>Future Ukrainian memes</p>
+                <p>In progress</p>
               </div>
             </div>
           </div>
