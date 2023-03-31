@@ -39,7 +39,6 @@ export default function MemeMain() {
 
   return (
     <main>
-      <MemePreviewBlock setMeme={setMeme} allMemeImages={allMemeImages} />
       <div className="meme">
         <CanvasMemeComponent
           meme={meme}
@@ -53,6 +52,41 @@ export default function MemeMain() {
           crossOrigin="anonymous"
         />
         <div className="meme--config">
+          <div className="tabs">
+            <div className="tab">
+              <input
+                type="radio"
+                name="css-tabs"
+                id="tab-1"
+                defaultChecked
+                className="tab-switch"
+              />
+              <label htmlFor="tab-1" className="tab-label">
+                World memes
+              </label>
+              <div className="tab-content">
+                <MemePreviewBlock
+                  setMeme={setMeme}
+                  allMemeImages={allMemeImages}
+                />
+              </div>
+            </div>
+            <div className="tab">
+              <input
+                type="radio"
+                name="css-tabs"
+                id="tab-2"
+                className="tab-switch"
+              />
+              <label htmlFor="tab-2" className="tab-label">
+                Ukrainian memes
+              </label>
+              <div className="tab-content">
+                <p>In progress</p>
+              </div>
+            </div>
+          </div>
+
           <div className="form">
             <textarea
               type="text"
