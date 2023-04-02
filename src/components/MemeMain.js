@@ -14,7 +14,7 @@ export default function MemeMain() {
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
-  const [worldMemesLoaded, setWorldMemesLoaded] = React.useState(false);
+  const [, setWorldMemesLoaded] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState("world");
   const stageRef = React.useRef(null);
   const [topTextPosition] = React.useState({
