@@ -5,6 +5,7 @@ import DownloadMemeComponent from "./DownloadMemeComponent.js";
 import CanvasMemeComponent from "./CanvasMemeComponent.js";
 import AddNewMemeComponent from "./AddNewMemeComponent.js";
 import MemePreviewBlock from "./MemePreviewBlock.js";
+import MemePreviewBlockUk from "./MemePreviewBlockUk.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -13,6 +14,9 @@ export default function MemeMain() {
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
+  const [, setWorldMemesLoaded] = React.useState(false);
+  const [activeTab, setActiveTab] = React.useState("world");
+  const stageRef = React.useRef(null);
   const [topTextPosition] = React.useState({
     x: 30,
     y: 40,
@@ -21,13 +25,6 @@ export default function MemeMain() {
     x: 30,
     y: 135,
   });
-  const stageRef = React.useRef(null);
-
-  React.useEffect(() => {
-    fetch("https://api.imgflip.com/get_memes")
-      .then((res) => res.json())
-      .then((data) => setAllMemeImages(data.data.memes));
-  }, []);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -58,33 +55,43 @@ export default function MemeMain() {
                 type="radio"
                 name="css-tabs"
                 id="tab-1"
-                defaultChecked
+                checked={activeTab === "world"}
+                onChange={() => setActiveTab("world")}
                 className="tab-switch"
               />
               <label htmlFor="tab-1" className="tab-label">
                 World memes
               </label>
-              <div className="tab-content">
-                <MemePreviewBlock
-                  setMeme={setMeme}
-                  allMemeImages={allMemeImages}
-                />
-              </div>
             </div>
             <div className="tab">
               <input
                 type="radio"
                 name="css-tabs"
                 id="tab-2"
+                checked={activeTab === "ukraine"}
+                onChange={() => setActiveTab("ukraine")}
                 className="tab-switch"
               />
               <label htmlFor="tab-2" className="tab-label">
                 Ukrainian memes
               </label>
-              <div className="tab-content">
-                <p>In progress</p>
-              </div>
             </div>
+          </div>
+          <div className="tab-content">
+            {activeTab === "world" ? (
+              <MemePreviewBlock
+                setMeme={setMeme}
+                allMemeImages={allMemeImages}
+                setAllMemeImages={setAllMemeImages}
+                setWorldMemesLoaded={setWorldMemesLoaded}
+              />
+            ) : (
+              <MemePreviewBlockUk
+                setMeme={setMeme}
+                setAllMemeImages={setAllMemeImages}
+                allMemeImages={allMemeImages}
+              />
+            )}
           </div>
 
           <div className="form">
