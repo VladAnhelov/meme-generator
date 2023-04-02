@@ -62,17 +62,6 @@ export default function MemeMain() {
               <label htmlFor="tab-1" className="tab-label">
                 World memes
               </label>
-              <div className="tab-content">
-                {activeTab === "world" && (
-                  <MemePreviewBlock
-                    setMeme={setMeme}
-                    allMemeImages={allMemeImages}
-                    setAllMemeImages={setAllMemeImages}
-                    worldMemesLoaded={worldMemesLoaded}
-                    setWorldMemesLoaded={setWorldMemesLoaded}
-                  />
-                )}
-              </div>
             </div>
             <div className="tab">
               <input
@@ -86,16 +75,23 @@ export default function MemeMain() {
               <label htmlFor="tab-2" className="tab-label">
                 Ukrainian memes
               </label>
-              <div className="tab-content">
-                {activeTab === "ukraine" && (
-                  <MemePreviewBlockUk
-                    setMeme={setMeme}
-                    setAllMemeImages={setAllMemeImages}
-                    allMemeImages={allMemeImages}
-                  />
-                )}
-              </div>
             </div>
+          </div>
+          <div className="tab-content">
+            {activeTab === "world" ? (
+              <MemePreviewBlock
+                setMeme={setMeme}
+                allMemeImages={allMemeImages}
+                setAllMemeImages={setAllMemeImages}
+                setWorldMemesLoaded={setWorldMemesLoaded}
+              />
+            ) : (
+              <MemePreviewBlockUk
+                setMeme={setMeme}
+                setAllMemeImages={setAllMemeImages}
+                allMemeImages={allMemeImages}
+              />
+            )}
           </div>
 
           <div className="form">

@@ -42,8 +42,6 @@ main {
 
 .tabs {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -89,7 +87,6 @@ main {
 }
 
 .tab-content {
-  visibility: hidden;
   padding: 10px;
   width: 49.3%;
   border-top: 1px solid #ddd;
