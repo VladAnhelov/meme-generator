@@ -4,6 +4,7 @@ export default function MemeHeader() {
   return (
     <header className="header">
       <svg
+        className="trollface--header"
         width="32"
         height="27"
         viewBox="0 0 32 27"

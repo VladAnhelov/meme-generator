@@ -18,26 +18,94 @@ main {
 
 .header {
   display: flex;
+  justify-content: center;
   align-items: center;
-  height: 50px;
-  background: linear-gradient(90deg, #672280 1.18%, #a626d3 100%);
+  background-image: linear-gradient(
+    135deg,
+    #1e5799 0%,
+    #2989d8 50%,
+    #207cca 51%,
+    #7db9e8 100%
+  );
+  height: 70px;
+  width: 100%;
   color: white;
-  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.header--image {
-  height: 100%;
-  margin-right: 6px;
+.trollface--header {
+  margin-left: 20px;
 }
 
 .header--title {
   font-size: 1.25rem;
   margin-right: auto;
+  margin-left: 5px;
 }
 
 .header--project {
   font-size: 0.75rem;
   font-weight: 500;
+  margin-right: 20px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+    135deg,
+    #3f4c6b 0%,
+    #3f4c6b 0%,
+    #606c88 50%,
+    #283048 100%
+  );
+  height: 70px;
+  width: 100%;
+  color: white;
+  font-size: 18px;
+}
+
+.social--text {
+  text-decoration: underline;
+  margin-right: 5px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin: 0 5px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.icon.facebook {
+  background-color: #3b5998;
+}
+
+.icon.telegram {
+  background-color: #229ed9;
+}
+
+.icon.linkedin {
+  background-color: #0077b5;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .tabs {
@@ -268,7 +336,7 @@ main {
   position: relative;
   justify-items: center;
   display: flex;
-  height: 100%;
+  min-height: calc(90vh - 65px);
   margin-top: 5px;
 }
 
