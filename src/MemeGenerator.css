@@ -110,6 +110,7 @@ footer {
 
 .tabs {
   display: flex;
+  height: 190px;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -170,21 +171,19 @@ footer {
   display: flex;
   align-items: center;
   width: 98%;
-  height: 108px;
   padding: 5px;
   margin: 0px 7px 0px 7px;
   overflow: scroll;
-  border-radius: 3px;
+  border-radius: 10px;
   overflow-y: hidden;
-  background-color: #bed0d7;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .im {
   display: grid;
   width: 100px;
-  height: 100px;
-  margin: 3px;
+  height: 110px;
+  margin: 5px;
   padding: 3px;
   cursor: pointer;
 }
@@ -192,8 +191,10 @@ footer {
 .im--preview {
   width: 100px;
   height: 100px;
-  border-radius: 2px;
+  perspective: 20px;
+  border-radius: 10px;
   filter: grayscale(50%);
+  box-shadow: 2px 2px 10px 5px #b8b8b8;
 }
 
 .im--preview:hover {
