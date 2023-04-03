@@ -21,6 +21,7 @@ export default function MemeFooter(second) {
         <a
           href="https://www.facebook.com/vladanhelov"
           target="_blank"
+          rel="noopener noreferrer"
           className="icon facebook"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -30,6 +31,7 @@ export default function MemeFooter(second) {
         <a
           href="https://t.me/sumne_hivno"
           target="_blank"
+          rel="noopener noreferrer"
           className="icon telegram"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -39,6 +41,7 @@ export default function MemeFooter(second) {
         <a
           href="https://www.linkedin.com/in/vladanhelov/"
           target="_blank"
+          rel="noopener noreferrer"
           className="icon linkedin"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
