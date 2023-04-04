@@ -51,19 +51,22 @@ export default function CanvasMemeComponent(props) {
       setDimensionsWithMaxWidth(image.naturalWidth, image.naturalHeight);
     };
   };
-  getImageWidth(meme.randomImage);
 
   useEffect(() => {
+    if (!imageElement) return;
     const handleResize = () => {
       const containerImage = document.querySelector(".canvas--block");
       const containerImageWidth = containerImage.offsetWidth;
       console.log("containerImageWidth:", containerImageWidth);
+      const aspectRatio =
+        imageElement.naturalWidth / imageElement.naturalHeight;
+      const newHeight = containerImageWidth / aspectRatio;
       const scale = containerImageWidth / sceneWidth;
 
       if (containerImageWidth < 773) {
         setContainerSize({
           width: containerImageWidth,
-          height: containerImageWidth < 390 ? 300 : 550,
+          height: newHeight,
         });
         setFontSizeTop(30);
         setFontSizeBottom(30);
@@ -78,7 +81,7 @@ export default function CanvasMemeComponent(props) {
 
       if (
         imageElement &&
-        imageElement.naturalHeight > 1000 &&
+        imageElement.naturalHeight > 1900 &&
         imageElement.naturalWidth < 900
       ) {
         const maxHeight = 788;
@@ -117,6 +120,7 @@ export default function CanvasMemeComponent(props) {
     };
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
+    getImageWidth(meme.randomImage);
   }, [meme.randomImage]);
 
   return (
