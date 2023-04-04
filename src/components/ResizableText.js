@@ -20,16 +20,19 @@ const ResizableText = ({
     }
   }, [isSelected]);
 
-  const handleTransformEnd = () => {
+  const handleTransform = () => {
     const node = shapeRef.current;
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
-    const newFontSize = fontSize * Math.max(scaleX, scaleY);
 
     node.scaleX(1);
     node.scaleY(1);
-    node.fontSize(newFontSize);
 
+    const newFontSize = fontSize * Math.max(scaleX, scaleY);
+    node.fontSize(newFontSize);
+  };
+
+  const handleTransformEnd = () => {
     onDeselect();
   };
 
@@ -51,6 +54,7 @@ const ResizableText = ({
         ref={shapeRef}
         onClick={onTextClick}
         onTap={onTextClick}
+        handleTransform={handleTransform}
         onTransformEnd={handleTransformEnd}
       />
       {isSelected && (
