@@ -259,6 +259,9 @@ footer {
 }
 
 .upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 38px;
   margin: 7px;
   padding: 2px;
@@ -390,7 +393,7 @@ canvas {
 
 .canvas--block {
   position: relative;
-  margin: 0px 7px 0px 7px;
+  margin: 0px 7px 0px 0px;
   width: 50%;
   height: 100%;
 }
