@@ -54,16 +54,20 @@ export default function CanvasMemeComponent(props) {
   getImageWidth(meme.randomImage);
 
   useEffect(() => {
+    if (!imageElement) return;
     const handleResize = () => {
       const containerImage = document.querySelector(".canvas--block");
       const containerImageWidth = containerImage.offsetWidth;
       console.log("containerImageWidth:", containerImageWidth);
+      const aspectRatio =
+        imageElement.naturalWidth / imageElement.naturalHeight;
+      const newHeight = containerImageWidth / aspectRatio;
       const scale = containerImageWidth / sceneWidth;
 
       if (containerImageWidth < 773) {
         setContainerSize({
           width: containerImageWidth,
-          height: containerImageWidth < 390 ? 300 : 550,
+          height: newHeight,
         });
         setFontSizeTop(30);
         setFontSizeBottom(30);

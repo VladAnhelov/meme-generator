@@ -10,6 +10,8 @@ body {
 
 main {
   padding: 25px;
+  min-height: 100vh;
+  margin: 0;
 }
 
 .container {
@@ -378,7 +380,6 @@ footer {
   position: relative;
   justify-items: center;
   display: flex;
-  min-height: calc(90vh - 65px);
   margin-top: 5px;
 }
 
