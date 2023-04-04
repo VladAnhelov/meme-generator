@@ -1,11 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  Stage,
-  Layer,
-  Text,
-  Transformer,
-  Image as KonvaImage,
-} from "react-konva";
+import React, { useState, useEffect } from "react";
+import MemeText from "./MemeText.js";
+import { Stage, Layer, Image as KonvaImage } from "react-konva";
 
 export default function CanvasMemeComponent(props) {
   const {
@@ -26,10 +21,6 @@ export default function CanvasMemeComponent(props) {
   const [sceneHeight, setSceneHeight] = useState(600);
   const [fontSizeTop, setFontSizeTop] = useState(40);
   const [fontSizeBottom, setFontSizeBottom] = useState(40);
-  const [nodes, setNodes] = useState([]);
-  const shapeRefTop = useRef();
-  const shapeRefBottom = useRef();
-  const trRef = useRef(null);
 
   const setDimensionsWithMaxWidth = (width, height) => {
     const maxWidth = 773;
@@ -128,92 +119,6 @@ export default function CanvasMemeComponent(props) {
     image.setAttribute("crossorigin", "anonymous");
   }, [meme.randomImage]);
 
-  const handleTextClick = (e) => {
-    const node = e.target;
-
-    if (node === shapeRefTop.current) {
-      setSelectedText("top");
-    } else if (node === shapeRefBottom.current) {
-      setSelectedText("bottom");
-    } else {
-      setSelectedText(null);
-    }
-    if (selectedText) {
-      trRef.current.attachTo(node);
-      trRef.current.getLayer().batchDraw();
-    }
-  };
-
-  const handleTransform = (e) => {
-    const node =
-      selectedText === "top" ? shapeRefTop.current : shapeRefBottom.current;
-    const scaleX = node.scaleX();
-    const scaleY = node.scaleY();
-    const fontSize = node.fontSize();
-
-    node.scaleX(1);
-    node.scaleY(1);
-
-    setSelectedText({
-      ...selectedText,
-      x: node.x(),
-      y: node.y(),
-      width: Math.max(5, node.width() * scaleX),
-      height: Math.max(5, node.height() * scaleY),
-    });
-
-    const newFontSize = fontSize * Math.max(scaleX, scaleY);
-    node.fontSize(newFontSize);
-  };
-
-  const handleTransformEnd = (e) => {
-    const node =
-      selectedText === "top" ? shapeRefTop.current : shapeRefBottom.current;
-    const scaleX = node.scaleX();
-    const scaleY = node.scaleY();
-    const fontSize = node.fontSize();
-
-    node.scaleX(1);
-    node.scaleY(1);
-
-    setSelectedText({
-      ...selectedText,
-      x: node.x(),
-      y: node.y(),
-      width: Math.max(5, node.width() * scaleX),
-      height: Math.max(5, node.height() * scaleY),
-    });
-
-    switch (selectedText) {
-      case "top":
-        setFontSizeTop(fontSize * Math.max(scaleX, scaleY));
-        break;
-      case "bottom":
-        setFontSizeBottom(fontSize * Math.max(scaleX, scaleY));
-        break;
-      default:
-        console.warn("Unexpected selectedText value:", selectedText);
-    }
-
-    setSelectedText(null);
-    node.fontSize(fontSize * Math.max(scaleX, scaleY));
-  };
-
-  const handleDragMove = (e) => {
-    const node = e.target;
-    const newNodes = nodes.slice();
-    newNodes[0] = {
-      ...newNodes[0],
-      x: node.x(),
-      y: node.y(),
-    };
-    setNodes(newNodes);
-  };
-
-  const handleDragEnd = () => {
-    setNodes([]);
-  };
-
   return (
     <Stage
       className="canvas--block"
@@ -232,89 +137,40 @@ export default function CanvasMemeComponent(props) {
           height={containerSize.height}
           preventDefault={false}
         />
-
-        <Text
-          x={
-            imageElement &&
-            (parseInt(topTextPosition.x) * containerSize.width) /
-              imageElement.naturalWidth
-          }
-          y={
-            imageElement &&
-            (parseInt(topTextPosition.y) * containerSize.height) /
-              imageElement.naturalHeight
-          }
+        <MemeText
+          position={{
+            x:
+              imageElement &&
+              (parseInt(topTextPosition.x) * containerSize.width) /
+                imageElement.naturalWidth,
+            y:
+              imageElement &&
+              (parseInt(topTextPosition.y) * containerSize.height) /
+                imageElement.naturalHeight,
+          }}
           rotation={topTextRotation}
           text={meme.topText.toUpperCase()}
-          fontFamily="Impact"
           fontSize={fontSizeTop}
-          fill="#fff"
-          shadowBlur={2}
-          shadowColor="#000"
-          shadowOffsetX={2}
-          shadowOffsetY={2}
-          draggable
-          ref={shapeRefTop}
-          onClick={handleTextClick}
-          onTransform={handleTransform}
-          onTransformEnd={handleTransformEnd}
-          onDragMove={handleDragMove}
-          onDragEnd={handleDragEnd}
+          selectedText={selectedText}
+          setSelectedText={setSelectedText}
         />
-        {selectedText === null ? null : (
-          <Transformer
-            selectedNode={selectedText}
-            ref={trRef}
-            keepRatio={true}
-            resizeEnabled
-            rotateEnabled
-            anchorSize={10}
-            anchorCornerRadius={5}
-            borderStrokeWidth={1}
-            borderDash={[3, 3]}
-          />
-        )}
-
-        <Text
-          x={
-            imageElement &&
-            (parseInt(bottomTextPosition.x) * containerSize.width) /
-              imageElement.naturalWidth
-          }
-          y={
-            imageElement &&
-            (parseInt(bottomTextPosition.y) * containerSize.height) /
-              imageElement.naturalHeight
-          }
+        <MemeText
+          position={{
+            x:
+              imageElement &&
+              (parseInt(bottomTextPosition.x) * containerSize.width) /
+                imageElement.naturalWidth,
+            y:
+              imageElement &&
+              (parseInt(bottomTextPosition.y) * containerSize.height) /
+                imageElement.naturalHeight,
+          }}
           rotation={bottomTextRotation}
           text={meme.bottomText.toUpperCase()}
-          fontFamily="Impact"
           fontSize={fontSizeBottom}
-          fill="#fff"
-          shadowBlur={5}
-          shadowColor="#000"
-          shadowOffsetX={2}
-          shadowOffsetY={2}
-          draggable
-          ref={shapeRefBottom}
-          onClick={handleTextClick}
-          onTransform={handleTransform}
-          onTransformEnd={handleTransformEnd}
-          onDragMove={handleDragMove}
-          onDragEnd={handleDragEnd}
+          selectedText={selectedText}
+          setSelectedText={setSelectedText}
         />
-        {selectedText === null ? null : (
-          <Transformer
-            selectedNode={selectedText}
-            keepRatio={true}
-            resizeEnabled
-            rotateEnabled
-            anchorSize={10}
-            anchorCornerRadius={5}
-            borderStrokeWidth={1}
-            borderDash={[3, 3]}
-          />
-        )}
       </Layer>
     </Stage>
   );
