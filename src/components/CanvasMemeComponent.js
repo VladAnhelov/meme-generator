@@ -82,7 +82,7 @@ export default function CanvasMemeComponent(props) {
 
       if (
         imageElement &&
-        imageElement.naturalHeight > 1000 &&
+        imageElement.naturalHeight > 1900 &&
         imageElement.naturalWidth < 900
       ) {
         const maxHeight = 788;
