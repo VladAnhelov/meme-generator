@@ -51,7 +51,6 @@ export default function CanvasMemeComponent(props) {
       setDimensionsWithMaxWidth(image.naturalWidth, image.naturalHeight);
     };
   };
-  getImageWidth(meme.randomImage);
 
   useEffect(() => {
     if (!imageElement) return;
@@ -121,6 +120,7 @@ export default function CanvasMemeComponent(props) {
     };
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
+    getImageWidth(meme.randomImage);
   }, [meme.randomImage]);
 
   return (
