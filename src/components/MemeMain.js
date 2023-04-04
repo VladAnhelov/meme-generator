@@ -111,6 +111,8 @@ export default function MemeMain() {
               value={meme.bottomText}
               onChange={handleChange}
             />
+          </div>
+          <div className="btns--block">
             <AddNewMemeComponent setMeme={setMeme} />
             <DownloadMemeComponent
               meme={meme}

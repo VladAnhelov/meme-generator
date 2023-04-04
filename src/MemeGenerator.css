@@ -253,25 +253,31 @@ footer {
   resize: none;
 }
 
-.upload {
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  background: linear-gradient(90.41deg, #1d77dd 1.14%, #106fdb 100%);
-  color: white;
-  border: none;
-  cursor: pointer;
+.btns--block {
   display: flex;
-  padding: 2px;
-  margin: 7px;
+  flex-direction: column;
 }
 
-.dog-icon {
-  width: 23px;
+.upload {
+  height: 38px;
+  margin: 7px;
+  padding: 2px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: #ffffff;
+  background-color: #3b91d8;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
 
 .upload:hover {
-  background: #2187fc;
+  background-color: #1a99d8;
+  box-shadow: 0px 15px 20px rgba(46, 177, 229, 0.4);
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 .text--button {
@@ -297,26 +303,23 @@ footer {
 }
 
 .download {
-  display: flex;
-  flex-direction: row-reverse;
+  display: contents;
 }
 
 .download-btn {
-  font-family: "Karla", sans-serif;
-  border-radius: 5px;
-  background: linear-gradient(90.41deg, #1c7a2a 1.14%, #12a31e 100%);
+  height: 38px;
   margin: 7px;
   padding: 2px;
-  color: white;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  height: 38px;
   text-transform: uppercase;
-  position: inherit;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  letter-spacing: 2.5px;
+  color: #ffffff;
+  background-color: #3ab54d;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  border: none;
 }
 
 .download-btn::before {
@@ -330,7 +333,10 @@ footer {
 }
 
 .download-btn:hover {
-  background: #25a137;
+  background-color: #33c241;
+  box-shadow: 0px 15px 20px rgba(46, 177, 229, 0.4);
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 .download-btn.clicked {
@@ -378,6 +384,11 @@ footer {
   display: none;
 }
 
+canvas {
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
 .canvas--block {
   position: relative;
   margin: 0px 7px 0px 7px;
@@ -410,11 +421,7 @@ footer {
   .tab-label {
     font-size: 13px;
   }
-  .download-btn {
-    width: 100%;
-  }
   .download-btn.clicked {
-    width: 100%;
     height: 38px;
   }
   .meme {
@@ -436,25 +443,10 @@ footer {
   .text--button {
     font-size: 12px;
   }
-  .dog-icon {
-    width: 15px;
-  }
-  .download-icon {
-    width: 20px;
-  }
 }
 
 @media (max-width: 390px) {
   .text--button {
     font-size: 10px;
-  }
-  .cat-icon {
-    width: 15px;
-  }
-  .dog-icon {
-    width: 10px;
-  }
-  .download-icon {
-    width: 15px;
   }
 }

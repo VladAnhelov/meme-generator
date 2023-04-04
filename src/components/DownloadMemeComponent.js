@@ -35,11 +35,6 @@ export default function DownloadMemeComponent(props) {
         ) : (
           <>
             <p className="text--button">Download Meme</p>
-            <img
-              src={`${process.env.PUBLIC_URL}/download-icon.png`}
-              alt="Download"
-              className="download-icon"
-            />
           </>
         )}
       </button>
