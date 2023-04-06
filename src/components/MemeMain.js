@@ -11,6 +11,7 @@ export default function MemeMain() {
   const [meme, setMeme] = React.useState({
     topText: "",
     bottomText: "",
+    thirdText: "",
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
@@ -25,6 +26,17 @@ export default function MemeMain() {
     x: 30,
     y: 135,
   });
+
+  const [thirdTextPosition] = React.useState({
+    x: 30,
+    y: 165,
+  });
+
+  const [showThirdInput, setShowThirdInput] = React.useState(false);
+
+  function handleAddButtonClick() {
+    setShowThirdInput(true);
+  }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -41,6 +53,7 @@ export default function MemeMain() {
           meme={meme}
           topTextPosition={topTextPosition}
           bottomTextPosition={bottomTextPosition}
+          thirdTextPosition={thirdTextPosition}
           stageRef={stageRef}
         />
         <img
@@ -93,24 +106,43 @@ export default function MemeMain() {
               />
             )}
           </div>
-
-          <div className="form">
-            <textarea
-              type="text"
-              placeholder="Top text"
-              className="form--input"
-              name="topText"
-              value={meme.topText}
-              onChange={handleChange}
-            />
-            <textarea
-              type="text"
-              placeholder="Bottom text"
-              className="form--input"
-              name="bottomText"
-              value={meme.bottomText}
-              onChange={handleChange}
-            />
+          <div className="block--settings">
+            <div className="form">
+              <textarea
+                type="text"
+                placeholder="Top text"
+                className="form--input"
+                name="topText"
+                value={meme.topText}
+                onChange={handleChange}
+              />
+              <textarea
+                type="text"
+                placeholder="Bottom text"
+                className="form--input"
+                name="bottomText"
+                value={meme.bottomText}
+                onChange={handleChange}
+              />
+              <button
+                type="button"
+                className={`add--button ${showThirdInput ? "clicked" : ""}`}
+                onClick={handleAddButtonClick}
+              >
+                <p className="text--button">More Text</p>
+              </button>
+              {showThirdInput && (
+                <textarea
+                  type="text"
+                  placeholder="Text #3"
+                  className="form--input"
+                  name="thirdText"
+                  value={meme.thirdText}
+                  onChange={handleChange}
+                />
+              )}
+            </div>
+            <div className="settings"></div>
           </div>
           <div className="btns--block">
             <AddNewMemeComponent setMeme={setMeme} />
