@@ -38,6 +38,14 @@ export default function MemeMain() {
     setShowThirdInput(true);
   }
 
+  function handleDeleteButtonClick() {
+    setShowThirdInput(false);
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      thirdText: "",
+    }));
+  }
+
   function handleChange(event) {
     const { name, value } = event.target;
     setMeme((prevMeme) => ({
@@ -132,17 +140,26 @@ export default function MemeMain() {
                 <p className="text--button">More Text</p>
               </button>
               {showThirdInput && (
-                <textarea
-                  type="text"
-                  placeholder="Text #3"
-                  className="form--input"
-                  name="thirdText"
-                  value={meme.thirdText}
-                  onChange={handleChange}
-                />
+                <div className="textarea-wrapper">
+                  <textarea
+                    type="text"
+                    placeholder="Text #3"
+                    className="form--input"
+                    name="thirdText"
+                    value={meme.thirdText}
+                    onChange={handleChange}
+                  />
+                  <button
+                    type="button"
+                    className="delete--button"
+                    onClick={handleDeleteButtonClick}
+                  >
+                    X
+                  </button>
+                </div>
               )}
             </div>
-            <div className="settings"></div>
+            <div className="settings">In progress settings block</div>
           </div>
           <div className="btns--block">
             <AddNewMemeComponent setMeme={setMeme} />

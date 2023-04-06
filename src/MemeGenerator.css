@@ -247,6 +247,7 @@ footer {
 .settings {
   display: flex;
   width: 50%;
+  margin: 10px;
   border: 2px solid red;
 }
 
@@ -257,6 +258,8 @@ footer {
 }
 
 .form--input {
+  width: 100%;
+  height: 36px;
   font-family: "Karla", sans-serif;
   border-radius: 10px;
   border: 1px solid #d5d4d8;
@@ -267,7 +270,7 @@ footer {
 }
 
 .add--button {
-  width: auto;
+  width: 100%;
   height: 36px;
   padding: 2px;
   margin: 7px;
@@ -287,6 +290,34 @@ footer {
 
 .add--button.clicked {
   display: none;
+}
+
+.textarea-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.delete--button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  right: 1px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #db4949;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.delete--button:hover {
+  border: 1px solid #db4949;
+  background-color: #ffffff;
+  color: #db4949;
 }
 
 .btns--block {
