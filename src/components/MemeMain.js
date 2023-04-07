@@ -6,6 +6,7 @@ import CanvasMemeComponent from "./CanvasMemeComponent.js";
 import AddNewMemeComponent from "./AddNewMemeComponent.js";
 import MemePreviewBlock from "./MemePreviewBlock.js";
 import MemePreviewBlockUk from "./MemePreviewBlockUk.js";
+import AddMoreMemeText from "./AddMoreMemeText.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -31,20 +32,6 @@ export default function MemeMain() {
     x: 30,
     y: 165,
   });
-
-  const [showThirdInput, setShowThirdInput] = React.useState(false);
-
-  function handleAddButtonClick() {
-    setShowThirdInput(true);
-  }
-
-  function handleDeleteButtonClick() {
-    setShowThirdInput(false);
-    setMeme((prevMeme) => ({
-      ...prevMeme,
-      thirdText: "",
-    }));
-  }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -132,32 +119,11 @@ export default function MemeMain() {
                 value={meme.bottomText}
                 onChange={handleChange}
               />
-              <button
-                type="button"
-                className={`add--button ${showThirdInput ? "clicked" : ""}`}
-                onClick={handleAddButtonClick}
-              >
-                <p className="text--button">More Text</p>
-              </button>
-              {showThirdInput && (
-                <div className="textarea-wrapper">
-                  <textarea
-                    type="text"
-                    placeholder="Text #3"
-                    className="form--input"
-                    name="thirdText"
-                    value={meme.thirdText}
-                    onChange={handleChange}
-                  />
-                  <button
-                    type="button"
-                    className="delete--button"
-                    onClick={handleDeleteButtonClick}
-                  >
-                    X
-                  </button>
-                </div>
-              )}
+              <AddMoreMemeText
+                meme={meme}
+                handleChange={handleChange}
+                setMeme={setMeme}
+              />
             </div>
             <div className="settings">In progress settings block</div>
           </div>
