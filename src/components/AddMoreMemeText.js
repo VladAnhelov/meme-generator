@@ -1,48 +1,60 @@
 import React from "react";
 
 export default function AddMoreMemeText(props) {
-  const [showThirdInput, setShowThirdInput] = React.useState(false);
+  const [additionalTexts, setLocalAdditionalTexts] = React.useState([]);
+  const { setAdditionalTexts } = props;
 
   function handleAddButtonClick() {
-    setShowThirdInput(true);
+    if (additionalTexts.length < 3) {
+      const newTexts = [...additionalTexts, ""];
+      setLocalAdditionalTexts(newTexts);
+      setAdditionalTexts(newTexts);
+    }
   }
 
-  function handleDeleteButtonClick() {
-    setShowThirdInput(false);
-    props.setMeme((prevMeme) => ({
-      ...prevMeme,
-      thirdText: "",
-    }));
+  function handleDeleteButtonClick(index) {
+    const newTexts = additionalTexts.filter((_, i) => i !== index);
+    setLocalAdditionalTexts(newTexts);
+    setAdditionalTexts(newTexts);
+  }
+
+  function handleTextChange(event, index) {
+    const updatedTexts = [...additionalTexts];
+    updatedTexts[index] = event.target.value;
+    setLocalAdditionalTexts(updatedTexts);
+    setAdditionalTexts(updatedTexts);
   }
 
   return (
     <div className="add--text">
       <button
         type="button"
-        className={`add--button ${showThirdInput ? "clicked" : ""}`}
+        className={`add--button ${
+          additionalTexts.length >= 3 ? "display-none" : ""
+        }`}
         onClick={handleAddButtonClick}
+        disabled={additionalTexts.length >= 3}
       >
         <p className="text--button">More Text</p>
       </button>
-      {showThirdInput && (
-        <div className="textarea-wrapper">
+      {additionalTexts.map((text, index) => (
+        <div className="textarea-wrapper" key={index}>
           <textarea
             type="text"
-            placeholder="Text #3"
+            placeholder="Additional Text"
             className="form--input"
-            name="thirdText"
-            value={props.meme.thirdText}
-            onChange={props.handleChange}
+            value={text}
+            onChange={(event) => handleTextChange(event, index)}
           />
           <button
             type="button"
             className="delete--button"
-            onClick={handleDeleteButtonClick}
+            onClick={() => handleDeleteButtonClick(index)}
           >
             X
           </button>
         </div>
-      )}
+      ))}
     </div>
   );
 }

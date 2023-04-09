@@ -25,13 +25,15 @@ export default function MemeMain() {
   });
   const [bottomTextPosition] = React.useState({
     x: 30,
-    y: 135,
+    y: 105,
   });
 
   const [thirdTextPosition] = React.useState({
     x: 30,
     y: 165,
   });
+
+  const [additionalTexts, setAdditionalTexts] = React.useState([]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -49,6 +51,7 @@ export default function MemeMain() {
           topTextPosition={topTextPosition}
           bottomTextPosition={bottomTextPosition}
           thirdTextPosition={thirdTextPosition}
+          additionalTexts={additionalTexts}
           stageRef={stageRef}
         />
         <img
@@ -123,6 +126,8 @@ export default function MemeMain() {
                 meme={meme}
                 handleChange={handleChange}
                 setMeme={setMeme}
+                additionalTexts={additionalTexts}
+                setAdditionalTexts={setAdditionalTexts}
               />
             </div>
             <div className="settings">In progress settings block</div>

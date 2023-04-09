@@ -10,8 +10,7 @@ export default function CanvasMemeComponent(props) {
     bottomTextPosition,
     topTextRotation,
     bottomTextRotation,
-    thirdTextPosition,
-    thirdTextRotation,
+    additionalTexts,
   } = props;
   const [containerSize, setContainerSize] = useState({
     width: 0,
@@ -23,7 +22,6 @@ export default function CanvasMemeComponent(props) {
   const [sceneHeight, setSceneHeight] = useState(600);
   const [fontSizeTop, setFontSizeTop] = useState(40);
   const [fontSizeBottom, setFontSizeBottom] = useState(40);
-  const [fontSizeThird, setFontSizeThird] = useState(40);
 
   const setDimensionsWithMaxWidth = (width, height) => {
     const maxWidth = 773;
@@ -73,7 +71,6 @@ export default function CanvasMemeComponent(props) {
         });
         setFontSizeTop(30);
         setFontSizeBottom(30);
-        setFontSizeThird(30);
       } else {
         setContainerSize({
           width: sceneWidth,
@@ -81,7 +78,6 @@ export default function CanvasMemeComponent(props) {
         });
         setFontSizeTop(40);
         setFontSizeBottom(40);
-        setFontSizeThird(40);
       }
 
       if (
@@ -95,7 +91,6 @@ export default function CanvasMemeComponent(props) {
         const newWidth = maxHeight * aspectRatio;
         setFontSizeTop(25);
         setFontSizeBottom(25);
-        setFontSizeThird(25);
 
         setContainerSize({
           width: newWidth,
@@ -181,23 +176,20 @@ export default function CanvasMemeComponent(props) {
           selectedText={selectedText}
           setSelectedText={setSelectedText}
         />
-        <MemeText
-          position={{
-            x:
-              imageElement &&
-              (parseInt(thirdTextPosition.x) * containerSize.width) /
-                imageElement.naturalWidth,
-            y:
-              imageElement &&
-              (parseInt(thirdTextPosition.y) * containerSize.height) /
-                imageElement.naturalHeight,
-          }}
-          rotation={thirdTextRotation}
-          text={meme.thirdText.toUpperCase()}
-          fontSize={fontSizeThird}
-          selectedText={selectedText}
-          setSelectedText={setSelectedText}
-        />
+        {additionalTexts.map((text, index) => (
+          <MemeText
+            key={index}
+            position={{
+              x: 30,
+              y: 270 + 70 * index,
+            }}
+            rotation={0}
+            text={text.toUpperCase()}
+            fontSize={30}
+            selectedText={selectedText}
+            setSelectedText={setSelectedText}
+          />
+        ))}
       </Layer>
     </Stage>
   );
