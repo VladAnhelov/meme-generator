@@ -239,13 +239,26 @@ footer {
   filter: grayscale(0%);
 }
 
+.block--settings {
+  display: flex;
+}
+
+.settings {
+  display: flex;
+  width: 50%;
+  margin: 10px;
+  border: 2px solid red;
+}
+
 .form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
 }
 
 .form--input {
+  width: 100%;
+  height: 36px;
   font-family: "Karla", sans-serif;
   border-radius: 10px;
   border: 1px solid #d5d4d8;
@@ -253,6 +266,64 @@ footer {
   padding: 2px;
   margin: 7px;
   resize: none;
+}
+
+.add--text {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.add--button {
+  display: flex;
+  width: 100%;
+  height: 36px;
+  padding: 2px;
+  margin: 7px;
+  border-radius: 10px;
+  border: none;
+  letter-spacing: 1.5px;
+  background-color: #03b500;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.add--button:hover {
+  background-color: #ffffff;
+  color: #03b500;
+  border: 1px solid #03b500;
+}
+
+.display-none {
+  display: none;
+}
+
+.textarea-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.delete--button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  right: 1px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #db4949;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.delete--button:hover {
+  border: 1px solid #db4949;
+  background-color: #ffffff;
+  color: #db4949;
 }
 
 .btns--block {
@@ -290,7 +361,7 @@ footer {
   font-family: "Karla", sans-serif;
   justify-content: center;
   font-size: 16px;
-  margin: 8px;
+  margin: auto;
   text-transform: uppercase;
 }
 
@@ -318,7 +389,7 @@ footer {
   text-transform: uppercase;
   letter-spacing: 2.5px;
   color: #ffffff;
-  background-color: #3ab54d;
+  background-color: #cfbb33;
   border-radius: 10px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
@@ -338,7 +409,7 @@ footer {
 }
 
 .download-btn:hover {
-  background-color: #33c241;
+  background-color: #dbc434;
   box-shadow: 0px 15px 20px rgba(46, 177, 229, 0.4);
   color: #fff;
   transform: translateY(-2px);
@@ -403,7 +474,7 @@ canvas {
   .meme--config {
     background-image: none;
     width: 100%;
-    height: 400px;
+    height: auto;
   }
 
   .meme-preview {

@@ -10,6 +10,7 @@ export default function CanvasMemeComponent(props) {
     bottomTextPosition,
     topTextRotation,
     bottomTextRotation,
+    additionalTexts,
   } = props;
   const [containerSize, setContainerSize] = useState({
     width: 0,
@@ -175,6 +176,20 @@ export default function CanvasMemeComponent(props) {
           selectedText={selectedText}
           setSelectedText={setSelectedText}
         />
+        {additionalTexts.map((text, index) => (
+          <MemeText
+            key={index}
+            position={{
+              x: 30,
+              y: 70 + 50 * index,
+            }}
+            rotation={0}
+            text={text.toUpperCase()}
+            fontSize={30}
+            selectedText={selectedText}
+            setSelectedText={setSelectedText}
+          />
+        ))}
       </Layer>
     </Stage>
   );

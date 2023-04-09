@@ -6,11 +6,13 @@ import CanvasMemeComponent from "./CanvasMemeComponent.js";
 import AddNewMemeComponent from "./AddNewMemeComponent.js";
 import MemePreviewBlock from "./MemePreviewBlock.js";
 import MemePreviewBlockUk from "./MemePreviewBlockUk.js";
+import AddMoreMemeText from "./AddMoreMemeText.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
     topText: "",
     bottomText: "",
+    thirdText: "",
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
@@ -23,8 +25,15 @@ export default function MemeMain() {
   });
   const [bottomTextPosition] = React.useState({
     x: 30,
-    y: 135,
+    y: 105,
   });
+
+  const [thirdTextPosition] = React.useState({
+    x: 30,
+    y: 165,
+  });
+
+  const [additionalTexts, setAdditionalTexts] = React.useState([]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -41,6 +50,8 @@ export default function MemeMain() {
           meme={meme}
           topTextPosition={topTextPosition}
           bottomTextPosition={bottomTextPosition}
+          thirdTextPosition={thirdTextPosition}
+          additionalTexts={additionalTexts}
           stageRef={stageRef}
         />
         <img
@@ -93,24 +104,33 @@ export default function MemeMain() {
               />
             )}
           </div>
-
-          <div className="form">
-            <textarea
-              type="text"
-              placeholder="Top text"
-              className="form--input"
-              name="topText"
-              value={meme.topText}
-              onChange={handleChange}
-            />
-            <textarea
-              type="text"
-              placeholder="Bottom text"
-              className="form--input"
-              name="bottomText"
-              value={meme.bottomText}
-              onChange={handleChange}
-            />
+          <div className="block--settings">
+            <div className="form">
+              <textarea
+                type="text"
+                placeholder="Top text"
+                className="form--input"
+                name="topText"
+                value={meme.topText}
+                onChange={handleChange}
+              />
+              <textarea
+                type="text"
+                placeholder="Bottom text"
+                className="form--input"
+                name="bottomText"
+                value={meme.bottomText}
+                onChange={handleChange}
+              />
+              <AddMoreMemeText
+                meme={meme}
+                handleChange={handleChange}
+                setMeme={setMeme}
+                additionalTexts={additionalTexts}
+                setAdditionalTexts={setAdditionalTexts}
+              />
+            </div>
+            <div className="settings">In progress settings block</div>
           </div>
           <div className="btns--block">
             <AddNewMemeComponent setMeme={setMeme} />
