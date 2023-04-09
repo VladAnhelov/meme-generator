@@ -37,19 +37,23 @@ export default function AddMoreMemeText(props) {
       >
         <p className="text--button">More Text</p>
       </button>
-      {additionalTexts.map((text, index) => (
+      {[...additionalTexts].reverse().map((text, index) => (
         <div className="textarea-wrapper" key={index}>
           <textarea
             type="text"
             placeholder="Additional Text"
             className="form--input"
             value={text}
-            onChange={(event) => handleTextChange(event, index)}
+            onChange={(event) =>
+              handleTextChange(event, additionalTexts.length - 1 - index)
+            }
           />
           <button
             type="button"
             className="delete--button"
-            onClick={() => handleDeleteButtonClick(index)}
+            onClick={() =>
+              handleDeleteButtonClick(additionalTexts.length - 1 - index)
+            }
           >
             X
           </button>

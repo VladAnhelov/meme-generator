@@ -181,7 +181,7 @@ export default function CanvasMemeComponent(props) {
             key={index}
             position={{
               x: 30,
-              y: 270 + 70 * index,
+              y: 70 + 50 * index,
             }}
             rotation={0}
             text={text.toUpperCase()}
