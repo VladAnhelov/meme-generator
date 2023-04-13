@@ -7,6 +7,7 @@ import AddNewMemeComponent from "./AddNewMemeComponent.js";
 import MemePreviewBlock from "./MemePreviewBlock.js";
 import MemePreviewBlockUk from "./MemePreviewBlockUk.js";
 import AddMoreMemeText from "./AddMoreMemeText.js";
+import ColorPaletteComponent from "./ColorPaletteComponent.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -34,6 +35,7 @@ export default function MemeMain() {
   });
 
   const [additionalTexts, setAdditionalTexts] = React.useState([]);
+  const [selectedColor, setSelectedColor] = React.useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -42,6 +44,10 @@ export default function MemeMain() {
       [name]: value,
     }));
   }
+
+  const handleColorChange = (color) => {
+    setSelectedColor(color);
+  };
 
   return (
     <main>
@@ -53,6 +59,7 @@ export default function MemeMain() {
           thirdTextPosition={thirdTextPosition}
           additionalTexts={additionalTexts}
           stageRef={stageRef}
+          selectedColor={selectedColor}
         />
         <img
           src={meme.randomImage}
@@ -130,7 +137,9 @@ export default function MemeMain() {
                 setAdditionalTexts={setAdditionalTexts}
               />
             </div>
-            <div className="settings">In progress settings block</div>
+            <div className="settings">
+              <ColorPaletteComponent handleColorChange={handleColorChange} />
+            </div>
           </div>
           <div className="btns--block">
             <AddNewMemeComponent setMeme={setMeme} />
