@@ -42,14 +42,15 @@ export default function ColorPaletteComponent({ handleColorChange }) {
     <div className="color--block">
       <button className="choose--color" onClick={handleButtonClick}>
         text color
+        <div
+          className="selected-color"
+          style={{
+            backgroundColor: color.hex,
+          }}
+          onClick={handleButtonClick}
+        ></div>
       </button>
-      <div
-        className="selected-color"
-        style={{
-          backgroundColor: color.hex,
-        }}
-        onClick={handleButtonClick}
-      ></div>
+
       {selectColor && (
         <div className="color-picker-container" ref={colorPickerRef}>
           <ColorPicker
