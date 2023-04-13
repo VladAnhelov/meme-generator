@@ -156,6 +156,7 @@ export default function CanvasMemeComponent(props) {
           rotation={topTextRotation}
           text={meme.topText.toUpperCase()}
           fontSize={fontSizeTop}
+          fillColor={props.selectedColor}
           selectedText={selectedText}
           setSelectedText={setSelectedText}
         />
@@ -173,6 +174,7 @@ export default function CanvasMemeComponent(props) {
           rotation={bottomTextRotation}
           text={meme.bottomText.toUpperCase()}
           fontSize={fontSizeBottom}
+          fillColor={props.selectedColor}
           selectedText={selectedText}
           setSelectedText={setSelectedText}
         />
@@ -186,6 +188,7 @@ export default function CanvasMemeComponent(props) {
             rotation={0}
             text={text.toUpperCase()}
             fontSize={30}
+            fillColor={props.selectedColor}
             selectedText={selectedText}
             setSelectedText={setSelectedText}
           />

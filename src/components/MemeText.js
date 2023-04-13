@@ -8,6 +8,7 @@ const MemeText = ({
   fontSize,
   selectedText,
   setSelectedText,
+  fillColor,
 }) => {
   const shapeRef = useRef();
 
@@ -30,6 +31,7 @@ const MemeText = ({
       rotation={rotation}
       text={text}
       fontSize={fontSize}
+      fillColor={fillColor}
       shapeRef={shapeRef}
       onTextClick={handleTextClick}
       isSelected={selectedText === shapeRef.current}

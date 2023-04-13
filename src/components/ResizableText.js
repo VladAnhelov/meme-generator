@@ -10,6 +10,7 @@ const ResizableText = ({
   onTextClick,
   isSelected,
   onDeselect,
+  fillColor,
 }) => {
   const trRef = useRef();
 
@@ -45,11 +46,11 @@ const ResizableText = ({
         text={text}
         fontFamily="Impact"
         fontSize={fontSize}
-        fill="#fff"
+        fill={fillColor}
         shadowBlur={2}
         shadowColor="#000"
-        shadowOffsetX={2}
-        shadowOffsetY={2}
+        shadowOffsetX={0}
+        shadowOffsetY={0}
         draggable
         ref={shapeRef}
         onClick={onTextClick}
