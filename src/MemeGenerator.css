@@ -110,7 +110,7 @@ main {
   width: 100px;
   height: 36px;
   color: #fff;
-  background: none;
+  background: #00b527;
   border: 1px solid;
   border-radius: 10px;
   text-decoration: none;
@@ -118,8 +118,24 @@ main {
   cursor: pointer;
 }
 
+.navbar__menu-link.sign-in {
+  background: #989c99;
+}
+
+.navbar__menu-link:hover.sign-in {
+  background: #acb0ad;
+}
+
+.navbar__menu-link.sign-out {
+  background: #db4949;
+}
+
+.navbar__menu-link:hover.sign-out {
+  background: #fa5454;
+}
+
 .navbar__menu-link:hover {
-  background: #0077b5;
+  background: #00bf29;
 }
 
 .modal {
@@ -133,6 +149,16 @@ main {
   top: 0;
   width: 100%;
   z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .modal-content {
@@ -178,7 +204,7 @@ main {
 .form-control {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 100%;
   height: 36px;
   font-family: "Karla", sans-serif;
   border-radius: 10px;
@@ -198,6 +224,7 @@ main {
   align-items: center;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .submit-btn {
@@ -700,5 +727,19 @@ canvas {
 @media (max-width: 390px) {
   .text--button {
     font-size: 10px;
+  }
+
+  .navbar__menu {
+    flex-direction: column;
+  }
+
+  .navbar__menu-link {
+    width: 60px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .navbar__menu-link.sign-out {
+    width: 65px;
   }
 }
