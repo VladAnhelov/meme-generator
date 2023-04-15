@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { auth, db, createUserWithEmailAndPassword } from "./firebase.js";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 export default function NavBarMenu() {
   const [showSignIn, setShowSignIn] = useState(false);
@@ -9,6 +11,32 @@ export default function NavBarMenu() {
 
   const handleCloseSignUp = () => setShowSignUp(false);
   const handleShowSignUp = () => setShowSignUp(true);
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+
+      // Store user data in Firestore
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        email: user.email,
+        createdAt: serverTimestamp(),
+      });
+
+      alert("User successfully created.");
+      handleCloseSignUp();
+    } catch (error) {
+      console.log(`Error creating user: ${error.message}`);
+    }
+  };
 
   return (
     <div className="navbar">
@@ -57,18 +85,20 @@ export default function NavBarMenu() {
               <div className="modal-content">
                 <div className="login-form">
                   <h2 className="modal--text">Sign Up</h2>
-                  <form className="modal--form--input" action="">
+                  <form className="modal--form--input" onSubmit={handleSignUp}>
                     <input
                       type="text"
+                      name="email"
                       className="form-control"
                       placeholder="Email"
                     ></input>
                     <input
                       type="password"
+                      name="password"
                       className="form-control"
                       placeholder="Password"
                     ></input>
-                    <button type="button" className="submit-btn">
+                    <button type="submit" className="submit-btn">
                       Sign Up
                     </button>
                   </form>
