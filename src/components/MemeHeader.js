@@ -1,4 +1,5 @@
 import React from "react";
+import NavBarMenu from "./NavBarMenu.js";
 
 export default function MemeHeader() {
   return (
@@ -185,6 +186,7 @@ export default function MemeHeader() {
         />
       </svg>
       <h2 className="header--title">Meme generator</h2>
+      <NavBarMenu />
       <h4 className="header--project">Vlad Anhelov Project</h4>
     </header>
   );
