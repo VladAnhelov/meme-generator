@@ -18,14 +18,6 @@
   height: 600px;
 }
 
-@media (max-width: 837px) {
-  .memeConfig {
-    background-image: none;
-    width: 100%;
-    height: auto;
-  }
-}
-
 .tabs {
   display: flex;
   height: 190px;
@@ -100,4 +92,26 @@
 .btnsBlock {
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 837px) {
+  .memeConfig {
+    width: 100%;
+    height: auto;
+  }
+  .meme {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+  .tabs {
+    align-items: baseline;
+  }
+
+  .tabContent {
+    width: 99.3%;
+  }
+
+  .tabLabel {
+    font-size: 13px;
+  }
 }

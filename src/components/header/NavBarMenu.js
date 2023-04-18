@@ -91,7 +91,7 @@ export default function NavBarMenu() {
         {!isSignedIn && (
           <li className={styles.navbarMenuItem}>
             <button
-              className={styles.navbarMenuLink}
+              className={`${styles.navbarMenuLink} ${styles.signIn}`}
               onClick={handleShowSignIn}
             >
               Sign In
@@ -186,7 +186,7 @@ export default function NavBarMenu() {
         {isSignedIn && (
           <li className={styles.navbarMenuItem}>
             <button
-              className={styles.navbarMenuLink.signOut}
+              className={`${styles.navbarMenuLink} ${styles.signOut}`}
               onClick={handleSignOut}
             >
               Sign Out

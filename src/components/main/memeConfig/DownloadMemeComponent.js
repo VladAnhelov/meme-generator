@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./DownloadMemeComponent.module.css";
+import buttons from "./AddMoreMemeText.module.css";
 
 export default function DownloadMemeComponent(props) {
   const [clicked, setClicked] = useState(false);
@@ -37,7 +38,7 @@ export default function DownloadMemeComponent(props) {
           ""
         ) : (
           <>
-            <p className={styles.textButton}>Download Meme</p>
+            <p className={buttons.textButton}>Download Meme</p>
           </>
         )}
       </button>

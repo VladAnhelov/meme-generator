@@ -31,31 +31,14 @@ canvas {
 }
 
 @media (max-width: 837px) {
-  .meme-preview {
-    overflow-y: hidden;
-  }
-
   main {
     overflow-x: hidden;
   }
-  .tabs {
-    align-items: baseline;
-  }
 
-  .tab-content {
-    width: 99.3%;
-  }
-
-  .tab-label {
-    font-size: 13px;
-  }
   .download-btn.clicked {
     height: 38px;
   }
-  .meme {
-    width: 100%;
-    flex-direction: column-reverse;
-  }
+
   .canvas--block {
     width: 100%;
   }
