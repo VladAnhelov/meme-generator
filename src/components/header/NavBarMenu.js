@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-} from "./firebase.js";
+} from "../firebase.js";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import styles from "./NavBarMenu.module.css";
 

@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/alt-text */
 // eslint-disable-next-line
 import React from "react";
-import DownloadMemeComponent from "./DownloadMemeComponent.js";
-import CanvasMemeComponent from "./CanvasMemeComponent.js";
-import AddNewMemeComponent from "./AddNewMemeComponent.js";
-import MemePreviewBlock from "./MemePreviewBlock.js";
-import MemePreviewBlockUk from "./MemePreviewBlockUk.js";
-import AddMoreMemeText from "./AddMoreMemeText.js";
-import ColorPaletteComponent from "./ColorPaletteComponent.js";
+import DownloadMemeComponent from "./memeConfig/DownloadMemeComponent.js";
+import CanvasMemeComponent from "../canvas/CanvasMemeComponent.js";
+import AddNewMemeComponent from "./memeConfig/AddNewMemeComponent.js";
+import MemePreviewBlock from "./memeConfig/MemePreviewBlock.js";
+import MemePreviewBlockUk from "./memeConfig/MemePreviewBlockUk.js";
+import AddMoreMemeText from "./memeConfig/AddMoreMemeText.js";
+import ColorPaletteComponent from "./memeConfig/ColorPaletteComponent.js";
 import styles from "./MemeMain.module.css";
-import forms from "./AddMoreMemeText.module.css";
+import forms from "./memeConfig/AddMoreMemeText.module.css";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
