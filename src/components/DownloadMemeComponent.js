@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./DownloadMemeComponent.module.css";
 
 export default function DownloadMemeComponent(props) {
   const [clicked, setClicked] = useState(false);
@@ -25,16 +26,18 @@ export default function DownloadMemeComponent(props) {
   };
 
   return (
-    <div className="download">
+    <div className={styles.download}>
       <button
-        className={`download-btn ${clicked ? "clicked" : ""}`}
+        className={`${styles.downloadBtn} ${
+          clicked ? `${styles.clicked}` : ""
+        }`}
         onClick={handleDownloadClick}
       >
         {clicked ? (
           ""
         ) : (
           <>
-            <p className="text--button">Download Meme</p>
+            <p className={styles.textButton}>Download Meme</p>
           </>
         )}
       </button>

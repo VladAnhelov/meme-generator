@@ -1,0 +1,47 @@
+.colorBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  width: 145px;
+  height: 46px;
+}
+
+.selectedColor {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  margin: 6px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chooseColor {
+  display: flex;
+  width: 190px;
+  height: 36px;
+  margin-top: 4px;
+  border-radius: 10px;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  background-color: #1e5799;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.chooseColor:hover {
+  width: 191px;
+  background-color: #2369b9;
+}
+
+.colorPickerContainer {
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0;
+}

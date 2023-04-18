@@ -1,4 +1,6 @@
 import React from "react";
+import styles from "./AddMoreMemeText.module.css";
+import buttons from "./AddNewMemeComponent.module.css";
 
 export default function AddNewMemeComponent(props) {
   const { setMeme } = props;
@@ -18,11 +20,11 @@ export default function AddNewMemeComponent(props) {
     }
   }
   return (
-    <label className="form--button upload">
-      <p className="text--button">Create your meme</p>
+    <label className={styles.uploadButton}>
+      <p className={buttons.textButton}>Create your meme</p>
       <input
         type="file"
-        className="file-upload-button"
+        className={styles.fileUploadButton}
         accept="image/*"
         onChange={uploadImage}
       />

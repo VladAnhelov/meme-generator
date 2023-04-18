@@ -8,6 +8,7 @@ import {
   onAuthStateChanged,
 } from "./firebase.js";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import styles from "./NavBarMenu.module.css";
 
 export default function NavBarMenu() {
   const [showSignIn, setShowSignIn] = useState(false);
@@ -85,44 +86,48 @@ export default function NavBarMenu() {
   }, []);
 
   return (
-    <div className="navbar">
-      <ul className="navbar__menu">
+    <div className={styles.navbar}>
+      <ul className={styles.navbarMenu}>
         {!isSignedIn && (
-          <li className="navbar__menu-item">
+          <li className={styles.navbarMenuItem}>
             <button
-              className="navbar__menu-link sign-in"
+              className={styles.navbarMenuLink}
               onClick={handleShowSignIn}
             >
               Sign In
             </button>
-            <div className={`modal${showSignIn ? " show" : ""}`}>
-              <div className="modal-content">
-                <div className="login-form">
-                  <h2 className="modal--text">Sign In</h2>
+            <div
+              className={`${styles.modal} ${
+                showSignIn ? `${styles.show}` : ""
+              }`}
+            >
+              <div className={styles.modalContent}>
+                <div className={styles.loginForm}>
+                  <h2 className={styles.modalText}>Sign In</h2>
                   <form
-                    className="modal--form--input"
+                    className={styles.modalFormInput}
                     onSubmit={handleSignIn}
                     action=""
                   >
                     <input
                       type="text"
                       name="email"
-                      className="form-control"
+                      className={styles.formControl}
                       placeholder="Email"
                     ></input>
                     <input
                       type="password"
                       name="password"
-                      className="form-control"
+                      className={styles.formControl}
                       placeholder="Password"
                     ></input>
-                    <button type="submit" className="submit-btn">
+                    <button type="submit" className={styles.submitBtn}>
                       Login
                     </button>
                   </form>
                 </div>
                 <button
-                  className="close--button--modal"
+                  className={styles.closeButtonModal}
                   onClick={handleCloseSignIn}
                 >
                   X
@@ -132,34 +137,44 @@ export default function NavBarMenu() {
           </li>
         )}
         {!isSignedIn && (
-          <li className="navbar__menu-item">
-            <button className="navbar__menu-link" onClick={handleShowSignUp}>
+          <li className={styles.navbarMenuItem}>
+            <button
+              className={styles.navbarMenuLink}
+              onClick={handleShowSignUp}
+            >
               Sign Up
             </button>
-            <div className={`modal${showSignUp ? " show" : ""}`}>
-              <div className="modal-content">
-                <div className="login-form">
-                  <h2 className="modal--text">Sign Up</h2>
-                  <form className="modal--form--input" onSubmit={handleSignUp}>
+            <div
+              className={`${styles.modal} ${
+                showSignUp ? `${styles.show}` : ""
+              }`}
+            >
+              <div className={styles.modalContent}>
+                <div className={styles.loginForm}>
+                  <h2 className={styles.modalText}>Sign Up</h2>
+                  <form
+                    className={styles.modalFormInput}
+                    onSubmit={handleSignUp}
+                  >
                     <input
                       type="text"
                       name="email"
-                      className="form-control"
+                      className={styles.formControl}
                       placeholder="Email"
                     ></input>
                     <input
                       type="password"
                       name="password"
-                      className="form-control"
+                      className={styles.formControl}
                       placeholder="Password"
                     ></input>
-                    <button type="submit" className="submit-btn">
+                    <button type="submit" className={styles.submitBtn}>
                       Sign Up
                     </button>
                   </form>
                 </div>
                 <button
-                  className="close--button--modal"
+                  className={styles.closeButtonModal}
                   onClick={handleCloseSignUp}
                 >
                   X
@@ -169,9 +184,9 @@ export default function NavBarMenu() {
           </li>
         )}
         {isSignedIn && (
-          <li className="navbar__menu-item">
+          <li className={styles.navbarMenuItem}>
             <button
-              className="navbar__menu-link sign-out"
+              className={styles.navbarMenuLink.signOut}
               onClick={handleSignOut}
             >
               Sign Out

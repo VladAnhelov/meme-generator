@@ -1,5 +1,7 @@
+// eslint-disable-next-line
 import React from "react";
 import Preloader from "./PreloaderComponent.js";
+import styles from "./MemePreviewBlock.module.css";
 
 export default function MemePreviewBlock(props) {
   const [loadedImages, setLoadedImages] = React.useState([]);
@@ -29,13 +31,13 @@ export default function MemePreviewBlock(props) {
     }));
   };
   return (
-    <div className="meme-preview">
+    <div className={styles.memePreview}>
       {props.allMemeImages.map((image, index) => (
-        <div className="im" key={index}>
+        <div className={styles.image} key={index}>
           {!loadedImages.includes(index) && <Preloader />}
           <img
             src={image.url}
-            className="im--preview"
+            className={styles.imagePreview}
             crossOrigin="anonymous"
             alt=""
             onClick={() => handleClick(image.url)}

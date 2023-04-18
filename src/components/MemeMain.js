@@ -8,6 +8,8 @@ import MemePreviewBlock from "./MemePreviewBlock.js";
 import MemePreviewBlockUk from "./MemePreviewBlockUk.js";
 import AddMoreMemeText from "./AddMoreMemeText.js";
 import ColorPaletteComponent from "./ColorPaletteComponent.js";
+import styles from "./MemeMain.module.css";
+import forms from "./AddMoreMemeText.module.css";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -51,7 +53,7 @@ export default function MemeMain() {
 
   return (
     <main>
-      <div className="meme">
+      <div className={styles.meme}>
         <CanvasMemeComponent
           meme={meme}
           topTextPosition={topTextPosition}
@@ -63,39 +65,39 @@ export default function MemeMain() {
         />
         <img
           src={meme.randomImage}
-          className="meme--image"
+          className={styles.memeImage}
           crossOrigin="anonymous"
         />
-        <div className="meme--config">
-          <div className="tabs">
-            <div className="tab">
+        <div className={styles.memeConfig}>
+          <div className={styles.tabs}>
+            <div className={styles.tab}>
               <input
                 type="radio"
                 name="css-tabs"
                 id="tab-1"
                 checked={activeTab === "world"}
                 onChange={() => setActiveTab("world")}
-                className="tab-switch"
+                className={styles.tabSwitch}
               />
-              <label htmlFor="tab-1" className="tab-label">
+              <label htmlFor="tab-1" className={styles.tabLabel}>
                 World memes
               </label>
             </div>
-            <div className="tab">
+            <div className={styles.tab}>
               <input
                 type="radio"
                 name="css-tabs"
                 id="tab-2"
                 checked={activeTab === "ukraine"}
                 onChange={() => setActiveTab("ukraine")}
-                className="tab-switch"
+                className={styles.tabSwitch}
               />
-              <label htmlFor="tab-2" className="tab-label">
+              <label htmlFor="tab-2" className={styles.tabLabel}>
                 Ukrainian memes
               </label>
             </div>
           </div>
-          <div className="tab-content">
+          <div className={styles.tabContent}>
             {activeTab === "world" ? (
               <MemePreviewBlock
                 setMeme={setMeme}
@@ -111,12 +113,12 @@ export default function MemeMain() {
               />
             )}
           </div>
-          <div className="block--settings">
-            <div className="form">
+          <div className={styles.blockSettings}>
+            <div className={forms.form}>
               <textarea
                 type="text"
                 placeholder="Top text"
-                className="form--input"
+                className={forms.formInput}
                 name="topText"
                 value={meme.topText}
                 onChange={handleChange}
@@ -124,7 +126,7 @@ export default function MemeMain() {
               <textarea
                 type="text"
                 placeholder="Bottom text"
-                className="form--input"
+                className={forms.formInput}
                 name="bottomText"
                 value={meme.bottomText}
                 onChange={handleChange}
@@ -137,11 +139,11 @@ export default function MemeMain() {
                 setAdditionalTexts={setAdditionalTexts}
               />
             </div>
-            <div className="settings">
+            <div className={styles.settings}>
               <ColorPaletteComponent handleColorChange={handleColorChange} />
             </div>
           </div>
-          <div className="btns--block">
+          <div className={styles.btnsBlock}>
             <AddNewMemeComponent setMeme={setMeme} />
             <DownloadMemeComponent
               meme={meme}
