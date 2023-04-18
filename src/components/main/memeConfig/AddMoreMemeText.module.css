@@ -1,0 +1,94 @@
+.addText {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.addButton {
+  display: flex;
+  height: 36px;
+  padding: 2px;
+  margin: 7px;
+  border-radius: 10px;
+  border: none;
+  letter-spacing: 1.5px;
+  background-color: #03b500;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  background-color: #ffffff;
+  color: #03b500;
+  border: 1px solid #03b500;
+}
+
+.displayNone {
+  display: none;
+}
+
+.textareaWrapper {
+  position: relative;
+  display: grid;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.formInput {
+  height: 36px;
+  font-family: "Karla", sans-serif;
+  border-radius: 10px;
+  border: 1px solid #d5d4d8;
+  text-indent: 5px;
+  padding: 2px;
+  margin: 7px;
+  resize: none;
+}
+
+.deleteButton {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  right: 15px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #db4949;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  border: 1px solid #db4949;
+  background-color: #ffffff;
+  color: #db4949;
+}
+
+.textButton {
+  display: flex;
+  font-family: "Karla", sans-serif;
+  justify-content: center;
+  font-size: 16px;
+  margin: auto;
+  text-transform: uppercase;
+}
+
+@media (max-width: 570px) {
+  .textButton {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 390px) {
+  .textButton {
+    font-size: 10px;
+  }
+}

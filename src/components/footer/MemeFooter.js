@@ -5,6 +5,7 @@ import {
   faLinkedinIn,
   faTelegram,
 } from "@fortawesome/free-brands-svg-icons";
+import styles from "./MemeFooter.module.css";
 
 export default function MemeFooter(second) {
   const handleMouseEnter = (e) => {
@@ -15,14 +16,14 @@ export default function MemeFooter(second) {
     e.currentTarget.style.transform = "scale(1)";
   };
   return (
-    <footer className="footer">
-      <p className="social--text">Get in touch:</p>
-      <div className="social-icons">
+    <footer className={styles.footer}>
+      <p className={styles.socialText}>Get in touch:</p>
+      <div className={styles.socialIcons}>
         <a
           href="https://www.facebook.com/vladanhelov"
           target="_blank"
           rel="noopener noreferrer"
-          className="icon facebook"
+          className={`${styles.icon} ${styles.icon_facebook}`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -32,7 +33,7 @@ export default function MemeFooter(second) {
           href="https://t.me/sumne_hivno"
           target="_blank"
           rel="noopener noreferrer"
-          className="icon telegram"
+          className={`${styles.icon} ${styles.icon_telegram}`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -42,7 +43,7 @@ export default function MemeFooter(second) {
           href="https://www.linkedin.com/in/vladanhelov/"
           target="_blank"
           rel="noopener noreferrer"
-          className="icon linkedin"
+          className={`${styles.icon} ${styles.icon_linkedin}`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >

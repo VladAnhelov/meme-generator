@@ -1,6 +1,7 @@
 import React from "react";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/lib/css/styles.css";
+import styles from "./ColorPaletteComponent.module.css";
 
 export default function ColorPaletteComponent({ handleColorChange }) {
   const [color, setColor] = useColor("hex", "#fff");
@@ -39,11 +40,11 @@ export default function ColorPaletteComponent({ handleColorChange }) {
   }, [color, handleColorChange]);
 
   return (
-    <div className="color--block">
-      <button className="choose--color" onClick={handleButtonClick}>
+    <div className={styles.colorBlock}>
+      <button className={styles.chooseColor} onClick={handleButtonClick}>
         text color
         <div
-          className="selected-color"
+          className={styles.selectedColor}
           style={{
             backgroundColor: color.hex,
           }}
@@ -52,7 +53,7 @@ export default function ColorPaletteComponent({ handleColorChange }) {
       </button>
 
       {selectColor && (
-        <div className="color-picker-container" ref={colorPickerRef}>
+        <div className={styles.colorPickerContainer} ref={colorPickerRef}>
           <ColorPicker
             width={156}
             height={128}

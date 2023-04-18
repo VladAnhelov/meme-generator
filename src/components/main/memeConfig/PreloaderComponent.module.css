@@ -1,0 +1,34 @@
+#preloader {
+  height: 50px;
+  width: 50px;
+  margin: 25px;
+  border: 5px solid rgb(148 150 183 / 45%);
+  border-top: 5px solid rgb(38 139 213);
+  border-radius: 50%;
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(160%);
+  }
+  50% {
+    transform: translate(160%, 160%);
+  }
+  75% {
+    transform: translate(0, 160%);
+  }
+}

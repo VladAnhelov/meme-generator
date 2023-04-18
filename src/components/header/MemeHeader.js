@@ -1,11 +1,12 @@
 import React from "react";
 import NavBarMenu from "./NavBarMenu.js";
+import styles from "./MemeHeader.module.css";
 
 export default function MemeHeader() {
   return (
-    <header className="header">
+    <header className={styles.header}>
       <svg
-        className="trollface--header"
+        className={styles.trollfaceHeader}
         width="32"
         height="27"
         viewBox="0 0 32 27"
@@ -185,9 +186,9 @@ export default function MemeHeader() {
           fill="#0D0D0D"
         />
       </svg>
-      <h2 className="header--title">Meme generator</h2>
+      <h2 className={styles.headerTitle}>Meme generator</h2>
       <NavBarMenu />
-      <h4 className="header--project">Vlad Anhelov Project</h4>
+      <h4 className={styles.headerProject}>Vlad Anhelov Project</h4>
     </header>
   );
 }

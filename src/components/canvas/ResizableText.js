@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useEffect, useRef } from "react";
 import { Text, Transformer } from "react-konva";
 
@@ -19,7 +20,7 @@ const ResizableText = ({
       trRef.current.nodes([shapeRef.current]);
       trRef.current.getLayer().batchDraw();
     }
-  }, [isSelected]);
+  }, [isSelected, shapeRef]);
 
   const handleTransform = () => {
     const node = shapeRef.current;

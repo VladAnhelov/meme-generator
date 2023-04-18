@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./AddMoreMemeText.module.css";
 
 export default function AddMoreMemeText(props) {
   const [additionalTexts, setLocalAdditionalTexts] = React.useState([]);
@@ -26,23 +27,23 @@ export default function AddMoreMemeText(props) {
   }
 
   return (
-    <div className="add--text">
+    <div className={styles.addText}>
       <button
         type="button"
-        className={`add--button ${
-          additionalTexts.length >= 3 ? "display-none" : ""
+        className={`${styles.addButton} ${
+          additionalTexts.length >= 3 ? "displayNone" : ""
         }`}
         onClick={handleAddButtonClick}
         disabled={additionalTexts.length >= 3}
       >
-        <p className="text--button">More Text</p>
+        <p className={styles.textButton}>More Text</p>
       </button>
       {[...additionalTexts].reverse().map((text, index) => (
-        <div className="textarea-wrapper" key={index}>
+        <div className={styles.textareaWrapper} key={index}>
           <textarea
             type="text"
             placeholder="Additional Text"
-            className="form--input"
+            className={styles.formInput}
             value={text}
             onChange={(event) =>
               handleTextChange(event, additionalTexts.length - 1 - index)
@@ -50,7 +51,7 @@ export default function AddMoreMemeText(props) {
           />
           <button
             type="button"
-            className="delete--button"
+            className={styles.deleteButton}
             onClick={() =>
               handleDeleteButtonClick(additionalTexts.length - 1 - index)
             }

@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./AddNewMemeComponent.module.css";
 
 export default function AddNewMemeComponent(props) {
   const { setMeme } = props;
@@ -6,7 +7,7 @@ export default function AddNewMemeComponent(props) {
     const file = event.target.files[0];
     const reader = new FileReader();
 
-    reader.onload = function(e) {
+    reader.onload = function (e) {
       setMeme((prevMeme) => ({
         ...prevMeme,
         randomImage: e.target.result,
@@ -18,11 +19,11 @@ export default function AddNewMemeComponent(props) {
     }
   }
   return (
-    <label className="form--button upload">
-      <p className="text--button">Create your meme</p>
+    <label className={styles.uploadButton}>
+      <p className={styles.textButton}>Create your meme</p>
       <input
         type="file"
-        className="file-upload-button"
+        className={styles.fileUploadButton}
         accept="image/*"
         onChange={uploadImage}
       />
