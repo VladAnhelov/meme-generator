@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import MemeText from "./MemeText.js";
 import { Stage, Layer, Image as KonvaImage } from "react-konva";
 
@@ -44,15 +44,16 @@ export default function CanvasMemeComponent(props) {
     setSceneHeight(newHeight);
   };
 
-  const getImageWidth = (imageUrl) => {
+  const getImageWidth = useCallback((imageUrl) => {
     const image = new Image();
     image.src = imageUrl;
 
     image.onload = () => {
       setDimensionsWithMaxWidth(image.naturalWidth, image.naturalHeight);
     };
-  };
+  }, []);
 
+  // eslint-disable-next-line
   useEffect(() => {
     if (!imageElement) return;
     const handleResize = () => {
@@ -112,7 +113,7 @@ export default function CanvasMemeComponent(props) {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [sceneWidth, sceneHeight]);
+  }, [sceneWidth, sceneHeight, imageElement]);
 
   useEffect(() => {
     const image = new Image();
@@ -122,7 +123,7 @@ export default function CanvasMemeComponent(props) {
     image.src = meme.randomImage;
     image.setAttribute("crossorigin", "anonymous");
     getImageWidth(meme.randomImage);
-  }, [meme.randomImage]);
+  }, [meme.randomImage, getImageWidth]);
 
   return (
     <Stage

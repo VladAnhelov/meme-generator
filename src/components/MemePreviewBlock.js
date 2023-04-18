@@ -22,7 +22,7 @@ export default function MemePreviewBlock(props) {
     } else {
       props.setWorldMemesLoaded(false);
     }
-  }, [props.worldMemesLoaded]);
+  }, [props.worldMemesLoaded, props]);
 
   const handleClick = (imageUrl) => {
     props.setMeme((prevMeme) => ({

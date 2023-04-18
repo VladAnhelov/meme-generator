@@ -20,7 +20,7 @@ const ResizableText = ({
       trRef.current.nodes([shapeRef.current]);
       trRef.current.getLayer().batchDraw();
     }
-  }, [isSelected]);
+  }, [isSelected, shapeRef]);
 
   const handleTransform = () => {
     const node = shapeRef.current;

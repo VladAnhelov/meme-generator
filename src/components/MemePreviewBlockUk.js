@@ -27,7 +27,7 @@ export default function MemePreviewBlockUk(props) {
         }
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [props]);
 
   const handleClick = (imageUrl) => {
     props.setMeme((prevMeme) => ({
