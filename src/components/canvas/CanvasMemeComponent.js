@@ -53,7 +53,6 @@ export default function CanvasMemeComponent(props) {
     };
   }, []);
 
-  // eslint-disable-next-line
   useEffect(() => {
     if (!imageElement) return;
     const handleResize = () => {

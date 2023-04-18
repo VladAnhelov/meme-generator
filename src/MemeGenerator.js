@@ -1,8 +1,8 @@
 import React from "react";
 import "./MemeGenerator.css";
-import MemeHeader from "./components/header/MemeHeader";
+import MemeHeader from "./components/header/MemeHeader.js";
 import MemeMain from "./components/main/MemeMain.js";
-import MemeFooter from "./components/footer/MemeFooter";
+import MemeFooter from "./components/footer/MemeFooter.js";
 
 function MemeGenerator() {
   return (
