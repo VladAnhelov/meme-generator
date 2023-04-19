@@ -1,3 +1,5 @@
+@use "/src/components/main/MemeMain.module.scss";
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -114,16 +116,14 @@
 }
 
 .formControl {
-  display: flex;
-  flex-direction: column;
+  @include MemeMain.defaultButton();
   width: 100%;
-  height: 36px;
   font-family: "Karla", sans-serif;
-  border-radius: 10px;
   border: 1px solid #d5d4d8;
   text-indent: 5px;
-  padding: 2px;
-  margin: 7px;
+  text-transform: none;
+  letter-spacing: normal;
+  color: #000;
   resize: none;
 }
 .modalText {
@@ -140,15 +140,11 @@
 }
 
 .submitBtn {
+  @include MemeMain.defaultButton();
   width: 100px;
-  height: 36px;
-  color: #fff;
   background: #0077b5;
   border: 1px solid;
-  border-radius: 10px;
   text-decoration: none;
-  text-transform: uppercase;
-  cursor: pointer;
 }
 
 .submitBtn:hover {

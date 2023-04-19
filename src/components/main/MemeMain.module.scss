@@ -1,5 +1,24 @@
 $defaultHeight: 36px;
 
+@mixin flexColumn() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin defaultButton() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 7px;
+  padding: 2px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  height: $defaultHeight;
+  color: #fff;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
 .meme {
   position: relative;
   justify-items: center;
@@ -28,8 +47,7 @@ $defaultHeight: 36px;
 }
 
 .tab {
-  display: flex;
-  flex-direction: column;
+  @include flexColumn();
   width: 100%;
 }
 

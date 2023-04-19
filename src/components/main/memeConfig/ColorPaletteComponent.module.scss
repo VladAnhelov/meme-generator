@@ -1,3 +1,5 @@
+@use "../MemeMain.module.scss";
+
 .colorBlock {
   display: flex;
   flex-direction: row;
@@ -18,19 +20,13 @@
 }
 
 .chooseColor {
-  display: flex;
+  @include MemeMain.defaultButton();
   width: 190px;
-  height: 36px;
+  margin: 0px;
+  padding: 0px;
   margin-top: 4px;
-  border-radius: 10px;
   border: none;
-  justify-content: center;
-  align-items: center;
   background-color: #1e5799;
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  cursor: pointer;
   transition: all 0.3s ease 0s;
 }
 

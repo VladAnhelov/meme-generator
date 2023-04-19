@@ -6,16 +6,9 @@
 }
 
 .addButton {
-  display: flex;
-  height: MemeMain.$defaultHeight;
-  padding: 2px;
-  margin: 7px;
-  border-radius: 10px;
+  @include MemeMain.defaultButton();
   border: none;
-  letter-spacing: 1.5px;
   background-color: #03b500;
-  color: #ffffff;
-  cursor: pointer;
 }
 
 .addButton:hover {
@@ -35,8 +28,7 @@
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
+  @include MemeMain.flexColumn();
   width: 50%;
 }
 
