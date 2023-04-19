@@ -1,9 +1,11 @@
+@use "../MemeMain.module.scss";
+
 .download {
   display: contents;
 }
 
 .downloadBtn {
-  height: 38px;
+  height: MemeMain.$defaultHeight;
   margin: 7px;
   padding: 2px;
   text-transform: uppercase;
@@ -36,7 +38,7 @@
 }
 
 .downloadBtn.clicked {
-  height: 38px;
+  height: MemeMain.$defaultHeight;
   background-color: #cee0ed;
   animation: fill 1s ease-out 1 forwards;
   animation-delay: 45ms;
