@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import styles from "./DownloadMemeComponent.module.css";
-import buttons from "./AddMoreMemeText.module.css";
+import styles from "./DownloadMemeComponent.module.scss";
+import buttons from "./AddMoreMemeText.module.scss";
 
 export default function DownloadMemeComponent(props) {
   const [clicked, setClicked] = useState(false);

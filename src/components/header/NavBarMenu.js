@@ -8,7 +8,7 @@ import {
   onAuthStateChanged,
 } from "../firebase.js";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import styles from "./NavBarMenu.module.css";
+import styles from "./NavBarMenu.module.scss";
 
 export default function NavBarMenu() {
   const [showSignIn, setShowSignIn] = useState(false);

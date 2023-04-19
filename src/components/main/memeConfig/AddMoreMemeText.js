@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./AddMoreMemeText.module.css";
+import styles from "./AddMoreMemeText.module.scss";
 
 export default function AddMoreMemeText(props) {
   const [additionalTexts, setLocalAdditionalTexts] = React.useState([]);

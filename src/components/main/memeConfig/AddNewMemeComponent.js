@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./AddNewMemeComponent.module.css";
+import styles from "./AddNewMemeComponent.module.scss";
 
 export default function AddNewMemeComponent(props) {
   const { setMeme } = props;

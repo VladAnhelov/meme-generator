@@ -5,7 +5,7 @@ import {
   faLinkedinIn,
   faTelegram,
 } from "@fortawesome/free-brands-svg-icons";
-import styles from "./MemeFooter.module.css";
+import styles from "./MemeFooter.module.scss";
 
 export default function MemeFooter(second) {
   const handleMouseEnter = (e) => {
