@@ -1,8 +1,17 @@
 $defaultHeight: 36px;
+$color: #fff;
 
 @mixin flexColumn() {
   display: flex;
   flex-direction: column;
+}
+
+@mixin font() {
+  font-family: "Karla", sans-serif;
+  justify-content: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: $color;
 }
 
 @mixin defaultButton() {
@@ -14,7 +23,7 @@ $defaultHeight: 36px;
   border-radius: 10px;
   text-transform: uppercase;
   height: $defaultHeight;
-  color: #fff;
+  color: $color;
   letter-spacing: 1.5px;
   cursor: pointer;
 }
@@ -79,7 +88,7 @@ $defaultHeight: 36px;
 }
 
 .tabSwitch:checked + .tabLabel {
-  background-color: #fff;
+  background-color: $color;
   color: #222;
 }
 
