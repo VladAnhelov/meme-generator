@@ -1,6 +1,6 @@
 import React from "react";
 import NavBarMenu from "./NavBarMenu.js";
-import styles from "./MemeHeader.module.css";
+import styles from "./MemeHeader.module.scss";
 
 export default function MemeHeader() {
   return (

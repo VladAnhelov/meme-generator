@@ -1,19 +1,14 @@
+@use "../MemeMain.module.scss";
+
 .addText {
   display: flex;
   flex-direction: column-reverse;
 }
 
 .addButton {
-  display: flex;
-  height: 36px;
-  padding: 2px;
-  margin: 7px;
-  border-radius: 10px;
+  @include MemeMain.defaultButton();
   border: none;
-  letter-spacing: 1.5px;
   background-color: #03b500;
-  color: #ffffff;
-  cursor: pointer;
 }
 
 .addButton:hover {
@@ -33,13 +28,12 @@
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
+  @include MemeMain.flexColumn();
   width: 50%;
 }
 
 .formInput {
-  height: 36px;
+  height: MemeMain.$defaultHeight;
   font-family: "Karla", sans-serif;
   border-radius: 10px;
   border: 1px solid #d5d4d8;
@@ -74,11 +68,8 @@
 
 .textButton {
   display: flex;
-  font-family: "Karla", sans-serif;
-  justify-content: center;
-  font-size: 16px;
   margin: auto;
-  text-transform: uppercase;
+  @include MemeMain.font();
 }
 
 @media (max-width: 570px) {

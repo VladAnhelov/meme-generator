@@ -1,3 +1,33 @@
+$defaultHeight: 36px;
+$color: #fff;
+
+@mixin flexColumn() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin font() {
+  font-family: "Karla", sans-serif;
+  justify-content: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: $color;
+}
+
+@mixin defaultButton() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 7px;
+  padding: 2px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  height: $defaultHeight;
+  color: $color;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
 .meme {
   position: relative;
   justify-items: center;
@@ -10,8 +40,6 @@
 }
 
 .memeConfig {
-  display: flex;
-  flex-direction: column;
   margin-left: 2px;
   justify-items: center;
   width: 50%;
@@ -28,8 +56,7 @@
 }
 
 .tab {
-  display: flex;
-  flex-direction: column;
+  @include flexColumn();
   width: 100%;
 }
 
@@ -40,7 +67,7 @@
 .tabLabel {
   position: relative;
   display: block;
-  height: 40px;
+  height: $defaultHeight;
   line-height: 40px;
   padding: 0 20px;
   margin-bottom: 130px;
@@ -61,7 +88,7 @@
 }
 
 .tabSwitch:checked + .tabLabel {
-  background-color: #fff;
+  background-color: $color;
   color: #222;
 }
 

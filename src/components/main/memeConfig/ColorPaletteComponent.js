@@ -1,7 +1,7 @@
 import React from "react";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/lib/css/styles.css";
-import styles from "./ColorPaletteComponent.module.css";
+import styles from "./ColorPaletteComponent.module.scss";
 
 export default function ColorPaletteComponent({ handleColorChange }) {
   const [color, setColor] = useColor("hex", "#fff");

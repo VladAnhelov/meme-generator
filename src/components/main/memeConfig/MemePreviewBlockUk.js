@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import React from "react";
 import Preloader from "./PreloaderComponent.js";
-import styles from "./MemePreviewBlock.module.css";
+import styles from "./MemePreviewBlock.module.scss";
 
 export default function MemePreviewBlockUk(props) {
   const [loadedImages, setLoadedImages] = React.useState([]);

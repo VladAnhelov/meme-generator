@@ -8,8 +8,8 @@ import MemePreviewBlock from "./memeConfig/MemePreviewBlock.js";
 import MemePreviewBlockUk from "./memeConfig/MemePreviewBlockUk.js";
 import AddMoreMemeText from "./memeConfig/AddMoreMemeText.js";
 import ColorPaletteComponent from "./memeConfig/ColorPaletteComponent.js";
-import styles from "./MemeMain.module.css";
-import forms from "./memeConfig/AddMoreMemeText.module.css";
+import styles from "./MemeMain.module.scss";
+import forms from "./memeConfig/AddMoreMemeText.module.scss";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({

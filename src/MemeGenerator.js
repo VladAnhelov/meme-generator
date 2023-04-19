@@ -1,5 +1,5 @@
 import React from "react";
-import "./MemeGenerator.css";
+import "./MemeGenerator.scss";
 import MemeHeader from "./components/header/MemeHeader.js";
 import MemeMain from "./components/main/MemeMain.js";
 import MemeFooter from "./components/footer/MemeFooter.js";

@@ -1,10 +1,12 @@
+@use "/src/components/main/MemeMain.module.scss";
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #33333300;
   padding: 1rem;
-  color: #fff;
+  color: MemeMain.$color;
 }
 
 .navbarMenu {
@@ -19,15 +21,13 @@
 }
 
 .navbarMenuLink {
+  @include MemeMain.defaultButton();
+  margin: 0px;
+  height: 30px;
   width: 100px;
-  height: 36px;
-  color: #fff;
   background: #00b527;
   border: 1px solid;
-  border-radius: 10px;
   text-decoration: none;
-  text-transform: uppercase;
-  cursor: pointer;
 }
 
 .navbarMenuLink.signIn {
@@ -75,7 +75,7 @@
 
 .modalContent {
   display: flex;
-  background-color: #ffffff;
+  background-color: MemeMain.$color;
   border-radius: 10px;
   padding: 20px;
   position: relative;
@@ -96,13 +96,13 @@
   border-radius: 10px;
   border: none;
   background-color: #db4949;
-  color: #ffffff;
+  color: MemeMain.$color;
   cursor: pointer;
 }
 
 .closeButtonModal:hover {
   border: 1px solid #db4949;
-  background-color: #ffffff;
+  background-color: MemeMain.$color;
   color: #db4949;
 }
 
@@ -114,16 +114,14 @@
 }
 
 .formControl {
-  display: flex;
-  flex-direction: column;
+  @include MemeMain.defaultButton();
   width: 100%;
-  height: 36px;
   font-family: "Karla", sans-serif;
-  border-radius: 10px;
   border: 1px solid #d5d4d8;
   text-indent: 5px;
-  padding: 2px;
-  margin: 7px;
+  text-transform: none;
+  letter-spacing: normal;
+  color: #000;
   resize: none;
 }
 .modalText {
@@ -140,19 +138,15 @@
 }
 
 .submitBtn {
+  @include MemeMain.defaultButton();
   width: 100px;
-  height: 36px;
-  color: #fff;
   background: #0077b5;
   border: 1px solid;
-  border-radius: 10px;
   text-decoration: none;
-  text-transform: uppercase;
-  cursor: pointer;
 }
 
 .submitBtn:hover {
-  background: #fff;
+  background: MemeMain.$color;
   color: #0077b5;
 }
 
@@ -165,6 +159,7 @@
     width: 60px;
     height: 20px;
     font-size: 10px;
+    margin: 2px;
   }
 
   .navbarMenuLink.signOut {
