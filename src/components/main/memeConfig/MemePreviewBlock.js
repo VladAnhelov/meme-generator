@@ -1,16 +1,13 @@
 // eslint-disable-next-line
 import React, { useState, useEffect } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import Preloader from "./PreloaderComponent.js";
 import styles from "./MemePreviewBlock.module.scss";
 
 export default function MemePreviewBlock(props) {
-  const [loadedImages, setLoadedImages] = React.useState([]);
   const [worldMemesLoaded, setWorldMemesLoaded] = useState(false);
   const url = "https://api.imgflip.com/get_memes";
-
-  const handleImageLoad = (index) => {
-    setLoadedImages((prevLoadedImages) => [...prevLoadedImages, index]);
-  };
 
   useEffect(() => {
     if (!worldMemesLoaded) {
@@ -34,15 +31,14 @@ export default function MemePreviewBlock(props) {
     <div className={styles.memePreview}>
       {props.allMemeImages.map((image, index) => (
         <div className={styles.image} key={index}>
-          {!loadedImages.includes(index) && <Preloader />}
-          <img
+          <LazyLoadImage
             src={image.url}
+            effect="blur"
             className={styles.imagePreview}
             crossOrigin="anonymous"
             alt=""
             onClick={() => handleClick(image.url)}
-            onLoad={() => handleImageLoad(index)}
-            style={{ display: loadedImages.includes(index) ? "block" : "none" }}
+            placeholder={<Preloader />}
           />
         </div>
       ))}
