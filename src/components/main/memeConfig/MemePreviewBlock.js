@@ -1,28 +1,27 @@
 // eslint-disable-next-line
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Preloader from "./PreloaderComponent.js";
 import styles from "./MemePreviewBlock.module.scss";
 
 export default function MemePreviewBlock(props) {
   const [loadedImages, setLoadedImages] = React.useState([]);
+  const [worldMemesLoaded, setWorldMemesLoaded] = useState(false);
   const url = "https://api.imgflip.com/get_memes";
 
   const handleImageLoad = (index) => {
     setLoadedImages((prevLoadedImages) => [...prevLoadedImages, index]);
   };
 
-  React.useEffect(() => {
-    if (!props.worldMemesLoaded) {
+  useEffect(() => {
+    if (!worldMemesLoaded) {
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
           props.setAllMemeImages(data.data.memes);
-          props.setWorldMemesLoaded(true);
+          setWorldMemesLoaded(true);
         });
-    } else {
-      props.setWorldMemesLoaded(false);
     }
-  }, [props.worldMemesLoaded, props]);
+  }, [worldMemesLoaded, props]);
 
   const handleClick = (imageUrl) => {
     props.setMeme((prevMeme) => ({
@@ -30,6 +29,7 @@ export default function MemePreviewBlock(props) {
       randomImage: imageUrl,
     }));
   };
+
   return (
     <div className={styles.memePreview}>
       {props.allMemeImages.map((image, index) => (
