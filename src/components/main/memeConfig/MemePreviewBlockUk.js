@@ -55,7 +55,6 @@ export default function MemePreviewBlockUk(props) {
             onClick={() => handleClick(image.link)}
             onLoad={() => handleImageLoad(index)}
             effect="blur"
-            style={{ opacity: loadedImages.includes(index) ? "0" : "1" }}
             placeholder={<Preloader />}
           />
         </div>
