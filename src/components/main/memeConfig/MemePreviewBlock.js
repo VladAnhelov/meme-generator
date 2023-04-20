@@ -29,19 +29,20 @@ export default function MemePreviewBlock(props) {
 
   return (
     <div className={styles.memePreview}>
-      {props.allMemeImages.map((image, index) => (
-        <div className={styles.image} key={index}>
-          <LazyLoadImage
-            src={image.url}
-            effect="blur"
-            className={styles.imagePreview}
-            crossOrigin="anonymous"
-            alt=""
-            onClick={() => handleClick(image.url)}
-            placeholder={<Preloader />}
-          />
-        </div>
-      ))}
+      {Array.isArray(props.allMemeImages) &&
+        props.allMemeImages.map((image, index) => (
+          <div className={styles.image} key={index}>
+            <LazyLoadImage
+              src={image.url}
+              effect="blur"
+              className={styles.imagePreview}
+              crossOrigin="anonymous"
+              alt=""
+              onClick={() => handleClick(image.url)}
+              placeholder={<Preloader />}
+            />
+          </div>
+        ))}
     </div>
   );
 }
