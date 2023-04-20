@@ -53,7 +53,6 @@ export default function MemePreviewBlockUk(props) {
             crossOrigin="anonymous"
             alt=""
             onClick={() => handleClick(image.link)}
-            onLoad={() => handleImageLoad(index)}
             effect="blur"
             placeholder={<Preloader />}
           />
