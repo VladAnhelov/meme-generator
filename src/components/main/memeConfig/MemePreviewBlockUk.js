@@ -13,15 +13,9 @@ export default function MemePreviewBlockUk(props) {
   const token = "02a7154b1bb6296911f0a2de6031103f4b731fb2";
 
   const handleImageLoad = (index) => {
-    setLoadedImages((prevLoadedImages) => {
-      // If the index is already in the loadedImages array, return it unchanged
-      if (prevLoadedImages.includes(index)) {
-        return prevLoadedImages;
-      }
-      // Otherwise, add the index to the loadedImages array
-      return [...prevLoadedImages, index];
-    });
+    setLoadedImages((prevLoadedImages) => [...prevLoadedImages, index]);
   };
+
   React.useEffect(() => {
     if (!ukMemesLoaded) {
       fetch(url, {
@@ -62,7 +56,8 @@ export default function MemePreviewBlockUk(props) {
             onClick={() => handleClick(image.link)}
             onLoad={() => handleImageLoad(index)}
             effect="blur"
-            style={{ display: loadedImages.includes(index) ? "block" : "none" }}
+            style={{ opacity: loadedImages.includes(index) ? "1" : "0" }}
+            placeholder={<Preloader />}
           />
         </div>
       ))}
