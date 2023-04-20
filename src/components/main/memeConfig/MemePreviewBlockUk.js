@@ -7,14 +7,9 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import styles from "./MemePreviewBlock.module.scss";
 
 export default function MemePreviewBlockUk(props) {
-  const [loadedImages, setLoadedImages] = React.useState([]);
   const [ukMemesLoaded, setUkMemesLoaded] = React.useState(false);
   const url = "https://api.imgur.com/3/account/me/images";
   const token = "02a7154b1bb6296911f0a2de6031103f4b731fb2";
-
-  const handleImageLoad = (index) => {
-    setLoadedImages((prevLoadedImages) => [...prevLoadedImages, index]);
-  };
 
   React.useEffect(() => {
     if (!ukMemesLoaded) {
