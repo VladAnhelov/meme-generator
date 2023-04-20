@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Preloader from "./PreloaderComponent.js";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import styles from "./MemePreviewBlock.module.scss";
@@ -45,7 +44,6 @@ export default function MemePreviewBlockUk(props) {
     <div className={styles.memePreview}>
       {props.allMemeImages.map((image, index) => (
         <div className={styles.image} key={index}>
-          {!loadedImages.includes(index) && <Preloader />}
           <LazyLoadImage
             src={image.link}
             className={styles.imagePreview}
