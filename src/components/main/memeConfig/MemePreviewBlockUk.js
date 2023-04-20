@@ -43,24 +43,23 @@ export default function MemePreviewBlockUk(props) {
 
   return (
     <div className={styles.memePreview}>
-      {Array.isArray(props.allMemeImages) &&
-        props.allMemeImages.map((image, index) => (
-          <div className={styles.image} key={index}>
-            {!loadedImages.includes(index) && <Preloader />}
-            <LazyLoadImage
-              src={image.link}
-              className={styles.imagePreview}
-              crossOrigin="anonymous"
-              alt=""
-              onClick={() => handleClick(image.link)}
-              onLoad={() => handleImageLoad(index)}
-              effect="blur"
-              style={{
-                display: loadedImages.includes(index) ? "block" : "none",
-              }}
-            />
-          </div>
-        ))}
+      {props.allMemeImages.map((image, index) => (
+        <div className={styles.image} key={index}>
+          {!loadedImages.includes(index) && <Preloader />}
+          <LazyLoadImage
+            src={image.link}
+            className={styles.imagePreview}
+            crossOrigin="anonymous"
+            alt=""
+            onClick={() => handleClick(image.link)}
+            onLoad={() => handleImageLoad(index)}
+            effect="blur"
+            style={{
+              display: loadedImages.includes(index) ? "block" : "none",
+            }}
+          />
+        </div>
+      ))}
     </div>
   );
 }
