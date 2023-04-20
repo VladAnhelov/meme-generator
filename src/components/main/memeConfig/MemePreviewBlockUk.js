@@ -46,6 +46,7 @@ export default function MemePreviewBlockUk(props) {
     <div className={styles.memePreview}>
       {props.allMemeImages.map((image, index) => (
         <div className={styles.image} key={index}>
+          {!loadedImages.includes(index)}
           <LazyLoadImage
             src={image.link}
             className={styles.imagePreview}
