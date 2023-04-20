@@ -46,7 +46,6 @@ export default function MemePreviewBlockUk(props) {
     <div className={styles.memePreview}>
       {props.allMemeImages.map((image, index) => (
         <div className={styles.image} key={index}>
-          {!loadedImages.includes(index) && <Preloader />}
           <LazyLoadImage
             src={image.link}
             className={styles.imagePreview}
@@ -56,6 +55,7 @@ export default function MemePreviewBlockUk(props) {
             onLoad={() => handleImageLoad(index)}
             effect="blur"
             style={{ display: loadedImages.includes(index) ? "block" : "none" }}
+            placeholder={<Preloader />}
           />
         </div>
       ))}
