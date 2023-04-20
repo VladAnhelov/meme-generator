@@ -1,6 +1,9 @@
 // eslint-disable-next-line
 import React from "react";
 import Preloader from "./PreloaderComponent.js";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 import styles from "./MemePreviewBlock.module.scss";
 
 export default function MemePreviewBlockUk(props) {
@@ -44,13 +47,14 @@ export default function MemePreviewBlockUk(props) {
       {props.allMemeImages.map((image, index) => (
         <div className={styles.image} key={index}>
           {!loadedImages.includes(index) && <Preloader />}
-          <img
+          <LazyLoadImage
             src={image.link}
             className={styles.imagePreview}
             crossOrigin="anonymous"
             alt=""
             onClick={() => handleClick(image.link)}
             onLoad={() => handleImageLoad(index)}
+            effect="blur"
             style={{ display: loadedImages.includes(index) ? "block" : "none" }}
           />
         </div>
