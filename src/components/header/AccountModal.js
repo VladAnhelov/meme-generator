@@ -58,7 +58,10 @@ export default function AccountModal() {
       setAvatarURL(url);
       console.log(auth);
       if (auth.currentUser) {
-        await auth.currentUser.updateProfile({ photoURL: url });
+        // Add null check here
+        if (auth.currentUser.updateProfile) {
+          await auth.currentUser.updateProfile({ photoURL: url });
+        }
       }
     });
 
