@@ -4,7 +4,6 @@ import {
   db,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
   onAuthStateChanged,
   updateProfile,
 } from "../firebase.js";
@@ -66,15 +65,6 @@ export default function NavBarMenu() {
       handleCloseSignIn();
     } catch (error) {
       alert(`Error signing in: ${error.message}`);
-    }
-  };
-
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-      alert("Signed out successfully.");
-    } catch (error) {
-      alert(`Error signing out: ${error.message}`);
     }
   };
 

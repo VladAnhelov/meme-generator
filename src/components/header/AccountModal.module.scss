@@ -33,12 +33,14 @@
   right: 20px;
   visibility: visible;
   opacity: 1;
-  background-color: #548bbaa3;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  background-color: #548bbaa3;
   width: 300px;
   height: 500px;
   z-index: 1;
-  border-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .block_buttomItem {
