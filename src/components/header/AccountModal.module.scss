@@ -1,3 +1,5 @@
+@use "/src/components/main/MemeMain.module.scss";
+
 .block {
   display: flex;
 }
@@ -7,6 +9,7 @@
   margin: 5px;
   cursor: pointer;
   transition: all 0.3s;
+  border-radius: 20px;
 }
 
 .account_icon:hover {
@@ -164,4 +167,41 @@
 
 .block_buttomItem {
   margin-bottom: 10px;
+}
+
+.fileInputContainer {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.fileInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.fileInputIcon {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.fileInputContainer:hover .fileInputIcon {
+  transform: scale(1.2);
+}
+
+.uploadButton {
+  @include MemeMain.defaultButton();
+  background-color: #03b500;
+  border: none;
+  padding: 5px;
+}
+
+.uploadButton:hover {
+  background-color: #05c801;
 }
