@@ -10,6 +10,7 @@ import {
 } from "../firebase.js";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import styles from "./NavBarMenu.module.scss";
+import AccountModal from "./AccountModal.js";
 
 export default function NavBarMenu() {
   const [showSignIn, setShowSignIn] = useState(false);
@@ -198,18 +199,8 @@ export default function NavBarMenu() {
             </div>
           </li>
         )}
-        {isSignedIn && (
-          <li className={styles.navbarMenuItem}>
-            <button
-              className={`${styles.navbarMenuLink} ${styles.signOut}`}
-              onClick={handleSignOut}
-            >
-              Sign Out
-            </button>
-          </li>
-        )}
       </ul>
-      {isSignedIn && user && <p>Hello, {user.displayName}</p>}
+      {isSignedIn && user && <AccountModal />}
     </div>
   );
 }
