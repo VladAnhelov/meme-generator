@@ -14,11 +14,13 @@ export default function AccountModal() {
     "https://img.icons8.com/fluency/96/null/doge.png",
   );
 
+  const currentUser = auth.currentUser;
+
   React.useEffect(() => {
-    if (auth.currentUser && auth.currentUser.photoURL) {
-      setAvatarURL(auth.currentUser.photoURL);
+    if (currentUser && currentUser.photoURL) {
+      setAvatarURL(currentUser.photoURL);
     }
-  }, [auth.currentUser]);
+  }, [currentUser]);
 
   const handleClick = () => {
     if (!click) {
