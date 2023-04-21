@@ -13,6 +13,7 @@ export default function AccountModal() {
   const [avatarURL, setAvatarURL] = React.useState(
     "https://img.icons8.com/fluency/96/null/doge.png",
   );
+  const [previewURL, setPreviewURL] = React.useState(null);
 
   const currentUser = auth.currentUser;
 
@@ -42,7 +43,9 @@ export default function AccountModal() {
   };
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setPreviewURL(URL.createObjectURL(selectedFile));
   };
 
   const uploadAvatar = async () => {
@@ -99,22 +102,30 @@ export default function AccountModal() {
           <p>Account Menu</p>
         </div>
         <div className={styles.fileInputContainer}>
+          {previewURL ? (
+            <img
+              src={previewURL}
+              alt="Avatar preview"
+              className={styles.avatarPreview}
+            />
+          ) : (
+            <img
+              src="https://img.icons8.com/dotty/80/null/edit-user-female.png"
+              alt=""
+              className={styles.fileInputIcon}
+            />
+          )}
           <input
             type="file"
             accept="image/*"
             onChange={handleFileChange}
             className={styles.fileInput}
           />
-          <img
-            src="https://img.icons8.com/dotty/80/null/edit-user-female.png"
-            alt=""
-            className={styles.fileInputIcon}
-          />
         </div>
         <button onClick={uploadAvatar} className={styles.uploadButton}>
           Upload avatar
         </button>
-        <p>{percent} "% done"</p>
+        <p className={styles.percentUpload}>{percent} "% done"</p>
 
         <div className={styles.block_buttomItem}>
           <button

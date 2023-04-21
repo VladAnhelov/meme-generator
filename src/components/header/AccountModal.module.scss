@@ -184,6 +184,11 @@
   opacity: 0;
   cursor: pointer;
 }
+.avatarPreview {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+}
 
 .fileInputIcon {
   width: 100%;
@@ -199,5 +204,9 @@
 }
 
 .uploadButton:hover {
-  background-color: #05c801;
+  background-color: #03c200;
+}
+
+.percentUpload {
+  font-size: 20px;
 }
