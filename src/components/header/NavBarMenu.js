@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from "../firebase.js";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import styles from "./NavBarMenu.module.scss";
@@ -14,6 +15,7 @@ export default function NavBarMenu() {
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
   const handleCloseSignIn = () => setShowSignIn(false);
   const handleShowSignIn = () => setShowSignIn(true);
@@ -23,6 +25,7 @@ export default function NavBarMenu() {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
+    const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
 
@@ -33,10 +36,14 @@ export default function NavBarMenu() {
         password,
       );
 
+      // Update user profile with displayName
+      await updateProfile(user, { displayName: name });
+
       // Store user data in Firestore
       await addDoc(collection(db, "users"), {
         uid: user.uid,
         email: user.email,
+        name: user.displayName,
         createdAt: serverTimestamp(),
       });
 
@@ -73,8 +80,10 @@ export default function NavBarMenu() {
   const handleAuthStateChanged = (user) => {
     if (user) {
       setIsSignedIn(true);
+      setUser(user);
     } else {
       setIsSignedIn(false);
+      setUser(null);
     }
   };
 
@@ -158,6 +167,12 @@ export default function NavBarMenu() {
                   >
                     <input
                       type="text"
+                      name="name"
+                      className={styles.formControl}
+                      placeholder="Name"
+                    ></input>
+                    <input
+                      type="text"
                       name="email"
                       className={styles.formControl}
                       placeholder="Email"
@@ -194,6 +209,7 @@ export default function NavBarMenu() {
           </li>
         )}
       </ul>
+      {isSignedIn && user && <p>Hello, {user.displayName}</p>}
     </div>
   );
 }
