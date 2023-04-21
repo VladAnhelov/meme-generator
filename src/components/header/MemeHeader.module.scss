@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-image: linear-gradient(
     135deg,
@@ -16,18 +16,29 @@
   font-weight: bold;
 }
 
+.block {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.block_headerName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .trollfaceHeader {
-  margin-left: 20px;
+  margin: 20px 5px 0px 20px;
 }
 
 .headerTitle {
   font-size: 1.25rem;
-  margin-right: auto;
-  margin-left: 5px;
+  margin-bottom: 10px;
 }
 
 .headerProject {
   font-size: 0.75rem;
   font-weight: 500;
-  margin-right: 20px;
+  margin: 0px;
 }
