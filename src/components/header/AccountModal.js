@@ -56,8 +56,10 @@ export default function AccountModal() {
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    setFile(selectedFile);
-    setPreviewURL(URL.createObjectURL(selectedFile));
+    if (selectedFile) {
+      setFile(selectedFile);
+      setPreviewURL(URL.createObjectURL(selectedFile));
+    }
   };
 
   const uploadAvatar = async () => {
