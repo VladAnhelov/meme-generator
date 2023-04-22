@@ -15,7 +15,6 @@ export default function AccountModal() {
   const [click, setClick] = React.useState(false);
   const [showAccountMenu, setShowAccountMenu] = React.useState(false);
   const [file, setFile] = React.useState(null);
-  const [percent, setPercent] = React.useState(0);
   const [avatarURL, setAvatarURL] = React.useState(
     localStorage.getItem("avatarURL") ||
       "https://img.icons8.com/fluency/96/null/doge.png",
@@ -100,13 +99,6 @@ export default function AccountModal() {
     });
 
     uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const percent = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
-        );
-        setPercent(percent);
-      },
       (err) => console.log(err),
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
@@ -129,9 +121,16 @@ export default function AccountModal() {
           showAccountMenu ? `${styles.show}` : ""
         }`}
       >
-        <div className={styles.block_textItem}>
-          <p>Account Menu</p>
+        <div className={styles.block}>
+          <p className={styles.block_textItem}>Account Menu</p>
         </div>
+        {auth.currentUser && (
+          <div className={styles.block}>
+            <p className={styles.block_textItem}>
+              Hello {auth.currentUser.displayName}!
+            </p>
+          </div>
+        )}
         <div className={styles.fileInputContainer}>
           {previewURL ? (
             <img
@@ -153,11 +152,13 @@ export default function AccountModal() {
             className={styles.fileInput}
           />
         </div>
-        <button onClick={uploadAvatar} className={styles.uploadButton}>
+        <button
+          onClick={uploadAvatar}
+          className={styles.uploadButton}
+          disabled={!file}
+        >
           Upload avatar
         </button>
-        <p className={styles.percentUpload}>{percent} "% done"</p>
-
         <div className={styles.block_buttomItem}>
           <button
             onClick={handleSignOut}
