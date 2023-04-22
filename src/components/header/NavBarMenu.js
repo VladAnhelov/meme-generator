@@ -72,13 +72,21 @@ export default function NavBarMenu() {
     if (user) {
       setIsSignedIn(true);
       setUser(user);
+      localStorage.setItem("user", JSON.stringify(user));
     } else {
       setIsSignedIn(false);
       setUser(null);
+      localStorage.removeItem("user");
     }
   };
 
   useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      setIsSignedIn(true);
+      setUser(storedUser);
+    }
+
     const unsubscribe = onAuthStateChanged(auth, handleAuthStateChanged);
     return () => {
       unsubscribe();
@@ -190,7 +198,11 @@ export default function NavBarMenu() {
           </li>
         )}
       </ul>
-      {isSignedIn && user && <AccountModal />}
+      {isSignedIn && user && (
+        <>
+          <AccountModal />
+        </>
+      )}
     </div>
   );
 }
