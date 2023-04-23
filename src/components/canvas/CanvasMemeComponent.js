@@ -101,6 +101,7 @@ export default function CanvasMemeComponent(props) {
           offsetY={img ? img.height / 2 : 0}
           zIndex={2}
           draggable
+          rotation={shapeProps.rotation || 0}
           {...shapeProps}
           onDragEnd={(e) => {
             onChange({
@@ -128,6 +129,7 @@ export default function CanvasMemeComponent(props) {
               // set minimal value
               width: Math.max(5, node.width() * scaleX),
               height: Math.max(node.height() * scaleY),
+              rotation: node.rotation(),
             });
           }}
         />
