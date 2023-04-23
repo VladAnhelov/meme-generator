@@ -304,19 +304,6 @@ export default function CanvasMemeComponent(props) {
     setImages(newImages);
   };
 
-  const handleAddImage = () => {
-    const imageUrl = "https://konvajs.org/assets/lion.png";
-    setImages(
-      images.concat([
-        {
-          x: 100, // You can set the initial x and y position of the image
-          y: 100,
-          src: imageUrl,
-        },
-      ]),
-    );
-  };
-
   const handleDragEnter = (e) => {
     e.preventDefault();
   };
@@ -396,7 +383,6 @@ export default function CanvasMemeComponent(props) {
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
-      <button onClick={handleAddImage}>Add Image</button>
       <div
         onDrop={(e) => {
           e.preventDefault();
