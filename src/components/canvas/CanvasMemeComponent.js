@@ -188,14 +188,16 @@ export default function CanvasMemeComponent(props) {
     let newWidth = width;
     let newHeight = height;
 
-    if (height > 1000) {
+    if (height > maxHeight || width > maxWidth) {
       const aspectRatio = width / height;
-      newHeight = maxHeight;
-      newWidth = newHeight * aspectRatio;
-    } else if (width > maxWidth) {
-      const aspectRatio = height / width;
-      newWidth = maxWidth;
-      newHeight = newWidth * aspectRatio;
+
+      if (height >= width) {
+        newHeight = maxHeight;
+        newWidth = newHeight * aspectRatio;
+      } else {
+        newWidth = maxWidth;
+        newHeight = newWidth * aspectRatio;
+      }
     }
 
     setSceneWidth(newWidth);
@@ -214,7 +216,7 @@ export default function CanvasMemeComponent(props) {
   useEffect(() => {
     if (!imageElement) return;
     const handleResize = () => {
-      const containerImage = document.querySelector(".canvas--block");
+      const containerImage = document.querySelector(".canvas-container");
       const containerImageWidth = containerImage.offsetWidth;
       console.log("containerImageWidth:", containerImageWidth);
       const aspectRatio =
@@ -380,124 +382,125 @@ export default function CanvasMemeComponent(props) {
   };
 
   return (
-    <div
-      onDragEnter={handleDragEnter}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-    >
+    <div className="canvas-container">
       <div
-        onDrop={(e) => {
-          e.preventDefault();
-          const imageSrc = e.dataTransfer.getData("imageSrc");
-          addImageToCanvas(imageSrc);
-        }}
-        onDragOver={(e) => e.preventDefault()}
+        onDragEnter={handleDragEnter}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
       >
-        {console.log("images =", images)}
-        <Stage
-          className="canvas--block"
-          width={670}
-          height={600}
-          ref={stageRef}
-          onContentClick={(e) => {
-            e.evt.preventDefault();
-            setSelectedText(e.target);
+        <div
+          onDrop={(e) => {
+            e.preventDefault();
+            const imageSrc = e.dataTransfer.getData("imageSrc");
+            addImageToCanvas(imageSrc);
           }}
-          scaleX={stageSpec.scale}
-          scaleY={stageSpec.scale}
-          x={stageSpec.x}
-          y={stageSpec.y}
-          onMouseDown={checkDeselect}
-          onTouchStart={checkDeselect}
-          onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
         >
-          <Layer zIndex={1}>
-            <KonvaImage
-              image={imageElement}
-              width={containerSize.width}
-              height={containerSize.height}
-              preventDefault={false}
-            />
-          </Layer>
-          <Layer zIndex={2}>
-            {images.map((image, index) => {
-              return (
-                <URLImage
-                  image={image}
-                  key={index}
-                  shapeProps={image}
-                  stageScale={stageSpec.scale}
-                  isSelected={image === selectedId}
-                  unSelectShape={unSelectShape}
-                  onClick={handleRemove}
-                  onSelect={() => {
-                    selectShape(image);
-                  }}
-                  onChange={(newAttrs) => {
-                    const rects = images.slice();
-                    rects[index] = newAttrs;
-                    setImages(rects);
-                  }}
-                  onDelete={onDeleteImage}
-                />
-              );
-            })}
-          </Layer>
-          <Layer>
-            <MemeText
-              position={{
-                x:
-                  imageElement &&
-                  (parseInt(topTextPosition.x) * containerSize.width) /
-                    imageElement.naturalWidth,
-                y:
-                  imageElement &&
-                  (parseInt(topTextPosition.y) * containerSize.height) /
-                    imageElement.naturalHeight,
-              }}
-              rotation={topTextRotation}
-              text={meme.topText.toUpperCase()}
-              fontSize={fontSizeTop}
-              fillColor={props.selectedColor}
-              selectedText={selectedText}
-              setSelectedText={setSelectedText}
-            />
-            <MemeText
-              position={{
-                x:
-                  imageElement &&
-                  (parseInt(bottomTextPosition.x) * containerSize.width) /
-                    imageElement.naturalWidth,
-                y:
-                  imageElement &&
-                  (parseInt(bottomTextPosition.y) * containerSize.height) /
-                    imageElement.naturalHeight,
-              }}
-              rotation={bottomTextRotation}
-              text={meme.bottomText.toUpperCase()}
-              fontSize={fontSizeBottom}
-              fillColor={props.selectedColor}
-              selectedText={selectedText}
-              setSelectedText={setSelectedText}
-            />
-            {additionalTexts.map((text, index) => (
+          {console.log("images =", images)}
+          <Stage
+            width={containerSize.width}
+            height={containerSize.height}
+            ref={stageRef}
+            onContentClick={(e) => {
+              e.evt.preventDefault();
+              setSelectedText(e.target);
+            }}
+            scaleX={stageSpec.scale}
+            scaleY={stageSpec.scale}
+            x={stageSpec.x}
+            y={stageSpec.y}
+            onMouseDown={checkDeselect}
+            onTouchStart={checkDeselect}
+            onDrop={handleDrop}
+            onDragOver={(e) => e.preventDefault()}
+          >
+            <Layer zIndex={1}>
+              <KonvaImage
+                image={imageElement}
+                width={containerSize.width}
+                height={containerSize.height}
+                preventDefault={false}
+              />
+            </Layer>
+            <Layer zIndex={2}>
+              {images.map((image, index) => {
+                return (
+                  <URLImage
+                    image={image}
+                    key={index}
+                    shapeProps={image}
+                    stageScale={stageSpec.scale}
+                    isSelected={image === selectedId}
+                    unSelectShape={unSelectShape}
+                    onClick={handleRemove}
+                    onSelect={() => {
+                      selectShape(image);
+                    }}
+                    onChange={(newAttrs) => {
+                      const rects = images.slice();
+                      rects[index] = newAttrs;
+                      setImages(rects);
+                    }}
+                    onDelete={onDeleteImage}
+                  />
+                );
+              })}
+            </Layer>
+            <Layer>
               <MemeText
-                key={index}
                 position={{
-                  x: 30,
-                  y: 70 + 50 * index,
+                  x:
+                    imageElement &&
+                    (parseInt(topTextPosition.x) * containerSize.width) /
+                      imageElement.naturalWidth,
+                  y:
+                    imageElement &&
+                    (parseInt(topTextPosition.y) * containerSize.height) /
+                      imageElement.naturalHeight,
                 }}
-                rotation={0}
-                text={text.toUpperCase()}
-                fontSize={30}
+                rotation={topTextRotation}
+                text={meme.topText.toUpperCase()}
+                fontSize={fontSizeTop}
                 fillColor={props.selectedColor}
                 selectedText={selectedText}
                 setSelectedText={setSelectedText}
               />
-            ))}
-          </Layer>
-        </Stage>
+              <MemeText
+                position={{
+                  x:
+                    imageElement &&
+                    (parseInt(bottomTextPosition.x) * containerSize.width) /
+                      imageElement.naturalWidth,
+                  y:
+                    imageElement &&
+                    (parseInt(bottomTextPosition.y) * containerSize.height) /
+                      imageElement.naturalHeight,
+                }}
+                rotation={bottomTextRotation}
+                text={meme.bottomText.toUpperCase()}
+                fontSize={fontSizeBottom}
+                fillColor={props.selectedColor}
+                selectedText={selectedText}
+                setSelectedText={setSelectedText}
+              />
+              {additionalTexts.map((text, index) => (
+                <MemeText
+                  key={index}
+                  position={{
+                    x: 30,
+                    y: 70 + 50 * index,
+                  }}
+                  rotation={0}
+                  text={text.toUpperCase()}
+                  fontSize={30}
+                  fillColor={props.selectedColor}
+                  selectedText={selectedText}
+                  setSelectedText={setSelectedText}
+                />
+              ))}
+            </Layer>
+          </Stage>
+        </div>
       </div>
     </div>
   );
