@@ -21,6 +21,7 @@
 
 .chooseColor {
   @include MemeMain.defaultButton();
+  font-family: "Bruno Ace SC", cursive;
   width: 190px;
   margin: 0px;
   padding: 0px;
