@@ -53,7 +53,7 @@ export default function CanvasMemeComponent(props) {
     stageScale,
     onDelete,
   }) => {
-    const [img] = useImage(image.src);
+    const [img] = useImage(image.src, "Anonymous");
 
     const shapeRef = React.useRef();
     const deleteButton = React.useRef();
