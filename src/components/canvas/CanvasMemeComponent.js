@@ -59,7 +59,21 @@ export default function CanvasMemeComponent(props) {
     const deleteButton = React.useRef();
     const trRef = React.useRef();
 
-    React.useEffect(() => {
+    const closeCircleX = React.useRef(0);
+    const closeCircleY = React.useRef(0);
+
+    useEffect(() => {
+      if (isSelected) {
+        const node = shapeRef.current;
+        const width = node.width() * node.scaleX();
+        const height = node.height() * node.scaleY();
+
+        closeCircleX.current = width * stageScale;
+        closeCircleY.current = (-height * stageScale) / 150;
+      }
+    }, [isSelected, stageScale]);
+
+    useEffect(() => {
       if (isSelected) {
         // we need to attach transformer manually
         trRef.current.nodes([shapeRef.current]);
@@ -159,19 +173,16 @@ export default function CanvasMemeComponent(props) {
                 strokeWidth={2}
                 ref={deleteButton}
                 onClick={handleDelete}
-                x={shapeRef.current ? shapeRef.current.width() * stageScale : 0}
+                x={closeCircleX.current}
+                y={closeCircleY.current}
               />
               <Text
                 text="X"
                 fontSize={12}
                 fontStyle="bold"
                 fill="white"
-                x={
-                  shapeRef.current
-                    ? shapeRef.current.width() * stageScale - 4 // Adjust the position to center the X within the circle
-                    : -5
-                }
-                y={-5} // Adjust the position to center the X within the circle
+                x={closeCircleX.current - 4} // Adjust the position to center the X within the circle
+                y={closeCircleY.current - 5} // Adjust the position to center the X within the circle
                 onClick={handleDelete}
               />
             </Group>
