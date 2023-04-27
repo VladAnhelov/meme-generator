@@ -6,6 +6,7 @@ export default function AddFaceModal() {
   const handleDragStart = (e) => {
     e.dataTransfer.setData("imageSrc", e.target.src);
   };
+
   return (
     <div className={styles.block}>
       <div className={styles.facePreview}>

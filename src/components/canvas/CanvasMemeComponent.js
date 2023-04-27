@@ -105,6 +105,8 @@ export default function CanvasMemeComponent(props) {
           image={img}
           x={image.x}
           y={image.y}
+          width={100}
+          height={100}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onClick={onSelect}
