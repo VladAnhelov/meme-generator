@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: row;
   overflow: auto;
+  height: 110px;
 }
 
 .faces {
@@ -33,7 +34,6 @@
 }
 
 .faceImage {
-  margin: 2px;
   align-items: center;
   justify-content: center;
   display: flex;
