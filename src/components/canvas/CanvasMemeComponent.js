@@ -229,7 +229,6 @@ export default function CanvasMemeComponent(props) {
     const handleResize = () => {
       const containerImage = document.querySelector(".canvas-container");
       const containerImageWidth = containerImage.offsetWidth;
-      console.log("containerImageWidth:", containerImageWidth);
       const aspectRatio =
         imageElement.naturalWidth / imageElement.naturalHeight;
       const newHeight = containerImageWidth / aspectRatio;
@@ -407,7 +406,6 @@ export default function CanvasMemeComponent(props) {
           }}
           onDragOver={(e) => e.preventDefault()}
         >
-          {console.log("images =", images)}
           <Stage
             width={containerSize.width}
             height={containerSize.height}
