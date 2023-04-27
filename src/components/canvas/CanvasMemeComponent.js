@@ -113,7 +113,6 @@ export default function CanvasMemeComponent(props) {
           // I will use offset to set origin to the center of the image
           offsetX={img ? img.width / 2 : 0}
           offsetY={img ? img.height / 2 : 0}
-          zIndex={2}
           draggable
           rotation={shapeProps.rotation || 0}
           {...shapeProps}
@@ -423,7 +422,7 @@ export default function CanvasMemeComponent(props) {
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
           >
-            <Layer zIndex={1}>
+            <Layer>
               <KonvaImage
                 image={imageElement}
                 width={containerSize.width / 1.2}
@@ -431,7 +430,7 @@ export default function CanvasMemeComponent(props) {
                 preventDefault={false}
               />
             </Layer>
-            <Layer zIndex={2}>
+            <Layer>
               {images.map((image, index) => {
                 return (
                   <URLImage
@@ -458,14 +457,14 @@ export default function CanvasMemeComponent(props) {
             <Layer>
               <MemeText
                 position={{
-                  x:
-                    imageElement &&
-                    (parseInt(topTextPosition.x) * containerSize.width) /
-                      imageElement.naturalWidth,
-                  y:
-                    imageElement &&
-                    (parseInt(topTextPosition.y) * containerSize.height) /
-                      imageElement.naturalHeight,
+                  x: imageElement
+                    ? (parseInt(topTextPosition.x) * containerSize.width) /
+                      imageElement.naturalWidth
+                    : 0,
+                  y: imageElement
+                    ? (parseInt(topTextPosition.y) * containerSize.height) /
+                      imageElement.naturalHeight
+                    : 0,
                 }}
                 rotation={topTextRotation}
                 text={meme.topText.toUpperCase()}
@@ -476,14 +475,14 @@ export default function CanvasMemeComponent(props) {
               />
               <MemeText
                 position={{
-                  x:
-                    imageElement &&
-                    (parseInt(bottomTextPosition.x) * containerSize.width) /
-                      imageElement.naturalWidth,
-                  y:
-                    imageElement &&
-                    (parseInt(bottomTextPosition.y) * containerSize.height) /
-                      imageElement.naturalHeight,
+                  x: imageElement
+                    ? (parseInt(bottomTextPosition.x) * containerSize.width) /
+                      imageElement.naturalWidth
+                    : 0,
+                  y: imageElement
+                    ? (parseInt(bottomTextPosition.y) * containerSize.height) /
+                      imageElement.naturalHeight
+                    : 0,
                 }}
                 rotation={bottomTextRotation}
                 text={meme.bottomText.toUpperCase()}

@@ -26,7 +26,7 @@ canvas {
 .canvas-container {
   position: relative;
   margin: 0px 7px 0px 0px;
-  width: 100%;
+  width: 50%;
 }
 
 @media (max-width: 837px) {
@@ -46,5 +46,8 @@ canvas {
 @media (max-width: 576px) {
   .download-btn {
     font-size: 0.85rem;
+  }
+  .canvas-container {
+    width: 100%;
   }
 }
