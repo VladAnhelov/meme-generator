@@ -428,8 +428,8 @@ export default function CanvasMemeComponent(props) {
             <Layer zIndex={1}>
               <KonvaImage
                 image={imageElement}
-                width={containerSize.width}
-                height={containerSize.height}
+                width={containerSize.width / 1.2}
+                height={containerSize.height / 1.2}
                 preventDefault={false}
               />
             </Layer>
