@@ -114,6 +114,7 @@ export default function MemeMain() {
               />
             )}
           </div>
+          <AddFaceModal />
           <div className={styles.blockSettings}>
             <div className={forms.form}>
               <textarea
@@ -142,7 +143,6 @@ export default function MemeMain() {
             </div>
             <div className={styles.settings}>
               <ColorPaletteComponent handleColorChange={handleColorChange} />
-              <AddFaceModal />
             </div>
           </div>
           <div className={styles.btnsBlock}>

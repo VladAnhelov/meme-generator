@@ -174,16 +174,14 @@ export default function CanvasMemeComponent(props) {
                 strokeWidth={2}
                 ref={deleteButton}
                 onClick={handleDelete}
-                x={closeCircleX.current}
-                y={closeCircleY.current}
               />
               <Text
                 text="X"
                 fontSize={12}
                 fontStyle="bold"
                 fill="white"
-                x={closeCircleX.current - 4} // Adjust the position to center the X within the circle
-                y={closeCircleY.current - 5} // Adjust the position to center the X within the circle
+                x={-4}
+                y={-5}
                 onClick={handleDelete}
               />
             </Group>
