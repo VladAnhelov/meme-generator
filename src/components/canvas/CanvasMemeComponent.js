@@ -94,9 +94,12 @@ export default function CanvasMemeComponent(props) {
       event.target.getStage().container().style.cursor = "default";
     };
 
-    const handleDelete = () => {
-      unSelectShape(null);
-      onDelete(shapeRef.current);
+    const handleDelete = (event) => {
+      if (onDelete) {
+        unSelectShape(null);
+        onDelete(shapeRef.current);
+        event.target.getStage().container().style.cursor = "default";
+      }
     };
 
     return (
