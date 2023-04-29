@@ -156,7 +156,7 @@ export default function CanvasMemeComponent(props) {
             ref={trRef}
             boundBoxFunc={(oldBox, newBox) => {
               // limit resize
-              if (newBox.width < 5 || newBox.height < 5) {
+              if (newBox.width < 50 || newBox.height < 50) {
                 return oldBox;
               }
               return newBox;
