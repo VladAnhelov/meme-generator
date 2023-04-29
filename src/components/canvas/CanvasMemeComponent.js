@@ -35,6 +35,7 @@ export default function CanvasMemeComponent(props) {
 
   const [images, setImages] = React.useState([]);
   const [selectedId, selectShape] = React.useState(null);
+
   // const stage = stageRef.current?.getStage();
   const [stageSpec] = useState({
     scale: 1.2,
@@ -116,8 +117,8 @@ export default function CanvasMemeComponent(props) {
           onTap={onSelect}
           ref={shapeRef}
           // I will use offset to set origin to the center of the image
-          offsetX={img ? img.width / 2 : 0}
-          offsetY={img ? img.height / 2 : 0}
+          offsetX={img ? img.width / 5.5 : 0}
+          offsetY={img ? img.height / 5.5 : 0}
           draggable
           rotation={shapeProps.rotation || 0}
           {...shapeProps}
@@ -136,6 +137,9 @@ export default function CanvasMemeComponent(props) {
             const node = shapeRef.current;
             const scaleX = node.scaleX();
             const scaleY = node.scaleY();
+
+            const newImageSize = img * Math.max(scaleX, scaleY); // make sure 'img' variable is properly defined
+            node.image(newImageSize); // corrected line: using 'image()' instead of 'Image'
 
             // we will reset it back
             node.scaleX(1);
