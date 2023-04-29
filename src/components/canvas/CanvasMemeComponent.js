@@ -103,6 +103,34 @@ export default function CanvasMemeComponent(props) {
       }
     };
 
+    const handleTransformEnd = () => {
+      const node = shapeRef.current;
+      const scaleX = node.scaleX();
+      const scaleY = node.scaleY();
+
+      // Set minimum width and height
+      const newWidth = Math.max(50, Math.abs(node.width() * scaleX));
+      const newHeight = Math.max(50, Math.abs(node.height() * scaleY));
+
+      // Adjust the position of the image when flipping
+      const newPosition = {
+        x: node.x() - (newWidth - node.width()) * (scaleX < 0 ? 1 : 0),
+        y: node.y() - (newHeight - node.height()) * (scaleY < 0 ? 1 : 0),
+      };
+
+      node.scaleX(scaleX < 0 ? -1 : 1);
+      node.scaleY(scaleY < 0 ? -1 : 1);
+
+      onChange({
+        ...shapeProps,
+        x: newPosition.x,
+        y: newPosition.y,
+        width: newWidth,
+        height: newHeight,
+        rotation: node.rotation(),
+      });
+    };
+
     return (
       <React.Fragment>
         <KonvaImage
@@ -115,6 +143,7 @@ export default function CanvasMemeComponent(props) {
           onMouseLeave={onMouseLeave}
           onClick={onSelect}
           onTap={onSelect}
+          onTransformEnd={handleTransformEnd}
           ref={shapeRef}
           // I will use offset to set origin to the center of the image
           offsetX={img ? img.width / 5.5 : 0}
@@ -129,43 +158,9 @@ export default function CanvasMemeComponent(props) {
               y: e.target.y(),
             });
           }}
-          onTransformEnd={(e) => {
-            // transformer is changing scale of the node
-            // and NOT its width or height
-            // but in the store we have only width and height
-            // to match the data better we will reset scale on transform end
-            const node = shapeRef.current;
-            const scaleX = node.scaleX();
-            const scaleY = node.scaleY();
-
-            const newImageSize = img * Math.max(scaleX, scaleY); // make sure 'img' variable is properly defined
-            node.image(newImageSize); // corrected line: using 'image()' instead of 'Image'
-
-            // we will reset it back
-            node.scaleX(1);
-            node.scaleY(1);
-            onChange({
-              ...shapeProps,
-              x: node.x(),
-              y: node.y(),
-              // set minimal value
-              width: Math.max(5, node.width() * scaleX),
-              height: Math.max(node.height() * scaleY),
-              rotation: node.rotation(),
-            });
-          }}
         />
         {isSelected && (
-          <Transformer
-            ref={trRef}
-            boundBoxFunc={(oldBox, newBox) => {
-              // limit resize
-              if (newBox.width < 50 || newBox.height < 50) {
-                return oldBox;
-              }
-              return newBox;
-            }}
-          >
+          <Transformer ref={trRef}>
             <Group
               onMouseEnter={(e) => {
                 e.target.getStage().container().style.cursor = "pointer";
