@@ -95,13 +95,33 @@ export default function CanvasMemeComponent(props) {
       event.target.getStage().container().style.cursor = "default";
     };
 
-    const handleDelete = (event) => {
-      if (onDelete) {
-        unSelectShape(null);
-        onDelete(shapeRef.current);
-        event.target.getStage().container().style.cursor = "default";
-      }
-    };
+    const handleDelete = useCallback(
+      (event) => {
+        if (onDelete) {
+          unSelectShape(null);
+          onDelete(shapeRef.current);
+          if (event && event.target) {
+            event.target.getStage().container().style.cursor = "default";
+          }
+        }
+      },
+      [onDelete, unSelectShape],
+    );
+
+    useEffect(() => {
+      const handleKeyDown = (e) => {
+        if (e.key === "Backspace" || e.key === "Delete") {
+          if (isSelected) {
+            handleDelete();
+          }
+        }
+      };
+
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }, [isSelected, handleDelete]);
 
     const handleTransformEnd = () => {
       const node = shapeRef.current;
