@@ -105,21 +105,35 @@ export default function CanvasMemeComponent(props) {
 
     const handleTransformEnd = () => {
       const node = shapeRef.current;
+
+      if (!node) {
+        return;
+      }
       const scaleX = node.scaleX();
       const scaleY = node.scaleY();
 
-      // Set minimum width and height
-      const newWidth = Math.max(50, Math.abs(node.width() * scaleX));
-      const newHeight = Math.max(50, Math.abs(node.height() * scaleY));
+      console.log("scaleX:", scaleX, "scaleY:", scaleY);
 
-      // Adjust the position of the image when flipping
+      let newWidth = node.width() * scaleX;
+      let newHeight = node.height() * scaleY;
+
+      console.log(
+        "Initial newWidth:",
+        Math.round(newWidth),
+        "Initial newHeight:",
+        Math.round(newHeight),
+      );
+
       const newPosition = {
-        x: node.x() - (newWidth - node.width()) * (scaleX < 0 ? 1 : 0),
-        y: node.y() - (newHeight - node.height()) * (scaleY < 0 ? 1 : 0),
+        x:
+          node.x() - (Math.abs(newWidth) - node.width()) * (scaleX < 0 ? 1 : 0),
+        y:
+          node.y() -
+          (Math.abs(newHeight) - node.height()) * (scaleY < 0 ? 1 : 0),
       };
 
-      node.scaleX(scaleX < 0 ? -1 : 1);
-      node.scaleY(scaleY < 0 ? -1 : 1);
+      const rotation =
+        (node.rotation() + (scaleX < 0 || scaleY < 0 ? 180 : 0)) % 360;
 
       onChange({
         ...shapeProps,
@@ -127,8 +141,20 @@ export default function CanvasMemeComponent(props) {
         y: newPosition.y,
         width: newWidth,
         height: newHeight,
-        rotation: node.rotation(),
+        rotation: rotation,
       });
+
+      console.log(
+        "Final newWidth:",
+        Math.round(newWidth),
+        "Final newHeight:",
+        Math.round(newHeight),
+      );
+      console.log(
+        Math.round(newWidth),
+        Math.round(newHeight),
+        Math.round(rotation),
+      );
     };
 
     return (
@@ -146,8 +172,8 @@ export default function CanvasMemeComponent(props) {
           onTransformEnd={handleTransformEnd}
           ref={shapeRef}
           // I will use offset to set origin to the center of the image
-          offsetX={img ? img.width / 5.5 : 0}
-          offsetY={img ? img.height / 5.5 : 0}
+          offsetX={img ? img.width / 2.5 : 0}
+          offsetY={img ? img.height / 2.5 : 0}
           draggable
           rotation={shapeProps.rotation || 0}
           {...shapeProps}
