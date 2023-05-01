@@ -112,10 +112,10 @@ export default function CanvasMemeComponent(props) {
       const scaleX = node.scaleX();
       const scaleY = node.scaleY();
 
-      console.log("scaleX:", scaleX, "scaleY:", scaleY);
+      console.log("scaleX:", Math.round(scaleX), "scaleY:", Math.round(scaleY));
 
-      let newWidth = node.width() * scaleX;
-      let newHeight = node.height() * scaleY;
+      let newWidth = Math.abs(node.width() * scaleX);
+      let newHeight = Math.abs(node.height() * scaleY);
 
       console.log(
         "Initial newWidth:",
@@ -125,15 +125,11 @@ export default function CanvasMemeComponent(props) {
       );
 
       const newPosition = {
-        x:
-          node.x() - (Math.abs(newWidth) - node.width()) * (scaleX < 0 ? 1 : 0),
-        y:
-          node.y() -
-          (Math.abs(newHeight) - node.height()) * (scaleY < 0 ? 1 : 0),
+        x: node.x(),
+        y: node.y(),
       };
 
-      const rotation =
-        (node.rotation() + (scaleX < 0 || scaleY < 0 ? 180 : 0)) % 360;
+      const rotation = node.rotation() % 360;
 
       onChange({
         ...shapeProps,
@@ -142,7 +138,16 @@ export default function CanvasMemeComponent(props) {
         width: newWidth,
         height: newHeight,
         rotation: rotation,
+        scaleX: scaleX,
+        scaleY: scaleY,
       });
+
+      console.log(
+        "newPositionX:",
+        Math.round(newPosition.x),
+        "newPositionY:",
+        Math.round(newPosition.y),
+      );
 
       console.log(
         "Final newWidth:",
@@ -171,9 +176,10 @@ export default function CanvasMemeComponent(props) {
           onTap={onSelect}
           onTransformEnd={handleTransformEnd}
           ref={shapeRef}
-          // I will use offset to set origin to the center of the image
           offsetX={img ? img.width / 2.5 : 0}
           offsetY={img ? img.height / 2.5 : 0}
+          scaleX={shapeProps.scaleX || 1}
+          scaleY={shapeProps.scaleY || 1}
           draggable
           rotation={shapeProps.rotation || 0}
           {...shapeProps}
@@ -185,6 +191,7 @@ export default function CanvasMemeComponent(props) {
             });
           }}
         />
+
         {isSelected && (
           <Transformer ref={trRef}>
             <Group
