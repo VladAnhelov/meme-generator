@@ -8,6 +8,7 @@ import MemePreviewBlock from "./memeConfig/MemePreviewBlock.js";
 import MemePreviewBlockUk from "./memeConfig/MemePreviewBlockUk.js";
 import AddMoreMemeText from "./memeConfig/AddMoreMemeText.js";
 import ColorPaletteComponent from "./memeConfig/ColorPaletteComponent.js";
+import AddFaceModal from "./memeConfig/AddFaceModal.js";
 import styles from "./MemeMain.module.scss";
 import forms from "./memeConfig/AddMoreMemeText.module.scss";
 
@@ -113,6 +114,7 @@ export default function MemeMain() {
               />
             )}
           </div>
+          <AddFaceModal />
           <div className={styles.blockSettings}>
             <div className={forms.form}>
               <textarea

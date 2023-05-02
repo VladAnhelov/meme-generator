@@ -3,9 +3,9 @@
 }
 
 body {
-  font-family: "Karla", sans-serif;
   margin: 0;
   overflow-x: hidden;
+  font-family: "Bruno Ace SC", cursive;
 }
 
 main {
@@ -23,11 +23,10 @@ canvas {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.canvas--block {
+.canvas-container {
   position: relative;
   margin: 0px 7px 0px 0px;
   width: 50%;
-  height: 100%;
 }
 
 @media (max-width: 837px) {
@@ -47,5 +46,8 @@ canvas {
 @media (max-width: 576px) {
   .download-btn {
     font-size: 0.85rem;
+  }
+  .canvas-container {
+    width: 100%;
   }
 }

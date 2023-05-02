@@ -1,0 +1,40 @@
+@use "../MemeMain.module.scss";
+.block {
+  display: grid;
+  background-color: #ddd;
+  margin-top: 5px;
+  padding: 3px;
+  border-radius: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.facePreview {
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  height: 110px;
+}
+
+.faces {
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  background-color: #fefefeaa;
+  border-radius: 10px;
+  filter: grayscale(50%);
+  margin: 0px 7px 0px 7px;
+  cursor: pointer;
+}
+
+.faces:hover {
+  transform: scale(1.05);
+  transition: transform 200ms ease-in-out, border-radius 200ms ease-in-out,
+    filter 200ms ease-in-out;
+  filter: grayscale(0%);
+}
+
+.faceImage {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}

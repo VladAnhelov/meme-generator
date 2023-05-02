@@ -22,6 +22,7 @@
 
 .navbarMenuLink {
   @include MemeMain.defaultButton();
+  font-family: "Bruno Ace SC", cursive;
   margin: 0px;
   height: 30px;
   width: 100px;
@@ -117,7 +118,7 @@
 .formControl {
   @include MemeMain.defaultButton();
   width: 100%;
-  font-family: "Karla", sans-serif;
+  font-family: "Bruno Ace SC", cursive;
   border: 1px solid #d5d4d8;
   text-indent: 5px;
   text-transform: none;
@@ -140,6 +141,7 @@
 
 .submitBtn {
   @include MemeMain.defaultButton();
+  font-family: "Bruno Ace SC", cursive;
   width: 100px;
   background: #0077b5;
   border: 1px solid;
@@ -159,7 +161,7 @@
   .navbarMenuLink {
     width: 60px;
     height: 20px;
-    font-size: 10px;
+    font-size: 8px;
     margin: 2px;
   }
 
