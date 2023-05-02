@@ -242,6 +242,17 @@ export default function CanvasMemeComponent(props) {
       }
     }, []);
 
+    // for mobile test
+    useEffect(() => {
+      const stage = shapeRef.current.getStage();
+      if (stage) {
+        stage.draggable(true);
+        stage.on("dragstart", (e) => {
+          e.target.setAttr("dragDistance", 3);
+        });
+      }
+    }, []);
+
     return (
       <React.Fragment>
         <KonvaImage
