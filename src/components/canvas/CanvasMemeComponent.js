@@ -246,12 +246,13 @@ export default function CanvasMemeComponent(props) {
     useEffect(() => {
       const stage = shapeRef.current.getStage();
       if (stage) {
-        stage.draggable(true);
-        stage.on("dragstart", (e) => {
-          e.target.setAttr("dragDistance", 3);
+        stage.on("mousedown touchstart", (e) => {
+          if (e.target === stage) {
+            unSelectShape(null);
+          }
         });
       }
-    }, []);
+    }, [unSelectShape]);
 
     return (
       <React.Fragment>
