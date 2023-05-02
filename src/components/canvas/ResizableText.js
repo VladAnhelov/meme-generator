@@ -48,6 +48,10 @@ const ResizableText = ({
         fontFamily="Impact"
         fontSize={fontSize}
         fill={fillColor}
+        /* need add this style to text in future
+        stroke={"black"}
+        strokeWidth={1}
+        */
         shadowBlur={2}
         shadowColor="#000"
         shadowOffsetX={0}

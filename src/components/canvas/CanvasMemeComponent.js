@@ -62,6 +62,7 @@ export default function CanvasMemeComponent(props) {
 
     const closeCircleX = React.useRef(0);
     const closeCircleY = React.useRef(0);
+    const mirrored = shapeProps.scaleX < 0 || shapeProps.scaleY < 0;
 
     useEffect(() => {
       if (isSelected) {
@@ -134,8 +135,8 @@ export default function CanvasMemeComponent(props) {
 
       console.log("scaleX:", Math.round(scaleX), "scaleY:", Math.round(scaleY));
 
-      let newWidth = Math.abs(node.width() * scaleX);
-      let newHeight = Math.abs(node.height() * scaleY);
+      let newWidth = node.width();
+      let newHeight = node.height();
 
       console.log(
         "Initial newWidth:",
@@ -149,7 +150,7 @@ export default function CanvasMemeComponent(props) {
         y: node.y(),
       };
 
-      const rotation = node.rotation() % 360;
+      const rotation = ((node.rotation() % 360) + 360) % 360;
 
       onChange({
         ...shapeProps,
@@ -196,8 +197,8 @@ export default function CanvasMemeComponent(props) {
           onTap={onSelect}
           onTransformEnd={handleTransformEnd}
           ref={shapeRef}
-          offsetX={img ? img.width / 2.5 : 0}
-          offsetY={img ? img.height / 2.5 : 0}
+          offsetX={img ? img.width / 1.5 : 0}
+          offsetY={img ? img.height / 1.5 : 0}
           scaleX={shapeProps.scaleX || 1}
           scaleY={shapeProps.scaleY || 1}
           draggable
@@ -213,7 +214,11 @@ export default function CanvasMemeComponent(props) {
         />
 
         {isSelected && (
-          <Transformer ref={trRef}>
+          <Transformer
+            ref={trRef}
+            anchorSize={mirrored ? -12 : 12}
+            borderDash={[mirrored ? 10 : 0, 0]}
+          >
             <Group
               onMouseEnter={(e) => {
                 e.target.getStage().container().style.cursor = "pointer";
