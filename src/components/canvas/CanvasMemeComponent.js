@@ -201,7 +201,7 @@ export default function CanvasMemeComponent(props) {
           offsetY={img ? img.height / 1.5 : 0}
           scaleX={shapeProps.scaleX || 1}
           scaleY={shapeProps.scaleY || 1}
-          draggable
+          draggable={true}
           rotation={shapeProps.rotation || 0}
           {...shapeProps}
           onDragEnd={(e) => {
@@ -234,6 +234,7 @@ export default function CanvasMemeComponent(props) {
                 strokeWidth={2}
                 ref={deleteButton}
                 onClick={handleDelete}
+                onTap={handleDelete}
               />
               <Text
                 text="X"
@@ -243,6 +244,7 @@ export default function CanvasMemeComponent(props) {
                 x={-4}
                 y={-5}
                 onClick={handleDelete}
+                onTap={handleDelete}
               />
             </Group>
           </Transformer>
