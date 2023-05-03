@@ -43,6 +43,10 @@
   resize: none;
 }
 
+.formInput::placeholder {
+  font-size: 15px;
+}
+
 .deleteButton {
   position: absolute;
   display: flex;
@@ -74,6 +78,9 @@
 
 @media (max-width: 570px) {
   .textButton {
+    font-size: 12px;
+  }
+  .formInput::placeholder {
     font-size: 12px;
   }
 }
