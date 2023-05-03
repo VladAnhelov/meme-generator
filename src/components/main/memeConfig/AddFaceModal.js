@@ -2,9 +2,10 @@ import React from "react";
 import styles from "./AddFaceModal.module.scss";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-export default function AddFaceModal(addImageToCanvas) {
+export default function AddFaceModal({ addImageToCanvas }) {
   const addImgClick = (e) => {
     console.log("test");
+    addImageToCanvas(e.target.src, e);
   };
 
   const handleDragStart = (e) => {
@@ -29,6 +30,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -37,6 +39,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -45,6 +48,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -53,6 +57,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -61,6 +66,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -69,6 +75,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -77,6 +84,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -85,6 +93,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -93,6 +102,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -101,6 +111,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -109,6 +120,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -117,6 +129,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
@@ -125,6 +138,7 @@ export default function AddFaceModal(addImageToCanvas) {
             alt=""
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
       </div>

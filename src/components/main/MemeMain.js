@@ -40,6 +40,8 @@ export default function MemeMain() {
   const [additionalTexts, setAdditionalTexts] = React.useState([]);
   const [selectedColor, setSelectedColor] = React.useState("");
 
+  const [images, setImages] = React.useState([]);
+
   function handleChange(event) {
     const { name, value } = event.target;
     setMeme((prevMeme) => ({
@@ -52,6 +54,23 @@ export default function MemeMain() {
     setSelectedColor(color);
   };
 
+  // Додає зображення на канвас за координатами курсора миші, коли користувач клікає на сцені.
+  const addImageToCanvas = (imageSrc, e) => {
+    const stage = stageRef.current.getStage();
+
+    // Перевірте, чи клікнув користувач на сцені, замість перетягування зображення
+    if (!stage.isDragging()) {
+      setImages((prevImages) => [
+        ...prevImages,
+        {
+          src: imageSrc,
+          x: 200,
+          y: 200,
+          id: "image-" + new Date().getTime(),
+        },
+      ]);
+    }
+  };
   return (
     <main>
       <div className={styles.meme}>
@@ -61,6 +80,8 @@ export default function MemeMain() {
           bottomTextPosition={bottomTextPosition}
           thirdTextPosition={thirdTextPosition}
           additionalTexts={additionalTexts}
+          images={images}
+          setImages={setImages}
           stageRef={stageRef}
           selectedColor={selectedColor}
         />
@@ -114,7 +135,7 @@ export default function MemeMain() {
               />
             )}
           </div>
-          <AddFaceModal />
+          <AddFaceModal addImageToCanvas={addImageToCanvas} />
           <div className={styles.blockSettings}>
             <div className={forms.form}>
               <textarea

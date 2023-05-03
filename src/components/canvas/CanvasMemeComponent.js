@@ -13,6 +13,8 @@ export default function CanvasMemeComponent(props) {
     topTextRotation,
     bottomTextRotation,
     additionalTexts,
+    images,
+    setImages,
   } = props;
   const [containerSize, setContainerSize] = useState({
     width: 0,
@@ -25,7 +27,6 @@ export default function CanvasMemeComponent(props) {
   const [fontSizeTop, setFontSizeTop] = useState(40);
   const [fontSizeBottom, setFontSizeBottom] = useState(40);
 
-  const [images, setImages] = React.useState([]);
   const [selectedId, selectShape] = React.useState(null);
 
   // const stage = stageRef.current?.getStage();
@@ -231,20 +232,22 @@ export default function CanvasMemeComponent(props) {
     }
   };
 
-  //Додає зображення на канвас за координатами курсора миші, коли користувач клікає на сцені.
+  // Додає зображення на канвас за координатами курсора миші, коли користувач клікає на сцені.
   const addImageToCanvas = (imageSrc, e) => {
     const stage = stageRef.current.getStage();
-    const point = stage.getPointerPosition();
 
-    setImages((prevImages) => [
-      ...prevImages,
-      {
-        src: imageSrc,
-        x: point.x,
-        y: point.y,
-        id: "image-" + new Date().getTime(),
-      },
-    ]);
+    // Перевірте, чи клікнув користувач на сцені, замість перетягування зображення
+    if (!stage.isDragging()) {
+      setImages((prevImages) => [
+        ...prevImages,
+        {
+          src: imageSrc,
+          x: 200,
+          y: 200,
+          id: "image-" + new Date().getTime(),
+        },
+      ]);
+    }
   };
 
   return (
@@ -293,6 +296,7 @@ export default function CanvasMemeComponent(props) {
                   <URLImage
                     image={image}
                     key={index}
+                    addImageToCanvas={addImageToCanvas}
                     shapeProps={image}
                     stageScale={stageSpec.scale}
                     isSelected={image === selectedId}
