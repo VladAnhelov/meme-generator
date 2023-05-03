@@ -13,6 +13,8 @@ export default function CanvasMemeComponent(props) {
     topTextRotation,
     bottomTextRotation,
     additionalTexts,
+    images,
+    setImages,
   } = props;
   const [containerSize, setContainerSize] = useState({
     width: 0,
@@ -25,7 +27,6 @@ export default function CanvasMemeComponent(props) {
   const [fontSizeTop, setFontSizeTop] = useState(40);
   const [fontSizeBottom, setFontSizeBottom] = useState(40);
 
-  const [images, setImages] = React.useState([]);
   const [selectedId, selectShape] = React.useState(null);
 
   // const stage = stageRef.current?.getStage();
@@ -36,6 +37,8 @@ export default function CanvasMemeComponent(props) {
   });
   const dragUrl = React.useRef();
 
+  //Задає розміри сцени, обмежуючи їх максимальною шириною та висотою.
+  //Це допомагає забезпечити, що зображення не будуть занадто великими на канвасі.
   const setDimensionsWithMaxWidth = (width, height) => {
     const maxWidth = 773;
     const maxHeight = 788;
@@ -58,7 +61,7 @@ export default function CanvasMemeComponent(props) {
     setSceneWidth(newWidth);
     setSceneHeight(newHeight);
   };
-
+  //Завантажує зображення та встановлює розміри сцени на основі розмірів завантаженого зображення.
   const getImageWidth = useCallback((imageUrl) => {
     const image = new Image();
     image.src = imageUrl;
@@ -68,6 +71,8 @@ export default function CanvasMemeComponent(props) {
     };
   }, []);
 
+  // Завантажує зображення, змінює його розмір та слухає подію зміни розміру вікна,
+  //щоб коректно масштабувати зображення та відповідні елементи.
   useEffect(() => {
     if (!imageElement) return;
     const handleResize = () => {
@@ -128,6 +133,8 @@ export default function CanvasMemeComponent(props) {
     return () => window.removeEventListener("resize", handleResize);
   }, [sceneWidth, sceneHeight, imageElement]);
 
+  // Відповідає за встановлення випадкового зображення мему,
+  //визначення його ширини та висоти, а також завантаження зображення на сцену.
   useEffect(() => {
     const image = new Image();
     image.onload = () => {
@@ -138,12 +145,14 @@ export default function CanvasMemeComponent(props) {
     getImageWidth(meme.randomImage);
   }, [meme.randomImage, getImageWidth]);
 
+  // Видаляє елемент зі списку зображень за індексом.
   const handleRemove = (index) => {
     const newList = images.filter((item) => item.index !== index);
 
     setImages(newList);
   };
 
+  //Знімає виділення з фігури, якщо користувач клікнув на порожній області сцени.
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target === e.target.getStage();
@@ -152,24 +161,27 @@ export default function CanvasMemeComponent(props) {
     }
   };
 
+  //Знімає виділення з фігури.
   const unSelectShape = (prop) => {
     selectShape(prop);
   };
 
+  //Видаляє зображення зі списку зображень за вказаним вузлом.
   const onDeleteImage = (node) => {
     const newImages = [...images];
     newImages.splice(node.index, 1);
     setImages(newImages);
   };
 
+  // Обробляє подію введення перетягування на сцену.
   const handleDragEnter = (e) => {
     e.preventDefault();
   };
-
+  //Обробляє подію перетягування над сценою.
   const handleDragOver = (e) => {
     e.preventDefault();
   };
-
+  //Обробляє подію відпускання (відкидання) перетягування на сцені. Додає зображення на канвас у відповідному місці.
   const handleDrop = (e) => {
     e.preventDefault();
 
@@ -220,19 +232,20 @@ export default function CanvasMemeComponent(props) {
     }
   };
 
+  // Додає зображення на канвас за координатами курсора миші, коли користувач клікає на сцені.
   const addImageToCanvas = (imageSrc, e) => {
     const stage = stageRef.current.getStage();
-    const point = stage.getPointerPosition();
 
-    setImages((prevImages) => [
-      ...prevImages,
-      {
-        src: imageSrc,
-        x: point.x,
-        y: point.y,
-        id: "image-" + new Date().getTime(),
-      },
-    ]);
+    // Перевірте, чи клікнув користувач на сцені, замість перетягування зображення
+    if (!stage.isDragging()) {
+      setImages((prevImages) => [
+        ...prevImages,
+        {
+          src: imageSrc,
+          id: "image-" + new Date().getTime(),
+        },
+      ]);
+    }
   };
 
   return (
@@ -281,6 +294,7 @@ export default function CanvasMemeComponent(props) {
                   <URLImage
                     image={image}
                     key={index}
+                    addImageToCanvas={addImageToCanvas}
                     shapeProps={image}
                     stageScale={stageSpec.scale}
                     isSelected={image === selectedId}
