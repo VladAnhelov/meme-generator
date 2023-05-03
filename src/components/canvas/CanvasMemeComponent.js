@@ -242,8 +242,6 @@ export default function CanvasMemeComponent(props) {
         ...prevImages,
         {
           src: imageSrc,
-          x: 200,
-          y: 200,
           id: "image-" + new Date().getTime(),
         },
       ]);

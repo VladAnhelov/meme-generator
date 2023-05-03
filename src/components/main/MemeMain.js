@@ -60,17 +60,28 @@ export default function MemeMain() {
 
     // Перевірте, чи клікнув користувач на сцені, замість перетягування зображення
     if (!stage.isDragging()) {
-      setImages((prevImages) => [
-        ...prevImages,
-        {
-          src: imageSrc,
-          x: 200,
-          y: 200,
-          id: "image-" + new Date().getTime(),
-        },
-      ]);
+      const image = new window.Image();
+      image.src = imageSrc;
+
+      image.onload = () => {
+        const centerX = stage.attrs.width / 2 + image.width / 2;
+        const centerY = stage.attrs.height / 2 + image.height / 2;
+
+        setImages((prevImages) => [
+          ...prevImages,
+          {
+            src: imageSrc,
+            x: centerX,
+            y: centerY,
+            id: "image-" + new Date().getTime(),
+          },
+        ]);
+        console.log(stage.attrs.width);
+        console.log(image.width);
+      };
     }
   };
+
   return (
     <main>
       <div className={styles.meme}>
