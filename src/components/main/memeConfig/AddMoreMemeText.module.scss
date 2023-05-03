@@ -34,13 +34,17 @@
 
 .formInput {
   height: MemeMain.$defaultHeight;
-  font-family: "Bruno Ace SC", cursive;
+  font-family: "Bruno Ace SC", "Times New Roman", Times, serif;
   border-radius: 10px;
   border: 1px solid #d5d4d8;
   text-indent: 5px;
   padding: 2px;
   margin: 7px;
   resize: none;
+}
+
+.formInput::placeholder {
+  font-size: 15px;
 }
 
 .deleteButton {
@@ -74,6 +78,9 @@
 
 @media (max-width: 570px) {
   .textButton {
+    font-size: 12px;
+  }
+  .formInput::placeholder {
     font-size: 12px;
   }
 }
