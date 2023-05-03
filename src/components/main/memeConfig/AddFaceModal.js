@@ -2,7 +2,11 @@ import React from "react";
 import styles from "./AddFaceModal.module.scss";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-export default function AddFaceModal() {
+export default function AddFaceModal(addImageToCanvas) {
+  const addImgClick = (e) => {
+    console.log("test");
+  };
+
   const handleDragStart = (e) => {
     e.dataTransfer.setData("imageSrc", e.target.src);
   };
@@ -16,6 +20,7 @@ export default function AddFaceModal() {
             alt="putin"
             className={styles.faces}
             onDragStart={handleDragStart}
+            onClick={addImgClick}
           />
         </div>
         <div className={styles.faceImage}>
