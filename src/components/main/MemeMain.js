@@ -11,6 +11,7 @@ import ColorPaletteComponent from "./memeConfig/ColorPaletteComponent.js";
 import AddFaceModal from "./memeConfig/AddFaceModal.js";
 import styles from "./MemeMain.module.scss";
 import forms from "./memeConfig/AddMoreMemeText.module.scss";
+import AddFaceByUserModal from "./memeConfig/AddFaceByUserModal.js";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -175,6 +176,7 @@ export default function MemeMain() {
             </div>
             <div className={styles.settings}>
               <ColorPaletteComponent handleColorChange={handleColorChange} />
+              <AddFaceByUserModal />
             </div>
           </div>
           <div className={styles.btnsBlock}>
