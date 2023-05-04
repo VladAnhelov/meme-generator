@@ -4,6 +4,7 @@ import { Stage, Layer, Image as KonvaImage } from "react-konva";
 import WaterMark from "./WaterMark.js";
 import { v4 as uuidv4 } from "uuid";
 import URLImage from "./URLImage.js";
+import EraserKonva from "./EraserKonva.js";
 
 export default function CanvasMemeComponent(props) {
   const {
@@ -29,7 +30,13 @@ export default function CanvasMemeComponent(props) {
   const [fontSizeBottom, setFontSizeBottom] = useState(40);
 
   const [selectedId, selectShape] = React.useState(null);
+  // Додайте isErasing стан
+  const [isErasing, setIsErasing] = useState(false);
 
+  // Функція для перемикання режиму стирання
+  const toggleEraser = () => {
+    setIsErasing(!isErasing);
+  };
   // const stage = stageRef.current?.getStage();
   const [stageSpec] = useState({
     scale: 1.2,
@@ -264,6 +271,7 @@ export default function CanvasMemeComponent(props) {
           }}
           onDragOver={(e) => e.preventDefault()}
         >
+          <button onClick={toggleEraser}>{isErasing ? "Draw" : "Erase"}</button>
           <Stage
             width={containerSize.width}
             height={containerSize.height}
@@ -367,6 +375,9 @@ export default function CanvasMemeComponent(props) {
                   setSelectedText={setSelectedText}
                 />
               ))}
+            </Layer>
+            <Layer>
+              <EraserKonva isErasing={isErasing} stageRef={stageRef} />
             </Layer>
           </Stage>
         </div>
