@@ -13,7 +13,6 @@ export default function WaterMark() {
     };
     watermark.src = "watermark.png";
   }, []);
-  console.log(watermarkImage);
   return (
     <>
       {/* додайте watermark тільки коли воно завантажене */}
