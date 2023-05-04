@@ -41,22 +41,28 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
         }`}
       >
         <div className={styles.remove_bg_content}>
-          {/* Add your modal content here */}
-          In progress
-          <input
-            className={styles.upload_face}
-            type="file"
-            onChange={handleImageUpload}
-          />
-          {image && (
-            <img
-              src={image}
-              className={styles.userFacePreview}
-              onDragStart={handleDragStart}
-              onClick={addImgClick}
-              alt="User face"
-            />
-          )}
+          <div className={styles.title_block}>
+            <p className={styles.title}>Add Your Face</p>
+            <p className={styles.title}>Click to Add</p>
+          </div>
+          <div className={styles.upload_and_preview_block}>
+            <label
+              className={styles.custom_file_upload}
+              onChange={handleImageUpload}
+            >
+              <input type="file" />
+              Upload
+            </label>
+            {image && (
+              <img
+                src={image}
+                className={styles.userFacePreview}
+                onDragStart={handleDragStart}
+                onClick={addImgClick}
+                alt="User face"
+              />
+            )}
+          </div>
           <button className={styles.close_btn} onClick={handleClick}>
             X
           </button>

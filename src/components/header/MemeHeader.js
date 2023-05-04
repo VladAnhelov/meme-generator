@@ -12,7 +12,7 @@ export default function MemeHeader() {
           alt=""
         />
         <div className={styles.block_headerName}>
-          <h2 className={styles.headerTitle}>Meme generator</h2>
+          <h2 className={styles.headerTitle}>Memebulance</h2>
           <h4 className={styles.headerProject}>Vlad Anhelov Project</h4>
         </div>
       </div>
