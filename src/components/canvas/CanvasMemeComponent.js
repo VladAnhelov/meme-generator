@@ -271,7 +271,9 @@ export default function CanvasMemeComponent(props) {
           }}
           onDragOver={(e) => e.preventDefault()}
         >
+          {/** 
           <button onClick={toggleEraser}>{isErasing ? "Draw" : "Erase"}</button>
+        **/}
           <Stage
             width={containerSize.width}
             height={containerSize.height}
@@ -376,9 +378,11 @@ export default function CanvasMemeComponent(props) {
                 />
               ))}
             </Layer>
+            {/** 
             <Layer>
               <EraserKonva isErasing={isErasing} stageRef={stageRef} />
             </Layer>
+            */}
           </Stage>
         </div>
       </div>
