@@ -34,15 +34,6 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
           Add your face
           <div className={styles.block_add}></div>
         </button>
-        {image && (
-          <img
-            src={image}
-            onDragStart={handleDragStart}
-            onClick={addImgClick}
-            className={styles.userFacePreview}
-            alt="User face"
-          />
-        )}
       </div>
       <div
         className={`${styles.remove_bg_modal} ${
@@ -61,6 +52,8 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
             <img
               src={image}
               className={styles.userFacePreview}
+              onDragStart={handleDragStart}
+              onClick={addImgClick}
               alt="User face"
             />
           )}

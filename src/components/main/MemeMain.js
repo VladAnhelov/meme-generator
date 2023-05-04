@@ -176,7 +176,7 @@ export default function MemeMain() {
             </div>
             <div className={styles.settings}>
               <ColorPaletteComponent handleColorChange={handleColorChange} />
-              <AddFaceByUserModal />
+              <AddFaceByUserModal addImageToCanvas={addImageToCanvas} />
             </div>
           </div>
           <div className={styles.btnsBlock}>

@@ -5,6 +5,7 @@
   flex-direction: row;
   align-items: center;
   position: relative;
+  width: 155px;
   height: 46px;
   margin-top: 5px;
 }
@@ -55,12 +56,13 @@
 
 .remove_bg_content {
   display: flex;
+  flex-direction: column;
   background-color: rgba(255, 255, 255, 0.6431372549);
   border-radius: 1rem;
   padding: 20px;
   position: relative;
-  width: 500px;
-  height: 320px;
+  width: 350px;
+  height: 220px;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
@@ -89,14 +91,14 @@
 }
 
 .upload_face {
-  width: 100px;
-  height: 35px;
+  width: 200px;
+  height: 40px;
 }
 
 .userFacePreview {
   width: 130px;
   height: 130px;
-
-  border: 1px solid red;
-  margin-left: 56px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #b3b3b3;
 }
