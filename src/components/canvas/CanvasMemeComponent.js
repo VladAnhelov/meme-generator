@@ -29,7 +29,13 @@ export default function CanvasMemeComponent(props) {
   const [fontSizeBottom, setFontSizeBottom] = useState(40);
 
   const [selectedId, selectShape] = React.useState(null);
+  // Додайте isErasing стан
+  // const [isErasing, setIsErasing] = useState(false);
 
+  // Функція для перемикання режиму стирання
+  // const toggleEraser = () => {
+  //   setIsErasing(!isErasing);
+  // };
   // const stage = stageRef.current?.getStage();
   const [stageSpec] = useState({
     scale: 1.2,
@@ -264,6 +270,9 @@ export default function CanvasMemeComponent(props) {
           }}
           onDragOver={(e) => e.preventDefault()}
         >
+          {/** 
+          <button onClick={toggleEraser}>{isErasing ? "Draw" : "Erase"}</button>
+        **/}
           <Stage
             width={containerSize.width}
             height={containerSize.height}
@@ -368,6 +377,11 @@ export default function CanvasMemeComponent(props) {
                 />
               ))}
             </Layer>
+            {/** 
+            <Layer>
+              <EraserKonva isErasing={isErasing} stageRef={stageRef} />
+            </Layer>
+            */}
           </Stage>
         </div>
       </div>

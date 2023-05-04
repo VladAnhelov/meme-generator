@@ -13,7 +13,6 @@ export default function WaterMark() {
     };
     watermark.src = "watermark.png";
   }, []);
-  console.log(watermarkImage);
   return (
     <>
       {/* додайте watermark тільки коли воно завантажене */}
@@ -21,10 +20,10 @@ export default function WaterMark() {
         <Layer>
           <KonvaImage
             image={watermarkImage}
-            width={350}
-            height={300}
-            x={10}
-            y={10}
+            width={90}
+            height={20}
+            x={5}
+            y={5}
           />
         </Layer>
       )}

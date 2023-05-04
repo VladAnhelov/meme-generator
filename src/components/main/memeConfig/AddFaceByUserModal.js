@@ -1,10 +1,32 @@
 import React from "react";
 import styles from "./AddFaceByUserModal.module.scss";
-export default function AddFaceByUserModal() {
+import removeBackground from "./RemoveBackground.js";
+
+export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [showModal, setShowModal] = React.useState(false);
+  const [image, setImage] = React.useState(null);
+  const apiKey = "MXgyYrcr6m4fRh9TCgB2pLhD";
+
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const noBackgroundImage = await removeBackground(file, apiKey);
+    setImage(`data:image/png;base64,${noBackgroundImage}`);
+  };
+
   const handleClick = (e) => {
     setShowModal(!showModal);
   };
+
+  const addImgClick = (e) => {
+    addImageToCanvas(e.target.src, e);
+  };
+
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData("imageSrc", e.target.src);
+  };
+
   return (
     <>
       <div className={styles.block}>
@@ -19,8 +41,28 @@ export default function AddFaceByUserModal() {
         }`}
       >
         <div className={styles.remove_bg_content}>
-          {/* Add your modal content here */}
-          In progress
+          <div className={styles.title_block}>
+            <p className={styles.title}>Add Your Face</p>
+            <p className={styles.title}>Click to Add</p>
+          </div>
+          <div className={styles.upload_and_preview_block}>
+            <label
+              className={styles.custom_file_upload}
+              onChange={handleImageUpload}
+            >
+              <input type="file" />
+              Upload
+            </label>
+            {image && (
+              <img
+                src={image}
+                className={styles.userFacePreview}
+                onDragStart={handleDragStart}
+                onClick={addImgClick}
+                alt="User face"
+              />
+            )}
+          </div>
           <button className={styles.close_btn} onClick={handleClick}>
             X
           </button>
