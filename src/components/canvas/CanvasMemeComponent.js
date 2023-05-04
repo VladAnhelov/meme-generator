@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import MemeText from "./MemeText.js";
 import { Stage, Layer, Image as KonvaImage } from "react-konva";
+import WaterMark from "./WaterMark.js";
 import { v4 as uuidv4 } from "uuid";
 import URLImage from "./URLImage.js";
 
@@ -288,6 +289,7 @@ export default function CanvasMemeComponent(props) {
                 preventDefault={false}
               />
             </Layer>
+            <WaterMark />
             <Layer>
               {images.map((image, index) => {
                 return (
