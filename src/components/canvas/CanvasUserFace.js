@@ -16,6 +16,8 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
       };
     }
   }, [src]);
+  console.log("imageElement", imageElement);
+
   // Додайте функцію збереження зображення
   useImperativeHandle(ref, () => ({
     saveImage: () => {
@@ -26,7 +28,7 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
   }));
 
   return (
-    <div>
+    <>
       <Stage ref={stageRef} width={130} height={130}>
         <Layer>
           {imageElement && (
@@ -35,7 +37,7 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
           <EraserKonva isErasing={isErasing} stageRef={stageRef} />
         </Layer>
       </Stage>
-    </div>
+    </>
   );
 });
 

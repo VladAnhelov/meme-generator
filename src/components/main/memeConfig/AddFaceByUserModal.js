@@ -5,6 +5,7 @@ import CanvasUserFace from "/Users/vladanhelov/Desktop/meme-generator/src/compon
 
 export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [showModal, setShowModal] = React.useState(false);
+  const [editedImage, setEditedImage] = React.useState(null);
 
   const [image, setImage] = React.useState(null);
 
@@ -38,13 +39,11 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
 
   const handleSave = () => {
     console.log("save");
-    // Збережіть змінене зображення тут і передайте його в CanvasMemeComponent
     if (canvasUserFaceRef.current) {
       const dataUrl = canvasUserFaceRef.current.saveImage();
-      // Зберігайте dataUrl або передавайте його до CanvasMemeComponent
+      setEditedImage(dataUrl);
     }
   };
-
   return (
     <>
       <div className={styles.block}>
@@ -86,23 +85,32 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
                 alt="save"
               />
             </button>
-            {/** 
-            {image && (
-              */}
-            <CanvasUserFace
-              ref={canvasUserFaceRef}
-              src={image}
-              isErasing={isErasing}
-            />
-            <img
-              src={image}
-              className={styles.userFacePreview}
-              onDragStart={handleDragStart}
-              onClick={addImgClick}
-              alt="User face"
-            />
+            <div style={{ display: editedImage ? "none" : "block" }}>
+              <CanvasUserFace
+                ref={canvasUserFaceRef}
+                src={image}
+                isErasing={isErasing}
+              />
+            </div>
+            {editedImage ? (
+              <img
+                src={editedImage}
+                className={styles.userFacePreview}
+                onDragStart={handleDragStart}
+                onClick={addImgClick}
+                alt="User face"
+              />
+            ) : (
+              <img
+                src={image}
+                className={styles.userFacePreview}
+                onDragStart={handleDragStart}
+                onClick={addImgClick}
+                alt="User face"
+                style={{ display: !editedImage && !image ? "none" : "block" }}
+              />
+            )}
           </div>
-          {/** )}*/}
           <button className={styles.close_btn} onClick={handleClick}>
             X
           </button>
