@@ -120,10 +120,11 @@
   border: 1px solid #ccc;
   background-color: #19a7ce;
   width: 100px;
-  height: 36px;
+  font-size: 13px;
+  height: 25px;
   margin: 0px;
   padding: 0px;
-  border-radius: 10px;
+  border-radius: 7px;
   padding: 6px 12px;
   cursor: pointer;
 }
@@ -150,8 +151,7 @@ input[type="file"] {
   cursor: pointer;
 }
 .eraserIcon {
-  width: 30px;
-  margin-top: 5px;
+  width: 27px;
   transition: all 0.3s ease-in-out; /* Add a smooth transition */
 }
 
