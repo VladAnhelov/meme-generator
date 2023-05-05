@@ -10,6 +10,8 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
 
   const [image, setImage] = React.useState(null);
 
+  const [isCanvasVisible, setIsCanvasVisible] = React.useState(false);
+
   const [isErasing, setIsErasing] = React.useState(false);
   const canvasUserFaceRef = React.useRef(null);
   const apiKey = "MXgyYrcr6m4fRh9TCgB2pLhD";
@@ -46,17 +48,20 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
     addImageToCanvas(e.target.src, e);
   };
 
+  const handleImageDoubleClick = () => {
+    setIsCanvasVisible(true);
+  };
+
   const handleDragStart = (e) => {
     e.dataTransfer.setData("imageSrc", e.target.src);
   };
 
   const handleSave = () => {
-    console.log("save");
-    if (canvasUserFaceRef.current) {
-      const dataUrl = canvasUserFaceRef.current.saveImage();
-      setEditedImage(dataUrl);
-    }
+    const dataUrl = canvasUserFaceRef.current.saveImage();
+    setEditedImage(dataUrl);
+    setIsCanvasVisible(false);
   };
+
   return (
     <>
       <div className={styles.block}>
@@ -84,49 +89,79 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
               Upload
             </label>
             <div className={styles.edit_block}>
-              <div>
-                <button className={styles.eraserButton} onClick={toggleEraser}>
-                  {isErasing ? "!" : ""}
-                  <img
-                    className={styles.eraserIcon}
-                    src="https://img.icons8.com/dusk/64/null/eraser.png"
-                    alt="eraser"
-                  />
-                </button>
+              <div className={styles.edit_block_items}>
+                <div>
+                  <button
+                    className={styles.eraserButton}
+                    onClick={toggleEraser}
+                  >
+                    {isErasing ? "!" : ""}
+                    <img
+                      className={styles.eraserIcon}
+                      src="https://img.icons8.com/dusk/64/null/eraser.png"
+                      alt="eraser"
+                    />
+                  </button>
+                </div>
+                <div>
+                  <button className={styles.saveButton} onClick={handleSave}>
+                    <img
+                      className={styles.saveIcon}
+                      src="https://img.icons8.com/dusk/64/null/save--v1.png"
+                      alt="save"
+                    />
+                  </button>
+                </div>
               </div>
               <div>
-                <button className={styles.saveButton} onClick={handleSave}>
-                  <img
-                    className={styles.saveIcon}
-                    src="https://img.icons8.com/dusk/64/null/save--v1.png"
-                    alt="save"
+                <div>
+                  <CanvasZoomControls
+                    onZoomIn={handleZoomIn}
+                    onZoomOut={handleZoomOut}
                   />
-                </button>
+                </div>
               </div>
               <div>
-                <CanvasZoomControls
-                  onZoomIn={handleZoomIn}
-                  onZoomOut={handleZoomOut}
-                />
+                <div>
+                  <button
+                    className={styles.undoButton}
+                    onClick={() => canvasUserFaceRef.current.undo()}
+                  >
+                    <img
+                      className={styles.undoIcon}
+                      src="https://img.icons8.com/dusk/64/null/reply-arrow.png"
+                      alt="back"
+                    />
+                  </button>
+                  <button
+                    className={styles.redoButton}
+                    onClick={() => canvasUserFaceRef.current.redo()}
+                  >
+                    <img
+                      className={styles.redoIcon}
+                      src="https://img.icons8.com/dusk/64/null/forward-arrow.png"
+                      alt="forward"
+                    />
+                  </button>
+                </div>
               </div>
             </div>
 
-            <div
-              className={styles.canvasPreview}
-              style={{ display: editedImage ? "none" : "block" }}
-            >
-              <CanvasUserFace
-                ref={canvasUserFaceRef}
-                src={image}
-                isErasing={isErasing}
-              />
-            </div>
-            {editedImage ? (
+            {isCanvasVisible ? (
+              <div className={styles.canvasPreview}>
+                <CanvasUserFace
+                  ref={canvasUserFaceRef}
+                  src={image}
+                  isErasing={isErasing}
+                />
+              </div>
+            ) : editedImage ? (
               <img
                 src={editedImage}
                 className={styles.userFacePreview}
                 onDragStart={handleDragStart}
                 onClick={addImgClick}
+                onDoubleClick={handleImageDoubleClick}
                 alt="User face"
               />
             ) : (
@@ -135,8 +170,8 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
                 className={styles.userFacePreview}
                 onDragStart={handleDragStart}
                 onClick={addImgClick}
+                onDoubleClick={handleImageDoubleClick}
                 alt="User face"
-                style={{ display: !editedImage && !image ? "none" : "block" }}
               />
             )}
           </div>

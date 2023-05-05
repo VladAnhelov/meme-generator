@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Konva from "konva";
 
-const EraserKonva = ({ isErasing, stageRef }) => {
+const EraserKonva = ({ isErasing, stageRef, pushStateToHistory }) => {
   useEffect(() => {
     if (!isErasing) return;
 
@@ -19,6 +19,9 @@ const EraserKonva = ({ isErasing, stageRef }) => {
 
     stage.on("mousedown touchstart", () => {
       if (!isErasing) return;
+
+      // Зберегти поточний стан перед застосуванням гумки
+      pushStateToHistory(stage.toDataURL());
 
       const eraserLine = new Konva.Line({
         stroke: "white",
@@ -58,7 +61,7 @@ const EraserKonva = ({ isErasing, stageRef }) => {
       stage.off("mouseup touchend");
       stage.container().style.cursor = "default";
     };
-  }, [isErasing, stageRef]);
+  }, [isErasing, stageRef, pushStateToHistory]);
 
   return null;
 };

@@ -7,8 +7,44 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
 
   const [imageElement, setImageElement] = useState(null);
   const [scale, setScale] = useState(1);
+  const [history, setHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+
+  const pushStateToHistory = (dataUrl) => {
+    setHistory((prevHistory) => {
+      const newHistory = prevHistory.slice(0, historyIndex + 1);
+      newHistory.push(dataUrl);
+      return newHistory;
+    });
+    setHistoryIndex((prevIndex) => prevIndex + 1);
+  };
+
+  const undo = () => {
+    console.log("Undo called");
+    if (historyIndex > 0) {
+      setHistoryIndex((prevIndex) => prevIndex - 1);
+      const img = new window.Image();
+      img.src = history[historyIndex - 1];
+      img.onload = () => {
+        setImageElement(img);
+      };
+    }
+  };
+
+  const redo = () => {
+    console.log("Redo called");
+    if (historyIndex < history.length - 1) {
+      setHistoryIndex((prevIndex) => prevIndex + 1);
+      const img = new window.Image();
+      img.src = history[historyIndex + 1];
+      img.onload = () => {
+        setImageElement(img);
+      };
+    }
+  };
 
   React.useEffect(() => {
+    console.log("Src changed:", src);
     if (src) {
       const img = new window.Image();
       img.src = src;
@@ -30,6 +66,12 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
     },
     zoomOut: () => {
       setScale((prevScale) => prevScale - 0.1);
+    },
+    undo: () => {
+      undo();
+    },
+    redo: () => {
+      redo();
     },
   }));
 
@@ -65,7 +107,7 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
   // Функція для обрізки зображення у круглому контурі
   const clipCircle = (ctx) => {
     ctx.beginPath();
-    ctx.arc(65, 65, 65, 0, Math.PI * 2, true);
+    ctx.arc(70, 70, 70, 0, Math.PI * 2, true);
     ctx.clip();
   };
 
@@ -73,18 +115,20 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
     <>
       <Stage
         ref={stageRef}
-        width={130}
-        height={130}
+        width={140}
+        height={140}
         onWheel={handleWheel}
-        scaleX={scale}
-        scaleY={scale}
         draggable
       >
         <Layer scale={{ x: scale, y: scale }} clipFunc={clipCircle}>
           {imageElement && (
-            <KonvaImage image={imageElement} width={130} height={130} />
+            <KonvaImage image={imageElement} width={140} height={140} />
           )}
-          <EraserKonva isErasing={isErasing} stageRef={stageRef} />
+          <EraserKonva
+            isErasing={isErasing}
+            stageRef={stageRef}
+            pushStateToHistory={pushStateToHistory}
+          />
         </Layer>
       </Stage>
     </>
