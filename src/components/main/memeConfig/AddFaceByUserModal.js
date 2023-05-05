@@ -10,11 +10,25 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
 
   const [image, setImage] = React.useState(null);
 
-  const [isCanvasVisible, setIsCanvasVisible] = React.useState(false);
+  const [isCanvasVisible, setIsCanvasVisible] = React.useState(true);
+
+  const [lastTouchTime, setLastTouchTime] = React.useState(0);
 
   const [isErasing, setIsErasing] = React.useState(false);
   const canvasUserFaceRef = React.useRef(null);
   const apiKey = "MXgyYrcr6m4fRh9TCgB2pLhD";
+
+  const handleTouchStart = (e) => {
+    const currentTime = new Date().getTime();
+    const timeDiff = currentTime - lastTouchTime;
+
+    if (timeDiff < 300) {
+      // 300 мс - час між двома тапами
+      handleImageDoubleClick();
+    }
+
+    setLastTouchTime(currentTime);
+  };
 
   const handleZoomIn = () => {
     if (canvasUserFaceRef.current) {
@@ -162,6 +176,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
                 onDragStart={handleDragStart}
                 onClick={addImgClick}
                 onDoubleClick={handleImageDoubleClick}
+                onTouchStart={handleTouchStart}
                 alt=""
               />
             ) : (
@@ -171,6 +186,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
                 onDragStart={handleDragStart}
                 onClick={addImgClick}
                 onDoubleClick={handleImageDoubleClick}
+                onTouchStart={handleTouchStart}
                 alt=""
               />
             )}
