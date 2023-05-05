@@ -5,7 +5,13 @@ import removeBackground from "./RemoveBackground.js";
 export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [showModal, setShowModal] = React.useState(false);
   const [image, setImage] = React.useState(null);
+
+  const [isErasing, setIsErasing] = React.useState(false);
   const apiKey = "MXgyYrcr6m4fRh9TCgB2pLhD";
+
+  const toggleEraser = () => {
+    setIsErasing(!isErasing);
+  };
 
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
@@ -53,16 +59,26 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
               <input type="file" />
               Upload
             </label>
-            {image && (
+            <button className={styles.eraserButton} onClick={toggleEraser}>
+              {isErasing ? "!" : ""}
               <img
-                src={image}
-                className={styles.userFacePreview}
-                onDragStart={handleDragStart}
-                onClick={addImgClick}
-                alt="User face"
+                className={styles.eraserIcon}
+                src="https://img.icons8.com/dusk/64/null/eraser.png"
+                alt="eraser"
               />
-            )}
+            </button>
+            {/** 
+            {image && (
+              */}
+            <img
+              src={image}
+              className={styles.userFacePreview}
+              onDragStart={handleDragStart}
+              onClick={addImgClick}
+              alt="User face"
+            />
           </div>
+          {/** )}*/}
           <button className={styles.close_btn} onClick={handleClick}>
             X
           </button>
