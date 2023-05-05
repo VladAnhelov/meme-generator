@@ -1,12 +1,15 @@
 import React from "react";
 import styles from "./AddFaceByUserModal.module.scss";
 import removeBackground from "./RemoveBackground.js";
+import CanvasUserFace from "/Users/vladanhelov/Desktop/meme-generator/src/components/canvas/CanvasUserFace.js";
 
 export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [showModal, setShowModal] = React.useState(false);
+
   const [image, setImage] = React.useState(null);
 
   const [isErasing, setIsErasing] = React.useState(false);
+  const canvasUserFaceRef = React.useRef(null);
   const apiKey = "MXgyYrcr6m4fRh9TCgB2pLhD";
 
   const toggleEraser = () => {
@@ -31,6 +34,15 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
 
   const handleDragStart = (e) => {
     e.dataTransfer.setData("imageSrc", e.target.src);
+  };
+
+  const handleSave = () => {
+    console.log("save");
+    // Збережіть змінене зображення тут і передайте його в CanvasMemeComponent
+    if (canvasUserFaceRef.current) {
+      const dataUrl = canvasUserFaceRef.current.saveImage();
+      // Зберігайте dataUrl або передавайте його до CanvasMemeComponent
+    }
   };
 
   return (
@@ -67,9 +79,21 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
                 alt="eraser"
               />
             </button>
+            <button className={styles.saveButton} onClick={handleSave}>
+              <img
+                className={styles.saveIcon}
+                src="https://img.icons8.com/dusk/64/null/save--v1.png"
+                alt="save"
+              />
+            </button>
             {/** 
             {image && (
               */}
+            <CanvasUserFace
+              ref={canvasUserFaceRef}
+              src={image}
+              isErasing={isErasing}
+            />
             <img
               src={image}
               className={styles.userFacePreview}

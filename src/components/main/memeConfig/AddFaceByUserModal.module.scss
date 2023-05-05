@@ -112,6 +112,7 @@
   border-radius: 10px;
   background-color: #ffffffe6;
   border: 1px solid #b3b3b3;
+  display: none;
 }
 
 .custom_file_upload {
@@ -160,6 +161,35 @@ input[type="file"] {
 }
 
 @keyframes eraserHover {
+  0% {
+    transform: rotate(0deg) scale(1); /* Start with no rotation and original scale */
+  }
+  50% {
+    transform: rotate(10deg) scale(1.01); /* Rotate 20 degrees and scale up */
+  }
+  100% {
+    transform: rotate(0deg) scale(1); /* Return to original rotation and scale */
+  }
+}
+
+.saveButton {
+  border: none;
+  background-color: none;
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+}
+.saveIcon {
+  width: 27px;
+  transition: all 0.3s ease-in-out; /* Add a smooth transition */
+}
+
+.saveIcon:hover {
+  animation: saveHover 0.5s infinite; /* Apply the animation on hover */
+}
+
+@keyframes saveHover {
   0% {
     transform: rotate(0deg) scale(1); /* Start with no rotation and original scale */
   }
