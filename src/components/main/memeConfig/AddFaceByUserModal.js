@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./AddFaceByUserModal.module.scss";
 import removeBackground from "./RemoveBackground.js";
 import CanvasUserFace from "/Users/vladanhelov/Desktop/meme-generator/src/components/canvas/CanvasUserFace.js";
+import CanvasZoomControls from "/Users/vladanhelov/Desktop/meme-generator/src/components/canvas/CanvasZoomControls.js";
 
 export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [showModal, setShowModal] = React.useState(false);
@@ -12,6 +13,18 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [isErasing, setIsErasing] = React.useState(false);
   const canvasUserFaceRef = React.useRef(null);
   const apiKey = "MXgyYrcr6m4fRh9TCgB2pLhD";
+
+  const handleZoomIn = () => {
+    if (canvasUserFaceRef.current) {
+      canvasUserFaceRef.current.zoomIn();
+    }
+  };
+
+  const handleZoomOut = () => {
+    if (canvasUserFaceRef.current) {
+      canvasUserFaceRef.current.zoomOut();
+    }
+  };
 
   const toggleEraser = () => {
     setIsErasing(!isErasing);
@@ -70,22 +83,38 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
               <input type="file" />
               Upload
             </label>
-            <button className={styles.eraserButton} onClick={toggleEraser}>
-              {isErasing ? "!" : ""}
-              <img
-                className={styles.eraserIcon}
-                src="https://img.icons8.com/dusk/64/null/eraser.png"
-                alt="eraser"
-              />
-            </button>
-            <button className={styles.saveButton} onClick={handleSave}>
-              <img
-                className={styles.saveIcon}
-                src="https://img.icons8.com/dusk/64/null/save--v1.png"
-                alt="save"
-              />
-            </button>
-            <div style={{ display: editedImage ? "none" : "block" }}>
+            <div className={styles.edit_block}>
+              <div>
+                <button className={styles.eraserButton} onClick={toggleEraser}>
+                  {isErasing ? "!" : ""}
+                  <img
+                    className={styles.eraserIcon}
+                    src="https://img.icons8.com/dusk/64/null/eraser.png"
+                    alt="eraser"
+                  />
+                </button>
+              </div>
+              <div>
+                <button className={styles.saveButton} onClick={handleSave}>
+                  <img
+                    className={styles.saveIcon}
+                    src="https://img.icons8.com/dusk/64/null/save--v1.png"
+                    alt="save"
+                  />
+                </button>
+              </div>
+              <div>
+                <CanvasZoomControls
+                  onZoomIn={handleZoomIn}
+                  onZoomOut={handleZoomOut}
+                />
+              </div>
+            </div>
+
+            <div
+              className={styles.canvasPreview}
+              style={{ display: editedImage ? "none" : "block" }}
+            >
               <CanvasUserFace
                 ref={canvasUserFaceRef}
                 src={image}
