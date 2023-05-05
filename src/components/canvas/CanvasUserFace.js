@@ -10,6 +10,12 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
 
+  const [isStageDraggable, setIsStageDraggable] = useState(true);
+
+  React.useEffect(() => {
+    setIsStageDraggable(!isErasing);
+  }, [isErasing]);
+
   const pushStateToHistory = (dataUrl) => {
     setHistory((prevHistory) => {
       const newHistory = prevHistory.slice(0, historyIndex + 1);
@@ -58,7 +64,7 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
   useImperativeHandle(ref, () => ({
     saveImage: () => {
       const stage = stageRef.current.getStage();
-      const dataUrl = stage.toDataURL();
+      const dataUrl = stage.toDataURL({ pixelRatio: 4 });
       return dataUrl;
     },
     zoomIn: () => {
@@ -118,7 +124,7 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
         width={140}
         height={140}
         onWheel={handleWheel}
-        draggable
+        draggable={isStageDraggable}
       >
         <Layer scale={{ x: scale, y: scale }} clipFunc={clipCircle}>
           {imageElement && (

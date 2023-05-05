@@ -162,7 +162,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
                 onDragStart={handleDragStart}
                 onClick={addImgClick}
                 onDoubleClick={handleImageDoubleClick}
-                alt="User face"
+                alt=""
               />
             ) : (
               <img
@@ -171,7 +171,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
                 onDragStart={handleDragStart}
                 onClick={addImgClick}
                 onDoubleClick={handleImageDoubleClick}
-                alt="User face"
+                alt=""
               />
             )}
           </div>
