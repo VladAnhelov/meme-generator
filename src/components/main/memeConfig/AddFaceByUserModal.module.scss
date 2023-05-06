@@ -10,6 +10,10 @@
   margin-top: 5px;
 }
 
+.custom_cursor {
+  cursor: url("https://img.icons8.com/ios/20/null/circled.png") 10 10, auto;
+}
+
 .block_add {
   width: 30px;
   height: 25px;
@@ -189,6 +193,14 @@ input[type="file"] {
   100% {
     transform: rotate(0deg) scale(1); /* Return to original rotation and scale */
   }
+}
+
+.eraserIcon_active,
+.saveIcon_active {
+  background-color: #0067b56f;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
 }
 
 .edit_block {

@@ -15,6 +15,9 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [lastTouchTime, setLastTouchTime] = React.useState(0);
 
   const [isErasing, setIsErasing] = React.useState(false);
+  const [isEraserIconActive, setIsEraserIconActive] = React.useState(false);
+  const [isSaveIconActive, setIsSaveIconActive] = React.useState(false);
+
   const canvasUserFaceRef = React.useRef(null);
   const apiKey = "MXgyYrcr6m4fRh9TCgB2pLhD";
 
@@ -44,6 +47,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
 
   const toggleEraser = () => {
     setIsErasing(!isErasing);
+    setIsEraserIconActive(!isEraserIconActive);
   };
 
   const handleImageUpload = async (event) => {
@@ -64,6 +68,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
 
   const handleImageDoubleClick = () => {
     setIsCanvasVisible(true);
+    setIsSaveIconActive(false);
   };
 
   const handleDragStart = (e) => {
@@ -74,6 +79,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
     const dataUrl = canvasUserFaceRef.current.saveImage();
     setEditedImage(dataUrl);
     setIsCanvasVisible(false);
+    setIsSaveIconActive(!isSaveIconActive);
   };
 
   return (
@@ -109,9 +115,12 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
                     className={styles.eraserButton}
                     onClick={toggleEraser}
                   >
-                    {isErasing ? "!" : ""}
                     <img
-                      className={styles.eraserIcon}
+                      className={`${styles.eraserIcon} ${
+                        isErasing && isEraserIconActive
+                          ? styles.eraserIcon_active
+                          : ""
+                      }`}
                       src="https://img.icons8.com/dusk/64/null/eraser.png"
                       alt="eraser"
                     />
@@ -120,7 +129,9 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
                 <div>
                   <button className={styles.saveButton} onClick={handleSave}>
                     <img
-                      className={styles.saveIcon}
+                      className={`${styles.saveIcon} ${
+                        isSaveIconActive ? styles.saveIcon_active : ""
+                      }`}
                       src="https://img.icons8.com/dusk/64/null/save--v1.png"
                       alt="save"
                     />

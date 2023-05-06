@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from "react";
+import styles from "/Users/vladanhelov/Desktop/meme-generator/src/components/main/memeConfig/AddFaceByUserModal.module.scss";
 import Konva from "konva";
 
 const EraserKonva = ({ isErasing, stageRef, pushStateToHistory }) => {
@@ -63,7 +64,12 @@ const EraserKonva = ({ isErasing, stageRef, pushStateToHistory }) => {
     if (!isErasing) return;
 
     const stage = stageRef.current;
-    stage.container().style.cursor = isErasing ? "crosshair" : "default";
+    const container = stage.container();
+    if (isErasing) {
+      container.classList.add(styles.custom_cursor);
+    } else {
+      container.classList.remove(styles.custom_cursor);
+    }
 
     stage.on("mousedown touchstart", (e) => {
       const eraserLine = handleMouseDown();
@@ -78,7 +84,7 @@ const EraserKonva = ({ isErasing, stageRef, pushStateToHistory }) => {
 
     return () => {
       stage.off("mousedown touchstart");
-      stage.container().style.cursor = "default";
+      stage.container().classList.remove(styles.custom_cursor);
     };
   }, [
     isErasing,
