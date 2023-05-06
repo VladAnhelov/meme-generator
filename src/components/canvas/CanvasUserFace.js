@@ -64,7 +64,7 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
   useImperativeHandle(ref, () => ({
     saveImage: () => {
       const stage = stageRef.current.getStage();
-      const dataUrl = stage.toDataURL({ pixelRatio: 4 });
+      const dataUrl = stage.toDataURL({ pixelRatio: 5 });
       return dataUrl;
     },
     zoomIn: () => {
