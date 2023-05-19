@@ -12,6 +12,16 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
 
   const [isStageDraggable, setIsStageDraggable] = useState(true);
 
+  const [eraserSize, setEraserSize] = useState(20); // Initial eraser size
+
+  const increaseEraserSize = () => {
+    setEraserSize((prevSize) => prevSize + 5); // Increase eraser size by 5
+  };
+
+  const decreaseEraserSize = () => {
+    setEraserSize((prevSize) => (prevSize > 5 ? prevSize - 5 : prevSize)); // Decrease eraser size by 5, but not less than 5
+  };
+
   React.useEffect(() => {
     setIsStageDraggable(!isErasing);
   }, [isErasing]);
@@ -134,9 +144,13 @@ const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
             isErasing={isErasing}
             stageRef={stageRef}
             pushStateToHistory={pushStateToHistory}
+            eraserSize={eraserSize}
+            scale={scale}
           />
         </Layer>
       </Stage>
+      <button onClick={increaseEraserSize}>+</button>
+      <button onClick={decreaseEraserSize}>-</button>
     </>
   );
 });

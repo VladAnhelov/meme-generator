@@ -7,6 +7,8 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [showModal, setShowModal] = React.useState(false);
   const [editedImage, setEditedImage] = React.useState(null);
 
+  const [isSaveButtonDisabled, setIsSaveButtonDisabled] = React.useState(false);
+
   const [image, setImage] = React.useState(null);
 
   const [isCanvasVisible, setIsCanvasVisible] = React.useState(true);
@@ -67,6 +69,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
   const handleImageDoubleClick = () => {
     setIsCanvasVisible(true);
     setIsSaveIconActive(false);
+    setIsSaveButtonDisabled(false);
   };
 
   const handleDragStart = (e) => {
@@ -74,6 +77,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
   };
 
   const handleSave = () => {
+    setIsSaveButtonDisabled(true);
     const dataUrl = canvasUserFaceRef.current.saveImage();
     setEditedImage(dataUrl);
     setIsCanvasVisible(false);
@@ -125,7 +129,11 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
                   </button>
                 </div>
                 <div>
-                  <button className={styles.saveButton} onClick={handleSave}>
+                  <button
+                    className={styles.saveButton}
+                    onClick={handleSave}
+                    disabled={isSaveButtonDisabled}
+                  >
                     <img
                       className={`${styles.saveIcon} ${
                         isSaveIconActive ? styles.saveIcon_active : ""

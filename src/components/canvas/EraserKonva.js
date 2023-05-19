@@ -2,7 +2,13 @@ import { useEffect, useCallback } from "react";
 import styles from "/Users/vladanhelov/Desktop/meme-generator/src/components/main/memeConfig/AddFaceByUserModal.module.scss";
 import Konva from "konva";
 
-const EraserKonva = ({ isErasing, stageRef, pushStateToHistory }) => {
+const EraserKonva = ({
+  isErasing,
+  stageRef,
+  pushStateToHistory,
+  eraserSize,
+  scale,
+}) => {
   const getRelativePointerPosition = (node) => {
     const transform = node.getAbsoluteTransform().copy();
     transform.invert();
@@ -21,7 +27,7 @@ const EraserKonva = ({ isErasing, stageRef, pushStateToHistory }) => {
 
     const eraserLine = new Konva.Line({
       stroke: "white",
-      strokeWidth: 20,
+      strokeWidth: eraserSize / scale,
       lineCap: "round",
       lineJoin: "round",
       tension: 4.5,
@@ -35,7 +41,7 @@ const EraserKonva = ({ isErasing, stageRef, pushStateToHistory }) => {
     layer.draw();
 
     return eraserLine;
-  }, [isErasing, stageRef, pushStateToHistory]);
+  }, [isErasing, stageRef, pushStateToHistory, eraserSize, scale]);
 
   const handleMouseMove = useCallback(
     (eraserLine) => {
@@ -60,15 +66,33 @@ const EraserKonva = ({ isErasing, stageRef, pushStateToHistory }) => {
     stage.off("mousemove touchmove");
   }, [isErasing, stageRef]);
 
+  const createCursor = (size) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d");
+
+    // Draw the circle
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, size / 2, 0, 2 * Math.PI);
+    ctx.fillStyle = "#FCF1ED";
+    ctx.fill();
+
+    // Convert the canvas to a data URL
+    return canvas.toDataURL();
+  };
+
   useEffect(() => {
     if (!isErasing) return;
 
     const stage = stageRef.current;
     const container = stage.container();
     if (isErasing) {
-      container.classList.add(styles.custom_cursor);
+      container.style.cursor = `url(${createCursor(eraserSize)}) ${
+        eraserSize / 2
+      } ${eraserSize / 2}, auto`;
     } else {
-      container.classList.remove(styles.custom_cursor);
+      container.style.cursor = "auto";
     }
 
     stage.on("mousedown touchstart", (e) => {
@@ -93,6 +117,8 @@ const EraserKonva = ({ isErasing, stageRef, pushStateToHistory }) => {
     handleMouseDown,
     handleMouseMove,
     handleMouseUp,
+    eraserSize,
+    scale,
   ]);
 
   return null;
