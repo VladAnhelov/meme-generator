@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./AddFaceByUserModal.module.scss";
-import removeBackground from "./RemoveBackground.js";
 import CanvasUserFace from "/Users/vladanhelov/Desktop/meme-generator/src/components/canvas/CanvasUserFace.js";
 import CanvasZoomControls from "/Users/vladanhelov/Desktop/meme-generator/src/components/canvas/CanvasZoomControls.js";
 
@@ -19,7 +18,6 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [isSaveIconActive, setIsSaveIconActive] = React.useState(false);
 
   const canvasUserFaceRef = React.useRef(null);
-  const apiKey = "MXgyYrcr6m4fRh9TCgB2pLhD";
 
   const handleTouchStart = (e) => {
     const currentTime = new Date().getTime();
@@ -54,8 +52,8 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
     const file = event.target.files[0];
     if (!file) return;
 
-    const noBackgroundImage = await removeBackground(file, apiKey);
-    setImage(`data:image/png;base64,${noBackgroundImage}`);
+    const imageUrl = URL.createObjectURL(file);
+    setImage(imageUrl);
   };
 
   const handleClick = (e) => {

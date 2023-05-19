@@ -19,6 +19,7 @@ export default function AddFaceModal({ addImageToCanvas }) {
     "https://i.ibb.co/y48xS9x/upload-c1bba924-5625-453e-8242-621336418884.webp",
     "https://i.ibb.co/crmWhM2/upload-e0b91f3b-2d4d-4620-825b-381e384b9fd4.webp",
     "https://i.ibb.co/s59ztVS/upload-dbb62459-1f17-419b-bcc9-773232bbe662.webp",
+    "https://i.ibb.co/8Y1GsW8/62.png",
   ];
 
   const addImgClick = (e) => {
