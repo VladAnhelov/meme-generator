@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-// eslint-disable-next-line
-
 import React from "react";
 import styles from "./AddFaceByUserModal.module.scss";
 import CanvasUserFace from "../../canvas/CanvasUserFace.js";
