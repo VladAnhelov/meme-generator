@@ -10,6 +10,10 @@
   margin-top: 5px;
 }
 
+.custom_cursor {
+  cursor: url("https://img.icons8.com/ios/20/null/circled.png") 10 10, auto;
+}
+
 .block_add {
   width: 30px;
   height: 25px;
@@ -59,10 +63,10 @@
   background-color: #d7d5d5b1;
   border: 1px solid #808080;
   border-radius: 1rem;
-  padding: 20px;
+  padding: 10px;
   position: relative;
   width: 350px;
-  height: 220px;
+  height: 230px;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
@@ -84,8 +88,8 @@
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  right: 15px;
-  top: 15px;
+  right: 10px;
+  top: 10px;
   width: 20px;
   height: 20px;
   border-radius: 10px;
@@ -107,19 +111,25 @@
 }
 
 .userFacePreview {
-  width: 130px;
-  height: 130px;
-  border-radius: 10px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
   background-color: #ffffffe6;
   border: 1px solid #b3b3b3;
 }
 
 .custom_file_upload {
+  @include MemeMain.defaultButton();
+  @include MemeMain.font();
   border: 1px solid #ccc;
-  background-color: #b7d2b6;
+  background-color: #19a7ce;
   width: 100px;
-  height: 36px;
-  border-radius: 10px;
+  font-size: 13px;
+  height: 25px;
+  margin: 0px;
+  margin-top: 8px;
+  padding: 0px;
+  border-radius: 7px;
   padding: 6px 12px;
   cursor: pointer;
 }
@@ -128,11 +138,76 @@ input[type="file"] {
 }
 
 .custom_file_upload:hover {
-  background-color: #b8e9b6;
+  background-color: #6096b4;
 }
 
 .upload_and_preview_block {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.canvasPreview canvas {
+  border-radius: 90px;
+}
+
+.eraserButton,
+.saveButton,
+.zoom_plus_button,
+.zoom_minus_button,
+.undoButton,
+.redoButton {
+  border: none;
+  background-color: none;
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+}
+.eraserIcon,
+.saveIcon,
+.zoom_plus_icon,
+.zoom_minus_icon,
+.undoIcon,
+.redoIcon {
+  width: 30px;
+  transition: all 0.3s ease-in-out; /* Add a smooth transition */
+}
+
+.eraserIcon:hover,
+.zoom_plus_icon:hover,
+.saveIcon:hover,
+.zoom_minus_icon:hover,
+.redoIcon:hover,
+.undoIcon:hover {
+  animation: eraserHover 0.5s infinite; /* Apply the animation on hover */
+}
+
+@keyframes eraserHover {
+  0% {
+    transform: rotate(0deg) scale(1); /* Start with no rotation and original scale */
+  }
+  50% {
+    transform: rotate(10deg) scale(1.01); /* Rotate 20 degrees and scale up */
+  }
+  100% {
+    transform: rotate(0deg) scale(1); /* Return to original rotation and scale */
+  }
+}
+
+.eraserIcon_active,
+.saveIcon_active {
+  background-color: #0067b56f;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.edit_block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.edit_block_items {
+  display: flex;
 }
