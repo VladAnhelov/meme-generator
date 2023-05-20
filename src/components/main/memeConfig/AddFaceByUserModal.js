@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/alt-text */
+// eslint-disable-next-line
+
 import React from "react";
 import styles from "./AddFaceByUserModal.module.scss";
-import CanvasUserFace from "/Users/vladanhelov/Desktop/meme-generator/src/components/canvas/CanvasUserFace.js";
-import CanvasZoomControls from "/Users/vladanhelov/Desktop/meme-generator/src/components/canvas/CanvasZoomControls.js";
+import CanvasUserFace from "../../canvas/CanvasUserFace.js";
+import CanvasZoomControls from "../../canvas/CanvasZoomControls.js";
 
 export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [showModal, setShowModal] = React.useState(false);
