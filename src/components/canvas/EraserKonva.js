@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import styles from "/Users/vladanhelov/Desktop/meme-generator/src/components/main/memeConfig/AddFaceByUserModal.module.scss";
+import styles from "../main/memeConfig/AddFaceByUserModals.module.scss";
 import Konva from "konva";
 
 const EraserKonva = ({

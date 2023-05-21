@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./AddFaceByUserModal.module.scss";
+import styles from "./AddFaceByUserModals.module.scss";
 import CanvasUserFace from "../../canvas/CanvasUserFace.js";
 import CanvasZoomControls from "../../canvas/CanvasZoomControls.js";
 
