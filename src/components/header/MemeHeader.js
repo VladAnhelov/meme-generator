@@ -8,7 +8,7 @@ export default function MemeHeader() {
       <div className={styles.block}>
         <img
           className={styles.trollfaceHeader}
-          src="https://img.icons8.com/stickers/100/null/trollface.png"
+          src="https://stock-image.s3.amazonaws.com/editted-logo-fav-2.png"
           alt=""
         />
         <div className={styles.block_headerName}>
