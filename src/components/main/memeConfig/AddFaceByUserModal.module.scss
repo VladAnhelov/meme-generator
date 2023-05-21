@@ -1,3 +1,5 @@
+@use "../MemeMain.module.scss";
+
 .block {
   display: flex;
   flex-direction: row;
@@ -24,7 +26,9 @@
 }
 
 .chooseUserFace {
+  @include MemeMain.font();
   font-size: 12px;
+  @include MemeMain.defaultButton();
   margin: 0px;
   padding: 0px;
   background-color: #03b500;
@@ -91,6 +95,7 @@
   border-radius: 10px;
   border: none;
   background-color: #db4949;
+  color: MemeMain.$color;
   cursor: pointer;
 }
 
@@ -114,6 +119,8 @@
 }
 
 .custom_file_upload {
+  @include MemeMain.defaultButton();
+  @include MemeMain.font();
   border: 1px solid #ccc;
   background-color: #19a7ce;
   width: 100px;
