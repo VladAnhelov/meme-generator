@@ -1,5 +1,6 @@
 import React from "react";
 import loginModalStyle from "./LoginModal.module.scss";
+import NavBarMenu from "../../header/NavBarMenu.js";
 
 export default function LoginModal({ setShowModal }) {
   const handleClick = (e) => {
@@ -12,6 +13,7 @@ export default function LoginModal({ setShowModal }) {
         <div className={loginModalStyle.remove_bg_modal}>
           <div className={loginModalStyle.login_warning_content}>
             <p>This feature works only if you sign up or sign in</p>
+            <NavBarMenu />
             <button className={loginModalStyle.close_btn} onClick={handleClick}>
               X
             </button>

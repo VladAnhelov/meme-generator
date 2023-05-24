@@ -12,12 +12,12 @@ import button from "./NavBarMenu.module.scss";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"; // import storage from your firebase.js file
 
 export default function AccountModal() {
+  const DEFAULT_AVATAR = "https://img.icons8.com/fluency/96/null/doge.png";
   const [click, setClick] = React.useState(false);
   const [showAccountMenu, setShowAccountMenu] = React.useState(false);
   const [file, setFile] = React.useState(null);
   const [avatarURL, setAvatarURL] = React.useState(
-    localStorage.getItem("avatarURL") ||
-      "https://img.icons8.com/fluency/96/null/doge.png",
+    localStorage.getItem("avatarURL") || DEFAULT_AVATAR,
   );
   const [previewURL, setPreviewURL] = React.useState(null);
 
@@ -55,6 +55,7 @@ export default function AccountModal() {
   };
 
   const handleFileChange = (e) => {
+    console.log("click");
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
