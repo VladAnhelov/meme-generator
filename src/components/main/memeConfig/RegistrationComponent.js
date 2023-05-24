@@ -41,7 +41,7 @@ export default function RegistrationComponent({ onClose, onSignUp }) {
 
       onSignUp(userToStore);
       localStorage.setItem("user", JSON.stringify(userToStore));
-
+      window.location.reload();
       onClose();
     } catch (error) {
       alert(`Error creating user: ${error.message}`);

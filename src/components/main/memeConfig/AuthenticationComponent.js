@@ -21,7 +21,7 @@ export default function AuthenticationComponent({ onClose, onSignIn }) {
 
       onSignIn(userToStore);
       localStorage.setItem("user", JSON.stringify(userToStore));
-
+      window.location.reload();
       onClose();
     } catch (error) {
       alert(`Error signing in: ${error.message}`);
