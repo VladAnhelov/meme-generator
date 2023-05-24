@@ -49,6 +49,7 @@ export default function AccountModal() {
       await signOut(auth);
       localStorage.clear("avatarURL", avatarURL);
       alert("Signed out successfully.");
+      window.location.reload();
     } catch (error) {
       alert(`Error signing out: ${error.message}`);
     }

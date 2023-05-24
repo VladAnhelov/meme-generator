@@ -88,7 +88,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
           <div className={styles.block_add}></div>
         </button>
       </div>
-      {showModal && !isSignedIn ? (
+      {showModal && isSignedIn ? (
         <LoginModal setShowModal={setShowModal} />
       ) : (
         <div
@@ -106,7 +106,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
                 className={styles.custom_file_upload}
                 onChange={handleImageUpload}
               >
-                <input type="file" />
+                <input type="file" className={styles.input_file} />
                 Upload
               </label>
               <div className={styles.edit_block}>
