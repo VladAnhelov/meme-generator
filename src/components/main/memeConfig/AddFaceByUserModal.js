@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./AddFaceByUserModal.module.scss";
 import CanvasUserFace from "../../canvas/CanvasUserFace.js";
 import CanvasZoomControls from "../../canvas/CanvasZoomControls.js";
+import { auth, onAuthStateChanged } from "../../firebase.js";
+
 import LoginModal from "./LoginModal.js";
 
 export default function AddFaceByUserModal({ addImageToCanvas }) {
@@ -15,7 +17,20 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [isEraserIconActive, setIsEraserIconActive] = React.useState(false);
   const [isSaveIconActive, setIsSaveIconActive] = React.useState(false);
   const canvasUserFaceRef = React.useRef(null);
-  const [isSignedIn] = React.useState(false);
+  const [isSignedIn, setIsSignedIn] = React.useState(false);
+
+  React.useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsSignedIn(true);
+      } else {
+        setIsSignedIn(false);
+      }
+    });
+
+    // Clean up the subscription
+    return () => unsubscribe();
+  }, []);
 
   const handleTouchStart = (e) => {
     const currentTime = new Date().getTime();
@@ -88,7 +103,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
           <div className={styles.block_add}></div>
         </button>
       </div>
-      {showModal && isSignedIn ? (
+      {showModal && !isSignedIn ? (
         <LoginModal setShowModal={setShowModal} />
       ) : (
         <div
