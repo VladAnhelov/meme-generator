@@ -15,7 +15,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
   const [isEraserIconActive, setIsEraserIconActive] = React.useState(false);
   const [isSaveIconActive, setIsSaveIconActive] = React.useState(false);
   const canvasUserFaceRef = React.useRef(null);
-  const [isSignedIn, setIsSignedIn] = React.useState(false);
+  const [isSignedIn] = React.useState(false);
 
   const handleTouchStart = (e) => {
     const currentTime = new Date().getTime();
