@@ -60,6 +60,8 @@
   left: 0;
   position: fixed;
   top: 0;
+  border-radius: 1rem;
+
   width: 100%;
   z-index: 1;
   opacity: 0;
@@ -70,6 +72,7 @@
 
 .modal.show {
   opacity: 1;
+  border-radius: 1rem;
   visibility: visible;
   transform: translateY(0);
 }
@@ -142,7 +145,7 @@
 .submitBtn {
   @include MemeMain.defaultButton();
   font-family: "Bruno Ace SC", cursive;
-  width: 100px;
+  width: 130px;
   background: #0077b5;
   border: 1px solid;
   text-decoration: none;
@@ -151,6 +154,21 @@
 .submitBtn:hover {
   background: MemeMain.$color;
   color: #0077b5;
+}
+
+.errorMessage {
+  color: #db4949;
+  font-size: 13px;
+}
+
+.error {
+  border: 1px solid red;
+}
+
+.buttonBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 @media (max-width: 576px) {

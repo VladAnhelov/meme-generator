@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../main/memeConfig/AddFaceByUserModals.module.scss";
+import styles from "../main/memeConfig/AddFaceByUserModal.module.scss";
 
 const CanvasZoomControls = ({ onZoomIn, onZoomOut }) => {
   return (

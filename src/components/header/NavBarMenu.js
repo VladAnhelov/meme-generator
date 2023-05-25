@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from "react";
-import {
-  auth,
-  db,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  updateProfile,
-} from "../firebase.js";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import React, { useState } from "react";
+
 import styles from "./NavBarMenu.module.scss";
+import AuthenticationComponent from "../main/memeConfig/AuthenticationComponent.js";
+import RegistrationComponent from "../main/memeConfig/RegistrationComponent.js";
 import AccountModal from "./AccountModal.js";
 
 export default function NavBarMenu() {
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null,
+  );
+  const [isSignedIn, setIsSignedIn] = useState(user != null);
 
   const handleCloseSignIn = () => setShowSignIn(false);
   const handleShowSignIn = () => setShowSignIn(true);
@@ -23,76 +19,22 @@ export default function NavBarMenu() {
   const handleCloseSignUp = () => setShowSignUp(false);
   const handleShowSignUp = () => setShowSignUp(true);
 
-  const handleSignUp = async (event) => {
-    event.preventDefault();
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-
-    try {
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
-
-      // Update user profile with displayName
-      await updateProfile(user, { displayName: name });
-
-      // Store user data in Firestore
-      await addDoc(collection(db, "users"), {
-        uid: user.uid,
-        email: user.email,
-        name: user.displayName,
-        createdAt: serverTimestamp(),
-      });
-
-      alert("User successfully created.");
-      handleCloseSignUp();
-    } catch (error) {
-      alert(`Error creating user: ${error.message}`);
-    }
+  // Inside AuthenticationComponent and RegistrationComponent
+  const handleSignIn = (user) => {
+    console.log("Signing in with user", user); // Debug output
+    setIsSignedIn(true);
+    setUser(user);
+    setShowSignIn(false);
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
-  const handleSignIn = async (event) => {
-    event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("Signed in successfully.");
-      handleCloseSignIn();
-    } catch (error) {
-      alert(`Error signing in: ${error.message}`);
-    }
+  const handleSignUp = (user) => {
+    console.log("Signing up with user", user); // Debug output
+    setIsSignedIn(true);
+    setUser(user);
+    setShowSignUp(false);
+    localStorage.setItem("user", JSON.stringify(user));
   };
-
-  const handleAuthStateChanged = (user) => {
-    if (user) {
-      setIsSignedIn(true);
-      setUser(user);
-      localStorage.setItem("user", JSON.stringify(user));
-    } else {
-      setIsSignedIn(false);
-      setUser(null);
-      localStorage.removeItem("user");
-    }
-  };
-
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser) {
-      setIsSignedIn(true);
-      setUser(storedUser);
-    }
-
-    const unsubscribe = onAuthStateChanged(auth, handleAuthStateChanged);
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
   return (
     <div className={styles.navbar}>
       <ul className={styles.navbarMenu}>
@@ -109,38 +51,11 @@ export default function NavBarMenu() {
                 showSignIn ? `${styles.show}` : ""
               }`}
             >
-              <div className={styles.modalContent}>
-                <div className={styles.loginForm}>
-                  <h2 className={styles.modalText}>Sign In</h2>
-                  <form
-                    className={styles.modalFormInput}
-                    onSubmit={handleSignIn}
-                    action=""
-                  >
-                    <input
-                      type="text"
-                      name="email"
-                      className={styles.formControl}
-                      placeholder="Email"
-                    ></input>
-                    <input
-                      type="password"
-                      name="password"
-                      className={styles.formControl}
-                      placeholder="Password"
-                    ></input>
-                    <button type="submit" className={styles.submitBtn}>
-                      Login
-                    </button>
-                  </form>
-                </div>
-                <button
-                  className={styles.closeButtonModal}
-                  onClick={handleCloseSignIn}
-                >
-                  X
-                </button>
-              </div>
+              {" "}
+              <AuthenticationComponent
+                onClose={handleCloseSignIn}
+                onSignIn={handleSignIn}
+              />
             </div>
           </li>
         )}
@@ -157,43 +72,10 @@ export default function NavBarMenu() {
                 showSignUp ? `${styles.show}` : ""
               }`}
             >
-              <div className={styles.modalContent}>
-                <div className={styles.loginForm}>
-                  <h2 className={styles.modalText}>Sign Up</h2>
-                  <form
-                    className={styles.modalFormInput}
-                    onSubmit={handleSignUp}
-                  >
-                    <input
-                      type="text"
-                      name="name"
-                      className={styles.formControl}
-                      placeholder="Name"
-                    ></input>
-                    <input
-                      type="text"
-                      name="email"
-                      className={styles.formControl}
-                      placeholder="Email"
-                    ></input>
-                    <input
-                      type="password"
-                      name="password"
-                      className={styles.formControl}
-                      placeholder="Password"
-                    ></input>
-                    <button type="submit" className={styles.submitBtn}>
-                      Sign Up
-                    </button>
-                  </form>
-                </div>
-                <button
-                  className={styles.closeButtonModal}
-                  onClick={handleCloseSignUp}
-                >
-                  X
-                </button>
-              </div>
+              <RegistrationComponent
+                onClose={handleCloseSignUp}
+                onSignUp={handleSignUp}
+              />
             </div>
           </li>
         )}
