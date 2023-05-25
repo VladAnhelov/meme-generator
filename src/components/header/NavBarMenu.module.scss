@@ -145,7 +145,7 @@
 .submitBtn {
   @include MemeMain.defaultButton();
   font-family: "Bruno Ace SC", cursive;
-  width: 100px;
+  width: 130px;
   background: #0077b5;
   border: 1px solid;
   text-decoration: none;
@@ -163,6 +163,12 @@
 
 .error {
   border: 1px solid red;
+}
+
+.buttonBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 @media (max-width: 576px) {

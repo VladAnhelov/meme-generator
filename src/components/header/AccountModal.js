@@ -9,6 +9,8 @@ import {
 import { auth, signOut, storage, db } from "../firebase.js";
 import styles from "./AccountModal.module.scss";
 import button from "./NavBarMenu.module.scss";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"; // import storage from your firebase.js file
 
 export default function AccountModal() {
@@ -46,12 +48,12 @@ export default function AccountModal() {
 
   const handleSignOut = async () => {
     try {
+      toast.error("Signed out successfully.");
       await signOut(auth);
       localStorage.clear("avatarURL", avatarURL);
-      alert("Signed out successfully.");
       window.location.reload();
     } catch (error) {
-      alert(`Error signing out: ${error.message}`);
+      toast.error(`Error signing out: ${error.message}`);
     }
   };
 
@@ -66,7 +68,7 @@ export default function AccountModal() {
 
   const uploadAvatar = async () => {
     if (!file) {
-      alert("No file selected.");
+      toast.error("No file selected.");
       return;
     }
     const storageRef = ref(storage, `/files/${file.name}`);
@@ -113,65 +115,68 @@ export default function AccountModal() {
   };
 
   return (
-    <div className={styles.block}>
-      <img
-        className={styles.account_icon}
-        src={avatarURL}
-        alt=""
-        onClick={handleClick}
-      />
-      <div
-        className={`${styles.account_smallMenu} ${
-          showAccountMenu ? `${styles.show}` : ""
-        }`}
-      >
-        <div className={styles.block}>
-          <p className={styles.block_textItem}>Account Menu</p>
-        </div>
-        {auth.currentUser && (
-          <div className={styles.block}>
-            <p className={styles.block_textItem}>
-              Hello {auth.currentUser.displayName}!
-            </p>
-          </div>
-        )}
-        <div className={styles.fileInputContainer}>
-          {previewURL ? (
-            <img
-              src={previewURL}
-              alt="Avatar preview"
-              className={styles.avatarPreview}
-            />
-          ) : (
-            <img
-              src="https://img.icons8.com/dotty/80/null/edit-user-female.png"
-              alt=""
-              className={styles.fileInputIcon}
-            />
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            className={styles.fileInput}
-          />
-        </div>
-        <button
-          onClick={uploadAvatar}
-          className={styles.uploadButton}
-          disabled={!file}
+    <>
+      <ToastContainer />
+      <div className={styles.block}>
+        <img
+          className={styles.account_icon}
+          src={avatarURL}
+          alt=""
+          onClick={handleClick}
+        />
+        <div
+          className={`${styles.account_smallMenu} ${
+            showAccountMenu ? `${styles.show}` : ""
+          }`}
         >
-          Upload avatar
-        </button>
-        <div className={styles.block_buttomItem}>
+          <div className={styles.block}>
+            <p className={styles.block_textItem}>Account Menu</p>
+          </div>
+          {auth.currentUser && (
+            <div className={styles.block}>
+              <p className={styles.block_textItem}>
+                Hello {auth.currentUser.displayName}!
+              </p>
+            </div>
+          )}
+          <div className={styles.fileInputContainer}>
+            {previewURL ? (
+              <img
+                src={previewURL}
+                alt="Avatar preview"
+                className={styles.avatarPreview}
+              />
+            ) : (
+              <img
+                src="https://img.icons8.com/dotty/80/null/edit-user-female.png"
+                alt=""
+                className={styles.fileInputIcon}
+              />
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              className={styles.fileInput}
+            />
+          </div>
           <button
-            onClick={handleSignOut}
-            className={`${button.navbarMenuLink} ${button.signOut}`}
+            onClick={uploadAvatar}
+            className={styles.uploadButton}
+            disabled={!file}
           >
-            Sign Out
+            Upload avatar
           </button>
+          <div className={styles.block_buttomItem}>
+            <button
+              onClick={handleSignOut}
+              className={`${button.navbarMenuLink} ${button.signOut}`}
+            >
+              Sign Out
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

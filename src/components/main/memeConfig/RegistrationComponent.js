@@ -7,6 +7,8 @@ import {
 } from "../../firebase.js";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import styles from "../../header/NavBarMenu.module.scss";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function RegistrationComponent({ onClose, onSignUp }) {
   const [name, setName] = useState("");
@@ -32,7 +34,7 @@ export default function RegistrationComponent({ onClose, onSignUp }) {
         createdAt: serverTimestamp(),
       });
 
-      alert("User successfully created.");
+      toast.success("User successfully created.");
       const userToStore = {
         displayName: user.displayName,
         email: user.email,
@@ -44,47 +46,50 @@ export default function RegistrationComponent({ onClose, onSignUp }) {
       window.location.reload();
       onClose();
     } catch (error) {
-      alert(`Error creating user: ${error.message}`);
+      toast.error(`Error creating user: ${error.message}`);
     }
   };
 
   return (
-    <div className={styles.modalContent}>
-      <div className={styles.loginForm}>
-        <h2 className={styles.modalText}>Sign Up</h2>
-        <form className={styles.modalFormInput} onSubmit={handleSignUp}>
-          <input
-            type="text"
-            name="name"
-            className={styles.formControl}
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="email"
-            name="email"
-            className={styles.formControl}
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            name="password"
-            className={styles.formControl}
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit" className={styles.submitBtn}>
-            Sign Up
-          </button>
-        </form>
+    <>
+      <ToastContainer />
+      <div className={styles.modalContent}>
+        <div className={styles.loginForm}>
+          <h2 className={styles.modalText}>Sign Up</h2>
+          <form className={styles.modalFormInput} onSubmit={handleSignUp}>
+            <input
+              type="text"
+              name="name"
+              className={styles.formControl}
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="email"
+              name="email"
+              className={styles.formControl}
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              name="password"
+              className={styles.formControl}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button type="submit" className={styles.submitBtn}>
+              Sign Up
+            </button>
+          </form>
+        </div>
+        <button className={styles.closeButtonModal} onClick={onClose}>
+          X
+        </button>
       </div>
-      <button className={styles.closeButtonModal} onClick={onClose}>
-        X
-      </button>
-    </div>
+    </>
   );
 }

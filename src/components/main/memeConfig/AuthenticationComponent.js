@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { auth, signInWithEmailAndPassword } from "../../firebase.js";
+import {
+  auth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "../../firebase.js";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import styles from "../../header/NavBarMenu.module.scss";
 
 export default function AuthenticationComponent({ onClose, onSignIn }) {
@@ -14,7 +21,7 @@ export default function AuthenticationComponent({ onClose, onSignIn }) {
   };
 
   const validatePassword = () => {
-    return password.length >= 8;
+    return password.length >= 6;
   };
 
   const handleSignIn = async (event) => {
@@ -39,7 +46,7 @@ export default function AuthenticationComponent({ onClose, onSignIn }) {
           email,
           password,
         );
-        alert("Signed in successfully.");
+        toast.success("Signed in successfully.");
 
         const userToStore = {
           displayName: user.displayName,
@@ -52,50 +59,71 @@ export default function AuthenticationComponent({ onClose, onSignIn }) {
         window.location.reload();
         onClose();
       } catch (error) {
-        alert(`Error signing in: ${error.message}`);
+        toast.error(`Error signing in: ${error.message}`);
       }
     }
   };
 
+  const handleResetPassword = async () => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      toast.success("Password reset email sent!");
+    } catch (error) {
+      toast.error(`Error sending password reset email: ${error.message}`);
+    }
+  };
+
   return (
-    <div className={styles.modalContent}>
-      <div className={styles.loginForm}>
-        <h2 className={styles.modalText}>Sign In</h2>
-        <form className={styles.modalFormInput} onSubmit={handleSignIn}>
-          <input
-            type="email"
-            name="email"
-            className={`${styles.formControl} ${
-              emailError ? styles.error : ""
-            }`}
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {emailError && (
-            <div className={styles.errorMessage}>{emailError}</div>
-          )}
-          <input
-            type="password"
-            name="password"
-            className={`${styles.formControl} ${
-              passwordError ? styles.error : ""
-            }`}
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {passwordError && (
-            <div className={styles.errorMessage}>{passwordError}</div>
-          )}
-          <button type="submit" className={styles.submitBtn}>
-            Sign In
-          </button>
-        </form>
+    <>
+      <ToastContainer />
+      <div className={styles.modalContent}>
+        <div className={styles.loginForm}>
+          <h2 className={styles.modalText}>Sign In</h2>
+          <form className={styles.modalFormInput} onSubmit={handleSignIn}>
+            <input
+              type="email"
+              name="email"
+              className={`${styles.formControl} ${
+                emailError ? styles.error : ""
+              }`}
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {emailError && (
+              <div className={styles.errorMessage}>{emailError}</div>
+            )}
+            <input
+              type="password"
+              name="password"
+              className={`${styles.formControl} ${
+                passwordError ? styles.error : ""
+              }`}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {passwordError && (
+              <div className={styles.errorMessage}>{passwordError}</div>
+            )}
+            <div className={styles.buttonBlock}>
+              <button type="submit" className={styles.submitBtn}>
+                Sign In
+              </button>
+              <button
+                type="button"
+                className={styles.submitBtn}
+                onClick={handleResetPassword}
+              >
+                Reset Password
+              </button>
+            </div>
+          </form>
+        </div>
+        <button className={styles.closeButtonModal} onClick={onClose}>
+          X
+        </button>
       </div>
-      <button className={styles.closeButtonModal} onClick={onClose}>
-        X
-      </button>
-    </div>
+    </>
   );
 }
