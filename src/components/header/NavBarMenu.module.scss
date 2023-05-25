@@ -156,6 +156,15 @@
   color: #0077b5;
 }
 
+.errorMessage {
+  color: #db4949;
+  font-size: 13px;
+}
+
+.error {
+  border: 1px solid red;
+}
+
 @media (max-width: 576px) {
   .navbarMenu {
     flex-direction: column;
