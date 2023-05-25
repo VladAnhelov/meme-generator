@@ -11,12 +11,12 @@ import styles from "./AccountModal.module.scss";
 import button from "./NavBarMenu.module.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"; // import storage from your firebase.js file
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export default function AccountModal() {
   const DEFAULT_AVATAR = "https://img.icons8.com/fluency/96/null/doge.png";
-  const [click, setClick] = React.useState(false);
   const [showAccountMenu, setShowAccountMenu] = React.useState(false);
+
   const [file, setFile] = React.useState(null);
   const [avatarURL, setAvatarURL] = React.useState(
     localStorage.getItem("avatarURL") || DEFAULT_AVATAR,
@@ -26,29 +26,29 @@ export default function AccountModal() {
   const currentUser = auth.currentUser;
 
   React.useEffect(() => {
-    if (currentUser && currentUser.photoURL) {
-      setAvatarURL(currentUser.photoURL);
+    if (currentUser) {
+      fetchUserData(currentUser.uid);
     }
   }, [currentUser]);
 
-  React.useEffect(() => {
-    if (avatarURL) {
-      localStorage.setItem("avatarURL", avatarURL);
-    }
-  }, [avatarURL]);
-  const handleClick = () => {
-    if (!click) {
-      setShowAccountMenu(true);
-      setClick(true);
-    } else {
-      setShowAccountMenu(false);
-      setClick(false);
+  const fetchUserData = async (uid) => {
+    try {
+      const userDocRef = doc(db, "users", uid);
+      const userDocSnapshot = await getDoc(userDocRef);
+
+      if (userDocSnapshot.exists()) {
+        setAvatarURL(userDocSnapshot.data().photoURL);
+      }
+    } catch (error) {
+      toast.error(`Error fetching user data: ${error.message}`);
     }
   };
 
+  const handleClick = () => setShowAccountMenu(!showAccountMenu);
+
   const handleSignOut = async () => {
     try {
-      toast.error("Signed out successfully.");
+      toast.success("Signed out successfully.");
       await signOut(auth);
       localStorage.clear("avatarURL", avatarURL);
       window.location.reload();
@@ -58,7 +58,6 @@ export default function AccountModal() {
   };
 
   const handleFileChange = (e) => {
-    console.log("click");
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
@@ -71,44 +70,40 @@ export default function AccountModal() {
       toast.error("No file selected.");
       return;
     }
+
     const storageRef = ref(storage, `/files/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
-    getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
-      console.log(url);
-      setAvatarURL(url);
-      console.log(auth);
-      if (auth.currentUser) {
-        // Add null check here
-        if (auth.currentUser.updateProfile) {
-          await auth.currentUser.updateProfile({ photoURL: url });
-        }
-
-        // Update user's data in Firestore
-        const userDocRef = doc(db, "users", auth.currentUser.uid);
-        const userDocSnapshot = await getDoc(userDocRef);
-
-        if (userDocSnapshot.exists()) {
-          // Update the existing document
-          await updateDoc(userDocRef, { photoURL: url });
-        } else {
-          // Create a new document with the required fields
-          await setDoc(userDocRef, {
-            uid: auth.currentUser.uid,
-            email: auth.currentUser.email,
-            name: auth.currentUser.displayName,
-            photoURL: url,
-            createdAt: serverTimestamp(),
-          });
-        }
-      }
-    });
-
     uploadTask.on(
-      (err) => console.log(err),
+      "state_changed",
+      (snapshot) => {},
+      (error) => {
+        toast.error(`Error uploading file: ${error.message}`);
+      },
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          console.log(url);
+        getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
+          setAvatarURL(url);
+          if (
+            auth.currentUser &&
+            typeof auth.currentUser.updateProfile === "function"
+          ) {
+            await auth.currentUser.updateProfile({ photoURL: url });
+
+            const userDocRef = doc(db, "users", auth.currentUser.uid);
+            const userDocSnapshot = await getDoc(userDocRef);
+
+            if (userDocSnapshot.exists()) {
+              await updateDoc(userDocRef, { photoURL: url });
+            } else {
+              await setDoc(userDocRef, {
+                uid: auth.currentUser.uid,
+                email: auth.currentUser.email,
+                name: auth.currentUser.displayName,
+                photoURL: url,
+                createdAt: serverTimestamp(),
+              });
+            }
+          }
         });
       },
     );
