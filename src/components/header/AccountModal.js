@@ -1,12 +1,12 @@
 import React from "react";
 import {
   getDoc,
-  setDoc,
   updateDoc,
   doc,
+  setDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { auth, signOut, storage, db } from "../firebase.js";
+import { auth, signOut, updateProfile, storage, db } from "../firebase.js";
 import styles from "./AccountModal.module.scss";
 import button from "./NavBarMenu.module.scss";
 import { toast, ToastContainer } from "react-toastify";
@@ -21,9 +21,17 @@ export default function AccountModal() {
   const [avatarURL, setAvatarURL] = React.useState(
     localStorage.getItem("avatarURL") || DEFAULT_AVATAR,
   );
+
   const [previewURL, setPreviewURL] = React.useState(null);
 
   const currentUser = auth.currentUser;
+
+  //console.log(currentUser.country);
+  // console.log(currentUser.region);
+  console.log(currentUser.displayName);
+  console.log(currentUser.metadata.creationTime);
+  console.log(currentUser.email);
+  console.log(currentUser.uid);
 
   React.useEffect(() => {
     if (currentUser) {
@@ -37,7 +45,8 @@ export default function AccountModal() {
       const userDocSnapshot = await getDoc(userDocRef);
 
       if (userDocSnapshot.exists()) {
-        setAvatarURL(userDocSnapshot.data().photoURL);
+        const userData = userDocSnapshot.data();
+        setAvatarURL(userData.photoURL);
       }
     } catch (error) {
       toast.error(`Error fetching user data: ${error.message}`);
@@ -80,31 +89,43 @@ export default function AccountModal() {
       (error) => {
         toast.error(`Error uploading file: ${error.message}`);
       },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
-          setAvatarURL(url);
-          if (
-            auth.currentUser &&
-            typeof auth.currentUser.updateProfile === "function"
-          ) {
-            await auth.currentUser.updateProfile({ photoURL: url });
+      async () => {
+        try {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 
+          setAvatarURL(downloadURL);
+
+          if (auth.currentUser) {
             const userDocRef = doc(db, "users", auth.currentUser.uid);
             const userDocSnapshot = await getDoc(userDocRef);
 
             if (userDocSnapshot.exists()) {
-              await updateDoc(userDocRef, { photoURL: url });
+              // Update the user's data and add the photoURL field
+              await updateDoc(userDocRef, {
+                photoURL: downloadURL,
+              });
             } else {
+              // Create the user's data with the photoURL field
               await setDoc(userDocRef, {
                 uid: auth.currentUser.uid,
                 email: auth.currentUser.email,
                 name: auth.currentUser.displayName,
-                photoURL: url,
+                country: auth.currentUser.country || "", // Set a default value if country is undefined
+                region: auth.currentUser.region || "",
+                photoURL: downloadURL,
                 createdAt: serverTimestamp(),
               });
             }
+
+            // Update the user's profile photo
+            await updateProfile(auth.currentUser, { photoURL: downloadURL });
+
+            toast.success("Profile photo uploaded successfully.");
           }
-        });
+        } catch (error) {
+          console.log(error.message);
+          toast.error(`Error updating profile photo: ${error.message}`);
+        }
       },
     );
   };
@@ -130,8 +151,9 @@ export default function AccountModal() {
           {auth.currentUser && (
             <div className={styles.block}>
               <p className={styles.block_textItem}>
-                Hello {auth.currentUser.displayName}!
+                Hello {auth.currentUser.displayName}!{auth.currentUser.country}
               </p>
+              <p className={styles.block_textItem}></p>
             </div>
           )}
           <div className={styles.fileInputContainer}>
