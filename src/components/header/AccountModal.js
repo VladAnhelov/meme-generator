@@ -13,6 +13,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import anime from "animejs/lib/anime.es.js";
 
 export default function AccountModal() {
   const DEFAULT_AVATAR = "https://img.icons8.com/fluency/96/null/doge.png";
@@ -29,6 +30,8 @@ export default function AccountModal() {
   const [region, setRegion] = React.useState("");
 
   const currentUser = auth.currentUser;
+
+  const modalRef = React.useRef(null);
 
   React.useEffect(() => {
     if (currentUser) {
@@ -50,7 +53,31 @@ export default function AccountModal() {
     }
   };
 
-  const handleClick = () => setShowAccountMenu(!showAccountMenu);
+  const handleClick = () => {
+    if (showAccountMenu) {
+      anime({
+        targets: modalRef.current,
+        translateY: [-15, -100],
+        translateX: [5, 100],
+        scale: [1, 0.1],
+        opacity: [1, 0],
+        duration: 300,
+        easing: "easeInExpo",
+        complete: () => setShowAccountMenu(false),
+      });
+    } else {
+      anime({
+        targets: modalRef.current,
+        translateY: [-100, -15],
+        translateX: [100, 5],
+        scale: [0.1, 1],
+        opacity: [0, 1],
+        duration: 800,
+        easing: "easeOutElastic(1, .5)",
+        begin: () => setShowAccountMenu(true),
+      });
+    }
+  };
 
   const handleSignOut = async () => {
     try {
@@ -138,6 +165,7 @@ export default function AccountModal() {
           onClick={handleClick}
         />
         <div
+          ref={modalRef}
           className={`${styles.account_smallMenu} ${
             showAccountMenu ? `${styles.show}` : ""
           }`}
