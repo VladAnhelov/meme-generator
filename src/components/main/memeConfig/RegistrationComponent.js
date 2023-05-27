@@ -9,14 +9,11 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import styles from "../../header/NavBarMenu.module.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 export default function RegistrationComponent({ onClose, onSignUp }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [country, setCountry] = useState("");
-  const [region, setRegion] = useState("");
   const [photoURL] = useState("");
 
   const handleSignUp = async (event) => {
@@ -35,8 +32,6 @@ export default function RegistrationComponent({ onClose, onSignUp }) {
         uid: user.uid,
         email: user.email,
         name: user.displayName,
-        country: country,
-        region: region,
         photoURL: photoURL,
         createdAt: serverTimestamp(),
       };
@@ -87,17 +82,6 @@ export default function RegistrationComponent({ onClose, onSignUp }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div className={styles.countryBlock}>
-              <CountryDropdown
-                value={country}
-                onChange={(val) => setCountry(val)}
-              />
-              <RegionDropdown
-                country={country}
-                value={region}
-                onChange={(val) => setRegion(val)}
-              />
-            </div>
             <button type="submit" className={styles.submitBtn}>
               Sign Up
             </button>

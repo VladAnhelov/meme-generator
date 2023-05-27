@@ -12,6 +12,7 @@ import button from "./NavBarMenu.module.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 export default function AccountModal() {
   const DEFAULT_AVATAR = "https://img.icons8.com/fluency/96/null/doge.png";
@@ -24,14 +25,10 @@ export default function AccountModal() {
 
   const [previewURL, setPreviewURL] = React.useState(null);
 
-  const currentUser = auth.currentUser;
+  const [country, setCountry] = React.useState("");
+  const [region, setRegion] = React.useState("");
 
-  //console.log(currentUser.country);
-  // console.log(currentUser.region);
-  console.log(currentUser.displayName);
-  console.log(currentUser.metadata.creationTime);
-  console.log(currentUser.email);
-  console.log(currentUser.uid);
+  const currentUser = auth.currentUser;
 
   React.useEffect(() => {
     if (currentUser) {
@@ -110,8 +107,8 @@ export default function AccountModal() {
                 uid: auth.currentUser.uid,
                 email: auth.currentUser.email,
                 name: auth.currentUser.displayName,
-                country: auth.currentUser.country || "", // Set a default value if country is undefined
-                region: auth.currentUser.region || "",
+                country: auth.currentUser.country || "Ukraine", // Set a default value if country is undefined
+                region: auth.currentUser.region || "Lviv",
                 photoURL: downloadURL,
                 createdAt: serverTimestamp(),
               });
@@ -177,14 +174,25 @@ export default function AccountModal() {
               className={styles.fileInput}
             />
           </div>
-          <button
-            onClick={uploadAvatar}
-            className={styles.uploadButton}
-            disabled={!file}
-          >
-            Upload avatar
-          </button>
+          <div className={styles.countryBlock}>
+            <CountryDropdown
+              value={country}
+              onChange={(val) => setCountry(val)}
+            />
+            <RegionDropdown
+              country={country}
+              value={region}
+              onChange={(val) => setRegion(val)}
+            />
+          </div>
           <div className={styles.block_buttomItem}>
+            <button
+              onClick={uploadAvatar}
+              className={button.navbarMenuLink}
+              disabled={!file}
+            >
+              Save
+            </button>
             <button
               onClick={handleSignOut}
               className={`${button.navbarMenuLink} ${button.signOut}`}
