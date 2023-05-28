@@ -122,7 +122,7 @@
 }
 
 .inputGroup .input {
-  font-size: 100%;
+  font-size: 80%;
   padding: 10px;
   outline: none;
   height: 30px;
@@ -168,13 +168,125 @@
   background-color: aliceblue;
 }
 
+.block_switcher {
+  margin-left: 10px;
+}
+
+.block_swtcher_switch {
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 64px;
+  height: 30px;
+}
+
+.block_swtcher_switch .block_swtcher_switch_input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.block_swtcher_switch_slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 2px;
+  right: 0;
+  bottom: 0;
+  background-color: #73c0fc;
+  transition: 0.4s;
+  border-radius: 30px;
+}
+
+.block_swtcher_switch_slider:before {
+  position: absolute;
+  content: "";
+  height: 28px;
+  width: 28px;
+  border-radius: 20px;
+  left: 2px;
+  bottom: 1px;
+  z-index: 2;
+  background-color: #e8e8e8;
+  transition: 0.4s;
+}
+
+.block_swtcher_switch_sun svg {
+  position: absolute;
+  top: 3px;
+  left: 36px;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+}
+
+.block_swtcher_switch_moon svg {
+  fill: #73c0fc;
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+}
+
+/* .switch:hover */
+.block_swtcher_switch_sun svg {
+  animation: rotate 15s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* .switch:hover */
+.block_swtcher_switch_moon svg {
+  animation: tilt 5s linear infinite;
+}
+
+@keyframes tilt {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-10deg);
+  }
+
+  75% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.block_swtcher_switch_input:checked + .block_swtcher_switch_slider {
+  background-color: #183153;
+}
+
+.block_swtcher_switch_input:focus + .block_swtcher_switch_slider {
+  box-shadow: 0 0 1px #183153;
+}
+
+.block_swtcher_switch_input:checked + .block_swtcher_switch_slider:before {
+  transform: translateX(30px);
+}
+
 .block_buttomItem {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin: 10px;
-  margin-top: 70px;
+  margin-top: 30px;
 }
 
 .btn_save {
