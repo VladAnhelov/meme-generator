@@ -280,6 +280,68 @@
   transform: translateX(30px);
 }
 
+.block_switcher_pricing {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.block_pricing {
+  margin-top: 4px;
+  margin-right: 10px;
+}
+
+.pricing_btn {
+  position: relative;
+  font-size: 17px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid rgb(200, 200, 200);
+  width: 250px;
+  height: 30px;
+  display: inline-block;
+  border-radius: 20px;
+  transition: all 0.2s;
+  font-family: inherit;
+  font-weight: 500;
+  color: #c87ed9;
+  cursor: pointer;
+  background-color: aliceblue;
+}
+
+.pricing_btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.pricing_btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pricing_btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.pricing_btn::after {
+  background-color: #fff;
+}
+
+.pricing_btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
 .block_buttomItem {
   display: flex;
   flex-direction: row;
