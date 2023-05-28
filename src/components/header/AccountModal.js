@@ -8,7 +8,6 @@ import {
 } from "firebase/firestore";
 import { auth, signOut, updateProfile, storage, db } from "../firebase.js";
 import styles from "./AccountModal.module.scss";
-import button from "./NavBarMenu.module.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -176,7 +175,7 @@ export default function AccountModal() {
           {auth.currentUser && (
             <div className={styles.block}>
               <p className={styles.block_textItem}>
-                Hello {auth.currentUser.displayName}!
+                Hello {auth.currentUser.displayName} !
               </p>
             </div>
           )}
@@ -205,22 +204,31 @@ export default function AccountModal() {
               </div>
             </div>
           </div>
-          <div>
-            <form className={styles.modalFormInput}>
-              <input
-                type="text"
-                name="username"
-                className={styles.formControl}
-                placeholder="Change Username"
-              />
-              <input
-                type="password"
-                name="password"
-                className={styles.formControl}
-                placeholder="Change Password"
-              />
-            </form>
+          <div className={styles.inputGroup}>
+            <input
+              className={styles.input}
+              id="name"
+              type="text"
+              required
+              autoComplete="off"
+            />
+            <label className={styles.label_input} htmlFor="name">
+              Change Name
+            </label>
           </div>
+          <div className={styles.inputGroup}>
+            <input
+              className={styles.input}
+              id="name"
+              type="text"
+              required
+              autoComplete="off"
+            />
+            <label className={styles.label_input} htmlFor="password">
+              Change Password
+            </label>
+          </div>
+
           <div className={styles.countryBlock}>
             <CountryDropdown
               className={styles.dropDownPlace}

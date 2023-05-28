@@ -92,8 +92,8 @@
 }
 
 .fileInputIcon {
-  margin-left: 5px;
-  border: 2px solid black;
+  margin-left: 10px;
+  border: 2px solid rgb(200, 200, 200);
   background-color: aliceblue;
   width: 96px;
   height: 96px;
@@ -104,6 +104,8 @@
 .countryBlock {
   display: flex;
   flex-direction: row;
+  margin: 4px;
+  max-width: 100%;
   justify-content: space-between;
 }
 
@@ -113,13 +115,46 @@
   margin: 5px;
 }
 
-.formControl {
-  width: 100%;
+.inputGroup {
+  margin: 10px;
+  max-width: 100%;
+  position: relative;
+}
+
+.inputGroup .input {
+  font-size: 100%;
+  padding: 10px;
+  outline: none;
   height: 30px;
-  border: none;
-  border-radius: 5px;
+  border: 2px solid rgb(200, 200, 200);
   background-color: aliceblue;
-  margin-top: 7px;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.inputGroup .label_input {
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  margin-top: 3px;
+  margin-left: 10px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: rgb(100, 100, 100);
+}
+
+.inputGroup .input:focus ~ .label_input,
+.inputGroup .input:valid ~ .label_input {
+  transform: translateY(-60%) scale(0.9);
+  //margin: 0em;
+  margin-left: 1.3rem;
+  padding: 0.4em;
+  border-radius: 20px;
+}
+
+.inputGroup .input:focus,
+.inputGroup .input:valid {
+  border-color: rgb(150, 150, 200);
 }
 
 .dropDownPlace {
@@ -127,7 +162,9 @@
   width: 170px;
   height: 30px;
   margin: 5px;
-  border-radius: 5px;
+  border: 2px solid rgb(200, 200, 200);
+  outline: none;
+  border-radius: 20px;
   background-color: aliceblue;
 }
 
@@ -137,7 +174,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 10px;
-  margin-top: 90px;
+  margin-top: 70px;
 }
 
 .btn_save {
