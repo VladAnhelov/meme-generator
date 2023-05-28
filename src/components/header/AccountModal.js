@@ -171,43 +171,67 @@ export default function AccountModal() {
           }`}
         >
           <div className={styles.block}>
-            <p className={styles.block_textItem}>Account Menu</p>
+            <p className={styles.block_textItem}>Account settings</p>
           </div>
           {auth.currentUser && (
             <div className={styles.block}>
               <p className={styles.block_textItem}>
-                Hello {auth.currentUser.displayName}!{auth.currentUser.country}
+                Hello {auth.currentUser.displayName}!
               </p>
-              <p className={styles.block_textItem}></p>
             </div>
           )}
-          <div className={styles.fileInputContainer}>
-            {previewURL ? (
-              <img
-                src={previewURL}
-                alt="Avatar preview"
-                className={styles.avatarPreview}
+          <div className={styles.addUserPhotoBlock}>
+            <div>
+              <div className={styles.fileInputContainer}>
+                {previewURL ? (
+                  <img
+                    src={previewURL}
+                    alt="Avatar preview"
+                    className={styles.avatarPreview}
+                  />
+                ) : (
+                  <img
+                    src="https://img.icons8.com/dotty/80/null/edit-user-female.png"
+                    alt=""
+                    className={styles.fileInputIcon}
+                  />
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className={styles.fileInput}
+                />
+              </div>
+              <div>
+                <img src="https://i.ibb.co/M6mCQ27/Change-Avatar.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <form className={styles.modalFormInput}>
+              <input
+                type="text"
+                name="username"
+                className={styles.formControl}
+                placeholder="Change Username"
               />
-            ) : (
-              <img
-                src="https://img.icons8.com/dotty/80/null/edit-user-female.png"
-                alt=""
-                className={styles.fileInputIcon}
+              <input
+                type="password"
+                name="password"
+                className={styles.formControl}
+                placeholder="Change Password"
               />
-            )}
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className={styles.fileInput}
-            />
+            </form>
           </div>
           <div className={styles.countryBlock}>
             <CountryDropdown
+              className={styles.dropDownPlace}
               value={country}
               onChange={(val) => setCountry(val)}
             />
             <RegionDropdown
+              className={styles.dropDownPlace}
               country={country}
               value={region}
               onChange={(val) => setRegion(val)}
