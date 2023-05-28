@@ -133,22 +133,96 @@
 
 .block_buttomItem {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   margin: 10px;
+  margin-top: 100px;
 }
 
-.uploadButton {
-  @include MemeMain.defaultButton();
-  background-color: #03b500;
+.btn_save {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  margin-right: 15px;
+  height: 45px;
   border: none;
-  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(94, 226, 54);
 }
 
-.uploadButton:hover {
-  background-color: #03c200;
+.btn_signOut {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(255, 65, 65);
 }
 
-.uploadButton:disabled {
-  background-color: #838383;
-  cursor: not-allowed;
+/* plus sign */
+.sign {
+  width: 100%;
+  transition-duration: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 20px;
+}
+
+.sign svg path {
+  fill: white;
+}
+/* text */
+.btn_text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: 0.3s;
+}
+/* hover effect on button width */
+.btn_signOut:hover,
+.btn_save:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: 0.3s;
+}
+
+.btn_signOut:hover .sign,
+.btn_save:hover .sign {
+  width: 30%;
+  transition-duration: 0.3s;
+  padding-left: 20px;
+}
+/* hover effect button's text */
+.btn_signOut:hover .btn_text,
+.btn_save:hover .btn_text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: 0.3s;
+  padding-right: 10px;
+}
+/* button click effect*/
+.btn_signOut:active {
+  transform: translate(2px, 2px);
 }

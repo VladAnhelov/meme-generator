@@ -203,9 +203,6 @@ export default function AccountModal() {
                   className={styles.fileInput}
                 />
               </div>
-              <div>
-                <img src="https://i.ibb.co/M6mCQ27/Change-Avatar.png" alt="" />
-              </div>
             </div>
           </div>
           <div>
@@ -240,16 +237,28 @@ export default function AccountModal() {
           <div className={styles.block_buttomItem}>
             <button
               onClick={uploadAvatar}
-              className={button.navbarMenuLink}
+              className={styles.btn_save}
               disabled={!file}
             >
-              Save
+              <div className={styles.sign}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 5c3.453 0 5.891 2.797 5.567 6.78 1.745-.046 4.433.751 4.433 3.72 0 1.93-1.57 3.5-3.5 3.5h-13c-1.93 0-3.5-1.57-3.5-3.5 0-2.797 2.479-3.833 4.433-3.72-.167-4.218 2.208-6.78 5.567-6.78zm0-2c-4.006 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408-.212-3.951-3.473-7.092-7.479-7.092zm-4 10h3v-4h2v4h3l-4 4-4-4z" />
+                </svg>
+              </div>
+              <div className={styles.btn_text}>Save</div>
             </button>
-            <button
-              onClick={handleSignOut}
-              className={`${button.navbarMenuLink} ${button.signOut}`}
-            >
-              Sign Out
+            <button onClick={handleSignOut} className={styles.btn_signOut}>
+              <div className={styles.sign}>
+                <svg viewBox="0 0 512 512">
+                  <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                </svg>
+              </div>
+              <div className={styles.btn_text}>Logout</div>
             </button>
           </div>
         </div>
