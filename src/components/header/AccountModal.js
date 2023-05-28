@@ -227,6 +227,7 @@ export default function AccountModal() {
             <label className={styles.label_input} htmlFor="password">
               Change Password
             </label>
+            <input className={styles.togglePassword} type="checkbox" />
           </div>
 
           <div className={styles.countryBlock}>

@@ -156,7 +156,13 @@
 .inputGroup .input:valid {
   border-color: rgb(150, 150, 200);
 }
-
+.togglePassword {
+  margin-left: -30px;
+  margin-top: 7px;
+  cursor: pointer;
+  width: 20px;
+  height: 15px;
+}
 .dropDownPlace {
   display: flex;
   width: 170px;
@@ -176,6 +182,7 @@
   font-size: 17px;
   position: relative;
   display: inline-block;
+  cursor: pointer;
   width: 64px;
   height: 30px;
 }
