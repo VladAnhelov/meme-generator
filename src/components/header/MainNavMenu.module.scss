@@ -47,3 +47,17 @@
   transition: 0.3s;
   transform: scale(0.93);
 }
+
+@media (max-width: 1195px) {
+  .mainNavMenu_list {
+    width: 240px;
+  }
+}
+@media (max-width: 1070px) {
+  .mainNavMenu_list {
+    width: 150px;
+  }
+  .mainNavMenu_list_button {
+    padding: 15px 30px;
+  }
+}
