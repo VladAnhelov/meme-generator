@@ -1,0 +1,33 @@
+@use "../main/MemeMain.module.scss";
+.aboutBlock {
+  position: fixed;
+  top: 90px;
+  right: 140px;
+  display: flex;
+  text-align: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: #3495a2f7;
+  width: 80%;
+  height: 600px;
+  // z-index: 1;
+  border-radius: 10px;
+  box-shadow: 2px 2px 20px #838383;
+}
+
+.close_btn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  right: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #db4949;
+  color: MemeMain.$color;
+  cursor: pointer;
+}

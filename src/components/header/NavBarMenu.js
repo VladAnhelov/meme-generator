@@ -74,6 +74,7 @@ export default function NavBarMenu() {
               }`}
             >
               <RegistrationComponent
+                show={showSignUp}
                 onClose={handleCloseSignUp}
                 onSignUp={handleSignUp}
               />
