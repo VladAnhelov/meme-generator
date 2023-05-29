@@ -5,7 +5,6 @@
   justify-content: space-between;
   align-items: center;
   background-color: #33333300;
-  padding: 1rem;
   color: MemeMain.$color;
 }
 
@@ -25,13 +24,13 @@
   font-family: "Bruno Ace SC", cursive;
   height: 30px;
   width: 100px;
-  background: #00b527;
+  background: #00af2682;
   border: 1px solid;
   text-decoration: none;
 }
 
 .navbarMenuLink.signIn {
-  background: #989c99;
+  background: #00000047;
 }
 
 .navbarMenuLink:hover.signIn {
@@ -47,7 +46,7 @@
 }
 
 .navbarMenuLink:hover {
-  background: #00bf29;
+  background: #00af26e1;
 }
 
 .modal {

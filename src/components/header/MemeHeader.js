@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import NavBarMenu from "./NavBarMenu.js";
 import styles from "./MemeHeader.module.scss";
+import MainNavMenu from "./MainNavMenu.js";
 import { ThemeContext } from "../main/ThemeContext.js"; // Імпортуйте ваш контекст тут
 
 export default function MemeHeader() {
@@ -19,10 +20,11 @@ export default function MemeHeader() {
           alt=""
         />
         <div className={styles.block_headerName} style={headerNameStyle}>
-          <h2>Memebulance</h2>
-          <h4>Vlad Anhelov Project</h4>
+          <h2 className={styles.headerTitle}>Memebulance</h2>
+          <h4 className={styles.headerProject}>Vlad Anhelov Project</h4>
         </div>
       </div>
+      <MainNavMenu />
       <NavBarMenu />
     </header>
   );
