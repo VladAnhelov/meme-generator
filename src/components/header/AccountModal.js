@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   getDoc,
   updateDoc,
@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import anime from "animejs/lib/anime.es.js";
+import { ThemeContext } from "../main/ThemeContext.js";
 
 export default function AccountModal() {
   const DEFAULT_AVATAR = "https://img.icons8.com/fluency/96/null/doge.png";
@@ -27,6 +28,7 @@ export default function AccountModal() {
 
   const [country, setCountry] = React.useState("");
   const [region, setRegion] = React.useState("");
+  const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
 
   const currentUser = auth.currentUser;
 
@@ -262,6 +264,8 @@ export default function AccountModal() {
                 <input
                   type="checkbox"
                   className={styles.block_swtcher_switch_input}
+                  checked={isDarkTheme}
+                  onChange={toggleTheme}
                 />
                 <span className={styles.block_swtcher_switch_slider}></span>
               </label>

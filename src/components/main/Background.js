@@ -1,17 +1,17 @@
-import React from "react";
+// Background.js
+import React, { useContext } from "react";
 import styles from "./Background.module.scss";
+import { ThemeContext } from "../main/ThemeContext.js";
 
-export default function Background({ isDarkTheme }) {
+export default function Background() {
+  const { isDarkTheme } = useContext(ThemeContext);
+
   return (
     <>
       {isDarkTheme ? (
-        <video autoPlay="autoplay" loop="loop" muted className={styles.video}>
-          <source src="/DarkClouds.webm" type="video/webm" />
-        </video>
+        <img src="/AboveClouds.png" alt="" className={styles.background} />
       ) : (
-        <video autoPlay="autoplay" loop="loop" muted className={styles.video}>
-          <source src="/Clouds.webm" type="video/webm" />
-        </video>
+        <img src="/DarkClouds.png" alt="" className={styles.background} />
       )}
     </>
   );
