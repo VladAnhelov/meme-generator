@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   auth,
   signInWithEmailAndPassword,
@@ -6,14 +6,43 @@ import {
 } from "../../firebase.js";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import anime from "animejs/lib/anime.es.js";
 
 import styles from "../../header/NavBarMenu.module.scss";
 
-export default function AuthenticationComponent({ onClose, onSignIn }) {
+export default function AuthenticationComponent({ onClose, onSignIn, show }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    if (show) {
+      anime({
+        targets: modalRef.current,
+        translateY: [-100, -15],
+        translateX: [100, 5],
+        scale: [0.1, 1],
+        opacity: [0, 1],
+        duration: 800,
+        easing: "easeOutElastic(1, .5)",
+      });
+    }
+  }, [show]);
+
+  const handleClose = () => {
+    anime({
+      targets: modalRef.current,
+      translateY: [-15, -100],
+      translateX: [5, 100],
+      scale: [1, 0.1],
+      opacity: [1, 0],
+      duration: 300,
+      easing: "easeInExpo",
+      complete: onClose, // set showAboutModal to false after animation finishes
+    });
+  };
 
   const validateEmail = () => {
     const re = /\S+@\S+\.\S+/;
@@ -76,7 +105,7 @@ export default function AuthenticationComponent({ onClose, onSignIn }) {
   return (
     <>
       <ToastContainer />
-      <div className={styles.modalContent}>
+      <div ref={modalRef} className={styles.modalContent}>
         <div className={styles.loginForm}>
           <h2 className={styles.modalText}>Sign In</h2>
           <form className={styles.modalFormInput} onSubmit={handleSignIn}>
@@ -120,7 +149,7 @@ export default function AuthenticationComponent({ onClose, onSignIn }) {
             </div>
           </form>
         </div>
-        <button className={styles.closeButtonModal} onClick={onClose}>
+        <button className={styles.closeButtonModal} onClick={handleClose}>
           X
         </button>
       </div>

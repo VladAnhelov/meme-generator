@@ -53,6 +53,7 @@ export default function NavBarMenu() {
             >
               {" "}
               <AuthenticationComponent
+                show={showSignIn}
                 onClose={handleCloseSignIn}
                 onSignIn={handleSignIn}
               />

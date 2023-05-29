@@ -51,7 +51,6 @@
 
 .modal {
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   height: 100%;
   justify-content: center;
@@ -76,14 +75,19 @@
 }
 
 .modalContent {
+  position: fixed;
+  top: 190px;
+  right: 440px;
   display: flex;
-  background-color: #ffffffa4;
-  border-radius: 1rem;
-  padding: 20px;
-  position: relative;
-  width: 500px;
-  height: 320px;
+  text-align: center;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  background-color: #3495a2f7;
+  width: 40%;
+  height: 340px;
+  // z-index: 1;
+  border-radius: 10px;
+  box-shadow: 2px 2px 20px #838383;
 }
 
 .closeButtonModal {
@@ -130,11 +134,12 @@
 .modalText {
   display: flex;
   text-transform: uppercase;
-  color: #0280c4;
+  color: #d2d2d2;
 }
 
 .modalFormInput {
   align-items: center;
+  padding: 13px;
   display: flex;
   flex-direction: column;
   width: 100%;
