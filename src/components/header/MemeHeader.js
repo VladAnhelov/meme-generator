@@ -3,6 +3,7 @@ import NavBarMenu from "./NavBarMenu.js";
 import styles from "./MemeHeader.module.scss";
 import MainNavMenu from "./MainNavMenu.js";
 import { ThemeContext } from "../main/ThemeContext.js"; // Імпортуйте ваш контекст тут
+import BurgerMenu from "./BurgerMenu.js";
 
 export default function MemeHeader() {
   const { isDarkTheme } = useContext(ThemeContext); // Використовуйте контекст тут
@@ -24,6 +25,7 @@ export default function MemeHeader() {
           <h4 className={styles.headerProject}>Vlad Anhelov Project</h4>
         </div>
       </div>
+      <BurgerMenu />
       <MainNavMenu />
       <NavBarMenu />
     </header>
