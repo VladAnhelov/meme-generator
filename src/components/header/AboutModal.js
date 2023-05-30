@@ -32,6 +32,20 @@ export default function AboutModal({ show, onClose }) {
     });
   };
 
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      handleClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className={style.aboutBlock} ref={modalRef}>
       <p>Hello world</p>
