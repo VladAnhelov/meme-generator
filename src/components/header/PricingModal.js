@@ -33,7 +33,7 @@ export default function PricingModal({ show, onClose }) {
   };
 
   return (
-    <div className={style.aboutBlock} ref={modalRef}>
+    <div className={style.pricingBlock} ref={modalRef}>
       <div className={style.grid}>
         <div className={style.card}>
           <button className={style.close_btn} onClick={handleClose}>

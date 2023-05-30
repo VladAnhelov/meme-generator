@@ -77,13 +77,12 @@
 .modalContent {
   position: fixed;
   top: 190px;
-  right: 440px;
   display: flex;
   text-align: center;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   background-color: #3495a296;
-  width: 40%;
+  min-width: 40%;
   height: 340px;
   // z-index: 1;
   border-radius: 10px;
@@ -184,6 +183,10 @@
     height: 20px;
     font-size: 8px;
     margin: 2px;
+  }
+
+  .modalContent {
+    width: 80%;
   }
 
   .navbarMenuLink.signOut {

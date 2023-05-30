@@ -1,16 +1,15 @@
 @use "../main/MemeMain.module.scss";
 .aboutBlock {
   position: fixed;
-  top: 90px;
-  right: 140px;
+  top: 120px;
+  left: 10%;
   display: flex;
   text-align: center;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   background-color: #3495a296;
-  width: 80%;
+  min-width: 80%;
   height: 600px;
-  // z-index: 1;
   border-radius: 10px;
   box-shadow: 2px 2px 20px #838383;
 }
