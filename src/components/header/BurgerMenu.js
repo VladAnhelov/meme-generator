@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import style from "./BurgerMenu.module.scss";
 import { ThemeContext } from "../main/ThemeContext.js";
+import MainNavMenu from "./MainNavMenu.js";
 
 export default function BurgerMenu() {
   const [open, setOpen] = useState(false);
@@ -22,6 +23,11 @@ export default function BurgerMenu() {
       >
         <div className={style.menu_btn_icon}></div>
       </div>
+      {open && (
+        <div className={style.menu_content}>
+          <MainNavMenu />
+        </div>
+      )}
     </div>
   );
 }

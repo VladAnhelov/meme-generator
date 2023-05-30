@@ -64,6 +64,10 @@
 
 @media (max-width: 720px) {
   .mainNavMenu {
-    display: none;
+    display: flex;
+  }
+  .mainNavMenu_ul {
+    display: flex;
+    flex-direction: column;
   }
 }

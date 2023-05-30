@@ -54,6 +54,28 @@
   }
 }
 
+.menu_content {
+  display: none;
+  position: absolute;
+  top: 70px; /* Adjust according to your needs */
+  left: 44%;
+  text-align: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: #3495a296;
+  border-radius: 10px;
+  width: 200px;
+  height: 250px;
+  z-index: 100; /* To make sure it's on top */
+}
+
+.menu_btn.open + .menu_content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+}
+
 @media (max-width: 720px) {
   .BurgerMenu_block {
     display: block;
