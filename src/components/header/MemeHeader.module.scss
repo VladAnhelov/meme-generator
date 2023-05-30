@@ -33,7 +33,7 @@
 .block_headerName {
   display: flex;
   flex-direction: column;
-  width: 220px;
+  width: 170px;
   align-items: center;
 }
 
@@ -55,9 +55,15 @@
   text-shadow: 2px 2px 20px #838383;
   margin: 0px;
 }
+.menu {
+  display: flex;
+}
 
 @media (max-width: 720px) {
-  .block_headerName {
-    width: 160px;
+  .BurgerMenu {
+    display: none;
+  }
+  .menu {
+    display: none;
   }
 }

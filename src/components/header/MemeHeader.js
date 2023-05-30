@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import NavBarMenu from "./NavBarMenu.js";
 import styles from "./MemeHeader.module.scss";
 import MainNavMenu from "./MainNavMenu.js";
@@ -7,6 +7,7 @@ import BurgerMenu from "./BurgerMenu.js";
 
 export default function MemeHeader() {
   const { isDarkTheme } = useContext(ThemeContext); // Використовуйте контекст тут
+  const [burgerOpen, setBurgerOpen] = useState(true);
 
   const headerNameStyle = {
     color: isDarkTheme ? "black" : "white", // Змініть ці кольори на ті, які ви хочете використовувати для темної та світлої тем
@@ -25,8 +26,12 @@ export default function MemeHeader() {
           <h4 className={styles.headerProject}>Vlad Anhelov Project</h4>
         </div>
       </div>
-      <BurgerMenu />
-      <MainNavMenu />
+      <BurgerMenu onClick={() => setBurgerOpen(!burgerOpen)} />
+      {burgerOpen && (
+        <div className={styles.menu}>
+          <MainNavMenu />
+        </div>
+      )}
       <NavBarMenu />
     </header>
   );
