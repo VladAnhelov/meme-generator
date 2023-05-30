@@ -29,7 +29,7 @@
   cursor: pointer;
   padding: 15px 80px;
   border-radius: 10px;
-  text-shadow: 2px 2px 20px #838383;
+  text-shadow: 2px 2px 5px #000000;
   box-shadow: 0px 1px 2px #2b3044, 0px 4px 16px #2b3044;
   transform-style: preserve-3d;
   transform: scale(var(--s, 1)) perspective(600px) rotateX(var(--rx, 0deg))

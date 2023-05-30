@@ -7,7 +7,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   padding: 10px;
-  top: 120px;
+  top: 60px;
   left: 10%;
   width: 80%;
   height: 80%; /* specify a height to create a box for scrolling */
@@ -23,8 +23,8 @@
   margin: 10px;
   width: 350px;
   height: 540px;
-  background: #3495a296;
   border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 2px 2px 20px #838383;
   backdrop-filter: blur(10px);
   border-radius: 25px;
   transition: all 0.3s ease; /* smooth transitions */
@@ -33,21 +33,25 @@
 .card_title {
   font-weight: normal;
   font-size: 36px;
+  text-shadow: 2px 2px 5px #000000;
   margin-bottom: 20px;
 }
 
 .pricing {
   font-weight: normal;
   font-size: 30px;
+  text-shadow: 2px 2px 5px #000000;
 }
 
 .pricing .small {
   font-size: 15px;
+  text-shadow: 2px 2px 5px #000000;
 }
 
 .features {
   margin: 40px 0;
   list-style-position: inside;
+  text-shadow: 2px 2px 5px #000000;
 }
 
 .features li {
@@ -64,6 +68,7 @@ a.cta_btn {
   color: white;
   text-decoration: none;
   letter-spacing: 2px;
+  text-shadow: 2px 2px 5px #000000;
   transition: background 0.3s ease;
 }
 
@@ -81,6 +86,7 @@ a.cta_btn:hover {
   transform: rotate(-90deg);
   font-size: 18px;
   font-weight: 500;
+  text-shadow: 2px 2px 5px #000000;
   color: #fff;
   text-decoration: none;
   text-transform: capitalize;

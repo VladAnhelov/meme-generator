@@ -3,37 +3,43 @@ import anime from "animejs/lib/anime.es.js";
 import style from "./PricingModal.module.scss";
 
 export default function PricingModal({ show, onClose }) {
-  const modalRef = useRef(null);
+  const modalRef1 = useRef(null);
+  const modalRef2 = useRef(null);
+  const modalRef3 = useRef(null);
 
   useEffect(() => {
     if (show) {
       anime({
-        targets: modalRef.current,
-        translateY: [-100, -15],
-        translateX: [100, 5],
+        targets: [modalRef1.current, modalRef2.current, modalRef3.current],
+        translateY: [-500, 0],
+        translateX: [20, 0],
         scale: [0.1, 1],
-        opacity: [0, 1],
-        duration: 800,
-        easing: "easeOutElastic(1, .5)",
+        duration: 2000,
+        easing: "easeOutElastic(1, 1.5)",
+        delay: anime.stagger(100), // delay by 200ms for each element.
       });
     }
   }, [show]);
 
   const handleClose = () => {
     anime({
-      targets: modalRef.current,
-      translateY: [-15, -100],
-      translateX: [5, 100],
+      targets: [modalRef1.current, modalRef2.current, modalRef3.current],
+      translateY: [0, -500],
+      translateX: [0, -20],
       scale: [1, 0.1],
-      opacity: [1, 0],
-      duration: 300,
-      easing: "easeInExpo",
+      duration: 2000,
+      easing: "easeOutElastic(1, 1.5)",
       complete: onClose, // set showAboutModal to false after animation finishes
+      delay: anime.stagger(100), // delay by 200ms for each element.
     });
   };
 
   const handleClickOutside = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
+    if (
+      !modalRef1.current.contains(event.target) &&
+      !modalRef2.current.contains(event.target) &&
+      !modalRef3.current.contains(event.target)
+    ) {
       handleClose();
     }
   };
@@ -47,9 +53,9 @@ export default function PricingModal({ show, onClose }) {
   }, []);
 
   return (
-    <div className={style.pricingBlock} ref={modalRef}>
+    <div className={style.pricingBlock}>
       <div className={style.grid}>
-        <div className={style.card}>
+        <div className={style.card} ref={modalRef1}>
           <button className={style.close_btn} onClick={handleClose}>
             X
           </button>
@@ -69,7 +75,7 @@ export default function PricingModal({ show, onClose }) {
         </div>
       </div>
       <div className={style.grid}>
-        <div className={style.card}>
+        <div className={style.card} ref={modalRef2}>
           <button className={style.close_btn} onClick={handleClose}>
             X
           </button>
@@ -89,7 +95,7 @@ export default function PricingModal({ show, onClose }) {
         </div>
       </div>
       <div className={style.grid}>
-        <div className={style.card}>
+        <div className={style.card} ref={modalRef3}>
           <button className={style.close_btn} onClick={handleClose}>
             X
           </button>
