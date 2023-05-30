@@ -25,7 +25,6 @@
 .account_icon:hover {
   transform: scale(1.1);
 }
-
 .account_smallMenu {
   position: fixed;
   top: 90px;
@@ -36,13 +35,13 @@
   background-color: #3495a2f7;
   width: 355px;
   height: 500px;
-  // z-index: 1;
+  z-index: 2; /* Збільште z-index */
   border-radius: 10px;
   box-shadow: 2px 2px 20px #838383;
 }
 
 .account_smallMenu.show {
-  display: flex;
+  display: block;
   flex-direction: column;
 }
 
