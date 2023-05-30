@@ -16,8 +16,8 @@ export default function BurgerMenu() {
       anime({
         targets: menuContentRef.current,
         height: [0, menuHeight],
-        duration: 200,
-        easing: "easeInOutSine",
+        duration: 100,
+        easing: "easeInOutQuad",
       });
     }
   }, [open]);
@@ -27,8 +27,8 @@ export default function BurgerMenu() {
     anime({
       targets: menuContentRef.current,
       height: [menuHeight, 0],
-      duration: 200,
-      easing: "easeInOutSine",
+      duration: 100,
+      easing: "easeInOutQuad",
     }).finished.then(() => setOpen(false));
   };
 
