@@ -1,12 +1,36 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import style from "./BurgerMenu.module.scss";
 import { ThemeContext } from "../main/ThemeContext.js";
 import MainNavMenu from "./MainNavMenu.js";
+import anime from "animejs/lib/anime.es.js";
 
 export default function BurgerMenu() {
   const [open, setOpen] = useState(false);
+  const menuContentRef = useRef(null);
 
   const { isDarkTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    if (open) {
+      const menuHeight = menuContentRef.current.scrollHeight;
+      anime({
+        targets: menuContentRef.current,
+        height: [0, menuHeight],
+        duration: 200,
+        easing: "easeInOutSine",
+      });
+    }
+  }, [open]);
+
+  const handleClose = () => {
+    const menuHeight = menuContentRef.current.scrollHeight;
+    anime({
+      targets: menuContentRef.current,
+      height: [menuHeight, 0],
+      duration: 200,
+      easing: "easeInOutSine",
+    }).finished.then(() => setOpen(false));
+  };
 
   useEffect(() => {
     document.documentElement.style.setProperty(
@@ -24,8 +48,12 @@ export default function BurgerMenu() {
         <div className={style.menu_btn_icon}></div>
       </div>
       {open && (
-        <div className={style.menu_content}>
-          <MainNavMenu />
+        <div
+          ref={menuContentRef}
+          className={style.menu_content}
+          onClick={handleClose}
+        >
+          <MainNavMenu onClick={handleClose} />
         </div>
       )}
     </div>
