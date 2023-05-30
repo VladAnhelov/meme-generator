@@ -1,20 +1,98 @@
 @use "../main/MemeMain.module.scss";
 .aboutBlock {
   position: fixed;
-  top: 90px;
-  right: 140px;
-  display: flex;
-  text-align: center;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  background-color: #3495a296;
-  width: 80%;
-  height: 600px;
-  // z-index: 1;
-  border-radius: 10px;
-  box-shadow: 2px 2px 20px #838383;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-radius: 20px;
+  top: 100px;
+  right: 60px;
+  max-width: 1320px;
+  margin: 0 auto;
+  height: 630px;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4%;
+  padding: 40px;
+}
+
+.card {
+  padding: 10px;
+  width: 350px;
+  height: 560px;
+  background: #3495a296;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+}
+
+.card_title {
+  font-weight: normal;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.pricing {
+  font-weight: normal;
+  font-size: 30px;
+}
+
+.pricing .small {
+  font-size: 15px;
+}
+
+.features {
+  margin: 40px 0;
+  list-style-position: inside;
+}
+
+.features li {
+  padding-bottom: 10px;
+}
+
+a.cta_btn {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  background: rgba(21, 23, 24, 0.7);
+  border-radius: 29px;
+  padding: 20px 0;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: background 0.3s ease;
+}
+
+a.cta_btn:hover {
+  background: #000;
+}
+.link {
+  position: fixed;
+  background-color: #d12322;
+  padding: 23px 40px;
+  right: -99px;
+  border-radius: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  transform: rotate(-90deg);
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.1s ease-in-out;
+}
+
+.link i {
+  padding-left: 7px;
+}
+
+.link:hover {
+  text-decoration: underline;
+  background-color: black;
+}
 .close_btn {
   position: absolute;
   display: flex;
@@ -30,4 +108,49 @@
   background-color: #db4949;
   color: MemeMain.$color;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+  .grid,
+  .aboutBlock {
+    grid-template-columns: 1fr 1fr;
+    gap: 2%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2%;
+    padding-bottom: 25%;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  .card {
+    padding: 30px;
+  }
+
+  .card_title {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .pricing {
+    font-size: 52px;
+  }
+
+  hr {
+    margin-top: 50px;
+  }
+
+  a.cta_btn {
+    font-size: 11px;
+  }
 }
