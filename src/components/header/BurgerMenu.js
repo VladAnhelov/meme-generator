@@ -39,6 +39,23 @@ export default function BurgerMenu() {
     );
   }, [isDarkTheme]);
 
+  const handleClickOutside = (event) => {
+    if (
+      menuContentRef.current &&
+      !menuContentRef.current.contains(event.target)
+    ) {
+      handleClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className={style.BurgerMenu_block}>
       <div
