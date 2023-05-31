@@ -63,6 +63,9 @@
   .header {
     width: 0%;
   }
+  .header::before {
+    width: 0%;
+  }
   .BurgerMenu {
     display: none;
   }
