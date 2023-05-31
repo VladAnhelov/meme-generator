@@ -61,8 +61,13 @@
 
 @media (max-width: 720px) and (orientation: portrait) {
   //test must be 720
-  .header::before {
+  .header {
+    display: flex;
     width: 0%;
+  }
+
+  .block_headerName {
+    width: 100px;
   }
 
   .menu {
