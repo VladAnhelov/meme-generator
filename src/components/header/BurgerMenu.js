@@ -4,7 +4,7 @@ import { ThemeContext } from "../main/ThemeContext.js";
 import MainNavMenu from "./MainNavMenu.js";
 import anime from "animejs/lib/anime.es.js";
 
-export default function BurgerMenu() {
+export default function BurgerMenu({ onAboutClick, onPricingClick }) {
   const [open, setOpen] = useState(false);
   const menuContentRef = useRef(null);
 
@@ -70,7 +70,11 @@ export default function BurgerMenu() {
           className={style.menu_content}
           onClick={handleClose}
         >
-          <MainNavMenu onClick={handleClose} />
+          <MainNavMenu
+            onAboutClick={onAboutClick}
+            onPricingClick={onPricingClick}
+            onClick={handleClose}
+          />
         </div>
       )}
     </div>

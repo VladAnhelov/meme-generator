@@ -4,21 +4,13 @@ import { ThemeContext } from "../main/ThemeContext.js";
 import AboutModal from "./AboutModal.js";
 import PricingModal from "./PricingModal.js";
 
-export default function MainNavMenu() {
+export default function MainNavMenu({ onAboutClick, onPricingClick }) {
   const { isDarkTheme } = useContext(ThemeContext); // Використовуйте контекст тут
   const [showAboutModal, setShowAboutModal] = React.useState(false);
   const [showPricingModal, setShowPricingModal] = React.useState(false);
 
   const headerNameStyle = {
     color: isDarkTheme ? "black" : "white", // Змініть ці кольори на ті, які ви хочете використовувати для темної та світлої тем
-  };
-
-  const handleAboutClick = () => {
-    setShowAboutModal((prevShow) => !prevShow);
-  };
-
-  const handlePricingClick = () => {
-    setShowPricingModal((prevShow) => !prevShow);
   };
 
   return (
@@ -42,7 +34,7 @@ export default function MainNavMenu() {
             <button
               className={style.mainNavMenu_list_button}
               style={headerNameStyle}
-              onClick={handleAboutClick}
+              onClick={onAboutClick}
             >
               <span>About</span>
             </button>
@@ -52,7 +44,7 @@ export default function MainNavMenu() {
             <button
               className={style.mainNavMenu_list_button}
               style={headerNameStyle}
-              onClick={handlePricingClick}
+              onClick={onPricingClick}
             >
               <span>Pricing</span>{" "}
             </button>
