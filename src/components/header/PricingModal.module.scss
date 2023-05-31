@@ -1,0 +1,131 @@
+@use "../main/MemeMain.module.scss";
+.pricingBlock {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+  top: 60px;
+  left: 10%;
+  width: 80%;
+  height: 80%; /* specify a height to create a box for scrolling */
+  overflow-y: auto; /* add vertical scrolling */
+}
+.grid {
+  display: grid;
+  gap: 4%;
+}
+
+.card {
+  padding: 10px;
+  margin: 10px;
+  width: 350px;
+  height: 540px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 2px 2px 20px #838383;
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  transition: all 0.3s ease; /* smooth transitions */
+}
+
+.card_title {
+  font-weight: normal;
+  font-size: 36px;
+  text-shadow: 2px 2px 5px #000000;
+  margin-bottom: 20px;
+}
+
+.pricing {
+  font-weight: normal;
+  font-size: 30px;
+  text-shadow: 2px 2px 5px #000000;
+}
+
+.pricing .small {
+  font-size: 15px;
+  text-shadow: 2px 2px 5px #000000;
+}
+
+.features {
+  margin: 40px 0;
+  list-style-position: inside;
+  text-shadow: 2px 2px 5px #000000;
+}
+
+.features li {
+  padding-bottom: 10px;
+}
+
+a.cta_btn {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  background: rgba(21, 23, 24, 0.7);
+  border-radius: 29px;
+  padding: 20px 0;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 5px #000000;
+  transition: background 0.3s ease;
+}
+
+a.cta_btn:hover {
+  background: #000;
+}
+.link {
+  position: fixed;
+  background-color: #d12322;
+  padding: 23px 40px;
+  right: -99px;
+  border-radius: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  transform: rotate(-90deg);
+  font-size: 18px;
+  font-weight: 500;
+  text-shadow: 2px 2px 5px #000000;
+  color: #fff;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.1s ease-in-out;
+}
+
+.link i {
+  padding-left: 7px;
+}
+
+.link:hover {
+  text-decoration: underline;
+  background-color: black;
+}
+.close_btn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  right: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #db4949;
+  color: MemeMain.$color;
+  cursor: pointer;
+}
+
+@media (max-width: 1720px) {
+  .pricingBlock {
+    left: 0%;
+    width: 100%;
+    height: 100%;
+  }
+  .card {
+    width: 317px;
+    height: 520px;
+  }
+}

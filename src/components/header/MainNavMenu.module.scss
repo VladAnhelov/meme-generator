@@ -1,0 +1,72 @@
+@use "/src/components/main/MemeMain.module.scss";
+
+.mainNavMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(51, 51, 51, 0);
+  color: #fff;
+}
+
+.mainNavMenu_ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mainNavMenu_list {
+  display: flex;
+  justify-content: center;
+  width: 300px;
+  margin: 10px;
+}
+
+.mainNavMenu_list_button {
+  @include MemeMain.font();
+  font-weight: 700;
+  background-color: #2b304459;
+  cursor: pointer;
+  padding: 15px 80px;
+  border-radius: 10px;
+  text-shadow: 2px 2px 5px #000000;
+  box-shadow: 0px 1px 2px #2b3044, 0px 4px 16px #2b3044;
+  transform-style: preserve-3d;
+  transform: scale(var(--s, 1)) perspective(600px) rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg));
+  perspective: 600px;
+  transition: transform 0.1s;
+}
+
+.mainNavMenu_list_button:hover {
+  background-color: #00000047;
+}
+
+.mainNavMenu_list_button:active {
+  transition: 0.3s;
+  transform: scale(0.93);
+}
+
+@media (max-width: 1195px) {
+  .mainNavMenu_list {
+    width: 240px;
+  }
+}
+@media (max-width: 1070px) {
+  .mainNavMenu_list {
+    width: 150px;
+  }
+  .mainNavMenu_list_button {
+    padding: 15px 30px;
+  }
+}
+
+@media (max-width: 720px) {
+  .mainNavMenu {
+    display: flex;
+  }
+  .mainNavMenu_ul {
+    display: flex;
+    flex-direction: column;
+  }
+}
