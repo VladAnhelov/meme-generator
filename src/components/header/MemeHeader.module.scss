@@ -1,5 +1,5 @@
 .header {
-  // display: flex;
+  display: flex;
   position: fixed;
   z-index: 1;
   justify-content: space-between;
@@ -59,9 +59,10 @@
   display: flex;
 }
 
-@media (max-width: 220px) and (orientation: portrait) {
+@media (max-width: 720px) and (orientation: portrait) {
   //test must be 720
   .header {
+    display: block;
     width: 0%;
   }
   .header::before {
