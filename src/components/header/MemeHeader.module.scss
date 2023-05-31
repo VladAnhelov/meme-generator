@@ -63,11 +63,14 @@
   //test must be 720
   .header {
     display: flex;
-    justify-content: center;
     width: 0%;
   }
   .header::before {
     width: 0%;
+  }
+
+  .block_headerName {
+    display: none;
   }
   .menu {
     display: none;
