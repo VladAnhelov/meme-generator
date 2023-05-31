@@ -43,7 +43,10 @@ export default function MemeHeader() {
         onPricingClick={handlePricingClick}
       />
       <div className={styles.menu}>
-        <MainNavMenu />
+        <MainNavMenu
+          onAboutClick={handleAboutClick}
+          onPricingClick={handlePricingClick}
+        />
       </div>
       {showAboutModal && (
         <AboutModal
