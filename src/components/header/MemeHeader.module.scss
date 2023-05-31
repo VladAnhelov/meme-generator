@@ -60,6 +60,9 @@
 }
 
 @media (max-width: 720px) {
+  .header {
+    width: 0%;
+  }
   .BurgerMenu {
     display: none;
   }
