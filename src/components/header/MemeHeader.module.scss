@@ -62,7 +62,7 @@
 @media (max-width: 720px) and (orientation: portrait) {
   //test must be 720
   .header {
-    display: flex;
+    display: inline-flex;
     width: 0%;
   }
   .header::before {
