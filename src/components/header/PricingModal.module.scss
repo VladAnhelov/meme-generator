@@ -124,6 +124,12 @@ a.cta_btn:hover {
   cursor: pointer;
 }
 
+.close_btn:hover {
+  border: 1px solid #db4949;
+  background-color: MemeMain.$color;
+  color: #db4949;
+}
+
 @media (max-width: 1720px) {
   .pricingBlock {
     left: 0%;

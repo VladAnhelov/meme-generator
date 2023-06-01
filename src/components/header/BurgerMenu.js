@@ -1,14 +1,11 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import style from "./BurgerMenu.module.scss";
-import { ThemeContext } from "../../utils/ThemeContext.js";
 import MainNavMenu from "./MainNavMenu.js";
 import anime from "animejs/lib/anime.es.js";
 
 export default function BurgerMenu({ onAboutClick, onPricingClick }) {
   const [open, setOpen] = useState(false);
   const menuContentRef = useRef(null);
-
-  const { isDarkTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (open) {
@@ -31,13 +28,6 @@ export default function BurgerMenu({ onAboutClick, onPricingClick }) {
       easing: "easeInOutQuad",
     }).finished.then(() => setOpen(false));
   };
-
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--icon-color",
-      isDarkTheme ? "black" : "white",
-    );
-  }, [isDarkTheme]);
 
   const handleClickOutside = (event) => {
     if (

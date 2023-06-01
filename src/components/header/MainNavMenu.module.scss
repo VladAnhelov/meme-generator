@@ -25,12 +25,12 @@
 .mainNavMenu_list_button {
   @include MemeMain.font();
   font-weight: 700;
-  background-color: #2b304459;
+  background-color: #f6f6f6a1;
+  color: #27374d;
   cursor: pointer;
   padding: 15px 80px;
-  border-radius: 10px;
-  text-shadow: 2px 2px 5px #000000;
-  box-shadow: 0px 1px 2px #2b3044, 0px 4px 16px #2b3044;
+  border-radius: 20px;
+  border: none;
   transform-style: preserve-3d;
   transform: scale(var(--s, 1)) perspective(600px) rotateX(var(--rx, 0deg))
     rotateY(var(--ry, 0deg));
@@ -39,7 +39,7 @@
 }
 
 .mainNavMenu_list_button:hover {
-  background-color: #00000047;
+  transform: scale(0.9);
 }
 
 .mainNavMenu_list_button:active {
