@@ -22,6 +22,7 @@
   padding: 10px;
   margin: 10px;
   width: 350px;
+  background-color: #f6f6f6a1;
   height: 540px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   box-shadow: 2px 2px 20px #838383;
@@ -33,29 +34,34 @@
 .card_title {
   font-weight: normal;
   font-size: 36px;
-  text-shadow: 2px 2px 5px #000000;
+  color: #27374d;
   margin-bottom: 20px;
 }
 
 .pricing {
   font-weight: normal;
   font-size: 30px;
-  text-shadow: 2px 2px 5px #000000;
+  color: #27374d;
 }
 
 .pricing .small {
   font-size: 15px;
-  text-shadow: 2px 2px 5px #000000;
+  color: #27374d;
 }
 
 .features {
   margin: 40px 0;
   list-style-position: inside;
-  text-shadow: 2px 2px 5px #000000;
+  color: #27374d;
 }
 
 .features li {
   padding-bottom: 10px;
+}
+
+.save {
+  color: #00dfa2;
+  text-shadow: 2px 2px 5px #000000;
 }
 
 a.cta_btn {
