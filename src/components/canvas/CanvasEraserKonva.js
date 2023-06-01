@@ -1,8 +1,8 @@
 import { useEffect, useCallback } from "react";
-import styles from "../main/memeConfig/AddFaceByUserModal.module.scss";
+import styles from "../../containers/main/memeConfig/AddFaceByUserModal.module.scss";
 import Konva from "konva";
 
-const EraserKonva = ({
+const CanvasEraserKonva = ({
   isErasing,
   stageRef,
   pushStateToHistory,
@@ -124,4 +124,4 @@ const EraserKonva = ({
   return null;
 };
 
-export default EraserKonva;
+export default CanvasEraserKonva;

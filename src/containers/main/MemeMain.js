@@ -2,7 +2,7 @@
 // eslint-disable-next-line
 import React from "react";
 import DownloadMemeComponent from "./memeConfig/DownloadMemeComponent.js";
-import CanvasMemeComponent from "../canvas/CanvasMemeComponent.js";
+import CanvasMeme from "../../components/canvas/CanvasMeme.js";
 import AddNewMemeComponent from "./memeConfig/AddNewMemeComponent.js";
 import MemePreviewBlock from "./memeConfig/MemePreviewBlock.js";
 import MemePreviewBlockUk from "./memeConfig/MemePreviewBlockUk.js";
@@ -86,7 +86,7 @@ export default function MemeMain() {
   return (
     <main>
       <div className={styles.meme}>
-        <CanvasMemeComponent
+        <CanvasMeme
           meme={meme}
           topTextPosition={topTextPosition}
           bottomTextPosition={bottomTextPosition}

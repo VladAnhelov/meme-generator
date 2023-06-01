@@ -1,3 +1,4 @@
+@use "./containers/main/MemeMain.module.scss";
 * {
   box-sizing: border-box;
   // outline: 1px solid black;
@@ -7,6 +8,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   font-family: "Bruno Ace SC", cursive;
+  @include MemeMain.background-color();
 }
 
 main {

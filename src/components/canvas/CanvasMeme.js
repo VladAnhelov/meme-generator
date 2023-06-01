@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
-import MemeText from "./MemeText.js";
+import CanvasMemeText from "./CanvasMemeText.js";
 import { Stage, Layer, Image as KonvaImage } from "react-konva";
-import WaterMark from "./WaterMark.js";
+import CanvasWaterMark from "./CanvasWaterMark.js";
 import { v4 as uuidv4 } from "uuid";
-import URLImage from "./URLImage.js";
+import CanvasURLImage from "./CanvasURLImage.js";
 
-export default function CanvasMemeComponent(props) {
+export default function CanvasMeme(props) {
   const {
     stageRef,
     meme,
@@ -298,11 +298,11 @@ export default function CanvasMemeComponent(props) {
                 preventDefault={false}
               />
             </Layer>
-            <WaterMark />
+            <CanvasWaterMark />
             <Layer>
               {images.map((image, index) => {
                 return (
-                  <URLImage
+                  <CanvasURLImage
                     image={image}
                     key={index}
                     addImageToCanvas={addImageToCanvas}
@@ -325,7 +325,7 @@ export default function CanvasMemeComponent(props) {
               })}
             </Layer>
             <Layer>
-              <MemeText
+              <CanvasMemeText
                 position={{
                   x: imageElement
                     ? (parseInt(topTextPosition.x) * containerSize.width) /
@@ -343,7 +343,7 @@ export default function CanvasMemeComponent(props) {
                 selectedText={selectedText}
                 setSelectedText={setSelectedText}
               />
-              <MemeText
+              <CanvasMemeText
                 position={{
                   x: imageElement
                     ? (parseInt(bottomTextPosition.x) * containerSize.width) /
@@ -362,7 +362,7 @@ export default function CanvasMemeComponent(props) {
                 setSelectedText={setSelectedText}
               />
               {additionalTexts.map((text, index) => (
-                <MemeText
+                <CanvasMemeText
                   key={index}
                   position={{
                     x: 30,

@@ -1,6 +1,6 @@
 import React from "react";
 import loginModalStyle from "./LoginModal.module.scss";
-import NavBarMenu from "../../header/NavBarMenu.js";
+import NavBarMenu from "../../../components/header/NavBarMenu.js";
 
 export default function LoginModal({ setShowModal }) {
   const handleClick = (e) => {

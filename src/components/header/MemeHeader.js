@@ -4,7 +4,7 @@ import styles from "./MemeHeader.module.scss";
 import AboutModal from "./AboutModal.js";
 import PricingModal from "./PricingModal.js";
 import MainNavMenu from "./MainNavMenu.js";
-import { ThemeContext } from "../main/ThemeContext.js"; // Імпортуйте ваш контекст тут
+import { ThemeContext } from "../../utils/ThemeContext.js";
 import BurgerMenu from "./BurgerMenu.js";
 
 export default function MemeHeader() {

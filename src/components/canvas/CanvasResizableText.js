@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import { Text, Transformer } from "react-konva";
 
-const ResizableText = ({
+const CanvasResizableText = ({
   position,
   rotation,
   text,
@@ -80,4 +80,4 @@ const ResizableText = ({
   );
 };
 
-export default ResizableText;
+export default CanvasResizableText;

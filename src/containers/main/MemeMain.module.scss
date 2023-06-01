@@ -1,6 +1,20 @@
 $defaultHeight: 36px;
 $color: #fff;
 
+@mixin background-color() {
+  background: #e55d87; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #5fc3e4,
+    #e55d87
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #5fc3e4,
+    #e55d87
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 @mixin flexColumn() {
   display: flex;
   flex-direction: column;
@@ -72,7 +86,7 @@ $color: #fff;
   padding: 0 20px;
   margin-bottom: 130px;
   background-color: #ddd;
-  color: #444;
+  color: #27374d;
   font-family: "Bruno Ace SC", "Times New Roman", Times, serif;
   justify-content: center;
   font-size: 15px;
@@ -89,7 +103,7 @@ $color: #fff;
 
 .tabSwitch:checked + .tabLabel {
   background-color: $color;
-  color: #222;
+  color: #27374d;
 }
 
 .tabContent {

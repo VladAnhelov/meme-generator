@@ -1,13 +1,14 @@
-@use "../main/MemeMain.module.scss";
+@use "../../containers/main/MemeMain.module.scss";
 .aboutBlock {
   position: fixed;
   top: 120px;
   left: 10%;
   display: flex;
   text-align: center;
-  text-shadow: 2px 2px 5px #000000;
+  color: #27374d;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  background-color: #f6f6f6a1;
   min-width: 80%;
   height: 600px;
   border-radius: 10px;
@@ -29,4 +30,10 @@
   background-color: #db4949;
   color: MemeMain.$color;
   cursor: pointer;
+}
+
+.close_btn:hover {
+  border: 1px solid #db4949;
+  background-color: MemeMain.$color;
+  color: #db4949;
 }

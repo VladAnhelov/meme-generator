@@ -1,4 +1,4 @@
-@use "/src/components/main/MemeMain.module.scss";
+@use "../../containers/main/MemeMain.module.scss";
 
 .navbar {
   display: flex;
@@ -21,20 +21,21 @@
 
 .navbarMenuLink {
   @include MemeMain.defaultButton();
+  width: 130px;
+  background: #1b9c85;
+  border-radius: 20px;
+  border: none;
   font-family: "Bruno Ace SC", cursive;
   height: 30px;
-  width: 100px;
-  background: #00af2682;
-  border: 1px solid;
   text-decoration: none;
 }
 
 .navbarMenuLink.signIn {
-  background: #00000047;
+  background: #0079ff;
 }
 
 .navbarMenuLink:hover.signIn {
-  background: #acb0ad;
+  background: #3997ff;
 }
 
 .navbarMenuLink.signOut {
@@ -46,7 +47,7 @@
 }
 
 .navbarMenuLink:hover {
-  background: #00af26e1;
+  background: #1eb69b;
 }
 
 .modal {
@@ -58,8 +59,6 @@
   position: fixed;
   top: 0;
   border-radius: 1rem;
-  text-shadow: 2px 2px 5px #000000;
-
   width: 100%;
   z-index: 1;
   opacity: 0;
@@ -82,6 +81,7 @@
   text-align: center;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  background-color: #f6f6f6a1;
   min-width: 40%;
   height: 340px;
   // z-index: 1;
@@ -133,7 +133,7 @@
 .modalText {
   display: flex;
   text-transform: uppercase;
-  color: #d2d2d2;
+  color: #27374d;
 }
 
 .modalFormInput {

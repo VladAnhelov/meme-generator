@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./AddFaceByUserModal.module.scss";
-import CanvasUserFace from "../../canvas/CanvasUserFace.js";
-import CanvasZoomControls from "../../canvas/CanvasZoomControls.js";
-import { auth, onAuthStateChanged } from "../../firebase.js";
+import CanvasUserFace from "../../../components/canvas/CanvasUserFace.js";
+import CanvasZoomControls from "../../../components/canvas/CanvasZoomControls.js";
+import { auth, onAuthStateChanged } from "../../../services/firebase.js";
 
 import LoginModal from "./LoginModal.js";
 

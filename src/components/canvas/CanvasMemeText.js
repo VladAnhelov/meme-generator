@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
-import ResizableText from "./ResizableText.js";
+import ResizableText from "./CanvasResizableText.js";
 
-const MemeText = ({
+const CanvasMemeText = ({
   position,
   rotation,
   text,
@@ -40,4 +40,4 @@ const MemeText = ({
   );
 };
 
-export default MemeText;
+export default CanvasMemeText;

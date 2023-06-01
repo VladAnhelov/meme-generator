@@ -63,7 +63,7 @@ export default function PricingModal({ show, onClose }) {
           <p className={style.pricing}>
             20$<span className={style.small}>/per month</span>
           </p>
-          <p>Save $9</p>
+          <p className={style.save}>Save $9</p>
           <ul className={style.features}>
             <li>One account</li>
             <li>Unlimited memes</li>
@@ -83,7 +83,7 @@ export default function PricingModal({ show, onClose }) {
           <p className={style.pricing}>
             39$<span className={style.small}>/per month</span>
           </p>
-          <p>Save $15</p>
+          <p className={style.save}>Save $15</p>
           <ul className={style.features}>
             <li>One account</li>
             <li>Unlimited memes</li>
@@ -103,7 +103,7 @@ export default function PricingModal({ show, onClose }) {
           <p className={style.pricing}>
             60$<span className={style.small}>/per month</span>
           </p>
-          <p>Save $25</p>
+          <p className={style.save}>Save $25</p>
           <ul className={style.features}>
             <li>Six account</li>
             <li>Unlimited memes</li>

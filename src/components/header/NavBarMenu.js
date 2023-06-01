@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import styles from "./NavBarMenu.module.scss";
-import AuthenticationComponent from "../main/memeConfig/AuthenticationComponent.js";
-import RegistrationComponent from "../main/memeConfig/RegistrationComponent.js";
+import AuthenticationComponent from "../../containers/main/memeConfig/AuthenticationComponent.js";
+import RegistrationComponent from "../../containers/main/memeConfig/RegistrationComponent.js";
 import AccountModal from "./AccountModal.js";
 
 export default function NavBarMenu() {

@@ -3,12 +3,12 @@ import {
   auth,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
-} from "../../firebase.js";
+} from "../../../services/firebase.js";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import anime from "animejs/lib/anime.es.js";
 
-import styles from "../../header/NavBarMenu.module.scss";
+import styles from "../../../components/header/NavBarMenu.module.scss";
 
 export default function AuthenticationComponent({ onClose, onSignIn, show }) {
   const [email, setEmail] = useState("");
