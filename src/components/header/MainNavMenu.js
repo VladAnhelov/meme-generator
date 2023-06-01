@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import style from "./MainNavMenu.module.scss";
-import { ThemeContext } from "../main/ThemeContext.js";
+import { ThemeContext } from "../../utils/ThemeContext.js";
 import AboutModal from "./AboutModal.js";
 import PricingModal from "./PricingModal.js";
 

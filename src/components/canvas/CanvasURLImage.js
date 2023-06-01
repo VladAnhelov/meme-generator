@@ -8,7 +8,7 @@ import {
 } from "react-konva";
 import useImage from "use-image";
 
-const URLImage = ({
+const CanvasURLImage = ({
   image,
   shapeProps,
   unSelectShape,
@@ -217,4 +217,4 @@ const URLImage = ({
   );
 };
 
-export default URLImage;
+export default CanvasURLImage;

@@ -1,6 +1,6 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
 import { Stage, Layer, Image as KonvaImage } from "react-konva";
-import EraserKonva from "./EraserKonva";
+import EraserKonva from "./CanvasEraserKonva";
 
 const CanvasUserFace = forwardRef(({ src, isErasing }, ref) => {
   const stageRef = React.useRef();

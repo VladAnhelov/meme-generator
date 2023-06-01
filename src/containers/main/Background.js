@@ -1,7 +1,7 @@
 // Background.js
 import React, { useContext } from "react";
 import styles from "./Background.module.scss";
-import { ThemeContext } from "../main/ThemeContext.js";
+import { ThemeContext } from "../../utils/ThemeContext.js";
 
 export default function Background() {
   const { isDarkTheme } = useContext(ThemeContext);

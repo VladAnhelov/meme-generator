@@ -6,14 +6,20 @@ import {
   setDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { auth, signOut, updateProfile, storage, db } from "../firebase.js";
+import {
+  auth,
+  signOut,
+  updateProfile,
+  storage,
+  db,
+} from "../../services/firebase.js";
 import styles from "./AccountModal.module.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import anime from "animejs/lib/anime.es.js";
-import { ThemeContext } from "../main/ThemeContext.js";
+import { ThemeContext } from "../../utils/ThemeContext.js";
 
 export default function AccountModal() {
   const DEFAULT_AVATAR = "https://img.icons8.com/fluency/96/null/doge.png";

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import style from "./BurgerMenu.module.scss";
-import { ThemeContext } from "../main/ThemeContext.js";
+import { ThemeContext } from "../../utils/ThemeContext.js";
 import MainNavMenu from "./MainNavMenu.js";
 import anime from "animejs/lib/anime.es.js";
 
