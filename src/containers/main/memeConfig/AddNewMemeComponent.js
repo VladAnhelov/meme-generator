@@ -20,7 +20,7 @@ export default function AddNewMemeComponent(props) {
   }
   return (
     <label className={styles.uploadButton}>
-      <p className={styles.textButton}>Create your meme</p>
+      <p className={styles.textButton}>Create your own meme</p>
       <input
         type="file"
         className={styles.fileUploadButton}
