@@ -14,9 +14,9 @@ export default function PricingModal({ show, onClose }) {
         translateY: [-500, 0],
         translateX: [20, 0],
         scale: [0.1, 1],
-        duration: 2000,
-        easing: "easeOutElastic(1, 1.5)",
-        delay: anime.stagger(100), // delay by 200ms for each element.
+        duration: 300,
+        easing: "easeInOutQuad",
+        delay: anime.stagger(50), // delay by 200ms for each element.
       });
     }
   }, [show]);
@@ -27,10 +27,10 @@ export default function PricingModal({ show, onClose }) {
       translateY: [0, -500],
       translateX: [0, -20],
       scale: [1, 0.1],
-      duration: 2000,
-      easing: "easeOutElastic(1, 1.5)",
+      duration: 300,
+      easing: "easeInOutQuad",
       complete: onClose, // set showAboutModal to false after animation finishes
-      delay: anime.stagger(100), // delay by 200ms for each element.
+      delay: anime.stagger(50), // delay by 200ms for each element.
     });
   };
 
