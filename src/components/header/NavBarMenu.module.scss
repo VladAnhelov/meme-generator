@@ -52,17 +52,33 @@
 
 .modalContent {
   position: fixed;
-  top: 190px;
-  left: 390px;
+  top: 30%;
+  right: 30%;
   display: flex;
   text-align: center;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   background-color: #f6f6f6a1;
   min-width: 40%;
-  height: 340px;
+  height: 370px;
   border-radius: 10px;
   box-shadow: 2px 2px 20px #838383;
+}
+
+.modalContentBlock {
+  display: flex;
+  flex-direction: row;
+}
+
+.modalContentImage {
+  display: flex;
+  width: 160px;
+  height: 280px;
+  margin-right: 20px;
+}
+
+.modalContentForm {
+  width: 300px;
 }
 
 .closeButtonModal {
@@ -108,6 +124,7 @@
 .modalText {
   display: flex;
   color: #27374d;
+  margin: 15px;
 }
 
 .modalFormInput {
@@ -120,21 +137,30 @@
 
 .submitBtn {
   @include MemeMain.defaultButton();
+  border-radius: 20px;
   font-family: "Questrial", sans-serif;
-  width: 130px;
-  background: #0077b5;
-  border: 1px solid;
+  width: 60%;
+  background: #1b9c85;
+  border: none;
   text-decoration: none;
 }
 
 .submitBtn:hover {
-  background: MemeMain.$color;
-  color: #0077b5;
+  background: #1eb69b;
+}
+
+.textChooseAuth {
+  font-size: 15px;
+  color: #27374d;
+  margin: 5px;
 }
 
 .googleButton {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   padding: 12px 20px;
   background: white;
   border: 0;
