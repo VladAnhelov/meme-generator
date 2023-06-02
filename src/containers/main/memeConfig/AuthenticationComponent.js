@@ -3,6 +3,7 @@ import {
   auth,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  signInWithGoogle,
 } from "../../../services/firebase.js";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +17,27 @@ export default function AuthenticationComponent({ onClose, onSignIn, show }) {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const modalRef = useRef(null);
+
+  const handleSignInWithGoogle = async () => {
+    try {
+      const result = await signInWithGoogle();
+      const user = result.user;
+      toast.success("Signed in with Google successfully.");
+
+      const userToStore = {
+        displayName: user.displayName,
+        email: user.email,
+        uid: user.uid,
+      };
+
+      onSignIn(userToStore);
+      localStorage.setItem("user", JSON.stringify(userToStore));
+      window.location.reload();
+      onClose();
+    } catch (error) {
+      toast.error(`Error signing in with Google: ${error.message}`);
+    }
+  };
 
   useEffect(() => {
     if (show) {
@@ -68,28 +90,22 @@ export default function AuthenticationComponent({ onClose, onSignIn, show }) {
       setPasswordError("");
     }
 
-    if (validateEmail() && validatePassword()) {
-      try {
-        const { user } = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password,
-        );
-        toast.success("Signed in successfully.");
+    try {
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Signed in successfully.");
 
-        const userToStore = {
-          displayName: user.displayName,
-          email: user.email,
-          uid: user.uid,
-        };
+      const userToStore = {
+        displayName: user.displayName,
+        email: user.email,
+        uid: user.uid,
+      };
 
-        onSignIn(userToStore);
-        localStorage.setItem("user", JSON.stringify(userToStore));
-        window.location.reload();
-        onClose();
-      } catch (error) {
-        toast.error(`Error signing in: ${error.message}`);
-      }
+      onSignIn(userToStore);
+      localStorage.setItem("user", JSON.stringify(userToStore));
+      window.location.reload();
+      onClose();
+    } catch (error) {
+      toast.error(`Error signing in: ${error.message}`);
     }
   };
 
@@ -139,6 +155,21 @@ export default function AuthenticationComponent({ onClose, onSignIn, show }) {
               <button type="submit" className={styles.submitBtn}>
                 Sign In
               </button>
+              <button
+                type="button"
+                className={styles.googleButton}
+                onClick={handleSignInWithGoogle}
+              >
+                <img
+                  className={styles.googleIcon}
+                  alt=""
+                  src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                />
+                <span className={styles.googleButton_text}>
+                  Sign in with Google
+                </span>
+              </button>
+
               <button
                 type="button"
                 className={styles.submitBtn}

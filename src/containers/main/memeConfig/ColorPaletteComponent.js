@@ -42,7 +42,7 @@ export default function ColorPaletteComponent({ handleColorChange }) {
   return (
     <div className={styles.colorBlock}>
       <button className={styles.chooseColor} onClick={handleButtonClick}>
-        text color
+        <p className={styles.textButton}>Text Color</p>
         <div
           className={styles.selectedColor}
           style={{
