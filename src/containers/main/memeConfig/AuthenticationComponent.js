@@ -118,72 +118,88 @@ export default function AuthenticationComponent({ onClose, onSignIn, show }) {
     }
   };
 
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      handleClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <>
       <ToastContainer />
-      <div ref={modalRef} className={styles.modalContent}>
-        <div className={styles.loginForm}>
-          <h2 className={styles.modalText}>Sign In</h2>
-          <form className={styles.modalFormInput} onSubmit={handleSignIn}>
-            <input
-              type="email"
-              name="email"
-              className={`${styles.formControl} ${
-                emailError ? styles.error : ""
-              }`}
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            {emailError && (
-              <div className={styles.errorMessage}>{emailError}</div>
-            )}
-            <input
-              type="password"
-              name="password"
-              className={`${styles.formControl} ${
-                passwordError ? styles.error : ""
-              }`}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {passwordError && (
-              <div className={styles.errorMessage}>{passwordError}</div>
-            )}
-            <div className={styles.buttonBlock}>
-              <button type="submit" className={styles.submitBtn}>
-                Sign In
-              </button>
-              <button
-                type="button"
-                className={styles.googleButton}
-                onClick={handleSignInWithGoogle}
-              >
-                <img
-                  className={styles.googleIcon}
-                  alt=""
-                  src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-                />
-                <span className={styles.googleButton_text}>
-                  Sign in with Google
-                </span>
-              </button>
+      {show && (
+        <div ref={modalRef} className={styles.modalContent}>
+          <div className={styles.loginForm}>
+            <h2 className={styles.modalText}>Sign In</h2>
+            <form className={styles.modalFormInput} onSubmit={handleSignIn}>
+              <input
+                type="email"
+                name="email"
+                className={`${styles.formControl} ${
+                  emailError ? styles.error : ""
+                }`}
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              {emailError && (
+                <div className={styles.errorMessage}>{emailError}</div>
+              )}
+              <input
+                type="password"
+                name="password"
+                className={`${styles.formControl} ${
+                  passwordError ? styles.error : ""
+                }`}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {passwordError && (
+                <div className={styles.errorMessage}>{passwordError}</div>
+              )}
+              <div className={styles.buttonBlock}>
+                <button type="submit" className={styles.submitBtn}>
+                  Sign In
+                </button>
+                <button
+                  type="button"
+                  className={styles.googleButton}
+                  onClick={handleSignInWithGoogle}
+                >
+                  <img
+                    className={styles.googleIcon}
+                    alt=""
+                    src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                  />
+                  <span className={styles.googleButton_text}>
+                    Sign in with Google
+                  </span>
+                </button>
 
-              <button
-                type="button"
-                className={styles.submitBtn}
-                onClick={handleResetPassword}
-              >
-                Reset Password
-              </button>
-            </div>
-          </form>
+                <button
+                  type="button"
+                  className={styles.submitBtn}
+                  onClick={handleResetPassword}
+                >
+                  Reset Password
+                </button>
+              </div>
+            </form>
+          </div>
+          <button className={styles.closeButtonModal} onClick={handleClose}>
+            X
+          </button>
         </div>
-        <button className={styles.closeButtonModal} onClick={handleClose}>
-          X
-        </button>
-      </div>
+      )}
     </>
   );
 }

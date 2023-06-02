@@ -81,46 +81,62 @@ export default function RegistrationComponent({ onClose, onSignUp, show }) {
     }
   };
 
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      handleClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <>
       <ToastContainer />
-      <div ref={modalRef} className={styles.modalContent}>
-        <div className={styles.loginForm}>
-          <h2 className={styles.modalText}>Sign Up</h2>
-          <form className={styles.modalFormInput} onSubmit={handleSignUp}>
-            <input
-              type="text"
-              name="name"
-              className={styles.formControl}
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="email"
-              name="email"
-              className={styles.formControl}
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              name="password"
-              className={styles.formControl}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit" className={styles.submitBtn}>
-              Sign Up
-            </button>
-          </form>
+      {show && (
+        <div ref={modalRef} className={styles.modalContent}>
+          <div className={styles.loginForm}>
+            <h2 className={styles.modalText}>Sign Up</h2>
+            <form className={styles.modalFormInput} onSubmit={handleSignUp}>
+              <input
+                type="text"
+                name="name"
+                className={styles.formControl}
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="email"
+                name="email"
+                className={styles.formControl}
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                name="password"
+                className={styles.formControl}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button type="submit" className={styles.submitBtn}>
+                Sign Up
+              </button>
+            </form>
+          </div>
+          <button className={styles.closeButtonModal} onClick={handleClose}>
+            X
+          </button>
         </div>
-        <button className={styles.closeButtonModal} onClick={handleClose}>
-          X
-        </button>
-      </div>
+      )}
     </>
   );
 }
