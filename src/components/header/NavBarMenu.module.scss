@@ -59,7 +59,7 @@
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   background-color: #f6f6f6a1;
-  min-width: 40%;
+  width: 40%;
   height: 370px;
   border-radius: 10px;
   box-shadow: 2px 2px 20px #838383;
@@ -183,11 +183,6 @@
   width: 18px;
 }
 
-.googleButton_text {
-  margin-left: 0.5rem;
-  font-weight: 500;
-}
-
 .errorMessage {
   color: #db4949;
   font-size: 13px;
@@ -203,20 +198,27 @@
   justify-content: space-around;
 }
 
-@media (max-width: 888px) {
+@media (max-width: 1330px) {
   .navbarMenu {
     flex-direction: column;
   }
 
   .navbarMenuLink {
-    width: 80px;
-    height: 20px;
-    font-size: 8px;
+    width: 100px;
+    height: 25px;
+    font-size: 15px;
     margin: 2px;
   }
 
   .modalContent {
-    width: 80%;
+    width: 50%;
+  }
+
+  .modalContentImage {
+    display: flex;
+    width: 100px;
+    height: 200px;
+    margin-right: 10px;
   }
 
   .navbarMenuLink.signOut {
@@ -224,16 +226,37 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 727px) {
   .navbarMenu {
     flex-direction: column;
   }
 
+  .modalContent {
+    width: 100%;
+    right: 1%;
+  }
+
+  .modalContentImage {
+    display: flex;
+    width: 150px;
+    height: 250px;
+    margin-left: 50px;
+    margin-right: 15px;
+  }
+
   .navbarMenuLink {
-    width: 80px;
-    height: 20px;
-    font-size: 15px;
-    margin: 2px;
+    width: 90px;
+    height: 25px;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+
+  .modalFormInput {
+    align-items: center;
+    padding: 13px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
   }
 
   .navbarMenuLink.signOut {
