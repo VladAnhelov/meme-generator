@@ -121,6 +121,13 @@
   color: #0068fa;
 }
 
+.authBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 120px;
+}
+
 .loginForm {
   display: flex;
   flex-direction: column;
@@ -177,12 +184,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
+  width: 50px;
   height: 40px;
   padding: 12px 20px;
   background: white;
   border: 0;
-  border-radius: 20px;
+  border-radius: 40px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
   outline: 0;

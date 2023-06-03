@@ -8,7 +8,7 @@ import {
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import anime from "animejs/lib/anime.es.js";
-
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import styles from "../../../components/header/NavBarMenu.module.scss";
 
 export default function AuthenticationComponent({ onClose, onSignIn, show }) {
@@ -132,6 +132,12 @@ export default function AuthenticationComponent({ onClose, onSignIn, show }) {
     // eslint-disable-next-line
   }, []);
 
+  const responseFacebook = (response) => {
+    console.log(response);
+    // Here you can handle the response from Facebook
+    // You can store the user data in your state or in your database
+  };
+
   return (
     <>
       <ToastContainer />
@@ -184,17 +190,46 @@ export default function AuthenticationComponent({ onClose, onSignIn, show }) {
                     </button>
                   </div>
                   <span className={styles.textChooseAuth}>OR</span>
-                  <button
-                    type="button"
-                    className={styles.googleButton}
-                    onClick={handleSignInWithGoogle}
-                  >
-                    <img
-                      className={styles.googleIcon}
-                      alt=""
-                      src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                  <div className={styles.authBlock}>
+                    <button
+                      type="button"
+                      className={styles.googleButton}
+                      onClick={handleSignInWithGoogle}
+                    >
+                      <img
+                        className={styles.googleIcon}
+                        alt=""
+                        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                      />
+                    </button>
+                    <FacebookLogin
+                      appId="996556911365606"
+                      autoLoad={false}
+                      fields="name,email,picture"
+                      callback={responseFacebook}
+                      render={(renderProps) => (
+                        <button
+                          type="button"
+                          className={styles.googleButton}
+                          onClick={renderProps.onClick}
+                        >
+                          <svg
+                            width="25"
+                            height="25"
+                            viewBox="88.428 12.828 107.543 207.085"
+                            id="facebook"
+                          >
+                            <path
+                              fill="#3c5a9a"
+                              d="M158.232 219.912v-94.461h31.707l4.747-36.813h-36.454V65.134c0-10.658 
+              2.96-17.922 18.245-17.922l19.494-.009V14.278c-3.373-.447-14.944-1.449-28.406-1.449-28.106 0-47.348 
+              17.155-47.348 48.661v27.149H88.428v36.813h31.788v94.461l38.016-.001z"
+                            ></path>
+                          </svg>
+                        </button>
+                      )}
                     />
-                  </button>
+                  </div>
                 </form>
               </div>
             </div>
