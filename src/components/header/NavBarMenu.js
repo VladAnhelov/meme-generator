@@ -46,18 +46,11 @@ export default function NavBarMenu() {
             >
               Sign In
             </button>
-            <div
-              className={`${styles.modal} ${
-                showSignIn ? `${styles.show}` : ""
-              }`}
-            >
-              {" "}
-              <AuthenticationComponent
-                show={showSignIn}
-                onClose={handleCloseSignIn}
-                onSignIn={handleSignIn}
-              />
-            </div>
+            <AuthenticationComponent
+              show={showSignIn}
+              onClose={handleCloseSignIn}
+              onSignIn={handleSignIn}
+            />
           </li>
         )}
         {!isSignedIn && (
@@ -68,17 +61,11 @@ export default function NavBarMenu() {
             >
               Sign Up
             </button>
-            <div
-              className={`${styles.modal} ${
-                showSignUp ? `${styles.show}` : ""
-              }`}
-            >
-              <RegistrationComponent
-                show={showSignUp}
-                onClose={handleCloseSignUp}
-                onSignUp={handleSignUp}
-              />
-            </div>
+            <RegistrationComponent
+              show={showSignUp}
+              onClose={handleCloseSignUp}
+              onSignUp={handleSignUp}
+            />
           </li>
         )}
       </ul>

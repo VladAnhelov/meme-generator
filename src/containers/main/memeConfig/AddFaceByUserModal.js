@@ -99,8 +99,7 @@ export default function AddFaceByUserModal({ addImageToCanvas }) {
     <>
       <div className={styles.block}>
         <button className={styles.chooseUserFace} onClick={handleClick}>
-          Add your face
-          <div className={styles.block_add}></div>
+          <p className={styles.textButton}> Add Your Face</p>
         </button>
       </div>
       {showModal && !isSignedIn ? (

@@ -4,6 +4,15 @@
   display: none;
 }
 
+.textButton {
+  display: flex;
+  margin: auto;
+  font-family: "Questrial", sans-serif;
+  justify-content: center;
+  font-size: 18px;
+  color: #fff;
+}
+
 .uploadButton {
   @include MemeMain.defaultButton();
   background-color: #3b91d8;

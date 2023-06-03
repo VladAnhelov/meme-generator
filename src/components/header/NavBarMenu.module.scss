@@ -21,12 +21,13 @@
 
 .navbarMenuLink {
   @include MemeMain.defaultButton();
-  width: 130px;
+  width: 164px;
   background: #1b9c85;
+  font-size: 18px;
   border-radius: 20px;
   border: none;
-  font-family: "Bruno Ace SC", cursive;
-  height: 30px;
+  font-family: "Questrial", sans-serif;
+  height: 36px;
   text-decoration: none;
 }
 
@@ -50,43 +51,35 @@
   background: #1eb69b;
 }
 
-.modal {
-  align-items: center;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  left: 0;
-  position: fixed;
-  top: 0;
-  border-radius: 1rem;
-  width: 100%;
-  z-index: 1;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-20px);
-  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
-}
-
-.modal.show {
-  opacity: 1;
-  border-radius: 1rem;
-  visibility: visible;
-  transform: translateY(0);
-}
-
 .modalContent {
   position: fixed;
-  top: 190px;
+  top: 30%;
+  right: 30%;
   display: flex;
   text-align: center;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   background-color: #f6f6f6a1;
-  min-width: 40%;
-  height: 340px;
-  // z-index: 1;
+  width: 40%;
+  height: 370px;
   border-radius: 10px;
   box-shadow: 2px 2px 20px #838383;
+}
+
+.modalContentBlock {
+  display: flex;
+  flex-direction: row;
+}
+
+.modalContentImage {
+  display: flex;
+  width: 160px;
+  height: 280px;
+  margin-right: 20px;
+}
+
+.modalContentForm {
+  width: 300px;
 }
 
 .closeButtonModal {
@@ -112,6 +105,29 @@
   color: #db4949;
 }
 
+.resetBtn {
+  @include MemeMain.defaultButton();
+  border-radius: 20px;
+  font-family: "Questrial", sans-serif;
+  width: 60%;
+  background: #739c1b00;
+  color: #27374d;
+  font-size: 15px;
+  border: none;
+  text-decoration: none;
+}
+
+.resetBtn:hover {
+  color: #0068fa;
+}
+
+.authBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 120px;
+}
+
 .loginForm {
   display: flex;
   flex-direction: column;
@@ -122,7 +138,6 @@
 .formControl {
   @include MemeMain.defaultButton();
   width: 100%;
-  font-family: "Bruno Ace SC", cursive;
   border: 1px solid #d5d4d8;
   text-indent: 5px;
   text-transform: none;
@@ -132,8 +147,8 @@
 }
 .modalText {
   display: flex;
-  text-transform: uppercase;
   color: #27374d;
+  margin: 15px;
 }
 
 .modalFormInput {
@@ -146,16 +161,51 @@
 
 .submitBtn {
   @include MemeMain.defaultButton();
-  font-family: "Bruno Ace SC", cursive;
-  width: 130px;
-  background: #0077b5;
-  border: 1px solid;
+  border-radius: 20px;
+  font-family: "Questrial", sans-serif;
+  width: 60%;
+  background: #1b9c85;
+  border: none;
+  font-size: 18px;
   text-decoration: none;
 }
 
 .submitBtn:hover {
-  background: MemeMain.$color;
-  color: #0077b5;
+  background: #1eb69b;
+}
+
+.textChooseAuth {
+  font-size: 15px;
+  color: #27374d;
+  margin: 5px;
+}
+
+.googleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 40px;
+  padding: 12px 20px;
+  background: white;
+  border: 0;
+  border-radius: 40px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  outline: 0;
+  overflow: hidden;
+  will-change: box-shadow;
+  transform: scale(1);
+  transition: 0.2s all;
+  cursor: pointer;
+}
+.googleButton:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.18), 0 8px 16px rgba(0, 0, 0, 0.36);
+}
+
+.googleIcon {
+  height: 18px;
+  width: 18px;
 }
 
 .errorMessage {
@@ -171,22 +221,30 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  width: 280px;
 }
 
-@media (max-width: 888px) {
+@media (max-width: 1330px) {
   .navbarMenu {
     flex-direction: column;
   }
 
   .navbarMenuLink {
-    width: 80px;
-    height: 20px;
-    font-size: 8px;
+    width: 100px;
+    height: 25px;
+    font-size: 15px;
     margin: 2px;
   }
 
   .modalContent {
-    width: 80%;
+    width: 50%;
+  }
+
+  .modalContentImage {
+    display: flex;
+    width: 100px;
+    height: 200px;
+    margin-right: 10px;
   }
 
   .navbarMenuLink.signOut {
@@ -194,16 +252,37 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 727px) {
   .navbarMenu {
     flex-direction: column;
   }
 
+  .modalContent {
+    width: 100%;
+    right: 1%;
+  }
+
+  .modalContentImage {
+    display: flex;
+    width: 150px;
+    height: 250px;
+    margin-left: 50px;
+    margin-right: 15px;
+  }
+
   .navbarMenuLink {
-    width: 80px;
-    height: 20px;
-    font-size: 8px;
-    margin: 2px;
+    width: 90px;
+    height: 25px;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+
+  .modalFormInput {
+    align-items: center;
+    padding: 13px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
   }
 
   .navbarMenuLink.signOut {
