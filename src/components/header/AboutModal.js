@@ -48,7 +48,10 @@ export default function AboutModal({ show, onClose }) {
 
   return (
     <div className={style.aboutBlock} ref={modalRef}>
-      <p>Hello world</p>
+      <p>
+        Hello guys! This site is my project where I want upgrade my skill in
+        front-end.
+      </p>
       <button className={style.close_btn} onClick={handleClose}>
         X
       </button>
