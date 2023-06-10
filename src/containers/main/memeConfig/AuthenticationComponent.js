@@ -8,7 +8,7 @@ import {
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import anime from "animejs/lib/anime.es.js";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+//import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import styles from "../../../components/header/NavBarMenu.module.scss";
 
 export default function AuthenticationComponent({ onClose, onSignIn, show }) {
@@ -132,11 +132,13 @@ export default function AuthenticationComponent({ onClose, onSignIn, show }) {
     // eslint-disable-next-line
   }, []);
 
+  /*
   const responseFacebook = (response) => {
     console.log(response);
     // Here you can handle the response from Facebook
     // You can store the user data in your state or in your database
   };
+  */
 
   return (
     <>
@@ -202,7 +204,7 @@ export default function AuthenticationComponent({ onClose, onSignIn, show }) {
                         src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
                       />
                     </button>
-                    <FacebookLogin
+                    {/*        <FacebookLogin
                       appId="996556911365606"
                       autoLoad={false}
                       fields="name,email,picture"
@@ -229,6 +231,7 @@ export default function AuthenticationComponent({ onClose, onSignIn, show }) {
                         </button>
                       )}
                     />
+                      */}
                   </div>
                 </form>
               </div>
