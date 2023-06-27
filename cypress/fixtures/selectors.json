@@ -1,0 +1,10 @@
+{
+    "MEME_PREVIEW_BLOCK_SELECTOR": ".MemePreviewBlock_memePreview__AARvz",
+    "IMAGE_SELECTOR": ".MemePreviewBlock_image__VEwYN",
+    "ADD_TEXT_FORM": ".AddMoreMemeText_form__-LE4Y",
+    "ADD_TEXT_FORM_INPUT": ".AddMoreMemeText_formInput__oF9Z1",
+    "DOWNLOAD_MEME_BUTTON": ".DownloadMemeComponent_downloadBtn__9Qk74",
+    "SIGNIN_BUTTON": ".NavBarMenu_navbarMenuLink__rQTbD.NavBarMenu_signIn__NEmDT",
+    "SIGN_FORM": ".NavBarMenu_modalText__37DnY"
+  }
+  
