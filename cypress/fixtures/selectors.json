@@ -5,6 +5,10 @@
     "ADD_TEXT_FORM_INPUT": ".AddMoreMemeText_formInput__oF9Z1",
     "DOWNLOAD_MEME_BUTTON": ".DownloadMemeComponent_downloadBtn__9Qk74",
     "SIGNIN_BUTTON": ".NavBarMenu_navbarMenuLink__rQTbD.NavBarMenu_signIn__NEmDT",
-    "SIGN_FORM": ".NavBarMenu_modalText__37DnY"
+    "SIGN_FORM": ".NavBarMenu_modalText__37DnY",
+    "EMAIL_INPUT": "input[name='email']",
+    "PASSWORD_INPUT": "input[name='password']",
+    "SUBMIT_BUTTON": "button[type='submit']"
+
   }
   
