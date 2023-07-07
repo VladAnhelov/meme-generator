@@ -27,8 +27,12 @@ describe("Visit home page and sign in", () => {
     const {
       email, password
     } = userCredentials;
-    cy.get(EMAIL_INPUT).type(email);
-    cy.get(PASSWORD_INPUT).type(password);
+    cy.get(EMAIL_INPUT)
+    .should('exist')
+    .type(email);
+    cy.get(PASSWORD_INPUT)
+    .should('exist')
+    .type(password);
   });
 
   it('should fill in input fields and submit the form', () => {
@@ -42,7 +46,10 @@ describe("Visit home page and sign in", () => {
     const {
       SUBMIT_BUTTON
     } = selectors;
-    cy.get(SUBMIT_BUTTON).click();
+    cy.get(SUBMIT_BUTTON)
+    .contains("Sign In")
+    .should('exist')
+    .click()
 
     cy.get(".NavBarMenu_errorMessage__adhjR")
     cy.contains('Please enter a valid email.').should('exist');
