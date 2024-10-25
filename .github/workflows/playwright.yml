@@ -27,5 +27,14 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      - name: Create downloads directory
+        run: mkdir -p ./downloads
+
       - name: Run Playwright tests
         run: npx playwright test
+
+      - name: Upload download artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: download-artifacts
+          path: ./downloads

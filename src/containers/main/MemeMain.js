@@ -12,6 +12,7 @@ import AddFaceModal from "./memeConfig/AddFaceModal.js";
 import styles from "./MemeMain.module.scss";
 import forms from "./memeConfig/AddMoreMemeText.module.scss";
 import AddFaceByUserModal from "./memeConfig/AddFaceByUserModal.js";
+import { AutotestId } from "../../tests/AutotestId.ts";
 
 export default function MemeMain() {
   const [meme, setMeme] = React.useState({
@@ -157,6 +158,7 @@ export default function MemeMain() {
                 name="topText"
                 value={meme.topText}
                 onChange={handleChange}
+                data-testid={AutotestId.TOP_TEXT}
               />
               <textarea
                 type="text"
@@ -165,6 +167,7 @@ export default function MemeMain() {
                 name="bottomText"
                 value={meme.bottomText}
                 onChange={handleChange}
+                data-testid={AutotestId.BUTTOM_TEXT}
               />
               <AddMoreMemeText
                 meme={meme}
@@ -172,6 +175,7 @@ export default function MemeMain() {
                 setMeme={setMeme}
                 additionalTexts={additionalTexts}
                 setAdditionalTexts={setAdditionalTexts}
+                data-testid={AutotestId.ADD_MORE_MEME_TEXT_BUTTON}
               />
             </div>
             <div className={styles.settings}>
@@ -186,6 +190,7 @@ export default function MemeMain() {
               topTextPosition={topTextPosition}
               bottomTextPosition={bottomTextPosition}
               stageRef={stageRef}
+              data-testid={AutotestId.DOWNLOAD_MEME_BUTTON}
             />
           </div>
         </div>
