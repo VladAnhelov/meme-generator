@@ -4,9 +4,3 @@
 
 [context.production.environment]
   NODE_ENV = "production"
-
-[[plugins]]
-  package = "@netlify/plugin-react"
-
-[[plugins]]
-  package = "@netlify/plugin-webpack"
