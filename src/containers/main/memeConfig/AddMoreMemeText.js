@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./AddMoreMemeText.module.scss";
-import { AutotestId } from "../../tests/AutotestId.ts";
+import { AutotestId } from "../../../tests/AutotestId.ts";
 
 export default function AddMoreMemeText(props) {
   const [additionalTexts, setLocalAdditionalTexts] = React.useState([]);

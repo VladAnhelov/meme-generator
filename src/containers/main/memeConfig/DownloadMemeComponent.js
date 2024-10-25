@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./DownloadMemeComponent.module.scss";
 import buttons from "./AddMoreMemeText.module.scss";
-import { AutotestId } from "../../tests/AutotestId.ts";
+import { AutotestId } from "../../../tests/AutotestId.ts";
 
 export default function DownloadMemeComponent(props) {
   const [clicked, setClicked] = useState(false);
