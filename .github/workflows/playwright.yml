@@ -34,7 +34,7 @@ jobs:
         run: npx playwright test
 
       - name: Upload download artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: download-artifacts
           path: ./downloads
