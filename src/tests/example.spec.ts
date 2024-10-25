@@ -10,7 +10,7 @@ test("basic test", async ({ page }) => {
 
 test("test_buttons", async ({ page }) => {
   const locators = new MemeMainLocators();
-  await page.goto("http://192.168.178.21:3000");
+  await page.goto("https://memebulance.netlify.app/");
   await page.waitForSelector(locators.topTextButton);
   await page.click(locators.topTextButton);
   await page.fill(locators.topTextButton, "Hello");
