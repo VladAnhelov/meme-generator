@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./AddMoreMemeText.module.scss";
+import { AutotestId } from "../../tests/AutotestId.ts";
 
 export default function AddMoreMemeText(props) {
   const [additionalTexts, setLocalAdditionalTexts] = React.useState([]);
@@ -30,6 +31,7 @@ export default function AddMoreMemeText(props) {
     <div className={styles.addText}>
       <button
         type="button"
+        data-testid={AutotestId.ADD_MORE_MEME_TEXT_BUTTON}
         className={`${styles.addButton} ${
           additionalTexts.length >= 3 ? "displayNone" : ""
         }`}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./DownloadMemeComponent.module.scss";
 import buttons from "./AddMoreMemeText.module.scss";
+import { AutotestId } from "../../tests/AutotestId.ts";
 
 export default function DownloadMemeComponent(props) {
   const [clicked, setClicked] = useState(false);
@@ -29,6 +30,7 @@ export default function DownloadMemeComponent(props) {
   return (
     <div className={styles.download}>
       <button
+        data-testid={AutotestId.DOWNLOAD_MEME_BUTTON}
         className={`${styles.downloadBtn} ${
           clicked ? `${styles.clicked}` : ""
         }`}

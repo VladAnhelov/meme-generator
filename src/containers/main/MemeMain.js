@@ -167,7 +167,7 @@ export default function MemeMain() {
                 name="bottomText"
                 value={meme.bottomText}
                 onChange={handleChange}
-                data-testid={AutotestId.BUTTOM_TEXT}
+                data-testid={AutotestId.BUTTON_TEXT}
               />
               <AddMoreMemeText
                 meme={meme}
@@ -175,7 +175,6 @@ export default function MemeMain() {
                 setMeme={setMeme}
                 additionalTexts={additionalTexts}
                 setAdditionalTexts={setAdditionalTexts}
-                data-testid={AutotestId.ADD_MORE_MEME_TEXT_BUTTON}
               />
             </div>
             <div className={styles.settings}>
@@ -190,7 +189,6 @@ export default function MemeMain() {
               topTextPosition={topTextPosition}
               bottomTextPosition={bottomTextPosition}
               stageRef={stageRef}
-              data-testid={AutotestId.DOWNLOAD_MEME_BUTTON}
             />
           </div>
         </div>
