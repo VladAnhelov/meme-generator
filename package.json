@@ -30,7 +30,7 @@
     "sass": "1.80.4",
     "use-image": "1.1.1",
     "web-vitals": "4.2.4",
-    "webpack": "5.95.0"
+    "webpack": "4.29.6"
   },
   "scripts": {
     "start": "react-scripts start",
