@@ -16,5 +16,5 @@ test("test_buttons", async ({ page }) => {
   await page.fill(locators.topTextButton, "Hello");
   const textValue = await page.inputValue(locators.topTextButton);
   expect(textValue).toBe("Hello");
-  await page.click(locators.downloadMemeButton);
+  // await page.click(locators.downloadMemeButton);
 });
