@@ -20,10 +20,6 @@ const test = baseTest.extend<TestFixtures>({
 
     // give fixture downloadDir for use in test
     await use(downloadDir);
-
-    // clear after test
-    fs.rmSync(downloadDir, { recursive: true, force: true });
-    console.log(`dir is deleted: ${downloadDir}`);
   },
 });
 
