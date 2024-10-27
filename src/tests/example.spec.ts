@@ -59,6 +59,9 @@ test("test_buttons", async ({ page }) => {
   await download.saveAs(filePath);
   console.log(`Файл збережено за шляхом: ${filePath}`);
 
+  await page.screenshot({ path: "screenshot.png" });
+  console.log("Скріншот збережено.");
+
   // Перевіряємо, чи файл існує
   const fileExists = fs.existsSync(filePath);
   console.log(`Файл існує: ${fileExists}`);
