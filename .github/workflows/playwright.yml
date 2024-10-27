@@ -41,9 +41,3 @@ jobs:
         with:
           name: download-artifacts
           path: ./src/tests/downloads
-
-      - name: Upload screenshot
-        uses: actions/upload-artifact@v3
-        with:
-          name: screenshot
-          path: screenshot.png
