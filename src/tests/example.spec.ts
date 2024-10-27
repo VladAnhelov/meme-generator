@@ -25,7 +25,7 @@ test("test_buttons", async ({ page }) => {
   ]);
 
   const suggestedFilename = download.suggestedFilename();
-  const downloadsDir = path.resolve(__dirname, "downloads");
+  const downloadsDir = path.resolve(__dirname, "src/tests/downloads");
   const filePath = path.join(downloadsDir, suggestedFilename);
   await download.saveAs(filePath);
 

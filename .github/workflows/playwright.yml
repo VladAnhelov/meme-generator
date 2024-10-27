@@ -28,13 +28,16 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Create downloads directory
-        run: mkdir -p ./downloads
+        run: mkdir -p ./src/tests/downloads
 
       - name: Run Playwright tests
         run: npx playwright test
+
+      - name: List downloads directory
+        run: ls -la ./src/tests/downloads
 
       - name: Upload download artifacts
         uses: actions/upload-artifact@v3
         with:
           name: download-artifacts
-          path: ./downloads
+          path: ./src/tests/downloads
