@@ -7,7 +7,7 @@ const locators = new MemeMainLocators();
 const BASE_URL = "https://memebulance.netlify.app/";
 const EXPECTED_TITLE = "Memebulance";
 
-test.describe("MemeMain", { tag: "regression tests" }, () => {
+test.describe("MemeMain", { tag: "@regression tests" }, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(BASE_URL);
   });
