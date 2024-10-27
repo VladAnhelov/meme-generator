@@ -1,19 +1,25 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures.ts";
 import { MemeMainLocators } from "./MemeMainLocators.comp.ts";
 import fs from "fs";
 import path from "path";
 
-test("I check title ", async ({ page }) => {
-  await page.goto("https://memebulance.netlify.app/", { timeout: 60000 }); // 60 секунд
-  await page.waitForSelector("body");
-  const title = await page.title();
-  expect(title).toBe("Memebulance");
+const locators = new MemeMainLocators();
+const BASE_URL = "https://memebulance.netlify.app/";
+const EXPECTED_TITLE = "Memebulance";
+
+test.beforeEach(async ({ page }) => {
+  await page.goto(BASE_URL);
 });
 
-test("I check top and button field input", async ({ page }) => {
-  const locators = new MemeMainLocators();
-  await page.goto("https://memebulance.netlify.app/");
+test("I check title ", async ({ page }) => {
+  const title = await page.title();
+  expect(title).toBe(EXPECTED_TITLE);
+});
 
+test("I check top and bottom field input and download", async ({
+  page,
+  downloadDir,
+}) => {
   await page.click(locators.topTextInputField);
   await page.fill(locators.topTextInputField, "Hello");
   const checkTopInput = await page.inputValue(locators.topTextInputField);
@@ -24,17 +30,7 @@ test("I check top and button field input", async ({ page }) => {
   const checkBottomInput = await page.inputValue(locators.bottomInputField);
   expect(checkBottomInput).toBe("World");
 
-  // set download path to downloads folder
-  const downloadDir = path.resolve(process.cwd(), "src/tests/downloads");
-
-  // check if directory exists
-  if (!fs.existsSync(downloadDir)) {
-    fs.mkdirSync(downloadDir, { recursive: true });
-  } else {
-    console.log(`directory is not exist: ${downloadDir}`);
-  }
-
-  // start to download
+  // start download
   const [download] = await Promise.all([
     page.waitForEvent("download", { timeout: 10000 }).catch((error) => {
       console.error("download is not start:", error);
