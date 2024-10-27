@@ -16,11 +16,13 @@ test("I check top and button field input", async ({ page }) => {
 
   await page.click(locators.topTextInputField);
   await page.fill(locators.topTextInputField, "Hello");
-  expect(locators.topTextInputField).toBe("Hello");
+  const checkTopInput = await page.inputValue(locators.topTextInputField);
+  expect(checkTopInput).toBe("Hello");
 
   await page.click(locators.bottomInputField);
   await page.fill(locators.bottomInputField, "World");
-  expect(locators.bottomInputField).toBe("World");
+  const checkBottomInput = await page.inputValue(locators.bottomInputField);
+  expect(checkBottomInput).toBe("World");
 
   // set download path to downloads folder
   const downloadDir = path.resolve(process.cwd(), "src/tests/downloads");
