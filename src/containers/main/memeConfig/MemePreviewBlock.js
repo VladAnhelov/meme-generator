@@ -4,6 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Preloader from "./PreloaderComponent.js";
 import styles from "./MemePreviewBlock.module.scss";
+import { AutotestId } from "../../../tests/AutotestId.ts";
 
 export default function MemePreviewBlock(props) {
   const [worldMemesLoaded, setWorldMemesLoaded] = useState(false);
@@ -34,6 +35,7 @@ export default function MemePreviewBlock(props) {
           <div className={styles.image} key={index}>
             <LazyLoadImage
               src={image.url}
+              data-testid={AutotestId.MEME_IMAGE}
               effect="blur"
               className={styles.imagePreview}
               crossOrigin="anonymous"
