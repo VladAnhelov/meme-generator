@@ -2,7 +2,7 @@ import { test, expect } from "./fixtures";
 import { MemeMainLocators } from "./MemeMainLocators.comp.ts";
 
 const locators = new MemeMainLocators();
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://memebulance.netlify.app/";
 
 test.describe("MemePreview", { tag: "@smoke" }, () => {
   test.beforeEach(async ({ page }) => {
