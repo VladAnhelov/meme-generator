@@ -11,6 +11,7 @@ test.describe("MemePreview", { tag: "@smoke" }, () => {
 
   test("I click and check third meme", async ({ page }) => {
     const memeImages = page.locator(locators.memeImage);
+    await expect(memeImages.first()).toBeVisible();
     const countImage = await memeImages.count();
     expect(countImage).toBeGreaterThan(0);
     await memeImages.nth(2).click();
