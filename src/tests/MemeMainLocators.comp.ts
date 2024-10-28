@@ -12,4 +12,5 @@ export class MemeMainLocators extends Base {
   public readonly downloadMemeButton = this.derivedByTestId(
     AutotestId.DOWNLOAD_MEME_BUTTON,
   );
+  public readonly memeImage = this.derivedByTestId(AutotestId.MEME_IMAGE);
 }

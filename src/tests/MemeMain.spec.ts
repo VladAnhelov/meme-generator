@@ -12,7 +12,7 @@ test.describe("MemeMain", { tag: "@regression tests" }, () => {
     await page.goto(BASE_URL);
   });
 
-  test("I check title ", async ({ page }) => {
+  test("I check title", async ({ page }) => {
     const title = await page.title();
     expect(title).toBe(EXPECTED_TITLE);
   });

@@ -3,4 +3,5 @@ export enum AutotestId {
   BUTTON_TEXT = "button_text",
   ADD_MORE_MEME_TEXT_BUTTON = "AddMoreMemeText",
   DOWNLOAD_MEME_BUTTON = "DownloadMeme",
+  MEME_IMAGE = "MemeImage",
 }
