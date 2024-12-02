@@ -1,9 +1,10 @@
 @use "../../containers/main/MemeMain.module.scss";
 .aboutBlock {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 120px;
   left: 10%;
-  display: flex;
   text-align: center;
   color: #27374d;
   -webkit-backdrop-filter: blur(10px);
@@ -13,6 +14,27 @@
   height: 600px;
   border-radius: 10px;
   box-shadow: 2px 2px 20px #838383;
+}
+
+.save_btn {
+  width: 100px;
+  height: 25px;
+  font-size: 15px;
+  margin: 12px;
+  background-color: #29db3e;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px 20px #838383;
+}
+
+.save_btn:hover {
+  background-color: #25c738;
+}
+
+.block_save_btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .close_btn {

@@ -1,9 +1,26 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import anime from "animejs/lib/anime.es.js";
 import style from "./AboutModal.module.scss";
 
 export default function AboutModal({ show, onClose }) {
   const modalRef = useRef(null);
+
+  const [isSwitchOn, setIsSwitchOn] = useState(() => {
+    return JSON.parse(localStorage.getItem("switchState")) || false;
+  });
+
+  const [formData, setFormData] = useState(() => {
+    return (
+      JSON.parse(localStorage.getItem("formData")) || {
+        checkbox: false,
+        textInput: "",
+        dropdown: "red",
+        radio: "dog",
+        volume: 50,
+        feedback: "",
+      }
+    );
+  });
 
   useEffect(() => {
     if (show) {
@@ -28,8 +45,22 @@ export default function AboutModal({ show, onClose }) {
       opacity: [1, 0],
       duration: 300,
       easing: "easeInExpo",
-      complete: onClose, // set showAboutModal to false after animation finishes
+      complete: onClose,
     });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSave = () => {
+    localStorage.setItem("formData", JSON.stringify(formData));
+    localStorage.setItem("switchState", JSON.stringify(isSwitchOn));
+    alert("Your preferences have been saved!");
   };
 
   const handleClickOutside = (event) => {
@@ -43,7 +74,6 @@ export default function AboutModal({ show, onClose }) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-    // eslint-disable-next-line
   }, []);
 
   return (
@@ -53,15 +83,36 @@ export default function AboutModal({ show, onClose }) {
         in front-end development and QA!
       </p>
 
-      {/* Checkbox for automation */}
+      {/* Checkbox */}
       <div>
         <label htmlFor="accept-terms" data-testid="checkbox-label">
           Accept Terms and Conditions:
         </label>
-        <input type="checkbox" id="accept-terms" data-testid="checkbox" />
+        <input
+          type="checkbox"
+          id="accept-terms"
+          name="checkbox"
+          checked={formData.checkbox}
+          onChange={handleInputChange}
+          data-testid="checkbox"
+        />
       </div>
 
-      {/* Text input for automation */}
+      {/* Switcher */}
+      <div>
+        <label htmlFor="switch" data-testid="switch-label">
+          Enable notifications:
+        </label>
+        <input
+          type="checkbox"
+          id="switch"
+          checked={isSwitchOn}
+          onChange={(e) => setIsSwitchOn(e.target.checked)}
+          data-testid="switch"
+        />
+      </div>
+
+      {/* Text Input */}
       <div>
         <label htmlFor="name-input" data-testid="input-label">
           Enter your name:
@@ -69,24 +120,108 @@ export default function AboutModal({ show, onClose }) {
         <input
           type="text"
           id="name-input"
+          name="textInput"
+          value={formData.textInput}
+          onChange={handleInputChange}
           placeholder="Your Name"
           data-testid="text-input"
         />
       </div>
 
-      {/* Dropdown for automation */}
+      {/* Dropdown */}
       <div>
         <label htmlFor="color-select" data-testid="dropdown-label">
           Select a color:
         </label>
-        <select id="color-select" data-testid="dropdown">
+        <select
+          id="color-select"
+          name="dropdown"
+          value={formData.dropdown}
+          onChange={handleInputChange}
+          data-testid="dropdown"
+        >
           <option value="red">Red</option>
           <option value="blue">Blue</option>
           <option value="green">Green</option>
         </select>
       </div>
 
-      {/* Button to close the modal */}
+      {/* Radio Buttons */}
+      <div>
+        <fieldset data-testid="radio-group">
+          <legend>Choose your favorite pet:</legend>
+          <label>
+            <input
+              type="radio"
+              name="radio"
+              value="dog"
+              checked={formData.radio === "dog"}
+              onChange={handleInputChange}
+              data-testid="radio-dog"
+            />
+            Dog
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="radio"
+              value="cat"
+              checked={formData.radio === "cat"}
+              onChange={handleInputChange}
+              data-testid="radio-cat"
+            />
+            Cat
+          </label>
+        </fieldset>
+      </div>
+
+      {/* Slider */}
+      <div>
+        <label htmlFor="volume-slider" data-testid="slider-label">
+          Volume:
+        </label>
+        <input
+          type="range"
+          id="volume-slider"
+          name="volume"
+          min="0"
+          max="100"
+          value={formData.volume}
+          onChange={handleInputChange}
+          data-testid="slider"
+        />
+        <span data-testid="slider-value">{formData.volume}</span>
+      </div>
+
+      {/* Text Area */}
+      <div>
+        <label htmlFor="feedback" data-testid="textarea-label">
+          Your feedback:
+        </label>
+        <textarea
+          id="feedback"
+          name="feedback"
+          placeholder="Write your feedback here..."
+          rows="4"
+          value={formData.feedback}
+          onChange={handleInputChange}
+          data-testid="textarea"
+        />
+      </div>
+
+      {/* Save Button */}
+      <div className={style.block_save_btn}>
+        <button
+          className={style.save_btn}
+          type="button"
+          onClick={handleSave}
+          data-testid="save-button"
+        >
+          Save
+        </button>
+      </div>
+
+      {/* Close Button */}
       <button
         className={style.close_btn}
         onClick={handleClose}
