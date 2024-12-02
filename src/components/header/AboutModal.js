@@ -47,12 +47,51 @@ export default function AboutModal({ show, onClose }) {
   }, []);
 
   return (
-    <div className={style.aboutBlock} ref={modalRef}>
-      <p>
-        Hello guys! This site is my project where I want upgrade my skill in
-        front-end.
+    <div className={style.aboutBlock} ref={modalRef} data-testid="modal">
+      <p data-testid="modal-description">
+        Hello, guys! This site is my project where I want to improve my skills
+        in front-end development and QA!
       </p>
-      <button className={style.close_btn} onClick={handleClose}>
+
+      {/* Checkbox for automation */}
+      <div>
+        <label htmlFor="accept-terms" data-testid="checkbox-label">
+          Accept Terms and Conditions:
+        </label>
+        <input type="checkbox" id="accept-terms" data-testid="checkbox" />
+      </div>
+
+      {/* Text input for automation */}
+      <div>
+        <label htmlFor="name-input" data-testid="input-label">
+          Enter your name:
+        </label>
+        <input
+          type="text"
+          id="name-input"
+          placeholder="Your Name"
+          data-testid="text-input"
+        />
+      </div>
+
+      {/* Dropdown for automation */}
+      <div>
+        <label htmlFor="color-select" data-testid="dropdown-label">
+          Select a color:
+        </label>
+        <select id="color-select" data-testid="dropdown">
+          <option value="red">Red</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+        </select>
+      </div>
+
+      {/* Button to close the modal */}
+      <button
+        className={style.close_btn}
+        onClick={handleClose}
+        data-testid="close-button"
+      >
         X
       </button>
     </div>
