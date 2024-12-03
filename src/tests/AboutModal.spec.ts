@@ -2,8 +2,8 @@ import { test, expect } from "./fixtures";
 import { AboutModalLocators } from "./AboutModalLocators.comp.ts";
 
 const locators = new AboutModalLocators();
-const name_text = "test Vlad";
-const feedback_text = name_text;
+const userName = "test Vlad";
+const feedback_text = userName;
 let BASE_URL = "http://localhost:3000";
 
 async function getBaseURL() {
@@ -26,8 +26,17 @@ test.describe("About Modal", { tag: "@regression tests" }, () => {
   });
 
   test("Accept Terms and Conditions", async ({ page }) => {
+    const aboutButton = page.locator(locators.about_button);
+    const saveButton = page.locator(locators.save_button);
     const checkBoxItem = page.locator(locators.checkBox);
+
     await checkBoxItem.click();
+    await saveButton.click();
+
+    await page.reload();
+
+    await aboutButton.click({ timeout: 2000 });
+    await page.screenshot({ path: "screenshot.png" });
     await expect(checkBoxItem).toBeChecked();
   });
 });
