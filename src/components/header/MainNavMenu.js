@@ -28,6 +28,7 @@ export default function MainNavMenu({ onAboutClick, onPricingClick }) {
             <button
               className={style.mainNavMenu_list_button}
               onClick={onAboutClick}
+              data-testid="about"
             >
               <span>About</span>
             </button>

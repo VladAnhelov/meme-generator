@@ -60,7 +60,7 @@ export default function AboutModal({ show, onClose }) {
   const handleSave = () => {
     localStorage.setItem("formData", JSON.stringify(formData));
     localStorage.setItem("switchState", JSON.stringify(isSwitchOn));
-    alert("Your preferences have been saved!");
+    window.location.reload();
   };
 
   const handleClickOutside = (event) => {
