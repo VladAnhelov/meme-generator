@@ -1,3 +1,7 @@
 node_modules
 cypress/videos/
 cypress/downloads/
+playwright-report/
+allure-results/
+allure-report/
+test-results/

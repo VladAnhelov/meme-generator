@@ -11,6 +11,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - name: Checkout repository
@@ -27,11 +28,35 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      - name: Install Allure CLI
+        run: npm install -g allure-commandline --save-dev
+
       - name: Create downloads directory
         run: mkdir -p ./src/tests/downloads
 
       - name: Run Playwright tests
         run: npx playwright test
+
+      - name: Generate Allure Report
+        run: npx allure generate allure-results --clean -o public/allure-report
+
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: allure-report
+
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-results
+          path: allure-results
+
+      - name: Upload Playwright HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-html-report
+          path: playwright-report
 
       - name: List downloads directory
         run: ls -la ./src/tests/downloads

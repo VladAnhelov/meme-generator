@@ -37,7 +37,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "allure:generate": "npx allure generate allure-results --clean",
+    "allure:open": "npx allure open allure-report"
   },
   "eslintConfig": {
     "extends": [
@@ -60,6 +62,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@playwright/test": "1.48.1",
-    "@typescript-eslint/parser": "5.62.0"
+    "@typescript-eslint/parser": "5.62.0",
+    "allure-playwright": "3.0.6"
   }
 }

@@ -41,6 +41,12 @@ export default function MainNavMenu({ onAboutClick, onPricingClick }) {
             >
               <span>Pricing</span>{" "}
             </button>
+            <button
+              className={style.view_report_button}
+              onClick={() => window.open("/allure-report/index.html", "_blank")}
+            >
+              Allure Report
+            </button>
           </li>
         </ul>
       </div>
