@@ -4,4 +4,5 @@ cypress/downloads/
 playwright-report/
 allure-results/
 allure-report/
+!public/allure-report/
 test-results/
