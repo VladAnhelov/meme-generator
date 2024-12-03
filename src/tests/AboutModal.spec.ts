@@ -36,7 +36,7 @@ test.describe("About Modal", { tag: "@regression tests" }, () => {
     await page.reload();
 
     await aboutButton.click({ timeout: 2000 });
-    await page.screenshot({ path: "screenshot.png" });
+    await page.screenshot({ path: "test-results/screenshot.png" });
     await expect(checkBoxItem).toBeChecked();
   });
 });
