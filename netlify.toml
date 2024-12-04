@@ -6,3 +6,10 @@
   NODE_VERSION = "18"
   NPM_FLAGS = "--include=dev"
   NODE_OPTIONS = "--openssl-legacy-provider"
+
+[[headers]]
+  for = "/*" 
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
+    Pragma = "no-cache"
+    Expires = "0"

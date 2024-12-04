@@ -46,9 +46,11 @@ jobs:
       - name: Verify Allure Report exists
         run: ls -la public/allure-report
 
-      # 9. Trigger Netlify Build Hook
-      - name: Trigger Netlify Build Hook
-        run: curl -X POST -d {} https://api.netlify.com/build_hooks/67502e7876451f3fa0364e1b
+      # 9. Deploy updated content to Netlify
+      - name: Deploy to Netlify with CLI
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: netlify deploy --dir=public --prod --message "Deploy updated Allure report"
 
       # 10. Upload Allure Results as artifacts
       - name: Upload Allure Results
