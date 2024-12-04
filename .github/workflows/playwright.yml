@@ -40,7 +40,7 @@ jobs:
 
       # 7. Generate Allure Report
       - name: Generate Allure Report
-        run: npx allure generate allure-results --clean -o public/allure-report
+        run: npx allure generate allure-results --clean -o build/allure-report
 
       # 8. Verify Allure Report exists
       - name: Verify Allure Report exists
@@ -50,7 +50,7 @@ jobs:
       - name: Deploy Netlify with CLI
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: netlify deploy --dir=public --prod --message "Deploy updated Allure report"
+        run: netlify deploy --dir=build --prod --message "Deploy updated Allure report"
 
       # 10. Upload Allure Results as artifacts
       - name: Upload Allure Results

@@ -4,7 +4,7 @@ cypress/downloads/
 playwright-report/
 allure-results/
 allure-report/
-!public/allure-report/
+!build/allure-report/
 test-results/
 # Local Netlify folder
 !.netlify
