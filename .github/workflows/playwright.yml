@@ -47,7 +47,7 @@ jobs:
         run: ls -la public/allure-report
 
       # 9. Deploy updated content to Netlify
-      - name: Deploy to Netlify with CLI
+      - name: Deploy Netlify with CLI
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         run: netlify deploy --dir=public --prod --message "Deploy updated Allure report"
