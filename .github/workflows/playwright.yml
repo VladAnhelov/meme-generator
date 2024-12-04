@@ -35,7 +35,7 @@ jobs:
         run: mkdir -p ./src/tests/downloads
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test --reporter=line,allure-playwright
 
       - name: Generate Allure Report
         run: npx allure generate allure-results --clean -o public/allure-report
