@@ -1,5 +1,5 @@
 [build]
-  command = "CI=false npm run build"
+  command = "CI=false npm run build && npx allure generate allure-results --clean -o build/allure-report"
   publish = "build"
 
 [build.environment]

@@ -46,6 +46,10 @@ jobs:
       - name: Verify Allure Report exists
         run: ls -la build/allure-report
 
+      # 8.1. Verify Build directory
+      - name: Verify Build directory
+        run: ls -la build
+
       # 9. Deploy updated content to Netlify
       - name: Deploy Netlify with CLI
         env:
