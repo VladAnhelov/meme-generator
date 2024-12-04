@@ -1,0 +1,21 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Halberstadt",
+			"country": {
+				"code": "DE",
+				"name": "Germany"
+			},
+			"subdivision": {
+				"code": "ST",
+				"name": "Saxony-Anhalt"
+			},
+			"timezone": "Europe/Berlin",
+			"latitude": 51.8937,
+			"longitude": 11.0574,
+			"postalCode": "38820"
+		},
+		"timestamp": 1733306613420
+	},
+	"siteId": "58a749d4-6259-49ca-86cb-80ba0ed855a8"
+}

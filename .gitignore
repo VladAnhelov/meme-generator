@@ -7,4 +7,4 @@ allure-report/
 !public/allure-report/
 test-results/
 # Local Netlify folder
-.netlify
+!.netlify
