@@ -44,7 +44,7 @@ jobs:
 
       # 8. Verify Allure Report exists
       - name: Verify Allure Report exists
-        run: ls -la public/allure-report
+        run: ls -la build/allure-report
 
       # 9. Deploy updated content to Netlify
       - name: Deploy Netlify with CLI
