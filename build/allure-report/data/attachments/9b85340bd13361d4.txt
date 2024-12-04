@@ -1,0 +1,1 @@
+directory is not exist: /Users/vladanhelov/Desktop/meme-generator/src/tests/downloads

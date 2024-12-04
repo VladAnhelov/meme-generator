@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","2474","Accept Terms and Conditions","","Wed Dec 04 14:52:58 CET 2024","passed","Wed Dec 04 14:53:00 CET 2024","About Modal","AboutModal.spec.ts","",""
+"","2354","I check top and bottom field input and download","","Wed Dec 04 14:53:00 CET 2024","passed","Wed Dec 04 14:53:02 CET 2024","MemeMain","MemeMain.spec.ts","",""
+"","1067","I check title","","Wed Dec 04 14:52:58 CET 2024","passed","Wed Dec 04 14:52:59 CET 2024","MemeMain","MemeMain.spec.ts","",""
+"","1679","I click and check third meme","","Wed Dec 04 14:52:58 CET 2024","passed","Wed Dec 04 14:53:00 CET 2024","MemePreview","MemePreview.spec.ts","",""
