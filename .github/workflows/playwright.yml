@@ -22,48 +22,48 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      # 3. Install Playwright Browsers
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      # 3. Build the project
+      - name: Build project
+        run: npm run build
 
-      # 4. Install Allure CLI
-      - name: Install Allure CLI
-        run: npm install -g allure-commandline --save-dev
-
-      # 5. Create necessary directories
-      - name: Create downloads directory
-        run: mkdir -p ./src/tests/downloads
-
-      # 6. Run Playwright tests
-      - name: Run Playwright tests
-        run: npx playwright test --reporter=line,allure-playwright
-
-      # 7. Generate Allure Report
-      - name: Generate Allure Report
-        run: npx allure generate allure-results --clean -o build/allure-report
-
-      # 8. Verify Allure Report exists
-      - name: Verify Allure Report exists
-        run: ls -la build/allure-report
-
-      # 8.1. Verify Build directory
-      - name: Verify Build directory
-        run: ls -la build
-
-      # 9. Deploy updated content to Netlify
+      # 4. Deploy updated content to Netlify
       - name: Deploy to Netlify with CLI
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: netlify deploy --dir=build --prod --message "Deploy updated Allure report"
+        run: netlify deploy --dir=build --prod --message "Deploy updated content"
 
-      # 10. Upload Allure Results as artifacts
+      # 5. Install Playwright Browsers
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      # 6. Install Allure CLI
+      - name: Install Allure CLI
+        run: npm install -g allure-commandline --save-dev
+
+      # 7. Create necessary directories
+      - name: Create downloads directory
+        run: mkdir -p ./src/tests/downloads
+
+      # 8. Run Playwright tests
+      - name: Run Playwright tests
+        run: npx playwright test --reporter=line,allure-playwright
+
+      # 9. Generate Allure Report
+      - name: Generate Allure Report
+        run: npx allure generate allure-results --clean -o build/allure-report
+
+      # 10. Verify Allure Report exists
+      - name: Verify Allure Report exists
+        run: ls -la build/allure-report
+
+      # 11. Upload Allure Results as artifacts
       - name: Upload Allure Results
         uses: actions/upload-artifact@v3
         with:
           name: allure-results
           path: allure-results
 
-      # 11. Upload Playwright HTML Report as artifacts
+      # 12. Upload Playwright HTML Report as artifacts
       - name: Upload Playwright HTML Report
         uses: actions/upload-artifact@v3
         with:
