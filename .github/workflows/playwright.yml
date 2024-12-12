@@ -1,4 +1,4 @@
-name: Deploy to Netlify
+name: Playwright Tests and Deploy
 
 on:
   push:
@@ -9,8 +9,9 @@ on:
       - main
 
 jobs:
-  deploy:
+  test-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       # 1. Checkout the code
@@ -21,12 +22,50 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      # 3. Build the project
-      - name: Build project
-        run: npm run build
+      # 3. Install Playwright Browsers
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
-      # 4. Deploy updated content to Netlify
-      - name: Deploy to Netlify
+      # 4. Install Allure CLI
+      - name: Install Allure CLI
+        run: npm install -g allure-commandline --save-dev
+
+      # 5. Create necessary directories
+      - name: Create downloads directory
+        run: mkdir -p ./src/tests/downloads
+
+      # 6. Run Playwright tests
+      - name: Run Playwright tests
+        run: npx playwright test --reporter=line,allure-playwright
+
+      # 7. Generate Allure Report
+      - name: Generate Allure Report
+        run: npx allure generate allure-results --clean -o build/allure-report
+
+      # 8. Verify Allure Report exists
+      - name: Verify Allure Report exists
+        run: ls -la build/allure-report
+
+      # 8.1. Verify Build directory
+      - name: Verify Build directory
+        run: ls -la build
+
+      # 9. Deploy updated content to Netlify
+      - name: Deploy Netlify with CLI
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: netlify deploy --dir=build --prod --message "Deploy updated content"
+        run: netlify deploy --dir=build --prod --message "Deploy updated Allure report"
+
+      # 10. Upload Allure Results as artifacts
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-results
+          path: allure-results
+
+      # 11. Upload Playwright HTML Report as artifacts
+      - name: Upload Playwright HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-html-report
+          path: playwright-report
