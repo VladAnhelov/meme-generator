@@ -8,21 +8,7 @@
   NODE_OPTIONS = "--openssl-legacy-provider"
 
 [[headers]]
-  for = "/*"
   [headers.values]
     Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
     Pragma = "no-cache"
     Expires = "0"
-    Content-Security-Policy = """
-      default-src * 'unsafe-inline' 'unsafe-eval' blob: data:;
-      script-src https://dvjzohwh.eup.stape.net 'unsafe-inline' 'unsafe-eval';
-      style-src * 'unsafe-inline';
-      img-src * data:;
-      font-src * data:;
-      connect-src *;
-      media-src *;
-      object-src *;
-      frame-src *;
-      form-action *;
-      base-uri *;
-    """
