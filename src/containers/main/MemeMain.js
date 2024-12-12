@@ -19,7 +19,7 @@ export default function MemeMain() {
     topText: "",
     bottomText: "",
     thirdText: "",
-    randomImage: "http://i.imgflip.com/1bij.jpg",
+    randomImage: "https://i.imgflip.com/1bij.jpg",
   });
   const [allMemeImages, setAllMemeImages] = React.useState([]);
   const [, setWorldMemesLoaded] = React.useState(false);
